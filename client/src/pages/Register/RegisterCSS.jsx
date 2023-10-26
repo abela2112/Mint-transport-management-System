@@ -25,8 +25,8 @@ gap: 2px;
 `
 export const Label = styled.label`
 
-  
-  
+
+
 `;
 export const SignUpInput = styled.input`
   width: 99%;
