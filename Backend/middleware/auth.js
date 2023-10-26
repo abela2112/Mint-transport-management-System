@@ -16,5 +16,25 @@ req.user=decoded
 next()
 };
 
-
-module.exports = auth
+const verifyTokenAndAdmin = (req, res, next) => {
+  auth(req, res, () => {
+    const { isAdmin } = req.user;
+    if (isAdmin) {
+      next();
+    } else {
+      throw new UnAuthorizedError("access denied");
+    }
+  });
+};
+const verifyTokenAndAuth = (req, res, next) => {
+  auth(req, res, () => {
+    const { userID, isAdmin } = req.user;
+    const { id } = req.params;
+    if (id === userID || isAdmin) {
+      next();
+    } else {
+      throw new UnAuthorizedError("access denied");
+    }
+  });
+};
+module.exports = { auth, verifyTokenAndAdmin, verifyTokenAndAuth };
