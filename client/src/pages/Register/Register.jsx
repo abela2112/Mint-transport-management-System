@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { SignUpContainer,Contain, Header,SignUpForm, SignUpInput, SignUpButton , Option,SelectOption, ImageContainer, Image, TextContainer, Label, BottomText} from './RegisterCSS';
 
-const SignUpPage = () => {
+const Register = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -66,7 +66,7 @@ const SignUpPage = () => {
           <Contain>
 
           <Label>Position</Label>
-         <SelectOption>
+         <SelectOption onChange={(e)=>setPosition(e.target.value)}>
                  <Option disabled selected>Select Option</Option>
                   <Option>CEO</Option>
                   <Option>Desk</Option>
@@ -86,8 +86,8 @@ const SignUpPage = () => {
         
       <SignUpButton onClick={handleSignUp}>Sign Up</SignUpButton>
       <BottomText>
-       <p>Or</p>
-      <p>Already have an account? <span style={{color:'blue'}}>Sign in</span>  </p>
+       <span>or</span>
+      <p style={{color:'red'}}>Already have an account? <span style={{color:'blue'}}>Sign in</span>  </p>
       </BottomText>
       
       </SignUpForm>
@@ -103,4 +103,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default Register;

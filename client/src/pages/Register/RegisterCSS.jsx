@@ -53,12 +53,13 @@ export const SelectOption = styled.select`
   border-radius: 4px;
   cursor: pointer;
 `;
-export const BottomText = styled.p`
+export const BottomText = styled.div`
  
  text-align: center;
  width: 100%;
  justify-content: center;
  align-items: center;
+ margin:10px;
 `
 
 export const Image = styled.img`
