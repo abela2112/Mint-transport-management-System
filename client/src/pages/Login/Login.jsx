@@ -4,6 +4,7 @@ import { Logo, Mint, MinT } from '../../asset';
 
 const LoginContainer = styled.div`
   flex: 1;
+  margin-bottom:100;
   display: flex;
   height: 100%;
   align-items: center;
@@ -29,9 +30,10 @@ const Img1 = styled.img`
 
 const TextmintContainer = styled.div`
   position: absolute;
+  display: flex;
   top: 0;
   left: 100px;
-  width: 200px;
+  width: 150px;
   height: 80px;
   background-color: blue;
 `;
@@ -61,6 +63,7 @@ const LoginForm = styled.form`
   flex-direction: column;
   align-items: center;
   width: 100%;
+
 `;
 
 const Input = styled.input`
