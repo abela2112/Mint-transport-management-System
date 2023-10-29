@@ -1,6 +1,6 @@
 import React from 'react'
 import Register from './Register/Register'
-import {BrowserRouter ,Routes,Route} from 'react-router-dom'
+
 const Home = () => {
     return (
            <BrowserRouter>

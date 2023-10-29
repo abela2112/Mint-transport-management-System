@@ -19,7 +19,7 @@ const ImgmintContainer = styled.div`
   left: 0;
   width: 100px;
   height: 100px;
-  background-color: blue;
+  margin-left: 5px;
 `;
 
 const Img1 = styled.img`
@@ -123,6 +123,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     // You would typically send the login data to your server here for authentication.
     console.log('Email:', email);
     console.log('Password:', password);
@@ -155,7 +156,7 @@ const Login = () => {
             <SubmitButton type="submit">Login</SubmitButton>
             <ForgotPasswordLink href="/forgot-password">Forgot Password?</ForgotPasswordLink>
           </LoginForm>
-          <Desc>Don't have an account <SignUpLink href="/signup">Sign Up</SignUpLink></Desc>
+          <Desc>Don't have an account <SignUpLink href="/">Sign Up</SignUpLink></Desc>
         </FormContainer>
       </LoginContainer>
       <ImgContainer>

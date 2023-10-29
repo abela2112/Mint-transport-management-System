@@ -32,7 +32,7 @@ const register = async (req, res) => {
 const updateUser = async (req, res) => {
   let newPassword;
   const { id } = req.params;
-  console.log(req?.user);
+  console.log(req.user);
   if (req.body.password) {
     const salt = await bcrypt.genSalt(10);
     newPassword = await bcrypt.hash(req.body.password, salt);
@@ -52,11 +52,13 @@ const getAllUsers = async (req, res) => {
   const users = await User.find({});
   res.status(StatusCodes.OK).json({ users: users });
 };
+
 const getAUser = async (req, res) => {
   const { id } = req.params;
   const users = await User.findById(id);
   res.status(StatusCodes.OK).json({ users: users });
 };
+
 
 module.exports = {
   login,

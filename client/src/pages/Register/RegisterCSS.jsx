@@ -4,9 +4,10 @@ export const SignUpContainer = styled.div`
   display: flex;
   font-family: "Poppins", sans-serif;
   height: 100vh;
+  width: 100%;
 `;
 export const Header = styled.header`
-  padding: 10px;
+ 
 `
 
 export const SignUpForm = styled.div`
@@ -18,17 +19,19 @@ export const SignUpForm = styled.div`
 `;
 export const Contain = styled.div`
 display: flex;
+width: 100%;
 flex-direction: column;
 margin-bottom: 10px;
 gap: 2px;
 
 `
 export const Label = styled.label`
+padding: 5px 0;
  
 `;
 export const SignUpInput = styled.input`
-  width: 99%;
-  padding: 5px;
+  width: calc(100%-10px);
+  padding: 10px;
   margin-bottom: 10 px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -47,7 +50,7 @@ export const SignUpButton = styled.button`
 
 export const SelectOption = styled.select`
   width: 100%;
-  padding: 5px;
+  padding: 10px;
   border: none;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -67,10 +70,12 @@ export const Image = styled.img`
   height: 300px;
 `;
 export const ImageContainer = styled.div`
-  
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
 `;
 export const TextContainer = styled.div`
   flex: 1;

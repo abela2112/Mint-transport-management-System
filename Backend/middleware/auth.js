@@ -1,22 +1,22 @@
+const { StatusCodes } = require("http-status-codes");
 const { UnAuthorizedError } = require("../error");
-const jwt=require('jsonwebtoken')
+const jwt = require("jsonwebtoken");
 const auth = async (req, res, next) => {
-    const {authorization}=req.headers;
-    console.log('authorization',authorization)
-    if(!authorization || ! authorization.startsWith('Bearer ')){
-     throw new UnAuthorizedError('access denied');
+  const { authorization } = req.headers;
+  console.log("authorization", authorization);
+  if (!authorization || !authorization.startsWith("Bearer ")) {
+    throw new UnAuthorizedError("access denied");
+  }
 
-    }
+  const token = authorization.split(" ")[1];
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  console.log(token);
 
-    const token=authorization.split(' ')[1];
-    const decoded=await jwt.verify(token,process.env.JWT_SECRET)
-     
-    
-req.user=decoded
-next()
+  req.user = decoded;
+  next();
 };
 
-const verifyTokenAndAdmin = (req, res, next) => {
+const verifyTokenAndAdmin = async (req, res, next) => {
   auth(req, res, () => {
     const { isAdmin } = req.user;
     if (isAdmin) {
@@ -26,7 +26,7 @@ const verifyTokenAndAdmin = (req, res, next) => {
     }
   });
 };
-const verifyTokenAndAuth = (req, res, next) => {
+const verifyTokenAndAuth = async (req, res, next) => {
   auth(req, res, () => {
     const { userID, isAdmin } = req.user;
     const { id } = req.params;
