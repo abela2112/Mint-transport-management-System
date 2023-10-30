@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Background, Mint } from '../../asset';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { login } from '../../api/userApi';
 
 const LoginContainer = styled.div`
   flex: 1;
@@ -138,13 +140,14 @@ const TitleBox = styled.div`
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const dispatch = useDispatch()
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // You would typically send the login data to your server here for authentication.
     console.log('Email:', email);
     console.log('Password:', password);
+    login(dispatch, { email, password })
   };
 
   return (
@@ -162,23 +165,23 @@ const Login = () => {
           <LoginForm onSubmit={handleSubmit}>
             <div style={{ width: '100%' }}>
               <label>Email</label>
-            <Input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+              <Input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
             <div style={{ width: '100%' }}>
               <label>
                 password
               </label>
-            <Input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+              <Input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </div>
             <Link to="/forgot-password" style={{ color: '#e6953b', marginTop: '10px', textAlign: 'right', textDecoration: 'none' }}>Forgot Password?</Link>
 
