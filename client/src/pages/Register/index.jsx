@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { SignUpContainer, Contain, Header, SignUpForm, SignUpInput, SignUpButton, Option, SelectOption, ImageContainer, Image, TextContainer, Label, BottomText } from './RegisterCSS';
+import { SignUpContainer, Contain, Title, SignUpForm, SignUpInput, SignUpButton, Option, SelectOption, ImageContainer, Image, TextContainer, Label, BottomText } from './RegisterCSS';
 import { Link } from 'react-router-dom';
+import { Background } from '../../asset';
 
 
 const Register = () => {
@@ -22,12 +23,12 @@ const Register = () => {
   return (
 
     <SignUpContainer>
-
       <TextContainer>
-        <Header>
-          <h1>Get Started Now</h1>
-        </Header>
+        <Title>
+          Get Started Now
+        </Title>
         <SignUpForm>
+
           <Contain>
             <Label>First Name</Label>
             <SignUpInput
@@ -87,18 +88,18 @@ const Register = () => {
             />
           </Contain>
 
-          <SignUpButton onClick={handleSignUp}>Sign Up</SignUpButton>
-          <BottomText>
-            <span>or</span>
-            <p>Already have an account? <Link to={'/login'} style={{ color: 'blue' }}>Sign in</Link>  </p>
-          </BottomText>
 
+          <BottomText>
+
+            <p>Already have an account? <Link className='link' to={'/login'} style={{ color: '#e6953b' }}>Sign in</Link>  </p>
+          </BottomText>
+          <SignUpButton onClick={handleSignUp}>Sign Up</SignUpButton>
         </SignUpForm>
       </TextContainer>
 
-      <ImageContainer>
-        <Image src='https://borkena.com/wp-content/uploads/2019/05/Innovation-and-Technology-_-e-governance_.jpg' />
-      </ImageContainer>
+      {/* <ImageContainer>
+        <Image src={Background} />
+      </ImageContainer> */}
 
 
     </SignUpContainer>
@@ -107,3 +108,4 @@ const Register = () => {
 };
 
 export default Register;
+//https://borkena.com/wp-content/uploads/2019/05/Innovation-and-Technology-_-e-governance_.jpg

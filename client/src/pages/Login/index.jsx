@@ -1,30 +1,30 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Logo, Mint, MinT } from '../../asset';
+import { Background, Mint } from '../../asset';
+import { Link } from 'react-router-dom';
 
 const LoginContainer = styled.div`
   flex: 1;
-  margin-bottom:100;
   display: flex;
   height: 100%;
   align-items: center;
   justify-content: center;
   width: 100%;
-  background-color: white;
+ 
 `;
 
 const ImgmintContainer = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 5px;
+  left: 5px;
   width: 100px;
   height: 100px;
   margin-left: 5px;
 `;
 
 const Img1 = styled.img`
-  width: 100%;
-  height: 100%;
+  width: 50px;
+  height:50px;
   object-fit: cover;
 `;
 
@@ -46,42 +46,57 @@ const Img2 = styled.img`
 
 const ImgContainer = styled.div`
   flex: 1;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  
 `;
 
 const Img3 = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 `;
 
 const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   width: 100%;
+  margin:10px 0;
 
 `;
+export const WelcomeTxt = styled.span`
+ font-weight: 500;
+ font-size: 30px;
+text-align: left;
+margin-bottom: 10px;
+/* padding:10px 20px; */
 
+`
+export const LoginTxt = styled.span`
+ font-weight: 300;
+ font-size: 22px;
+text-align: left;
+margin-bottom: 20px;
+/* padding:10px 20px; */
+
+`
 const Input = styled.input`
   margin: 5px 0;
   padding: 10px;
   width: 100%;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 10px;
+  margin-bottom: 10px;
 `;
 
 const SubmitButton = styled.button`
-  background-color: #007bff;
+  background-color: #164E62;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   padding: 10px 20px;
+  font-size: 16px;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 20px;
   width: 100%;
 `;
 
@@ -93,7 +108,7 @@ const SignUpLink = styled.a`
 `;
 
 const ForgotPasswordLink = styled.a`
-  color: #007bff;
+  color:#e6953b ;
   text-decoration: none;
   cursor: pointer;
   text-align: right;
@@ -112,11 +127,14 @@ const Desc = styled.p`
 `;
 
 const FormContainer = styled.div`
-  width: 60%;
-  height: 70%;
-  position: relative;
+  width: 50%;
+  
+ 
 `;
-
+const TitleBox = styled.div`
+  display: flex;
+  flex-direction: column;
+`
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -135,32 +153,43 @@ const Login = () => {
         <ImgmintContainer>
           <Img1 src={Mint} />
         </ImgmintContainer>
-        <TextmintContainer>
-          <Img2 src={MinT} />
-        </TextmintContainer>
+
         <FormContainer>
-          <h1>Login</h1>
+          <TitleBox>
+            <WelcomeTxt>Welcome back</WelcomeTxt>
+            <LoginTxt>Login into your account</LoginTxt>
+          </TitleBox>
           <LoginForm onSubmit={handleSubmit}>
+            <div style={{ width: '100%' }}>
+              <label>Email</label>
             <Input
               type="email"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
+            </div>
+            <div style={{ width: '100%' }}>
+              <label>
+                password
+              </label>
             <Input
               type="password"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            </div>
+            <Link to="/forgot-password" style={{ color: '#e6953b', marginTop: '10px', textAlign: 'right', textDecoration: 'none' }}>Forgot Password?</Link>
+
             <SubmitButton type="submit">Login</SubmitButton>
-            <ForgotPasswordLink href="/forgot-password">Forgot Password?</ForgotPasswordLink>
           </LoginForm>
-          <Desc>Don't have an account <SignUpLink href="/">Sign Up</SignUpLink></Desc>
+          <Desc>Don't have an account <Link to='/' style={{ color: '#e6953b', marginTop: '10px' }}>Sign Up</Link></Desc>
+
         </FormContainer>
       </LoginContainer>
       <ImgContainer>
-        <Img3 src={Logo} />
+        <Img3 src={Background} />
       </ImgContainer>
     </Container>
   );
