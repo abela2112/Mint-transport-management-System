@@ -2,19 +2,21 @@ const { StatusCodes } = require("http-status-codes");
 const { UnAuthorizedError } = require("../error");
 const jwt = require("jsonwebtoken");
 const auth = async (req, res, next) => {
-  const { authorization } = req.headers;
-  console.log("authorization", authorization);
-  if (!authorization || !authorization.startsWith("Bearer ")) {
-    throw new UnAuthorizedError("access denied");
-  }
+    const {authorization}=req.headers;
+    console.log('authorization',authorization)
+    if(!authorization || ! authorization.startsWith('Bearer ')){
+     throw new UnAuthorizedError('access denied');
+   }
 
-  const token = authorization.split(" ")[1];
-  const decoded = jwt.verify(token, process.env.JWT_SECRET);
-  console.log(token);
-
-  req.user = decoded;
-  next();
+    const token=authorization.split(' ')[1];
+    const decoded=await jwt.verify(token,process.env.JWT_SECRET)
+     
+    console.log('decoded',decoded)
+req.user=decoded
+next()
 };
+
+
 
 const verifyTokenAndAdmin = async (req, res, next) => {
   auth(req, res, () => {
@@ -38,3 +40,4 @@ const verifyTokenAndAuth = async (req, res, next) => {
   });
 };
 module.exports = { auth, verifyTokenAndAdmin, verifyTokenAndAuth };
+
