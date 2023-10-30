@@ -5,13 +5,12 @@ const auth = async (req, res, next) => {
     console.log('authorization',authorization)
     if(!authorization || ! authorization.startsWith('Bearer ')){
      throw new UnAuthorizedError('access denied');
-
-    }
+   }
 
     const token=authorization.split(' ')[1];
     const decoded=await jwt.verify(token,process.env.JWT_SECRET)
      
-    
+    console.log('decoded',decoded)
 req.user=decoded
 next()
 };
