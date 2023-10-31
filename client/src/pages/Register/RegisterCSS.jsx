@@ -18,7 +18,7 @@ text-align: left;
 
 `
 
-export const SignUpForm = styled.div`
+export const SignUpForm = styled.form`
   //width: 400px;
   
   padding: 20px;
