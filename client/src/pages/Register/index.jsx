@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { SignUpContainer, Contain, Title, SignUpForm, SignUpInput, SignUpButton, Option, SelectOption, ImageContainer, Image, TextContainer, Label, BottomText } from './RegisterCSS';
 import { Link } from 'react-router-dom';
 import { Background } from '../../asset';
+import { signUp } from '../../api/userApi';
 
 
 const Register = () => {
@@ -10,14 +11,19 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [position, setPosition] = useState('');
   const [password, setPassword] = useState('');
+  const [department, setDepartment] = useState('');
 
-  const handleSignUp = () => {
+  const handleSignUp = (e) => {
+    e.preventDefault()
     console.log('Sign up button clicked');
     console.log('First Name:', firstName);
     console.log('Last Name:', lastName);
     console.log('Email:', email);
     console.log('Position:', position);
     console.log('Password:', password);
+    console.log('department:', department);
+    signUp({ firstName, lastName, email, position, department, password }).then(() => console.log('success fully registered')).catch((err) => console.log(err)
+    )
   };
 
   return (
@@ -27,7 +33,7 @@ const Register = () => {
         <Title>
           Get Started Now
         </Title>
-        <SignUpForm>
+        <SignUpForm onSubmit={handleSignUp}>
 
           <Contain>
             <Label>First Name</Label>
@@ -60,7 +66,7 @@ const Register = () => {
           <Contain>
 
             <Label>Department</Label>
-            <SelectOption>
+            <SelectOption onChange={(e) => setDepartment(e.target.value)}>
               <Option disabled selected>Select Option</Option>
               <Option>aaaa</Option>
               <Option>bbbb</Option>
@@ -93,7 +99,7 @@ const Register = () => {
 
             <p>Already have an account? <Link className='link' to={'/login'} style={{ color: '#e6953b' }}>Sign in</Link>  </p>
           </BottomText>
-          <SignUpButton onClick={handleSignUp}>Sign Up</SignUpButton>
+          <SignUpButton>Sign Up</SignUpButton>
         </SignUpForm>
       </TextContainer>
 
