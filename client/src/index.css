@@ -11,3 +11,22 @@
 
     color: #e6953b;
 }
+a {
+   text-decoration: none; 
+}
+.active {
+    color: #141522 !important;
+    background-color: #F5F5F7 !important;
+}
+
+.nav-link{
+    display:flex;
+padding:10px 20px ;
+margin-bottom: 10px;
+/* background-color: #F5F5F7; */
+border-radius: 5px;
+font-weight: 400;
+/* color: #141522; */
+cursor: pointer;
+color:#8E92BC;
+}
