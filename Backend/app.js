@@ -11,10 +11,11 @@ const errorHandleMiddleware = require("./middleware/errorhandler");
 const notFoundErrorMiddleware = require("./middleware/notFound");
 //router
 const userRoute = require("./routes/user");
+const requestRouter=require("./routes/request")
 app.use(cors());
 app.use(express.json());
 app.use("/api/user", userRoute);
-
+app.use("/api/request",requestRouter)
 // error handler
 app.use(errorHandleMiddleware);
 app.use(notFoundErrorMiddleware);
