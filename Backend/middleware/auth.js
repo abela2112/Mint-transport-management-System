@@ -40,4 +40,3 @@ const verifyTokenAndAuth = async (req, res, next) => {
   });
 };
 module.exports = { auth, verifyTokenAndAdmin, verifyTokenAndAuth };
-

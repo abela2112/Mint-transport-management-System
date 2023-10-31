@@ -1,3 +1,4 @@
+
 import React from 'react'
 import styled from 'styled-components'
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined';
@@ -63,3 +64,4 @@ const Navbar = ({title}) => {
 }
 
 export default Navbar
+

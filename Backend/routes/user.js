@@ -19,5 +19,4 @@ router.get("/:id", verifyTokenAndAdmin, getAUser);
 router.post("/login", login);
 router.post("/register", register);
 router.patch("/:id", verifyTokenAndAuth, updateUser);
-
 module.exports = router;
