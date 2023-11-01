@@ -32,6 +32,11 @@ cursor: pointer;
 color:rgb(167, 167, 172);
 }
 
+.nav-link:hover{
+    color: #18616C !important;
+    background-color: rgba(211, 248, 255,0.4) !important;
+}
+
 .custom-loader {
     width:40px;
     height:40px;
