@@ -39,6 +39,11 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  role: {
+    type: String,
+    enum: ["staff", "staff-manager", "transport-manager", "admin"],
+    default: "staff",
+  },
   status: {
     type: String,
     enum: ["approved", "rejected", "pending"],

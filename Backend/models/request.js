@@ -1,41 +1,48 @@
 const mongoose =require('mongoose')
 
-const RequestSchema=mongoose.Schema({
-      FullName:{
-        type:String,
-        require:true,
-      },
+const RequestSchema = mongoose.Schema({
+  name: {
+    type: String,
+    require: true,
+  },
 
-      Phone:{
-        type:String,
-        require:true
-      },
-     
-      pickUpDate:{
-        type:Date,
-        require:true
-      }
-      ,
-      ReturnDate:{
-        type:Date,
-        require:true 
-      },
+  phoneNumber: {
+    type: String,
+    require: true,
+  },
 
-      destination:{
-        type:String,
-        require:true
-      },
+  pickUpDate: {
+    type: Date,
+    require: true,
+  },
+  ReturnDate: {
+    type: Date,
+    require: true,
+  },
 
-      NumberOfPassanger:{
-        type:String,
-        require:true
-      },
+  destination: {
+    type: String,
+    require: true,
+  },
 
-      Discription:{
-        type:String,
-        require:true
-      },
-      
-})
+  Passangers: {
+    type: Array,
+    require: true,
+  },
 
-module.export=mongoose.model("Request",RequestSchema)
+  description: {
+    type: String,
+    require: true,
+  },
+  userCreated: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
+  },
+  status: {
+    type: String,
+    enum: ["approved", "rejected", "pending"],
+    default: "pending",
+  },
+});
+
+module.exports = mongoose.model("Request", RequestSchema);
