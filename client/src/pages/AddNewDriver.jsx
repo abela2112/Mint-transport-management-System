@@ -2,12 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 import { Label, SignUpInput, Title } from './Register/RegisterCSS'
 import Navbar from '../components/Navbar'
-const Container = styled.div`
+const Container = styled.div `
 width: 100%;
 padding: 20px;
 
 `
-const Wrapper = styled.div`
+const Wrapper = styled.div `
 display: flex;
 flex-direction: column;
 
