@@ -8,13 +8,36 @@ const Container = styled.div`
     padding: 20px;
 `
 const Wrapper = styled.div`
+display: flex;
+flex-direction: column;
     
 `
 const ButtonContainer = styled.div``
-const ApproveButton = styled.button``
-const RejectButton = styled.button``
-const Text = styled.span``
-const SingleRequestDetails = ({}) => {
+const ApproveButton = styled.button`
+padding: 7px 10px;
+border: none;
+margin: 10px 20px;
+background-color:#e5faf2;
+
+&:disabled{
+    cursor: not-allowed;
+}
+cursor:pointer;
+`
+const RejectButton = styled.button`
+padding: 7px 10px;
+border: none;
+margin: 10px 20px;
+background-color: '#fff0f1';
+cursor: pointer;
+&:disabled{
+    cursor: not-allowed;
+}
+`
+const Text = styled.span`
+padding: 10px;
+`
+const SingleRequestDetails = () => {
     const handleApprove = (e) => {
         e.preventDefault()
         updateRequestById(id, { status: 'approved' }).then(() => console.log('approved successfully')).catch((err) => console.log(err));
@@ -29,6 +52,7 @@ const SingleRequestDetails = ({}) => {
     useEffect(() => {
         setIsLoading(true)
         getRequestById(id).then(({ data }) => {
+            console.log(data)
             setIsLoading(false)
             setRequest(data)
         }).catch((err) => {
@@ -46,16 +70,18 @@ const SingleRequestDetails = ({}) => {
                 <Text>destination:{request?.destination}</Text>
                 <Text>Phone Number:{request?.phoneNumber}</Text>
                 <Text> description:{request?.description}</Text>
-                <Text>Pick Up date:{format(new Date(request?.pickUpDate)
+                <Text>Pick Up date:{request?.pickUpDate && format(new Date(request?.pickUpDate)
                     , 'MMMM do yyyy')}</Text>
-                <Text>return date:{format(new Date(request?.pickUpDate)
+                <Text>return date:{request?.pickUpDate && format(new Date(request?.pickUpDate)
                     , 'MMMM do yyyy')}</Text>
 
 
             </Wrapper>
             <ButtonContainer>
-                <ApproveButton onClick={handleApprove} >Approved</ApproveButton>
-                <RejectButton onClick={handleReject}>Reject</RejectButton>
+                <ApproveButton disabled={request?.status === 'approved' || request?.status === 'rejected' ? true : false} onClick={handleApprove} >Approved</ApproveButton>
+
+                <RejectButton disabled={request?.status === 'rejected' || request?.status === 'approved' ? true : false} onClick={handleReject}>Reject</RejectButton>
+
             </ButtonContainer>
 
         </Container>

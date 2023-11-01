@@ -32,4 +32,5 @@ export const getAllRequests = () => axios.get(`/api/request`);
 
 export const getRequestById = (id) => axios.get(`/api/request/${id}`);
 
-export const updateRequestById = (id, request) => axios.patch(`/api/request/${id}`,request)
+export const updateRequestById = (id, request) =>
+  axios.patch(`/api/request/updateRequest/${id}`, request);

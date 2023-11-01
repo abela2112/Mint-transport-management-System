@@ -49,15 +49,20 @@ const postRequest = async (req, res) => {
 
 const updateRequest = async (req, res) => {
   const { id } = req.params;
+
   try {
-    const request = await request.findByIdAndUpdate(id);
+    const request = await Request.findByIdAndUpdate(
+      id,
+      { ...req.body },
+      { new: true }
+    );
     res.status(StatusCodes.OK).json(request);
   } catch (error) {
     res.status(StatusCodes.BAD_REQUEST).json(error);
   }
 };
 
-const delateRequest = async (req, res) => {
+const deleteRequest = async (req, res) => {
   const { id } = req.params;
   try {
     const request = await Request.findByIdAndDelete(id);
@@ -72,6 +77,6 @@ module.exports = {
   getALLRequests,
   postRequest,
   updateRequest,
-  delateRequest,
+  deleteRequest,
   getUserRequests,
 };

@@ -9,7 +9,7 @@ const {
   postRequest,
   updateRequest,
   getUserRequests,
-  delateRequest,
+  deleteRequest,
 } = require("../controller/request");
 
 router.get("/", verifyTokenAndAdmin, getALLRequests);
@@ -17,7 +17,7 @@ router.get("/user/:id", auth, getUserRequests);
 router.get("/:id", verifyTokenAndAuth, getRequest);
 
 router.post("/reqPost", auth, postRequest);
-router.patch('/updateRequest',verifyTokenAndAdmin,updateRequest)
-router.delete('/deleteRequest',verifyTokenAndAdmin,delateRequest)
+router.patch("/updateRequest/:id", verifyTokenAndAdmin, updateRequest);
+router.delete("/deleteRequest/:id", verifyTokenAndAdmin, deleteRequest);
 
 module.exports=router
