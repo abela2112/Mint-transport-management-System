@@ -1,10 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Label, SignUpInput, Title } from './Register/RegisterCSS'
-import Navbar from '../components/Navbar'
+
 const Container = styled.div`
 width: 100%;
-padding: 20px;
+padding: 20px 10px;
+margin-top: 10px;
 
 `
 const Wrapper = styled.div`
@@ -31,7 +32,7 @@ const ButtonBox = styled.div`
     justify-content: flex-end;
 `
 const SubmitButton = styled.button`
-width: 200px;
+  width: 200px;
   padding:10px 20px;
   font-size: 16px;
   margin: 20px;
@@ -42,6 +43,7 @@ width: 200px;
   cursor: pointer;
   &:hover{
     background-color: #3b808c;
+    color: #EE8624;
   }
 
 `
@@ -50,9 +52,11 @@ width: 200px;
   padding:10px 20px;
   font-size: 16px;
   margin: 20px;
-  background-color: #828788;
-  color: #fff;
-  border: none;
+  color: black;
+  //background-color: #828788;
+  //color: #fff;
+  outline: auto;
+  //border: 1px solid #555;
   border-radius: 5px;
   cursor: pointer;
   
@@ -71,10 +75,10 @@ const Option = styled.option`
 const AddNewCar = () => {
     return (
         <>
-            <Navbar title={'Add New Car'} />
+
             <Container>
                 <Wrapper>
-                    {/* <Title>Add new Car</Title> */}
+                    <Title>Add new Car</Title>
 
                     <FormBox>
                         <InputItem>

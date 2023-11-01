@@ -17,7 +17,6 @@ next()
 };
 
 
-
 const verifyTokenAndAdmin = async (req, res, next) => {
   auth(req, res, () => {
     const { isAdmin } = req.user;

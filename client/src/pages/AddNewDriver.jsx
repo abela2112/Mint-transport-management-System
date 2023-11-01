@@ -58,7 +58,7 @@ width: 200px;
 const AddNewDriver = () => {
     return (
         <>
-            <Navbar title={'Add New Driver'} />
+
             <Container>
                 <Wrapper>
                     {/* <Title>Add new Car</Title> */}

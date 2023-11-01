@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Background, Mint } from '../../asset';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { login } from '../../api/userApi';
 
@@ -141,13 +141,15 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // You would typically send the login data to your server here for authentication.
     console.log('Email:', email);
     console.log('Password:', password);
-    login(dispatch, { email, password })
+    login(dispatch, navigate, { email, password })
+
   };
 
   return (

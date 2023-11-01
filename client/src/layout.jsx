@@ -2,6 +2,7 @@ import React from 'react'
 import SideBar from './components/SideBar'
 import { Outlet } from 'react-router-dom'
 import styled from 'styled-components'
+import Navbar from './components/Navbar'
 const Container = styled.div`
 display: flex;
 width: 100%;
@@ -15,6 +16,7 @@ const Layout = () => {
         <Container>
             <SideBar />
             <Main>
+                <Navbar />
                 <Outlet />
             </Main>
         </Container>
