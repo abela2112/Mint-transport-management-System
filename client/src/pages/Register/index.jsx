@@ -5,6 +5,7 @@ import { Background } from '../../asset';
 import { signUp } from '../../api/userApi';
 
 
+
 const Register = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');

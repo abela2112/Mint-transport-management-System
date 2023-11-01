@@ -11,7 +11,7 @@ const Container = styled.div`
 
    flex-direction:column;
    background-color:lightCyan;
-   position:relative;`
+   position:relative;
 `
 // const Wrraper =styled.div`
 //  padding :10px;
@@ -143,6 +143,9 @@ const Request = () => {
       
     })}
   }
+
+  
+
   console.log(inputArr)
   return (
 
@@ -251,6 +254,6 @@ const Request = () => {
 //       </Container>
 //     </>)
 
-//}
+}
 
 export default Request

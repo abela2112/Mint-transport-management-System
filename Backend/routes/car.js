@@ -15,6 +15,6 @@ const {
 router.get("/", verifyTokenAndAdmin, getAllcars);
 router.get("/:id", verifyTokenAndAdmin, getCarById);
 router.post("/add-new-car", verifyTokenAndAdmin, addNewCar);
-router.patch("/:id", verifyTokenAndAuth, updateCar);
-router.delete("/:id", verifyTokenAndAuth, deleteCar);
+router.patch("/:id", verifyTokenAndAdmin, updateCar);
+router.delete("/:id", verifyTokenAndAdmin, deleteCar);
 module.exports = router;
