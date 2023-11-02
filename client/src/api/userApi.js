@@ -27,10 +27,16 @@ export const createRequest = (request) =>
 
 export const getUserRequests = (userId) =>
   axios.get(`/api/request/user/${userId}`);
+  export const getUserRegisterRequests = (userId) =>
+    axios.get(`/api/user/${userId}`);
 
-export const getAllRequests = () => axios.get(`/api/request`);
+  export const getAllRequests = () => axios.get(`/api/request`);
 
-export const getRequestById = (id) => axios.get(`/api/request/${id}`);
+  export const getRequestById = (id) => axios.get(`/api/request/${id}`);
 
-export const updateRequestById = (id, request) =>
-  axios.patch(`/api/request/updateRequest/${id}`, request);
+  export const updateRequestById = (id, request) =>
+    axios.patch(`/api/request/updateRequest/${id}`, request);
+
+  export const getAllUserRegisterRequests = () => axios.get(`/api/user`);
+  export const updateUserRegisterRequestById = (id, request) =>
+    axios.patch(`/api/user/${id}`, request);
