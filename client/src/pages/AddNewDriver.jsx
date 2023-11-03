@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Label, SignUpInput, Title } from './Register/RegisterCSS'
 import Navbar from '../components/Navbar'
+import { addDriver } from '../api/userApi'
+import DialogModal from '../components/DialogModal'
+
 const Container = styled.div `
 width: 100%;
 padding: 20px;
@@ -56,9 +59,35 @@ width: 200px;
   
 `
 const AddNewDriver = () => {
+
+       const [name,setName]=useState("")
+       const [phone,setPhone]=useState("")
+       const [regDate,setRegDate]=useState("")
+       
+
+       const handleClick=(e)=>{
+        
+            console.log("name" ,name);
+            console.log("phone" ,phone);
+            console.log("regDate",regDate);
+            addDriver({name,phone,regDate}).then(()=>console.log("driver is succefully registered")).catch((err)=>console.log(err))
+       }
+       
+
+
+       
+       const [isModalOpen, setIsModalOpen] = useState(false);
+      
+       const handleButtonClick = () => {
+           
+         setIsModalOpen(true);
+       };
+
+
+
     return (
         <>
-            <Navbar title={'Add New Driver'} />
+
             <Container>
                 <Wrapper>
                     {/* <Title>Add new Car</Title> */}
@@ -66,24 +95,39 @@ const AddNewDriver = () => {
                     <FormBox>
                         <InputItem>
                             <Label>name</Label>
-                            <SignUpInput type='text' placeholder='brand name' />
+                            <SignUpInput 
+                            type='text' 
+                            placeholder='full name'
+                            value={name}
+                            onChange={(e)=>setName(e.target.value)}
+                            />
                         </InputItem>
                         <InputItem>
                             <Label>Phone Number</Label>
-                            <SignUpInput type='tel' placeholder='model name' />
+                            <SignUpInput 
+                            type='tel' 
+                            placeholder='phone number' 
+                            value={phone}
+                            onChange={(e)=>setPhone(e.target.value)}
+                            />
                         </InputItem>
 
 
                         <InputItem>
                             <Label>Registered date</Label>
-                            <SignUpInput type='date' />
+                            <SignUpInput 
+                            type='date'
+                            value={regDate}
+                            onChange={(e)=>setRegDate(e.target.value)}
+                            />
                         </InputItem>
 
                     </FormBox>
 
                     <ButtonBox>
-                        <CancelButton>cancel</CancelButton>
-                        <SubmitButton>submit</SubmitButton>
+
+                       <SubmitButton onClick={handleButtonClick}>submit</SubmitButton>
+                        <DialogModal open={isModalOpen} onClose={() => setIsModalOpen(false)} onSubmit={handleClick}/>
 
                     </ButtonBox>
                 </Wrapper>

@@ -1,41 +1,50 @@
 const mongoose =require('mongoose')
 
 const RequestSchema=mongoose.Schema({
-      FullName:{
+
+      name:{
         type:String,
-        require:[true,"you have to provide the full name"],
+        required:[true,"you have to provide the full name"],
       },
 
-      Phone:{
-        type:String,
-        require:[true,"you have to provide the phone"]
-      },
-     
-      pickUpDate:{
-        type:Date,
-        require:[true,"you have to provide the pick Up date"]
-      }
-      ,
-      ReturnDate:{
-        type:Date,
-        require:[true,"you have to provide the return date"]
-      },
+  phoneNumber: {
+    type: String,
+    required: true,
+  },
 
-      destination:{
-        type:String,
-        require:[true,"you have to provide the destination"]
-      },
+  pickUpDate: {
+    type: Date,
+    required: true,
+  },
+  ReturnDate: {
+    type: Date,
+    required: true,
+  },
 
-      NumberOfPassanger:{
-        type:String,
-        require:[true,"you have to provide the number of passanger"]
-      },
+  destination: {
+    type: String,
+    required: true,
+  },
 
-      Discription:{
-        type:String,
-        require:[true,"youb have to provide the description "]
-      },
-      
-})
+  Passangers: {
+    type: Array,
+    required: true,
+  },
 
-module.export=mongoose.model("Request",RequestSchema)
+
+  description: {
+    type: String,
+    required: true,
+  },
+  userCreated: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
+  },
+  status: {
+    type: String,
+    enum: ["approved", "rejected", "pending"],
+    default: "pending",
+  },
+});
+
+module.exports = mongoose.model("Request", RequestSchema);

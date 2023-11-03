@@ -4,11 +4,11 @@ const jwt=require('jsonwebtoken')
 const UserSchema = new mongoose.Schema({
   First_name: {
     type: String,
-    require: [true, "name must be provided"],
+    required: [true, "name must be provided"],
   },
   Last_name: {
     type: String,
-    require: [true, "name must be provided"],
+    required: [true, "name must be provided"],
   },
   email: {
     type: String,
@@ -25,19 +25,24 @@ const UserSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    require: [true, "password must be provided"],
+    required: [true, "password must be provided"],
   },
   department: {
     type: String,
-    require: true,
+    required: true,
   },
   phoneNumber: {
     type: String,
-    require: true,
+    required: true,
   },
   isAdmin: {
     type: Boolean,
     default: false,
+  },
+  role: {
+    type: String,
+    enum: ["staff", "staff-manager", "transport-manager", "admin"],
+    default: "staff",
   },
   status: {
     type: String,

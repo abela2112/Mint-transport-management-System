@@ -1,12 +1,18 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Label, SignUpInput, Title } from './Register/RegisterCSS'
-import Navbar from '../components/Navbar'
+//import CustomModal from '../components/Modal'
+//import Navbar from '../components/Navbar'
 import { addCar } from '../api/userApi';
+import DialogModal from '../components/DialogModal'
 
-const Container = styled.div`
+
+const Container = styled.div `
+
 width: 100%;
-padding: 20px;
+padding: 20px 10px;
+margin-top: 10px;
+
 `
 
 const Wrapper = styled.div`
@@ -33,7 +39,7 @@ const ButtonBox = styled.div`
     justify-content: flex-end;
 `
 const SubmitButton = styled.button`
-width: 200px;
+  width: 200px;
   padding:10px 20px;
   font-size: 16px;
   margin: 20px;
@@ -44,6 +50,7 @@ width: 200px;
   cursor: pointer;
   &:hover{
     background-color: #3b808c;
+    color: #EE8624;
   }
 
 `
@@ -52,9 +59,11 @@ width: 200px;
   padding:10px 20px;
   font-size: 16px;
   margin: 20px;
-  background-color: #828788;
-  color: #fff;
-  border: none;
+  color: black;
+  //background-color: #828788;
+  //color: #fff;
+  outline: auto;
+  //border: 1px solid #555;
   border-radius: 5px;
   cursor: pointer;
   
@@ -72,34 +81,42 @@ const Option = styled.option`
 `
 const AddNewCar = () => {
          
+ 
+        const [isModalOpen, setIsModalOpen] = useState(false);
+      
+        const handleButtonClick = () => {
+            
+          setIsModalOpen(true);
+        };
+
     const [brand, setBrand] = useState('');
     const [model, setModel] = useState('');
+    const [owned, setOwned] = useState('');
     const [licencePlateNumber, setLicencePlateNumber] = useState('');
-    const [driverName, setDriverName] = useState('');
+    const [DriverName, setDriverName] = useState('');
     const [driverDate, setDriverDate] = useState('');
     const [driverPhoneNumber, setDriverPhoneNumber] = useState('');
     
-    const handleClick=(e)=>{
-        e.preventDefault()
+    const handleClick=()=>{
+      
 
     console.log('brand:', brand);
     console.log('model:', model);
     console.log('licencePlateNumber:', licencePlateNumber);
-    console.log('driverName:', driverName);
+    console.log('driverName:', DriverName);
     console.log('driverDate:', driverDate);
     console.log('driverPhoneNumber:', driverPhoneNumber);
-    addCar({ brand, model, licencePlateNumber, driverName, driverDate, driverPhoneNumber }).then(() => console.log('car successfully registered')).catch((err) => console.log(err))
+    addCar({ brand, model, licencePlateNumber, DriverName, driverDate, driverPhoneNumber,owned }).then(() => console.log('car successfully registered')).catch((err) => console.log(err))
     
     }
 
 
-
     return (
         <>
-            <Navbar title={'Add New Car'} />
+
             <Container>
                 <Wrapper>
-                    {/* <Title>Add new Car</Title> */}
+                    <Title>Add new Car</Title>
 
                     <FormBox>
                         <InputItem>
@@ -142,8 +159,8 @@ const AddNewCar = () => {
                             <Label>Driver's Name</Label>
                             <SignUpInput 
                             type='text'
-                            placeholder='brand name' 
-                            value={driverName}
+                            placeholder='driver name' 
+                            value={DriverName}
                             onChange={(e)=>setDriverName(e.target.value)}
                             />
                         </InputItem>
@@ -158,7 +175,11 @@ const AddNewCar = () => {
                         </InputItem>
                         <InputItem>
                             <Label>Owned</Label>
-                            <Select>
+                            <Select 
+                            type='tel' 
+                           
+                            value={owned}
+                            onChange={(e)=>setOwned(e.target.value)}>
                                 <Option>rent</Option>
                                 <Option>own</Option>
                             </Select>
@@ -168,9 +189,10 @@ const AddNewCar = () => {
                     </FormBox>
 
                     <ButtonBox>
-                        <CancelButton>cancel</CancelButton>
-                        <SubmitButton onClick={handleClick}>submit</SubmitButton>
-
+                        
+                        
+                        <SubmitButton onClick={handleButtonClick}>submit</SubmitButton>
+                        <DialogModal open={isModalOpen} onClose={() => setIsModalOpen(false)} onSubmit={handleClick}/>
                     </ButtonBox>
                 </Wrapper>
             </Container></>

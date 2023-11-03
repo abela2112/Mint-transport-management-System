@@ -20,5 +20,6 @@ const {
   router.post("/add-new-driver", verifyTokenAndAdmin, addNewDriver);
   router.patch("/:id", verifyTokenAndAdmin, updateDriver);
   router.delete("/:id", verifyTokenAndAdmin, deleteDriver);
+  
   module.exports = router;
   

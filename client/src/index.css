@@ -13,10 +13,11 @@
 }
 a {
    text-decoration: none; 
+   color: inherit;
 }
 .active {
-    color: #141522 !important;
-    background-color: #F5F5F7 !important;
+    color: #18616C !important;
+    background-color: rgba(211, 248, 255,0.4) !important;
 }
 
 .nav-link{
@@ -28,5 +29,25 @@ border-radius: 5px;
 font-weight: 400;
 /* color: #141522; */
 cursor: pointer;
-color:#8E92BC;
+color:rgb(167, 167, 172);
 }
+
+.nav-link:hover{
+    color: #18616C !important;
+    background-color: rgba(211, 248, 255,0.4) !important;
+}
+
+.custom-loader {
+    width:40px;
+    height:40px;
+    --c:radial-gradient(farthest-side,#fff 92%,#0000);
+    background: 
+      var(--c) 50% 0,
+      var(--c) 50% 100%,
+      var(--c) 100% 50%,
+      var(--c) 0    50%;
+    background-size:12px 12px;
+    background-repeat:no-repeat;
+    animation:s7 1s infinite;
+  }
+  @keyframes s7 {to{transform: rotate(.5turn)}}
