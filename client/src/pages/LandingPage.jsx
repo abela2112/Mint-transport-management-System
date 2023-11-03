@@ -2,6 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Mint } from '../asset';
+import { useNavigate } from 'react-router-dom';
 
 const FirstContainer = styled.div`
   background: #164E62;
@@ -27,7 +28,7 @@ const ImgmintContainer2 = styled.div`
   left: 30px;
   width: 200px;
   height: 200px;
-  background-color: blue;
+ 
 `;
 
 const Img103 = styled.img`
@@ -68,7 +69,7 @@ const FourthContainer = styled.div`
 `;
 
 const LoginButton = styled.button`
-  color:blue;
+ 
   background-color: white;
   padding: 10px 20px ;
   text-decoration: none;
@@ -85,7 +86,7 @@ const SignUpButton = styled.button`
 `;
 
 const LandingPage = () => {
-  
+  const navigate = useNavigate()
   return (
     <FirstContainer>
       
@@ -102,8 +103,8 @@ const LandingPage = () => {
         </StyledText2>
         </ThirdContainer >
         <FourthContainer>
-          <LoginButton >Login</LoginButton>
-          <SignUpButton >Sign Up</SignUpButton>
+          <LoginButton onClick={() => navigate('/login')}>Login</LoginButton>
+          <SignUpButton onClick={() => navigate('/register')} >Sign Up</SignUpButton>
         </FourthContainer>
       
       </div>

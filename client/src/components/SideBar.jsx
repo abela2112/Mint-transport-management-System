@@ -97,10 +97,10 @@ const SideBar = () => {
                     {user.role === 'admin' &&
                         <>
                             <ListItem><NavLink className={'nav-link'} to='/requests'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />Booking</NavLink></ListItem>
-                            <ListItem><NavLink className={'nav-link'} to={'/add-new-car'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />Add New Car</NavLink></ListItem>
-                            <ListItem><NavLink className={'nav-link'} to='/add-new-driver'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />Add New Driver</NavLink></ListItem>
-                            <ListItem><NavLink className={'nav-link'} to={'/available-car'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />Available Car</NavLink></ListItem>
-
+                          
+                        <ListItem><NavLink className={'nav-link'} to={'/user-request'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />User Requests</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to='/add-department'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />Add New Department</NavLink></ListItem>
+                       
                         </>
                     }
                     <ListItemLogOut onClick={() => {
