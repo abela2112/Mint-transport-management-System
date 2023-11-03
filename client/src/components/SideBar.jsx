@@ -13,7 +13,7 @@ import { logOutUser } from '../redux/features/user';
 const Container = styled.div`
     flex: 1;
     padding: 10px;
-   // background-color: #C9F7FF;
+    background-color: #C9F7FF;
     height: 100vh;
     position: sticky;
     top: 0;

@@ -102,6 +102,7 @@ const AddNewCar = () => {
 
     console.log('brand:', brand);
     console.log('model:', model);
+    console.log('owned:', owned);
     console.log('licencePlateNumber:', licencePlateNumber);
     console.log('driverName:', DriverName);
     console.log('driverDate:', driverDate);
@@ -176,12 +177,10 @@ const AddNewCar = () => {
                         <InputItem>
                             <Label>Owned</Label>
                             <Select 
-                            type='tel' 
-                           
-                            value={owned}
+                             
                             onChange={(e)=>setOwned(e.target.value)}>
-                                <Option>rent</Option>
-                                <Option>own</Option>
+                                <Option value={"rent"}>rent</Option>
+                                <Option value={"own"}>own</Option>
                             </Select>
                        
                              
