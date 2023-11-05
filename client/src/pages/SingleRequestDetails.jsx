@@ -52,7 +52,6 @@ const SingleRequestDetails = () => {
     useEffect(() => {
         setIsLoading(true)
         getRequestById(id).then(({ data }) => {
-            console.log(data)
             setIsLoading(false)
             setRequest(data)
         }).catch((err) => {

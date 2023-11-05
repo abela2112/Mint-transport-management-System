@@ -19,23 +19,55 @@ next()
 
 const verifyTokenAndAdmin = async (req, res, next) => {
   auth(req, res, () => {
-    const { isAdmin } = req.user;
-    if (isAdmin) {
+    const { role } = req.user;
+    if (role === "admin") {
+      next();
+    } else {
+      throw new UnAuthorizedError("access denied you are not admin");
+    }
+  });
+};
+const verifyTokenAndAccessToRequest = async (req, res, next) => {
+  auth(req, res, () => {
+    const { role, userID } = req.user;
+    const { id } = req.params;
+    if (
+      role === "transport-manager" ||
+      role === "staff-manager" ||
+      id === userID
+    ) {
+      next();
+    } else {
+      throw new UnAuthorizedError("access denied ");
+    }
+  });
+};
+const verifyTokenAndStaffManager = async (req, res, next) => {
+  auth(req, res, () => {
+    const { role } = req.user;
+    if (role === "staff-manager") {
       next();
     } else {
       throw new UnAuthorizedError("access denied");
     }
   });
 };
+
 const verifyTokenAndAuth = async (req, res, next) => {
   auth(req, res, () => {
-    const { userID, isAdmin } = req.user;
+    const { userID, role } = req.user;
     const { id } = req.params;
-    if (id === userID || isAdmin) {
+    if (id === userID || role === "admin") {
       next();
     } else {
       throw new UnAuthorizedError("access denied");
     }
   });
 };
-module.exports = { auth, verifyTokenAndAdmin, verifyTokenAndAuth };
+module.exports = {
+  auth,
+  verifyTokenAndStaffManager,
+  verifyTokenAndAdmin,
+  verifyTokenAndAccessToRequest,
+  verifyTokenAndAuth,
+};

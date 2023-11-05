@@ -213,7 +213,7 @@ const Login = () => {
             <SubmitButton type="submit" disabled={isLoading}> {isLoading ? <Loader /> : 'Login'}</SubmitButton>
            
           </LoginForm>
-          <Desc>Don't have an account <Link to='/' style={{ color: '#e6953b', marginTop: '10px' }}>Sign Up</Link></Desc>
+          <Desc>Don't have an account <Link to='/register' style={{ color: '#e6953b', marginTop: '10px' }}>Sign Up</Link></Desc>
 
         </FormContainer>
       </LoginContainer>

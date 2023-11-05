@@ -20,7 +20,12 @@ import LandingPage from "./pages/LandingPage";
 import AddDepartment from "./pages/AddDepartment";
 import UserRegisterRequests from "./pages/UserRegisterRequests";
 import UserRequestDetail from "./pages/UserRequestDetail";
+
+import SearchPage from "./pages/SearchPage.jsx";
+import StaffMangerPendingRequests from "./pages/StaffMangerPendingRequests";
+import History from "./pages/History"
 import ForgotPassword from "./pages/ForgotPassword";
+
 const Container = styled.div`
   width: 100%;
   height: 100%;
@@ -41,15 +46,25 @@ function App() {
         <Route path="/" element={user ? <Layout /> : <Navigate to={"/home"} />}>
           <Route path="/" element={<Navigate to={"/booking"} />} />
           <Route path="/pending" element={<UserRequests />} />
+          <Route
+            path="/pending-user-request"
+            element={<StaffMangerPendingRequests />}
+          />
+          <Route path="/history" element={<UserRequests />} />
+
           <Route path="/booking" element={<MakeRequest />} />
           <Route path="/add-new-car" element={<AddNewCar />} />
           <Route path="/add-new-driver" element={<AddNewDriver />} />
           <Route path="/available-car" element={<MakeRequest />} />
           <Route path="/requests" element={<AllRequests />} />
+          <Route path="/requests-history" element={<History />} />
           <Route path="/request/:id" element={<SingleRequestDetails />} />
           <Route path="/user-request" element={<UserRegisterRequests />} />
           <Route path="/user-request/:id" element={<UserRequestDetail />} />
-         
+
+          <Route path="/search/:searchTerm" element={<SearchPage />} />
+
+
           <Route path="/add-department" element={<AddDepartment />} />
         </Route>
         <Route path="/home" element={<LandingPage />} />

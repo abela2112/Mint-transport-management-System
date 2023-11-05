@@ -4,11 +4,11 @@ const jwt=require('jsonwebtoken')
 
 const UserSchema = new mongoose.Schema(
   {
-    First_name: {
+    firstName: {
       type: String,
       required: [true, "name must be provided"],
     },
-    Last_name: {
+    lastName: {
       type: String,
       required: [true, "name must be provided"],
     },
@@ -37,10 +37,10 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: [true, "phone number  must be provided"],
     },
-    isAdmin: {
-      type: Boolean,
-      default: false,
-    },
+    // isAdmin: {
+    //   type: Boolean,
+    //   default: false,
+    // },
     role: {
       type: String,
       enum: ["staff", "staff-manager", "transport-manager", "admin"],
@@ -56,13 +56,11 @@ const UserSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
- 
-  UserSchema.pre('save',async function(next){
-    const salt =await bcrypt.genSalt(10)
-    this.password=await bcrypt.hash(this.password,salt)
-    if (!this.isModified("password")) return next();
-})
-
+UserSchema.pre("save", async function (next) {
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+  if (!this.isModified("password")) return next();
+});
 
 UserSchema.methods.comparePassword = async function (canditatePassword) {
   const isMatch = await bcrypt.compare(canditatePassword, this.password);
@@ -71,7 +69,7 @@ UserSchema.methods.comparePassword = async function (canditatePassword) {
 
 UserSchema.methods.createJWT = function () {
   return jwt.sign(
-    { userID: this._id, isAdmin: this.isAdmin },
+    { userID: this._id, role: this.role },
     process.env.JWT_SECRET,
     { expiresIn: process.env.JWT_LIFETIME }
   );

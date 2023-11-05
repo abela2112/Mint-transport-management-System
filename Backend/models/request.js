@@ -40,6 +40,10 @@ const RequestSchema=mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
   },
+  isChecked: {
+    type: Boolean,
+    default: false,
+  },
   status: {
     type: String,
     enum: ["approved", "rejected", "pending"],
