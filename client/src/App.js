@@ -19,7 +19,7 @@ import LandingPage from "./pages/LandingPage";
 import AddDepartment from "./pages/AddDepartment";
 import UserRegisterRequests from "./pages/UserRegisterRequests";
 import UserRequestDetail from "./pages/UserRequestDetail";
-
+import TransManagerResponse from "./pages/TransManagerResponse"
 import SearchPage from "./pages/SearchPage.jsx";
 import StaffMangerPendingRequests from "./pages/StaffMangerPendingRequests";
 import History from "./pages/History";
@@ -29,6 +29,8 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
 `;
+
+
 
 const StaffLayout = () => (
   <>
@@ -56,6 +58,7 @@ const AdminLayout = () => (
     <Outlet /> {/* Staff-manager sub-routes will render here */}
   </>
 );
+
 function App() {
   const user = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
@@ -70,6 +73,28 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={user ? <Layout /> : <Navigate to={"/home"} />}>
+
+          <Route path="/" element={<Navigate to={"/booking"} />} />
+          <Route path="/pending" element={<UserRequests />} />
+          <Route
+            path="/pending-user-request"
+            element={<StaffMangerPendingRequests />}
+          />
+          <Route path="/history" element={<UserRequests />} />
+          
+
+          <Route path="/booking" element={<MakeRequest />} />
+          <Route path="/add-new-car" element={<AddNewCar />} />
+          <Route path="/add-new-driver" element={<AddNewDriver />} />
+          <Route path="/available-car" element={<MakeRequest />} />
+          <Route path="/requests" element={<AllRequests />} />
+          <Route path="/requests-history" element={<History />} />
+          <Route path="/request/:id" element={<SingleRequestDetails />} />
+          <Route path="/user-request" element={<UserRegisterRequests />} />
+          <Route path="/user-request/:id" element={<UserRequestDetail />} />
+
+          <Route path="/search/:searchTerm" element={<SearchPage />} />
+
           {user?.role === "staff" && (
             <Route path="/" element={<StaffLayout />}>
               <Route path="/" element={<Navigate to={"/booking"} />} />
@@ -96,6 +121,7 @@ function App() {
             </Route>
           )}
 
+
           {user?.role === "transport-manager" && (
             <Route path="/" element={<TransportManagerLayout />}>
               <Route path="/add-new-car" element={<AddNewCar />} />
@@ -116,6 +142,7 @@ function App() {
             </Route>
           )}
         </Route>
+        <Route path="/transportManager-response" element={<TransManagerResponse />} />
         <Route path="/home" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -125,4 +152,8 @@ function App() {
   );
 }
 
+
+ 
+
 export default App;
+

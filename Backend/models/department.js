@@ -1,7 +1,7 @@
 const mongoose =require('mongoose');
 
 
-const DeptSchema=mongoose.Schema({
+const DeptSchema=new mongoose.Schema({
 
       deptName:{
         type:String,

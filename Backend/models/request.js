@@ -1,6 +1,6 @@
 const mongoose =require('mongoose')
 
-const RequestSchema=mongoose.Schema({
+const RequestSchema=new mongoose.Schema({
 
       name:{
         type:String,
@@ -49,6 +49,6 @@ const RequestSchema=mongoose.Schema({
     enum: ["approved", "rejected", "pending"],
     default: "pending",
   },
-});
+}, { timestamps: true });
 
 module.exports = mongoose.model("Request", RequestSchema);
