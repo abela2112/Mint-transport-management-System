@@ -31,6 +31,7 @@ export const SignUpForm = styled.form`
 `;
 export const Contain = styled.div`
 display: flex;
+
 width: 400px;
 flex-direction: column;
 margin-bottom: 10px;
@@ -91,11 +92,10 @@ export const TextContainer = styled.div`
   /* flex: 1; */
 padding: 20px;
   display: flex;
-  width: 100%;
-  height: 100%;
+
   flex-direction: column;
   width: 70%;
-  height: 80%;
+  height: 90%;
   background-color: #fff;
   box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
 -webkit-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);

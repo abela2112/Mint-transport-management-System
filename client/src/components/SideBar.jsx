@@ -13,15 +13,17 @@ import { logOutUser } from '../redux/features/user';
 const Container = styled.div`
     flex: 1;
     padding: 10px;
-    background-color: #C9F7FF;
+   // background-color: #C9F7FF;
     height: 100vh;
     position: sticky;
     top: 0;
     bottom: 0;
 `
+
 const List = styled.ul`
 list-style: none;
 `
+
 const ListItem = styled.li`
 /* display:flex;
 padding:10px 20px ;
@@ -32,8 +34,8 @@ font-weight: 400; */
 /* color: #141522; */
 cursor: pointer;
 /* color:#8E92BC; */ 
-
 `
+
 const ListItemLogOut = styled.li`
  display:flex;
 padding:10px 20px ;
@@ -49,6 +51,7 @@ color:#8E92BC;
     background-color: rgba(211, 248, 255,0.4) !important;
 }
 `
+
 const Logo = styled.img`
 height: 40px;
 `
@@ -96,7 +99,7 @@ const SideBar = () => {
                     }
                     {user.role === 'admin' &&
                         <>
-                            <ListItem><NavLink className={'nav-link'} to='/requests'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />Booking</NavLink></ListItem>
+                            {/* <ListItem><NavLink className={'nav-link'} to='/requests'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />Booking</NavLink></ListItem> */}
                           
                         <ListItem><NavLink className={'nav-link'} to={'/user-request'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />User Requests</NavLink></ListItem>
                         <ListItem><NavLink className={'nav-link'} to='/add-department'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />Add New Department</NavLink></ListItem>

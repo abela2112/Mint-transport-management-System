@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Background, Mint } from '../../asset';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import { login } from '../../api/userApi';
-
+import Loader from '../../components/Loader'
 const LoginContainer = styled.div`
   flex: 1;
   display: flex;
@@ -12,23 +12,26 @@ const LoginContainer = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
- 
+  background-color: #e0e0e0;
 `;
 
 const ImgmintContainer = styled.div`
-  position: absolute;
-  top: 5px;
-  left: 5px;
+   display:flex;
+   justify-content:center;
+   align-items:center;
+  
   width: 100px;
   height: 100px;
   margin-left: 5px;
 `;
 
+
 const Img1 = styled.img`
-  width: 50px;
-  height:50px;
+  width: 100px;
+  height:100px;
   object-fit: cover;
 `;
+
 
 const TextmintContainer = styled.div`
   position: absolute;
@@ -99,6 +102,9 @@ const SubmitButton = styled.button`
   font-size: 16px;
   cursor: pointer;
   margin-top: 20px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
 `;
 
@@ -129,17 +135,29 @@ const Desc = styled.p`
 `;
 
 const FormContainer = styled.div`
-  width: 50%;
-  
- 
+
+  display:flex;
+  justify-content: center;
+  align-items:center;
+  flex-direction: column;
+  width: 500px;
+  background-color:white;
+  box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
+-webkit-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
+-moz-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
+ padding: 2em 2em 2em;
+ border-radius:30px;
 `;
 const TitleBox = styled.div`
   display: flex;
   flex-direction: column;
 `
 const Login = () => {
+  const isLoading = useSelector((state) => state.isLoading);
+  console.log(isLoading)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const handleSubmit = (e) => {
@@ -155,16 +173,21 @@ const Login = () => {
   return (
     <Container>
       <LoginContainer>
-        <ImgmintContainer>
-          <Img1 src={Mint} />
-        </ImgmintContainer>
+        
 
         <FormContainer>
+
+          
+
           <TitleBox>
             <WelcomeTxt>Welcome back</WelcomeTxt>
             <LoginTxt>Login into your account</LoginTxt>
           </TitleBox>
+              <ImgmintContainer>
+                  <Img1 src={Mint} />
+               </ImgmintContainer>
           <LoginForm onSubmit={handleSubmit}>
+              
             <div style={{ width: '100%' }}>
               <label>Email</label>
               <Input
@@ -187,15 +210,16 @@ const Login = () => {
             </div>
             <Link to="/forgot-password" style={{ color: '#e6953b', marginTop: '10px', textAlign: 'right', textDecoration: 'none' }}>Forgot Password?</Link>
 
-            <SubmitButton type="submit">Login</SubmitButton>
+            <SubmitButton type="submit" disabled={isLoading}> {isLoading ? <Loader /> : 'Login'}</SubmitButton>
+           
           </LoginForm>
           <Desc>Don't have an account <Link to='/' style={{ color: '#e6953b', marginTop: '10px' }}>Sign Up</Link></Desc>
 
         </FormContainer>
       </LoginContainer>
-      <ImgContainer>
+      {/* <ImgContainer>
         <Img3 src={Background} />
-      </ImgContainer>
+      </ImgContainer> */}
     </Container>
   );
 };

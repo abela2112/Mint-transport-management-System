@@ -34,9 +34,10 @@ const DialogModal = ({ open, onClose, onSubmit }) => {
                 onClose={handleClose}
                 aria-labelledby='dialog-title'
                 aria-describedby='dialog-description'
-            >
+            >   
                 <DialogTitle id='dialog-title'>Add the New data to the database?</DialogTitle>
                 <DialogContent id='dialog-description'>
+                   
                     <DialogContentText>Are you sure?</DialogContentText>
                 </DialogContent>
                 <DialogActions>
