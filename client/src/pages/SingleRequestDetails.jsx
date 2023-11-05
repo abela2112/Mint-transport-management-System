@@ -41,9 +41,17 @@ padding: 10px;
 `
 const SingleRequestDetails = () => {
     const role = useSelector(state => state.user?.role)
+    const [isOpen, setIsOpen] = useState(false)
     const handleApprove = (e) => {
         e.preventDefault()
-        updateRequestById(id, { isChecked: true }).then(() => console.log('approved successfully')).catch((err) => console.log(err));
+        if (role === 'transport-manager') {
+            setIsOpen(true)
+            
+        }
+        else {
+            updateRequestById(id, { isChecked: true }).then(() => console.log('approved successfully')).catch((err) => console.log(err));
+
+        }
     }
     const handleReject = (e) => {
         e.preventDefault()
@@ -83,8 +91,9 @@ const SingleRequestDetails = () => {
             </Wrapper>
             <ButtonContainer>
                 {role === 'staff-manager' || role === 'transport-manager' ?
-                    <><ApproveButton disabled={request?.status === 'approved' || request?.status === 'rejected' ? true : false} onClick={handleApprove} >Approved</ApproveButton>
-                <RejectButton disabled={request?.status === 'rejected' || request?.status === 'approved' ? true : false} onClick={handleReject}>Reject</RejectButton>
+                    <>
+                        <ApproveButton disabled={request?.status === 'approved' || request?.status === 'rejected' ? true : false} onClick={handleApprove} >Approved</ApproveButton>
+                        <RejectButton disabled={request?.status === 'rejected' || request?.status === 'approved' ? true : false} onClick={handleReject}>Reject</RejectButton>
                     </> : <Button style={{ cursor: 'not-allowed' }} disabled type={request?.status} >{request?.status}</Button>}
             </ButtonContainer>
         </Container>
