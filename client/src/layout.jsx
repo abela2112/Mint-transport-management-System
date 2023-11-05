@@ -11,6 +11,7 @@ height: 100%;
 const Main = styled.div`
 flex: 4;
 `
+
 const Layout = () => {
     return (
         <Container>

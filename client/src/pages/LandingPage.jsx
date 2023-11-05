@@ -1,8 +1,9 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Mint } from '../asset';
 import { useNavigate } from 'react-router-dom';
+
 
 const FirstContainer = styled.div`
   background: #164E62;
@@ -87,6 +88,7 @@ const SignUpButton = styled.button`
 
 const LandingPage = () => {
   const navigate = useNavigate()
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <FirstContainer>
       
@@ -106,7 +108,7 @@ const LandingPage = () => {
           <LoginButton onClick={() => navigate('/login')}>Login</LoginButton>
           <SignUpButton onClick={() => navigate('/register')} >Sign Up</SignUpButton>
         </FourthContainer>
-      
+        
       </div>
     </FirstContainer>
     
@@ -114,6 +116,6 @@ const LandingPage = () => {
 
 };
 
-
+//navigate('/login')
 
 export default LandingPage;

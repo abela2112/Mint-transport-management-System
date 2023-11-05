@@ -18,7 +18,6 @@ const Right = styled.div`
 flex: 1;
 `
 const Center = styled.div`
-
 flex: 1;`
 const Button = styled.button`
 border:none;
@@ -31,6 +30,7 @@ border-radius: 10px;
   color: ${({ type }) => type === 'declined' && '#d95087'};
   color: ${({ type }) => type === 'pending' && '#3bb077'};
 `
+
 const Text = styled.span``
 const SingleRequest = ({ request }) => {
     console.log(request)

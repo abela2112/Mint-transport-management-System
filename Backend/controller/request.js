@@ -47,20 +47,15 @@ const postRequest = async (req, res) => {
   }
 };
 
-const updateRequest = async (req, res) => {
-  const { id } = req.params;
-
-  try {
-    const request = await Request.findByIdAndUpdate(
-      id,
-      { ...req.body },
-      { new: true }
-    );
-    res.status(StatusCodes.OK).json(request);
-  } catch (error) {
-    res.status(StatusCodes.BAD_REQUEST).json(error);
-  }
-};
+const updateRequest=async(req,res)=>{
+       const {id} =req.params
+    try{
+        const request=await  request.findByIdAndUpdate(id, { ...req.body }, { new: true })
+        res.status(StatusCodes.OK).json(request)
+    }catch(error){
+       res.status(StatusCodes.BAD_REQUEST).json(error)
+    }
+}
 
 const deleteRequest = async (req, res) => {
   const { id } = req.params;

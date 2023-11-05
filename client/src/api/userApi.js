@@ -6,10 +6,11 @@ import {
 } from "../redux/features/user";
 
 export const signUp = (user) => axios.post("/api/user/register", user);
+export const addCar =(car)=> axios.post("api/car/add-new-car",car)
+export const signIn =(user)=> axios.post("/api/user/login", user);
+export const addDriver=(driver)=> axios.post("api/driver/add-new-driver", driver)
 
-export const signIn = (user) => axios.post("/api/user/login", user);
-
-export const login = (dispatch, navigate, user) => {
+export const login = (dispatch,navigate, user) => {
   dispatch(loginUserFetch());
   signIn(user)
     .then(({ data }) => {
@@ -34,8 +35,10 @@ export const getUserRequests = (userId) =>
 
   export const getRequestById = (id) => axios.get(`/api/request/${id}`);
 
-  export const updateRequestById = (id, request) =>
-    axios.patch(`/api/request/updateRequest/${id}`, request);
+
+export const updateRequestById = (id, request) =>
+  axios.patch(`/api/request/updateRequest/${id}`, request);
+  
 
   export const getAllUserRegisterRequests = () => axios.get(`/api/user`);
   export const updateUserRegisterRequestById = (id, request) =>

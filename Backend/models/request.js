@@ -1,38 +1,40 @@
 const mongoose =require('mongoose')
 
-const RequestSchema = mongoose.Schema({
-  name: {
-    type: String,
-    require: true,
-  },
+const RequestSchema=mongoose.Schema({
+
+      name:{
+        type:String,
+        required:[true,"you have to provide the full name"],
+      },
 
   phoneNumber: {
     type: String,
-    require: true,
+    required: true,
   },
 
   pickUpDate: {
     type: Date,
-    require: true,
+    required: true,
   },
   ReturnDate: {
     type: Date,
-    require: true,
+    required: true,
   },
 
   destination: {
     type: String,
-    require: true,
+    required: true,
   },
 
   Passangers: {
     type: Array,
-    require: true,
+    required: true,
   },
+
 
   description: {
     type: String,
-    require: true,
+    required: true,
   },
   userCreated: {
     type: mongoose.Schema.Types.ObjectId,

@@ -3,6 +3,9 @@ const express =require('express')
 const router =express.Router()
 const   { auth, verifyTokenAndAdmin, verifyTokenAndAuth }=require('../middleware/auth')
 
+
+
+    
 const {
   getRequest,
   getALLRequests,
@@ -15,6 +18,7 @@ const {
 router.get("/", verifyTokenAndAdmin, getALLRequests);
 router.get("/user/:id", auth, getUserRequests);
 router.get("/:id", verifyTokenAndAuth, getRequest);
+
 
 router.post("/reqPost", auth, postRequest);
 router.patch("/updateRequest/:id", verifyTokenAndAdmin, updateRequest);
