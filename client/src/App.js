@@ -20,7 +20,7 @@ import LandingPage from "./pages/LandingPage";
 import AddDepartment from "./pages/AddDepartment";
 import UserRegisterRequests from "./pages/UserRegisterRequests";
 import UserRequestDetail from "./pages/UserRequestDetail";
-
+import TransManagerResponse from "./pages/TransManagerResponse"
 import SearchPage from "./pages/SearchPage.jsx";
 import StaffMangerPendingRequests from "./pages/StaffMangerPendingRequests";
 import History from "./pages/History"
@@ -30,6 +30,7 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
 `;
+
 function App() {
   const user = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
@@ -51,6 +52,7 @@ function App() {
             element={<StaffMangerPendingRequests />}
           />
           <Route path="/history" element={<UserRequests />} />
+          
 
           <Route path="/booking" element={<MakeRequest />} />
           <Route path="/add-new-car" element={<AddNewCar />} />
@@ -67,6 +69,7 @@ function App() {
 
           <Route path="/add-department" element={<AddDepartment />} />
         </Route>
+        <Route path="/transportManager-response" element={<TransManagerResponse />} />
         <Route path="/home" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -75,5 +78,7 @@ function App() {
     </>
   );
 }
+
+ 
 
 export default App;

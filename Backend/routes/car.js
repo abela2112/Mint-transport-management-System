@@ -6,11 +6,13 @@ const {
   getAllcars,
   getCarById,
 } = require("../controller/car");
-const {
+const  {
   auth,
+  verifyTokenAndStaffManager,
   verifyTokenAndAdmin,
+  verifyTokenAndAccessToRequest,
   verifyTokenAndAuth,
-} = require("../middleware/auth");
+}=require('../middleware/auth')
 
 router.get("/", verifyTokenAndAdmin, getAllcars);
 router.get("/:id", verifyTokenAndAdmin, getCarById);

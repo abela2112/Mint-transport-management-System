@@ -2,7 +2,8 @@ import styled from 'styled-components'
 import Navbar from '../components/Navbar'
 
 import { useState } from 'react'
-const Container = styled.div`
+
+const Container = styled.div `
    width:100%;
    height:100vh;
    display:flex;

@@ -31,6 +31,6 @@ const carSchema = new mongoose.Schema({
   DriverPhoneNumber: {
     type: String,
   },
-});
+}, { timestamps: true });
 
 module.exports = mongoose.model("car", carSchema);
