@@ -24,6 +24,7 @@ import SearchPage from "./pages/SearchPage.jsx";
 import StaffMangerPendingRequests from "./pages/StaffMangerPendingRequests";
 import History from "./pages/History";
 import ForgotPassword from "./pages/ForgotPassword";
+import AvailableCar from "./pages/AvailableCar.jsx";
 
 const Container = styled.div`
   width: 100%;
@@ -101,7 +102,7 @@ function App() {
               <Route path="/" element={<Navigate to={"/requests"} />} />
               <Route path="/add-new-car" element={<AddNewCar />} />
               <Route path="/add-new-driver" element={<AddNewDriver />} />
-              <Route path="/available-car" element={<MakeRequest />} />
+              <Route path="/available-car" element={<AvailableCar />} />
               <Route path="/requests" element={<AllRequests />} />
               <Route path="/request/:id" element={<SingleRequestDetails />} />
               <Route path="/search/:searchTerm" element={<SearchPage />} />
