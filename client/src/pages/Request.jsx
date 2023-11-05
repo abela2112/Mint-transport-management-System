@@ -176,7 +176,7 @@ const Request = () => {
                      <Input placeholder="Destination"/>
                      </Div>
                      <Div>
-                     <Label>Number of passanger</Label>
+                     <Label>Number ofpassanger</Label>
                      <Input placeholder="Number of passanger"/>
                      </Div>
                      <Div> 

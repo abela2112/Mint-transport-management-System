@@ -22,7 +22,7 @@ const {
 
 router.get("/", verifyTokenAndAccessToRequest, getALLRequests);
 router.get("/user/:id", auth, getUserRequests);
-router.get("/:id", verifyTokenAndAccessToRequest, getRequest);
+router.get("/:id", auth, getRequest);
 
 
 router.post("/reqPost", auth, postRequest);
