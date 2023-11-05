@@ -30,7 +30,7 @@ export const getUserRequests = (userId) =>
   export const getUserRegisterRequests = (userId) =>
     axios.get(`/api/user/${userId}`);
 
-  export const getAllRequests = () => axios.get(`/api/request`);
+  export const getAllRequests = () => axios.get(`/api/request?all=true`);
 
   export const getRequestById = (id) => axios.get(`/api/request/${id}`);
 

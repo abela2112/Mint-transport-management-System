@@ -80,8 +80,9 @@ const SideBar = () => {
                     </>}
                     {user.role === 'staff-manager' &&
                         <>
-                            <ListItem><NavLink className={'nav-link'} to='/requests'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />Booking</NavLink></ListItem>
-                            <ListItem><NavLink className={'nav-link'} to={'/pending'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />Pending</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to={'/pending-user-request'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />Pending</NavLink></ListItem>
+
+                        <ListItem><NavLink className={'nav-link'} to='/requests-history'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />History</NavLink></ListItem>
 
                         </>
                     }
@@ -96,7 +97,7 @@ const SideBar = () => {
                     }
                     {user.role === 'admin' &&
                         <>
-                            <ListItem><NavLink className={'nav-link'} to='/requests'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />Booking</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to='/requests'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />Booking</NavLink></ListItem>
                         <ListItem><NavLink className={'nav-link'} to={'/user-request'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />User Requests</NavLink></ListItem>
                         <ListItem><NavLink className={'nav-link'} to='/add-department'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />Add New Department</NavLink></ListItem>
                         
