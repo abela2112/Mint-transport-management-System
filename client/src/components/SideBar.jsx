@@ -97,8 +97,10 @@ const SideBar = () => {
                     }
                     {user.role === 'admin' &&
                         <>
-                        <ListItem><NavLink className={'nav-link'} to='/requests'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />Booking</NavLink></ListItem>
-                        <ListItem><NavLink className={'nav-link'} to={'/user-request'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />User Requests</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to='/user-list'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />User</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to={'/user-register-request'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />User Register Requests</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to={'/department'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />Department</NavLink></ListItem>
+                        
                         <ListItem><NavLink className={'nav-link'} to='/add-department'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />Add New Department</NavLink></ListItem>
                         
 
