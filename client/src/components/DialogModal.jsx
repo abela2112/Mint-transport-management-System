@@ -39,7 +39,8 @@ const DialogModal = ({ open, onClose, onSubmit }) => {
                 <DialogContent id='dialog-description'>
                    
                     <DialogContentText>Are you sure?</DialogContentText>
-                </DialogContent>
+                   
+                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
                     <Button autoFocus onClick={handleSubmit}>Submit</Button>
