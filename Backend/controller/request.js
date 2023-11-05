@@ -49,7 +49,7 @@ const getALLRequests = async (req, res) => {
 const getRequest = async (req, res) => {
   const { id } = req.params;
   try {
-    const request = await Request.find({ _id: id });
+    const request = await Request.findById(id);
     console.log("request", request);
     res.status(StatusCodes.OK).json(request);
   } catch (error) {

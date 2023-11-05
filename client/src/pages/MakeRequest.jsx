@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 
 import CustomModal from '../components/Modal'
 import DialogModal from '../components/DialogModal'
+import { useSelector } from 'react-redux'
 
 const Container = styled.div`
    width:100%;
@@ -16,7 +17,6 @@ const Container = styled.div`
    justify-content:center; */
 
    flex-direction:column;
-   
    position:relative;`
 
 const Wrraper = styled.div`
@@ -24,7 +24,8 @@ const Wrraper = styled.div`
  margin-top:0px;
  //background-color:rgba(222, 222, 222,0.2);
  //background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyhslcK5oQ2mB4tlTPUCiNTpKEz2qfoQENCw&usqp=CAU");
- width:80%;
+ width:100%;
+ flex-wrap:wrap;
    
    
 `
@@ -92,7 +93,7 @@ const PassangerDiv = styled.div`
 `
 const TextArea = styled.textarea`
   margin-top:10px;
-  min-width:480px;
+  min-width:400px;
   border-radius:10px;
   padding:10px;
   border: 1px solid #ccc;
@@ -167,12 +168,13 @@ background-color: rgb(21, 92, 104);
 
 
 const MakeRequest = () => {
+  const user = useSelector(state => state.user)
   const inputArray = [{
     value: ''
   }]
   const navigate = useNavigate()
   const [Passangers, setPassangers] = useState(inputArray)
-  const [name, setName] = useState('')
+  const [name, setName] = useState('Abel Ayalew')
   const [phoneNumber, setPhoneNumber] = useState('')
   const [destination, setDestination] = useState('')
   const [pickUpDate, setPickUpDate] = useState('')
@@ -250,7 +252,7 @@ const MakeRequest = () => {
           <Form >
             <Div>
               <Label>full name</Label>
-              <Input placeholder="Full Name" value={name} onChange={(e) => setName(e.target.value)} />
+              <Input placeholder="Full Name" disabled value={name} onChange={(e) => setName(e.target.value)} />
             </Div>
             <Div>
               <Label>phone</Label>
@@ -286,6 +288,7 @@ const MakeRequest = () => {
                       type='text'
                       size="40"
                     />
+
                     <Removebutton id={i} onClick={removeInput}> Remove</Removebutton>
                   </PassangerDiv>
                 );

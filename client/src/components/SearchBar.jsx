@@ -51,8 +51,8 @@ const SearchBar = ({ sortingTerm, setSortingTerm, filters, setFilters }) => {
             <FilterBox>
                 <FilterListOutlinedIcon style={{ marginRight: '5px' }} />
                 <Title>Status:</Title>
-                <Select value={filters} defaultValue={'approved'} onChange={(e) => setFilters(e.target.value)} >
-
+                <Select value={filters} defaultValue={'pending'} onChange={(e) => setFilters(e.target.value)} >
+                    <Option value={'pending'}>Pending</Option>
                     <Option value={'approved'}>approved</Option>
                     <Option value={'rejected'}>rejected</Option>
                 </Select>

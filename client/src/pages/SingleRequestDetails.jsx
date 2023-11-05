@@ -4,6 +4,8 @@ import { getRequestById, updateRequestById } from '../api/userApi'
 import styled from 'styled-components'
 import { format } from 'date-fns'
 import Loader from '../components/Loader'
+import { useSelector } from 'react-redux'
+import { Button } from './UserRegisterRequest'
 const Container = styled.div`
     padding: 20px;
 `
@@ -38,13 +40,22 @@ const Text = styled.span`
 padding: 10px;
 `
 const SingleRequestDetails = () => {
+    const role = useSelector(state => state.user?.role)
+    const [isOpen, setIsOpen] = useState(false)
     const handleApprove = (e) => {
         e.preventDefault()
-        updateRequestById(id, { status: 'approved' }).then(() => console.log('approved successfully')).catch((err) => console.log(err));
+        if (role === 'transport-manager') {
+            setIsOpen(true)
+            
+        }
+        else {
+            updateRequestById(id, { isChecked: true }).then(() => console.log('approved successfully')).catch((err) => console.log(err));
+
+        }
     }
     const handleReject = (e) => {
         e.preventDefault()
-        updateRequestById(id, { status: 'rejected' }).then(() => console.log('rejected successfully')).catch((err) => console.log(err));
+        updateRequestById(id, { isChecked: false, status: 'rejected' }).then(() => console.log('rejected successfully')).catch((err) => console.log(err));
     }
     const [request, setRequest] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
@@ -53,6 +64,7 @@ const SingleRequestDetails = () => {
         setIsLoading(true)
         getRequestById(id).then(({ data }) => {
             setIsLoading(false)
+            console.log('single request', data)
             setRequest(data)
         }).catch((err) => {
             setIsLoading(false)
@@ -61,6 +73,7 @@ const SingleRequestDetails = () => {
     }, [id])
     if (isLoading) return <Loader />
     console.log(request)
+
     return (
         <Container>
 
@@ -77,12 +90,12 @@ const SingleRequestDetails = () => {
 
             </Wrapper>
             <ButtonContainer>
-                <ApproveButton disabled={request?.status === 'approved' || request?.status === 'rejected' ? true : false} onClick={handleApprove} >Approved</ApproveButton>
-
-                <RejectButton disabled={request?.status === 'rejected' || request?.status === 'approved' ? true : false} onClick={handleReject}>Reject</RejectButton>
-
+                {role === 'staff-manager' || role === 'transport-manager' ?
+                    <>
+                        <ApproveButton disabled={request?.status === 'approved' || request?.status === 'rejected' ? true : false} onClick={handleApprove} >Approved</ApproveButton>
+                        <RejectButton disabled={request?.status === 'rejected' || request?.status === 'approved' ? true : false} onClick={handleReject}>Reject</RejectButton>
+                    </> : <Button style={{ cursor: 'not-allowed' }} disabled type={request?.status} >{request?.status}</Button>}
             </ButtonContainer>
-
         </Container>
     )
 }
