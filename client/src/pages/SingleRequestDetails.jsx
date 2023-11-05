@@ -6,6 +6,7 @@ import { format } from 'date-fns'
 import Loader from '../components/Loader'
 import { useSelector } from 'react-redux'
 import { Button } from './UserRegisterRequest'
+import TransportManagerResponse from '../components/TransportManagerResponse'
 const Container = styled.div`
     padding: 20px;
 `
@@ -53,6 +54,7 @@ const SingleRequestDetails = () => {
 
         }
     }
+
     const handleReject = (e) => {
         e.preventDefault()
         updateRequestById(id, { isChecked: false, status: 'rejected' }).then(() => console.log('rejected successfully')).catch((err) => console.log(err));
@@ -96,8 +98,9 @@ const SingleRequestDetails = () => {
                         <RejectButton disabled={request?.status === 'rejected' || request?.status === 'approved' ? true : false} onClick={handleReject}>Reject</RejectButton>
                     </> : <Button style={{ cursor: 'not-allowed' }} disabled type={request?.status} >{request?.status}</Button>}
             </ButtonContainer>
+            <TransportManagerResponse open={isOpen} setOpen={setIsOpen}/>
         </Container>
-    )
-}
+   )
+ }
 
 export default SingleRequestDetails
