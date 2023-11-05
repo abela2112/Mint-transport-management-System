@@ -6,6 +6,8 @@ import Loader from '../components/Loader'
 import { useNavigate } from 'react-router-dom'
 
 import CustomModal from '../components/Modal'
+import DialogModal from '../components/DialogModal'
+
 const Container = styled.div`
    width:100%;
    height:100vh;
@@ -177,13 +179,22 @@ const MakeRequest = () => {
   const [returnDate, setReturnDate] = useState('')
   const [description, setDescription] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => {
-    setOpen(false)
-    navigate('/pending')
+  // const [open, setOpen] = useState(false);
+  // const handleOpen = () => setOpen(true);
+  // const handleClose = () => {
+  //   setOpen(false)
+  //   navigate('/pending')
 
+  // };
+
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+      
+  const handleButtonClick = () => {
+      
+    setIsModalOpen(true);
   };
+
 
   const addInput = (e) => {
     e.preventDefault()
@@ -198,13 +209,16 @@ const MakeRequest = () => {
     })
 
   }
-  const handleSubmit = (e) => {
-    e.preventDefault()
+
+
+
+  const handleSubmit = () => {
+   
     setIsLoading(true)
     createRequest({ name, phoneNumber, destination, pickUpDate, returnDate, description, Passangers }).then(({ data }) => {
       console.log(data)
       setIsLoading(false)
-      handleOpen()
+      // handleOpen()
 
     }).catch((err) => {
       setIsLoading(false)
@@ -224,7 +238,6 @@ const MakeRequest = () => {
       })
     }
   }
-
 
 
   return (
@@ -281,21 +294,21 @@ const MakeRequest = () => {
 
             </div>
 
-
           </Form>
 
           <ButtonContainer>
-            <Cancel>
+            {/* <Cancel>
               Cancel
-            </Cancel>
-            <Submit type='submit' onClick={handleSubmit} disabled={isLoading}>
+            </Cancel> */}
+            <Submit type='submit' onClick={handleButtonClick} disabled={isLoading}>
               {isLoading ? <Loader /> : 'Submit'}
             </Submit>
+            <DialogModal open={isModalOpen} onClose={() => setIsModalOpen(false)} onSubmit={handleSubmit}/>
           </ButtonContainer>
 
         </Wrraper>
-        <CustomModal open={open} handleClose={handleClose
-        } handleOpen={handleOpen} />
+        {/* <CustomModal open={open} handleClose={handleClose
+        } handleOpen={handleOpen} /> */}
 
 
       </Container></>

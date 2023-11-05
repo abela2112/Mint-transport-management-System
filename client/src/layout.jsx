@@ -12,6 +12,7 @@ height: 100%;
 const Main = styled.div`
 flex: 4;
 `
+
 const Layout = () => {
     const user = useSelector(state => state.user)
     return (

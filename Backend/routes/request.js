@@ -8,6 +8,9 @@ const {
   verifyTokenAndAccessToRequest,
 } = require("../middleware/auth");
 
+
+
+    
 const {
   getRequest,
   getALLRequests,
@@ -20,6 +23,7 @@ const {
 router.get("/", verifyTokenAndAccessToRequest, getALLRequests);
 router.get("/user/:id", auth, getUserRequests);
 router.get("/:id", verifyTokenAndAccessToRequest, getRequest);
+
 
 router.post("/reqPost", auth, postRequest);
 router.patch(

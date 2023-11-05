@@ -1,15 +1,16 @@
 const mongoose=require('mongoose')
 const bcrypt=require('bcryptjs')
 const jwt=require('jsonwebtoken')
+
 const UserSchema = new mongoose.Schema(
   {
     firstName: {
       type: String,
-      require: [true, "name must be provided"],
+      required: [true, "name must be provided"],
     },
     lastName: {
       type: String,
-      require: [true, "name must be provided"],
+      required: [true, "name must be provided"],
     },
     email: {
       type: String,
@@ -21,20 +22,20 @@ const UserSchema = new mongoose.Schema(
     position: {
       type: String,
       required: [true, "position must be provided"],
-      enum: ["CEO", "DESK", "EXPERT"],
+      enum: ["CEO", "Desk", "Expert"],
       default: "EXPERT",
     },
     password: {
       type: String,
-      require: [true, "password must be provided"],
+      required: [true, "password must be provided"],
     },
     department: {
       type: String,
-      require: true,
+      required:[true, "department must be provided"],
     },
     phoneNumber: {
       type: String,
-      require: true,
+      required: [true, "phone number  must be provided"],
     },
     // isAdmin: {
     //   type: Boolean,
@@ -50,6 +51,7 @@ const UserSchema = new mongoose.Schema(
       enum: ["approved", "rejected", "pending"],
       default: "pending",
     },
+
   },
   { timestamps: true }
 );
