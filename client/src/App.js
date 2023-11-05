@@ -98,6 +98,7 @@ function App() {
 
           {user?.role === "transport-manager" && (
             <Route path="/" element={<TransportManagerLayout />}>
+              <Route path="/" element={<Navigate to={"/requests"} />} />
               <Route path="/add-new-car" element={<AddNewCar />} />
               <Route path="/add-new-driver" element={<AddNewDriver />} />
               <Route path="/available-car" element={<MakeRequest />} />
@@ -109,6 +110,7 @@ function App() {
 
           {user?.role === "admin" && (
             <Route path="/" element={<AdminLayout />}>
+              <Route path="/" element={<Navigate to={"/user-request"} />} />
               <Route path="/user-request" element={<UserRegisterRequests />} />
               <Route path="/user-request/:id" element={<UserRequestDetail />} />
               <Route path="/search/:searchTerm" element={<SearchPage />} />
