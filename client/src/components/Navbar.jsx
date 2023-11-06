@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 const Container = styled.div`
     width: 100%;
     height: 40px;
+    position: fixed;
+    background-color: #fff;
    
     /* padding: 20px; */
 `
