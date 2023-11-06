@@ -12,6 +12,8 @@ height: 100%;
 const Main = styled.div`
 flex: 4;
 `
+const InnerContainer = styled.div`
+margin-top:60px;`
 
 const Layout = () => {
     const user = useSelector(state => state.user)
@@ -19,8 +21,13 @@ const Layout = () => {
         <Container>
             <SideBar />
             <Main>
+
                 <Navbar title={`${user?.firstName} ${user?.lastName}`} />
-                <Outlet />
+                <InnerContainer>
+                    <Outlet />
+                </InnerContainer>
+
+
             </Main>
         </Container>
     )

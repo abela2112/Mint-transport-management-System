@@ -6,14 +6,14 @@ import {
     DialogContentText,
     DialogActions,
 } from '@mui/material'
-import {useState}  from 'react'
-
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 import styled from 'styled-components'
 import { Background, Mint } from '../asset';
 
 
-const Container=styled.div`
+const Container = styled.div`
     display:flex;
     align-items:center;
     justify-content:center;
@@ -38,7 +38,7 @@ const Img1 = styled.img`
   height:100px;
   object-fit: cover;
 `;
-const Wrapper=styled.div`
+const Wrapper = styled.div`
 margin-top:50px;
 padding:20px;
 // border-radius:30px;
@@ -56,7 +56,7 @@ flex-direction: column;
 -moz-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
 `
 
-const Form =styled.form`
+const Form = styled.form`
 display: flex;
 justify-content:center;
 
@@ -70,7 +70,7 @@ const Desc = styled.h1`
   text-align: center;
 `;
 
-const InputForm=styled.input`
+const InputForm = styled.input`
 // box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
 // -webkit-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
 // -moz-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
@@ -81,17 +81,26 @@ border: 1px solid #ccc;
 border-radius: 10px;
 margin-bottom: 10px;
 `
-const Lable=styled.p`
+const Lable = styled.p`
   margin-top:5px;
 `
-const LabledInput=styled.div`
+const LabledInput = styled.div`
 
    display:flex;
    flex-direction:column;
    padding-right:20px;
   
 `
-const ButtonConatainer =styled.button`
+const Select = styled.select`
+margin: 5px 0;
+padding: 10px;
+width:400px;
+border: 1px solid #ccc;
+border-radius: 10px;
+margin-bottom: 10px;
+`
+const Option = styled.option``
+const ButtonConatainer = styled.button`
 background-color: #164E62;
 color: white;
 border: none;
@@ -105,117 +114,130 @@ align-items: center;
 justify-content: center;
 width: 400px;
 `
-const TransportManagerResponse=({ open, setOpen,onSubmit })=>{
+const TransportManagerResponse = ({ open, setOpen, onSubmit }) => {
+    const [cars, setCars] = useState('')
+    const [filterdCar, setFilterdCar] = useState([])
+    const [isOpen, setIsOpen] = useState(false)
+    const [PlateNumber, setPlateNumber] = useState('')
+    const [DriverName, setDriverName] = useState('')
+    const [DriverPhone, setDriverPhone] = useState('')
+    const [CarModel, setCarModel] = useState('')
+    const [ReturnDate, setReturnDate] = useState('')
+    useEffect(() => {
+        axios.get('/api/car').then(({ data }) => {
+            setCars(data)
+        }).catch(err => console.log(err))
+    }, [])
 
-   const [isOpen, setIsOpen] = useState(false)
-   const [plateNumber,setPlateNumber]=useState('')
-       const [driverName,setDriverName]=useState('')
-       const [driverPhone,setDriverPhone]=useState('')
-       const [carModel,setCarModel]=useState('')
-       const [returnDate,setReturnDate]=useState('')
-
-      
-    
-        const handleOpen = () => {
-            setIsOpen(true)
-        }
-    
-        const handleClose = () => {
-            
-setOpen(false)
-            
-        }
-    
-        const handleSubmit = (e) => {
-            
-            onSubmit({plateNumber,driverName,driverPhone,carModel,returnDate})
-            handleClose()
-        }
-    
-        return (
-            <>
-                {/* <Button onClick={handleOpen}>Open dialog</Button> */}
-                <Dialog
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby='dialog-title'
-                    aria-describedby='dialog-description'
-                    maxWidth='md'
-                    fullWidth={true}
-                    overflow='hidden'
-                >   
-                    <DialogTitle id='dialog-title'>Approve Form</DialogTitle>
-                    <DialogContent id='dialog-description'>
-                       
-                    <Wrapper> 
-                   
-                   <ImgmintContainer>
-                  <Img1 src={Mint} />
-               </ImgmintContainer>
-                   <Form> 
-                       <LabledInput>
-                           <Lable>Plate Number</Lable>
-                           <InputForm 
-                           type="text"
-                            placeholder="Plate Number"
-                            value={plateNumber}
-                            onChange={(e)=>setPlateNumber(e.target.value)}
-                            />
-                       </LabledInput>
-                       <LabledInput>
-                           <Lable>Driver name</Lable>
-                           <InputForm 
-                           type="text"
-                           placeholder="Driver name"
-                           value={driverName}
-                           onChange={(e)=>setDriverName(e.target.value)}
-                           />
-                       </LabledInput>
-                       <LabledInput>
-                           <Lable>Driver phone</Lable>
-                           <InputForm 
-                           type="text"
-                           placeholder="Driver phone"
-                           value={driverPhone}
-                           onChange={(e)=>setDriverPhone(e.target.value)}
-                           />
-                       </LabledInput>
-                       <LabledInput>
-                           <Lable>Car model</Lable>
-                           <InputForm 
-                           type="text"
-                           placeholder="Car Model"
-                           value={carModel}
-                           onChange={(e)=>setCarModel(e.target.value)}
-                           />
-                       </LabledInput>
-                       <LabledInput>
-                           <Lable>Return Date</Lable>
-                           <InputForm
-                            type="text"
-                            placeholder="MM/dd/yy"
-                            value={returnDate}
-                            onChange={(e)=>setReturnDate(e.target.value)}
-                            />
-                       </LabledInput>
-                     
-                   </Form>
-
-
-             
-                </Wrapper>     
-                       
-                     </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleClose}>Cancel</Button>
-                        <Button autoFocus onClick={handleSubmit}>Submit</Button>
-                    </DialogActions>
-                </Dialog>
-            </>
+    useEffect(() => {
+        PlateNumber && setFilterdCar(
+            ...cars.filter(car => car?.licencePlateNumber === PlateNumber)
         )
+    }, [PlateNumber])
+    console.log(PlateNumber)
+   
+    const handleOpen = () => {
+        setIsOpen(true)
     }
-    
-    
+    const handleClose = () => {
+        setOpen(false)
+    }
+
+    const handleSubmit = () => {
+
+        onSubmit({ PlateNumber, DriverName: filterdCar?.DriverName || DriverName, DriverPhone: filterdCar?.DriverPhone, CarModel: filterdCar?.model || CarModel, ReturnDate })
+        handleClose()
+    }
+    console.log('phone-name', DriverName)
+    return (
+        <>
+            {/* <Button onClick={handleOpen}>Open dialog</Button> */}
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby='dialog-title'
+                aria-describedby='dialog-description'
+                maxWidth='md'
+                fullWidth={true}
+                overflow='hidden'
+            >
+                <DialogTitle id='dialog-title'>Approve Form</DialogTitle>
+                <DialogContent id='dialog-description'>
+
+                    <Wrapper>
+
+                        <ImgmintContainer>
+                            <Img1 src={Mint} />
+                        </ImgmintContainer>
+                        <Form>
+                            <LabledInput>
+                                <Lable>Plate Number</Lable>
+                                <Select
+
+                                    placeholder="Plate Number"
+                                    value={PlateNumber}
+                                    onChange={(e) => setPlateNumber(e.target.value)}
+                                >
+                                    {cars.length > 0 && cars.map((car, i) => (
+                                        <Option key={i} value={car?.licencePlateNumber} >{car?.licencePlateNumber} </Option>
+                                    ))}
+                                </Select>
+                            </LabledInput>
+                            <LabledInput>
+                                <Lable>Driver name</Lable>
+                                <InputForm
+                                    type="text"
+                                    placeholder="Driver name"
+                                    value={filterdCar?.DriverName || ''}
+                                    onChange={(e) => setDriverName(e.target.value)}
+                                />
+                            </LabledInput>
+                            <LabledInput>
+                                <Lable>Driver phone</Lable>
+                                <InputForm
+                                    type="tel"
+                                    placeholder="Driver phone"
+                                    value={filterdCar?.DriverPhoneNumber || ''}
+                                    onChange={(e) => setDriverPhone(e.target.value)}
+                                    readOnly
+                                />
+                            </LabledInput>
+                            <LabledInput>
+                                <Lable>Car model</Lable>
+                                <InputForm
+                                    type="text"
+                                    placeholder="Car Model"
+                                    value={filterdCar?.model || ''}
+                                    onChange={(e) => setCarModel(e.target.value)}
+                                />
+                            </LabledInput>
+                            <LabledInput>
+                                <Lable>Return Date</Lable>
+                                <InputForm
+                                    type="date"
+                                    placeholder="MM/dd/yy"
+                                    value={ReturnDate}
+                                    onChange={(e) => setReturnDate(e.target.value)}
+                                />
+                            </LabledInput>
+
+                        </Form>
+
+
+
+                    </Wrapper>
+
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button autoFocus onClick={handleSubmit}>Submit</Button>
+                </DialogActions>
+            </Dialog>
+        </>
+    )
+}
+
+
 
 
 export default TransportManagerResponse
