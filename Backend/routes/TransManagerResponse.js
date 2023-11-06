@@ -22,7 +22,7 @@ const  {
 
 router.get("/", verifyTokenAndAccessToRequest, getAllResponses);
 router.get("/:id", verifyTokenAndAccessToRequest, getResponseById);
-router.post("/add-new-reponse", verifyTokenAndAccessToRequest, addNewResponse);
+router.post("/add-new-response", verifyTokenAndAccessToRequest, addNewResponse);
 router.patch("/:id", verifyTokenAndAccessToTarnsManager, updateResponse);
 router.delete("/:id", verifyTokenAndAccessToTarnsManager, deleteResponse);
 

@@ -19,7 +19,7 @@ const TResponseSchema=new mongoose.Schema({
         required:[true,"You must provide car model"]
     },
     ReturnDate:{
-        type:Date.Now(),
+        type:Date,
         required:[true,"You must privide return date "]
     }
 }, { timestamps: true })
