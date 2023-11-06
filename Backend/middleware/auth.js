@@ -42,14 +42,11 @@ const verifyTokenAndAccessToRequest = async (req, res, next) => {
     }
   });
 };
-const verifyTokenAndAccessToTarnsManager = async (req, res, next) => {
+const verifyTokenAndAccessToTransportManager = async (req, res, next) => {
   auth(req, res, () => {
     const { role, userID } = req.user;
     const { id } = req.params;
-    if (
-      role === "transport-manager" 
-      
-    ) {
+    if (role === "transport-manager") {
       next();
     } else {
       throw new UnAuthorizedError("access denied ");
@@ -83,6 +80,6 @@ module.exports = {
   verifyTokenAndStaffManager,
   verifyTokenAndAdmin,
   verifyTokenAndAccessToRequest,
-  verifyTokenAndAccessToTarnsManager,
+  verifyTokenAndAccessToTransportManager,
   verifyTokenAndAuth,
 };
