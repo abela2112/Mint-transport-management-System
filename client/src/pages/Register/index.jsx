@@ -20,6 +20,7 @@ const Register = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [phoneNumber,setPhoneNumber]=useState('');
   const [position, setPosition] = useState('');
   const [password, setPassword] = useState('');
   const [department, setDepartment] = useState('');
@@ -34,12 +35,16 @@ const Register = () => {
     console.log('Email:', email);
     console.log('Position:', position);
     console.log('Password:', password);
+    console.log('phoneNumber:',phoneNumber)
     console.log('department:', department);
     
       // Make the API request to your backend using Axios
      
-      signUp({ firstName, lastName, email, position, department, password }).then(() => console.log('success fully registered'))
-      .catch((error) => {
+      signUp({ firstName, lastName, email, position, department, password, phoneNumber })
+      .then(() => {
+        console.log('Successfully registered');
+        setIsOpen(true);
+      }).catch((error) => {
         if (error.response) {
           console.log(error)
         setError(error.response.data.message);
@@ -60,7 +65,7 @@ const Register = () => {
     <SignUpContainer>
       <TextContainer>
         <Title>
-          Get Started Now
+         Get Start Now 
         </Title>
         <SignUpForm onSubmit={handleSignUp}>
 
@@ -123,6 +128,16 @@ const Register = () => {
             />
           </Contain>
           <Contain>
+          
+            <Label>Phone</Label>
+            <SignUpInput
+              type="tel"
+              placeholder="phone"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+            />
+          </Contain>
+          {/* <Contain>
 
             <Label>Gender</Label>
             <div>
@@ -133,7 +148,8 @@ const Register = () => {
               <Label htmlFor='female'>Female</Label>
             </div>
           </Contain>
-          
+           */}
+
           <Contain>
 
             <Label>Confirm Password</Label>
@@ -158,45 +174,56 @@ const Register = () => {
         
         </SignUpForm>
 
-
-        <Dialog
-            open={isOpen}
-            onClose={() => setIsOpen(false)}
-            aria-labelledby="dialog-title"
-            aria-describedby="dialog-description"
-          >
-            <DialogTitle id="dialog-title">
-              Confirm Password
-            </DialogTitle>
-            <DialogContent id="dialog-description">
-              <DialogContentText>Password doesn't match! Please confirm again</DialogContentText>
-             
-              <Contain>
-
-            <Label>Confirm Password</Label>
-            <SignUpInput
-              type="password"
-              placeholder="Confirm Password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-          </Contain>
-            
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={() => setIsOpen(false)} style={{backgroundColor:"Red",color:"white"}}>Cancel</Button>
-              <Button
-                style={{backgroundColor:"Yellow",color:"white"}}
-                autoFocus
-                onClick={() => {
-                   
-                  setIsOpen(false);
-                }}
-              >
-                Submit
-              </Button>
-            </DialogActions>
-          </Dialog>
+<Dialog
+  open={isOpen}
+  onClose={() => setIsOpen(false)}
+  aria-labelledby="dialog-title"
+  aria-describedby="dialog-description"
+>
+  <DialogTitle id="dialog-title">
+    {password !== confirmPassword ? "Confirm Password" : "Registration Successful"}
+  </DialogTitle>
+  <DialogContent id="dialog-description">
+    {password !== confirmPassword ? (
+      <DialogContentText>Password doesn't match! Please confirm again</DialogContentText>
+    ) : (
+      <DialogContentText>Congratulations! You have successfully registered.</DialogContentText>
+    )}
+    {password !== confirmPassword && (
+      <Contain>
+        <Label>Confirm Password</Label>
+        <SignUpInput
+          type="password"
+          placeholder="Confirm Password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
+      </Contain>
+    )}
+  </DialogContent>
+  <DialogActions>
+    {password !== confirmPassword ? (
+      <>
+        <Button onClick={() => setIsOpen(false)} style={{ backgroundColor: "Red", color: "white" }}>
+          Cancel
+        </Button>
+        <Button
+          style={{ backgroundColor: "Yellow", color: "white" }}
+          autoFocus
+          onClick={() => {
+            setIsOpen(false);
+          }}
+        >
+          Submit
+        </Button>
+      </>
+    ) : (
+      <Button onClick={() => setIsOpen(false)} color="primary">
+        Close
+      </Button>
+    )}
+  </DialogActions>
+</Dialog>
        
       </TextContainer>
       

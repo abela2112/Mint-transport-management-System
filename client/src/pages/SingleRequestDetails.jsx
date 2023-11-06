@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { getRequestById, updateRequestById } from '../api/userApi'
+import { getRequestById, TransportManagerResponseapi,updateRequestById } from '../api/userApi'
 import styled from 'styled-components'
 import { format } from 'date-fns'
 import Loader from '../components/Loader'
@@ -43,6 +43,9 @@ padding: 10px;
 const SingleRequestDetails = () => {
     const role = useSelector(state => state.user?.role)
     const [isOpen, setIsOpen] = useState(false)
+    const handleForm=(data)=>{
+        TransportManagerResponseapi(data)
+    }
     const handleApprove = (e) => {
         e.preventDefault()
         if (role === 'transport-manager') {
@@ -88,7 +91,7 @@ const SingleRequestDetails = () => {
                     , 'MMMM do yyyy')}</Text>
                 <Text>return date:{request?.pickUpDate && format(new Date(request?.pickUpDate)
                     , 'MMMM do yyyy')}</Text>
-
+            
 
             </Wrapper>
             <ButtonContainer>
@@ -98,7 +101,7 @@ const SingleRequestDetails = () => {
                         <RejectButton disabled={request?.status === 'rejected' || request?.status === 'approved' ? true : false} onClick={handleReject}>Reject</RejectButton>
                     </> : <Button style={{ cursor: 'not-allowed' }} disabled type={request?.status} >{request?.status}</Button>}
             </ButtonContainer>
-            <TransportManagerResponse open={isOpen} setOpen={setIsOpen}/>
+            <TransportManagerResponse open={isOpen} setOpen={setIsOpen} onSubmit={handleForm}/>
         </Container>
    )
  }

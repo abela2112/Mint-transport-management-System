@@ -9,7 +9,7 @@ export const signUp = (user) => axios.post("/api/user/register", user);
 export const addCar =(car)=> axios.post("api/car/add-new-car",car)
 export const signIn =(user)=> axios.post("/api/user/login", user);
 export const addDriver=(driver)=> axios.post("api/driver/add-new-driver", driver)
-
+export const TransportManagerResponseapi=(data)=> axios.post("api/TMresponse/add-new-response",data)
 export const login = (dispatch,navigate, user) => {
   dispatch(loginUserFetch());
   signIn(user)
