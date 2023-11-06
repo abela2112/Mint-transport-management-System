@@ -74,28 +74,6 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={user ? <Layout /> : <Navigate to={"/home"} />}>
-
-          <Route path="/" element={<Navigate to={"/booking"} />} />
-          <Route path="/pending" element={<UserRequests />} />
-          <Route
-            path="/pending-user-request"
-            element={<StaffMangerPendingRequests />}
-          />
-          <Route path="/history" element={<UserRequests />} />
-          
-
-          <Route path="/booking" element={<MakeRequest />} />
-          <Route path="/add-new-car" element={<AddNewCar />} />
-          <Route path="/add-new-driver" element={<AddNewDriver />} />
-          <Route path="/available-car" element={<MakeRequest />} />
-          <Route path="/requests" element={<AllRequests />} />
-          <Route path="/requests-history" element={<History />} />
-          <Route path="/request/:id" element={<SingleRequestDetails />} />
-          <Route path="/user-request" element={<UserRegisterRequests />} />
-          <Route path="/user-request/:id" element={<UserRequestDetail />} />
-
-          <Route path="/search/:searchTerm" element={<SearchPage />} />
-
           {user?.role === "staff" && (
             <Route path="/" element={<StaffLayout />}>
               <Route path="/" element={<Navigate to={"/booking"} />} />
@@ -122,7 +100,6 @@ function App() {
             </Route>
           )}
 
-
           {user?.role === "transport-manager" && (
             <Route path="/" element={<TransportManagerLayout />}>
               <Route path="/" element={<Navigate to={"/requests"} />} />
@@ -145,7 +122,10 @@ function App() {
             </Route>
           )}
         </Route>
-        <Route path="/transportManager-response" element={<TransManagerResponse />} />
+        <Route
+          path="/transportManager-response"
+          element={<TransManagerResponse />}
+        />
         <Route path="/home" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
