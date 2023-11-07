@@ -5,9 +5,11 @@ import { getAllRequests } from '../api/userApi'
 import SingleRequest from './SingleRequest'
 import axios from 'axios'
 const Container = styled.div`
-    padding: 20px;
-    margin-top: 10px;
-`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction:column;
+   `
 const History = () => {
     const [requests, setRequests] = useState([])
     const [sortingTerm, setSortingTerm] = useState('')

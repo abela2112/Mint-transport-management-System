@@ -21,6 +21,7 @@ const Container = styled.div`
 `
 
 const List = styled.ul`
+color: red;
 list-style: none;
 `
 
@@ -30,8 +31,8 @@ padding:10px 20px ;
 margin-bottom: 10px;
 /* background-color: #F5F5F7; */
 /* border-radius: 5px;
-font-weight: 400; */
-/* color: #141522; */
+font-weight: 400;
+color: red;
 cursor: pointer;
 /* color:#8E92BC; */ 
 `
@@ -56,12 +57,18 @@ const Logo = styled.img`
 height: 40px;
 `
 const ImgContainer = styled.div`
+margin-bottom: 1.5rem;
 display: flex;
 align-items: center;
 `
 const ListWrapper = styled.div`
+display: flex;
+flex-direction: column;
+align-content: space-between;
+box-shadow: 2px 0px 2px 0px rgba(255, 165, 0, 0.75);
+margin-left: -2rem;
 padding: 20px;
-    
+height: 100vh;    
 `
 const SideBar = () => {
     const dispatch = useDispatch()
@@ -76,9 +83,12 @@ const SideBar = () => {
             </ImgContainer>
             <ListWrapper>
                 <List>
-                    {user?.role === 'staff' && <> <ListItem><NavLink className={'nav-link'} to='/booking'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />Booking</NavLink></ListItem>
-                    <ListItem><NavLink className={'nav-link'} to='/history'><RestoreOutlinedIcon style={{ marginRight: '10px' }} />History</NavLink></ListItem>
-                    </>}
+                    {user?.role === 'staff' && 
+                        <>
+                        <ListItem><NavLink className={'nav-link'} to='/booking'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />Booking</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to='/history'><RestoreOutlinedIcon style={{ marginRight: '10px' }} />History</NavLink></ListItem>
+                        </>
+                    }
                     {user?.role === 'staff-manager' &&
                         <>
                         <ListItem><NavLink className={'nav-link'} to={'/pending-user-request'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />Pending</NavLink></ListItem>
@@ -105,12 +115,13 @@ const SideBar = () => {
    
                         </>
                     }
-                    <ListItemLogOut onClick={() => {
+                    
+                </List>
+                <ListItemLogOut onClick={() => {
                         dispatch(logOutUser())
                         navigate('/home')
 
                     }}> <SettingsOutlinedIcon style={{ marginRight: '10px' }} />Logout</ListItemLogOut>
-                </List>
             </ListWrapper>
         </Container>
 
