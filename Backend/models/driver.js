@@ -2,16 +2,17 @@ const mongoose = require("mongoose");
 const driverSchema = new mongoose.Schema({
   name: {
     type: String,
-    require: [true, "full name brand must be provided"],
+    required: [true, "full name brand must be provided"],
   },
   phoneNumber: {
     type: String,
-    require: [true, "phone  must be provided"],
+    required: [true, "phone  must be provided"],
   },
   registeredDate: {
     type: Date,
     default: Date.now(),
   },
-});
+}, { timestamps: true });
 
-module.exports = mongoose.model("driver", driverSchema);
+module.exports = mongoose.model("Driver", driverSchema);
+

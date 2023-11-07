@@ -18,22 +18,22 @@ const Right = styled.div`
 flex: 1;
 `
 const Center = styled.div`
-
 flex: 1;`
 const Button = styled.button`
 border:none;
 padding: 5px 7px;
 border-radius: 10px;
   background-color: ${({ type }) => type === 'approved' && '#e5faf2'};
-  background-color: ${({ type }) => type === 'declined' && '#fff0f1'};
+  background-color: ${({ type }) => type === 'rejected' && '#fff0f1'};
   background-color: ${({ type }) => type === 'pending' && '#ebf1fe'};
   color: ${({ type }) => type === 'approved' && '#3bb077'};
-  color: ${({ type }) => type === 'declined' && '#d95087'};
+  color: ${({ type }) => type === 'rejected' && '#d95087'};
   color: ${({ type }) => type === 'pending' && '#3bb077'};
 `
+
 const Text = styled.span``
 const SingleRequest = ({ request }) => {
-    console.log(request)
+
     return (
         <Link to={`/request/${request._id}`}>
             <Container>

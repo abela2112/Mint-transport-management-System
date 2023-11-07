@@ -1,17 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SignUpContainer, Contain, Title, SignUpForm, SignUpInput, SignUpButton, Option, SelectOption, ImageContainer, Image, TextContainer, Label, BottomText } from './RegisterCSS';
 import { Link } from 'react-router-dom';
 import { Background } from '../../asset';
 import { signUp } from '../../api/userApi';
 
 
+import {
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+} from "@mui/material";
+
+
+
 const Register = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [phoneNumber,setPhoneNumber]=useState('');
   const [position, setPosition] = useState('');
   const [password, setPassword] = useState('');
   const [department, setDepartment] = useState('');
+  const [gender, setGender] = useState('male');
+  const [confirmPassword, setConfirmPassword]=useState('')
+  const [error, setError] = useState('');
+
 
   const handleSignUp = (e) => {
     e.preventDefault()
@@ -21,17 +37,41 @@ const Register = () => {
     console.log('Email:', email);
     console.log('Position:', position);
     console.log('Password:', password);
+    console.log('phoneNumber:',phoneNumber)
     console.log('department:', department);
-    signUp({ firstName, lastName, email, position, department, password }).then(() => console.log('success fully registered')).catch((err) => console.log(err)
-    )
-  };
+    
+      // Make the API request to your backend using Axios
+     
+      signUp({ firstName, lastName, email, position, department, password, phoneNumber })
+      .then(() => {
+        console.log('Successfully registered');
+        setIsOpen(true);
+      }).catch((error) => {
+        if (error.response) {
+          console.log(error)
+        setError(error.response.data.message);
+      } else {
+        // Handle network errors or other exceptions
+        console.log('Error:', error);
+      }
+    }
+  )
+    
+      // Success, perform further actions or submit the form
+  } 
 
+  const [isOpen, setIsOpen] = useState(false);
+  useEffect(() => {
+    setTimeout(() => {
+      setError('')
+    }, 5000)
+  }, [])
   return (
 
     <SignUpContainer>
       <TextContainer>
         <Title>
-          Get Started Now
+         Get Start Now 
         </Title>
         <SignUpForm onSubmit={handleSignUp}>
 
@@ -84,7 +124,7 @@ const Register = () => {
             </SelectOption>
           </Contain>
           <Contain>
-
+          
             <Label>Password</Label>
             <SignUpInput
               type="password"
@@ -93,21 +133,106 @@ const Register = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </Contain>
+          <Contain>
+          
+            <Label>Phone</Label>
+            <SignUpInput
+              type="tel"
+              placeholder="phone"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+            />
+          </Contain>
+          {/* <Contain>
 
+            <Label>Gender</Label>
+            <div>
+              <input style={{margin:'0 10px'}} type='radio' name='gender' value='male' id='male' checked={gender==='male'} onChange={(e)=>setGender(e.target.value)}/>
+              <Label htmlFor='male'>Male</Label>
 
+              <input  style={{margin:'0 10px'}}  type='radio' name='gender' value='female' id='female' checked={gender==='female'} onChange={(e)=>setGender(e.target.value)}/>
+              <Label htmlFor='female'>Female</Label>
+            </div>
+          </Contain>
+           */}
+
+          <Contain>
+
+            <Label>Confirm Password</Label>
+            <SignUpInput
+              type="password"
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </Contain>
+          
+         
+
+          {error && <p style={{color:"red"}}>{error}</p>}
+          
+         
           <BottomText>
 
             <p>Already have an account? <Link className='link' to={'/login'} style={{ color: '#e6953b' }}>Sign in</Link>  </p>
           </BottomText>
-          <SignUpButton>Sign Up</SignUpButton>
+          <SignUpButton    onClick={()=>(password !== confirmPassword) ? setIsOpen(true) : setIsOpen(false)} >Sign up</SignUpButton>
+        
         </SignUpForm>
+
+<Dialog
+  open={isOpen}
+  onClose={() => setIsOpen(false)}
+  aria-labelledby="dialog-title"
+  aria-describedby="dialog-description"
+>
+  <DialogTitle id="dialog-title">
+    {password !== confirmPassword ? "Confirm Password" : "Registration Successful"}
+  </DialogTitle>
+  <DialogContent id="dialog-description">
+    {password !== confirmPassword ? (
+      <DialogContentText>Password doesn't match! Please confirm again</DialogContentText>
+    ) : (
+      <DialogContentText>Congratulations! You have successfully registered.</DialogContentText>
+    )}
+    {password !== confirmPassword && (
+      <Contain>
+        <Label>Confirm Password</Label>
+        <SignUpInput
+          type="password"
+          placeholder="Confirm Password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
+      </Contain>
+    )}
+  </DialogContent>
+  <DialogActions>
+    {password !== confirmPassword ? (
+      <>
+        <Button onClick={() => setIsOpen(false)} style={{ backgroundColor: "Red", color: "white" }}>
+          Cancel
+        </Button>
+        <Button
+          style={{ backgroundColor: "Yellow", color: "white" }}
+          autoFocus
+          onClick={() => {
+            setIsOpen(false);
+          }}
+        >
+          Submit
+        </Button>
+      </>
+    ) : (
+      <Button onClick={() => setIsOpen(false)} color="primary">
+        Close
+      </Button>
+    )}
+  </DialogActions>
+</Dialog>
+       
       </TextContainer>
-
-      {/* <ImageContainer>
-        <Image src={Background} />
-      </ImageContainer> */}
-
-
+      
     </SignUpContainer>
 
   );

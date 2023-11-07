@@ -8,13 +8,16 @@ const {
 } = require("../controller/car");
 const {
   auth,
+  verifyTokenAndStaffManager,
+  verifyTokenAndAccessToTransportManager,
   verifyTokenAndAdmin,
+  verifyTokenAndAccessToRequest,
   verifyTokenAndAuth,
 } = require("../middleware/auth");
 
-router.get("/", verifyTokenAndAdmin, getAllcars);
-router.get("/:id", verifyTokenAndAdmin, getCarById);
-router.post("/add-new-car", verifyTokenAndAdmin, addNewCar);
-router.patch("/:id", verifyTokenAndAuth, updateCar);
-router.delete("/:id", verifyTokenAndAuth, deleteCar);
+router.get("/", verifyTokenAndAccessToTransportManager, getAllcars);
+router.get("/:id", verifyTokenAndAccessToTransportManager, getCarById);
+router.post("/add-new-car", verifyTokenAndAccessToTransportManager, addNewCar);
+router.patch("/:id", verifyTokenAndAccessToTransportManager, updateCar);
+router.delete("/:id", verifyTokenAndAccessToTransportManager, deleteCar);
 module.exports = router;

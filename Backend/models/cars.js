@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 const carSchema = new mongoose.Schema({
   brand: {
     type: String,
-    require: [true, "car's brand must be provided"],
+    required: [true, "car's brand must be provided"],
   },
   model: {
     type: String,
-    require: [true, "model must be provided"],
+    required: [true, "model must be provided"],
   },
   licencePlateNumber: {
     type: String,
@@ -31,6 +31,6 @@ const carSchema = new mongoose.Schema({
   DriverPhoneNumber: {
     type: String,
   },
-});
+}, { timestamps: true });
 
 module.exports = mongoose.model("car", carSchema);

@@ -8,7 +8,7 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 5px 20px;
+    padding: 10px 20px;
     margin-top: 10px;
 `
 const Title = styled.span``
@@ -20,14 +20,14 @@ color:#54577A;
 padding: 10px;
 border: none;
 `
-const SearchBox = styled.div` 
-border: 1px solid #F5F5F7;
-display: flex;
-align-items: center;
-justify-content: space-between;
-border-radius: 5px;
-width: 400px;
-`
+// const SearchBox = styled.div` 
+// border: 1px solid #F5F5F7;
+// display: flex;
+// align-items: center;
+// justify-content: space-between;
+// border-radius: 5px;
+// width: 400px;
+// `
 const SortingBox = styled.div`
 border: 1px solid #F5F5F7;
 display:flex;
@@ -35,19 +35,34 @@ align-items: center;
 padding: 5px;
 
 `
-const SearchBar = () => {
+
+const FilterBox = styled.div`
+display: flex;
+align-items: center;
+`
+const SearchBar = ({ sortingTerm, setSortingTerm, filters, setFilters }) => {
+    console.log(filters)
     return (
         <Container>
-            <SearchBox>
+            {/* <SearchBox>
                 <Input type='text' placeholder='search request...' />
                 <SearchOutlinedIcon style={{margin:'0 5px' ,}} />
-            </SearchBox>
+            </SearchBox> */}
+            <FilterBox>
+                <FilterListOutlinedIcon style={{ marginRight: '5px' }} />
+                <Title>Status:</Title>
+                <Select value={filters} defaultValue={'pending'} onChange={(e) => setFilters(e.target.value)} >
+                    <Option value={'pending'}>Pending</Option>
+                    <Option value={'approved'}>approved</Option>
+                    <Option value={'rejected'}>rejected</Option>
+                </Select>
+            </FilterBox>
             <SortingBox>
-                <FilterListOutlinedIcon />
+
                 <Title>Sort BY:</Title>
-                <Select>
-                    <Option>ASC</Option>
-                    <Option>DES</Option>
+                <Select value={sortingTerm} defaultValue={'ASC'} onChange={(e) => setSortingTerm(e.target.value)}>
+                    <Option value={'ASC'}>ASC</Option>
+                    <Option value={'DES'}>DES</Option>
                 </Select>
             </SortingBox>
         </Container>

@@ -1,12 +1,15 @@
 
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import Badge from '@mui/material/Badge';
+import { useNavigate } from 'react-router-dom';
 const Container = styled.div`
     width: 100%;
     height: 40px;
+    position: fixed;
+    background-color: #fff;
    
     /* padding: 20px; */
 `
@@ -56,7 +59,7 @@ background-color: transparent;
 border-color: #18616C;
 }
 `
-const SearchBox = styled.div` 
+const SearchBox = styled.form` 
 border: 1px solid #C9F7FF;
 display: flex;
 align-items: center;
@@ -71,12 +74,18 @@ const Hr = styled.hr`
     background-color: #C9F7FF;
 `
 const Navbar = ({title}) => {
+    const [searchTerm, setSearchTerm] = useState('')
+    const navigate = useNavigate()
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        navigate(`/search/${searchTerm}`)
+    }
     return (
         <Container>
             <Wrapper>
                 <Left>
-                    <SearchBox>
-                        <Input type='text' placeholder='search...' />
+                    <SearchBox onSubmit={handleSubmit}>
+                        <Input type='text' placeholder='search...' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
                         <SearchOutlinedIcon style={{ margin: '0 5px', }} />
                     </SearchBox>
                 </Left>
@@ -87,7 +96,7 @@ const Navbar = ({title}) => {
 
 
                     <User>
-                        <UserName>Abel Ayalew</UserName>
+                        <UserName>{title}</UserName>
                         <Img src='' />
                     </User>
                 </Right>
