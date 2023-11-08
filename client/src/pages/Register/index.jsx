@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { SignUpContainer, Contain, Title, SignUpForm, SignUpInput, SignUpButton, Option, SelectOption, ImageContainer, Image, TextContainer, Label, BottomText } from './RegisterCSS';
+import { SignUpContainer, Contain, Title, SignUpForm, SignUpInput, SignUpButton, Option, SelectOption, ImgmintContainer, Img1, ImageContainer, Image, TextContainer, Label, BottomText, CopyRight } from './RegisterCSS';
 import { Link } from 'react-router-dom';
-import { Background } from '../../asset';
+import { Background, Mint } from '../../asset';
 import { signUp } from '../../api/userApi';
 
 
@@ -31,6 +31,8 @@ const Register = () => {
 
   const handleSignUp = (e) => {
     e.preventDefault()
+
+    setError('');
     console.log('Sign up button clicked');
     console.log('First Name:', firstName);
     console.log('Last Name:', lastName);
@@ -46,6 +48,7 @@ const Register = () => {
       .then(() => {
         console.log('Successfully registered');
         setIsOpen(true);
+        setError('');
       }).catch((error) => {
         if (error.response) {
           console.log(error)
@@ -70,6 +73,10 @@ const Register = () => {
 
     <SignUpContainer>
       <TextContainer>
+        <ImgmintContainer>
+          <Img1 src={Mint} />
+        </ImgmintContainer>
+
         <Title>
          Get Start Now 
         </Title>
@@ -179,58 +186,61 @@ const Register = () => {
         
         </SignUpForm>
 
-<Dialog
-  open={isOpen}
-  onClose={() => setIsOpen(false)}
-  aria-labelledby="dialog-title"
-  aria-describedby="dialog-description"
->
-  <DialogTitle id="dialog-title">
-    {password !== confirmPassword ? "Confirm Password" : "Registration Successful"}
-  </DialogTitle>
-  <DialogContent id="dialog-description">
-    {password !== confirmPassword ? (
-      <DialogContentText>Password doesn't match! Please confirm again</DialogContentText>
-    ) : (
-      <DialogContentText>Congratulations! You have successfully registered.</DialogContentText>
-    )}
-    {password !== confirmPassword && (
-      <Contain>
-        <Label>Confirm Password</Label>
-        <SignUpInput
-          type="password"
-          placeholder="Confirm Password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-      </Contain>
-    )}
-  </DialogContent>
-  <DialogActions>
-    {password !== confirmPassword ? (
-      <>
-        <Button onClick={() => setIsOpen(false)} style={{ backgroundColor: "Red", color: "white" }}>
-          Cancel
-        </Button>
-        <Button
-          style={{ backgroundColor: "Yellow", color: "white" }}
-          autoFocus
-          onClick={() => {
-            setIsOpen(false);
-          }}
+        <Dialog
+          open={isOpen}
+          onClose={() => setIsOpen(false)}
+          aria-labelledby="dialog-title"
+          aria-describedby="dialog-description"
         >
-          Submit
-        </Button>
-      </>
-    ) : (
-      <Button onClick={() => setIsOpen(false)} color="primary">
-        Close
-      </Button>
-    )}
-  </DialogActions>
-</Dialog>
+          <DialogTitle id="dialog-title">
+            {password !== confirmPassword ? "Confirm Password" : "Registration Successful"}
+          </DialogTitle>
+          <DialogContent id="dialog-description">
+            {password !== confirmPassword ? (
+              <DialogContentText>Password doesn't match! Please confirm again</DialogContentText>
+            ) : (
+              <DialogContentText>Congratulations! You have successfully registered.</DialogContentText>
+            )}
+            {password !== confirmPassword && (
+              <Contain>
+                <Label>Confirm Password</Label>
+                <SignUpInput
+                  type="password"
+                  placeholder="Confirm Password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+              </Contain>
+            )}
+          </DialogContent>
+          <DialogActions>
+            {password !== confirmPassword ? (
+              <>
+                <Button onClick={() => setIsOpen(false)} style={{ backgroundColor: "Red", color: "white" }}>
+                  Cancel
+                </Button>
+                <Button
+                  style={{ backgroundColor: "Yellow", color: "white" }}
+                  autoFocus
+                  onClick={() => {
+                    setIsOpen(false);
+                  }}
+                >
+                  Submit
+                </Button>
+              </>
+            ) : (
+              <Button onClick={() => setIsOpen(false)} color="primary">
+                Close
+              </Button>
+            )}
+          </DialogActions>
+        </Dialog>
        
       </TextContainer>
+      <CopyRight>
+        <small>mint&copy;2023 All right reserved</small>
+      </CopyRight>
       
     </SignUpContainer>
 

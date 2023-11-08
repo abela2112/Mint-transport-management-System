@@ -10,23 +10,22 @@ import DialogModal from '../components/DialogModal'
 import { useSelector } from 'react-redux'
 
 const Container = styled.div`
-   width:100%;
-   height:100vh;
-   display:flex;
-   /* align-items:center;
-   justify-content:center; */
-
-   flex-direction:column;
-   position:relative;`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction:column;
+   `
 
 const Wrraper = styled.div`
- padding :10px;
- margin-top:0px;
- //background-color:rgba(222, 222, 222,0.2);
- //background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyhslcK5oQ2mB4tlTPUCiNTpKEz2qfoQENCw&usqp=CAU");
- width:100%;
- flex-wrap:wrap;
-   
+// display:flex;
+// // align-items:center;
+// background-color: grey;
+// // justify-content:center;
+// //  padding :10px;
+// //  margin-top:0px;
+//  //background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyhslcK5oQ2mB4tlTPUCiNTpKEz2qfoQENCw&usqp=CAU");
+ width:80%;
+//  flex-wrap:wrap;
    
 `
 // const Wrraper = styled.div`
@@ -43,10 +42,10 @@ const Wrraper = styled.div`
 // `
 const Form = styled.form`
 display:flex;
-/* justify-content:center;
-align-items:center; */
+justify-content:start;
+align-items:start;
 flex-wrap:wrap;
-
+// width: 75%;
 `
 const Title = styled.h1`
 font-size:24px;
@@ -92,18 +91,18 @@ const PassangerDiv = styled.div`
   width: 400px;
 `
 const TextArea = styled.textarea`
-  margin-top:10px;
-  min-width:400px;
-  border-radius:10px;
-  padding:10px;
+  // margin-top:10px;
+  min-width: 400px;
+  border-radius:6px;
+  padding: 10px;
   border: 1px solid #ccc;
   width: 100%;
  //box-shadow: 2px 2px 5px grey;
 `
 const ButtonContainer = styled.div`
     display:flex;
-    justify-content:flex-end;
-    margin-top:20px;
+    justify-content:center;
+    margin-top:3rem;
     border-radius:20px;
     align-items: center;
     gap: 1rem;
@@ -139,7 +138,7 @@ const Submit = styled.button`
   height:50px;
   font-size:16px;
   cursor:pointer;
-  background-color: rgb(21, 92, 104);
+  background-color: rgb(255, 165, 0);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -147,23 +146,25 @@ const Submit = styled.button`
           0 0 25px yellow; */
   &:hover{
     font-size:18px;
-    box-shadow: 0px 0px 18px 0px rgba(21, 92, 104,0.75);
--webkit-box-shadow: 0px 0px 18px 0px rgba(21, 92, 104,0.75);
--moz-box-shadow: 0px 0px 18px 0px rgba(21, 92, 104,0.75);
+    box-shadow: 0px 0px 18px 0px rgba(255, 165, 0, 0.75);
+-webkit-box-shadow: 0px 0px 18px 0px rgba(255, 165, 0, 0.75);
+-moz-box-shadow: 0px 0px 18px 0px rgba(255, 165, 0, 0.75);
   }
 `
 const Addbutton = styled.button`
-padding: 5px 7px;
+display: flex;
+align-items: end;
+padding: 0.5rem;
 color: white;
 background-color: rgb(21, 92, 104);
-
+border-radius:10px;
+margin-top: 1rem;
 `
 const Removebutton = styled.button`
-padding: 5px 7px;
-color: white;
+font-size: 21px;
+color: red;
 margin-left: 20px;
-background-color: rgb(21, 92, 104);
-
+background-color: white;
 `
 
 
@@ -249,11 +250,11 @@ const MakeRequest = () => {
           <Title><b>REQUEST FORM</b></Title>
           <Form >
             <Div>
-              <Label>full name</Label>
+              <Label>Full Name</Label>
               <Input placeholder="Full Name" disabled value={name} onChange={(e) => setName(e.target.value)} />
             </Div>
             <Div>
-              <Label>phone</Label>
+              <Label>Phone No.</Label>
               <Input placeholder="Phone" type='tel' value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
             </Div>
             <Div>
@@ -265,17 +266,21 @@ const MakeRequest = () => {
               <Input placeholder="Return date" type='date' value={returnDate} onChange={(e) => setReturnDate(e.target.value)} />
             </Div>
             <Div>
-              <Label>destination</Label>
+              <Label>Destination</Label>
               <Input placeholder="Destination" value={destination} onChange={(e) => setDestination(e.target.value)} />
             </Div>
             <Div>
-              <Label>discription</Label>
-              <TextArea placeholder="discription" value={description} onChange={(e) => setDescription(e.target.value)} />
+              <Label>Discription</Label>
+              <TextArea
+                placeholder="Discription"
+                value={description} 
+                onChange={(e) => setDescription(e.target.value)} 
+                rows={4}
+              />
             </Div>
-
-
+            <Div>
             <div>
-              <Label> passangers</Label>
+              <Label> Passangers</Label>
               {Passangers?.map((item, i) => {
                 return (
                   <PassangerDiv key={i} >
@@ -287,14 +292,13 @@ const MakeRequest = () => {
                       size="40"
                     />
 
-                    <Removebutton id={i} onClick={removeInput}> Remove</Removebutton>
+                    <Removebutton id={i} onClick={removeInput}>X</Removebutton>
                   </PassangerDiv>
                 );
               })}
-              <Addbutton onClick={addInput}>add Passenger</Addbutton>
-
+              <Addbutton onClick={addInput}>Add Passenger</Addbutton>
             </div>
-
+            </Div>
           </Form>
 
           <ButtonContainer>

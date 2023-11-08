@@ -16,7 +16,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: [true, "email must be provided"],
 
-      match: [/^[\w.-]+@MinT\.gov\.et$/, "please provide valid email"],
+      match: [/^[\w.-]+@mint\.gov\.et$/, "please provide valid email"],
       unique: true,
     },
     position: {
@@ -33,10 +33,25 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required:[true, "department must be provided"],
     },
+    // phoneNumber: {
+    //   type: String,
+    //   required: [true, "phone number  must be provided"],
+    // },
     phoneNumber: {
       type: String,
-      required: [true, "phone number  must be provided"],
+      validate: {
+        validator: function (value) {
+          // Remove any non-digit characters
+          const phoneNumberDigits = value.replace(/\D/g, '');
+  
+          // Check if the resulting string has exactly 10 digits and consists of only numeric characters
+          return /^\d{10}$/.test(phoneNumberDigits) && phoneNumberDigits.length === 10;
+        },
+        message: 'Phone number must be a 10-digit number',
+      },
+      required: [true, 'Phone number must be provided'],
     },
+  
     // isAdmin: {
     //   type: Boolean,
     //   default: false,
@@ -76,3 +91,4 @@ UserSchema.methods.createJWT = function () {
 };
 
 module.exports=mongoose.model('User',UserSchema)
+//match: [/^[\w.-]+@MinT\.gov\.et$/, "please provide valid email"],

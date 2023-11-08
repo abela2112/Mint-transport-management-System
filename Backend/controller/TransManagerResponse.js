@@ -10,6 +10,7 @@ const addNewResponse = async (req, res) => {
 
 const updateResponse = async (req, res) => {
   const { id } = req.params;
+
   const response = await TResponse.findByIdAndUpdate(
     id,
     { ...req.body },
@@ -29,6 +30,8 @@ const notify = async (req, res) => {
     { new: true }
   );
   res.status(200).json({ message: "success" });
+200).json(response);
+
 };
 const deleteResponse = async (req, res) => {
   const { id } = req.params;
