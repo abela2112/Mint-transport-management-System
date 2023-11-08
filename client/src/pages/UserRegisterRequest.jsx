@@ -35,7 +35,7 @@ const Text = styled.span``
 const UserRegisterRequest = ({ request }) => {
     console.log(request)
     return (
-        <Link to={`/user-request/${request?._id}`}>
+        <Link to={`/user-register-request/${request?._id}`}>
             <Container>
                 <Left>
                     <Text>Full Name:{request?.First_name} {request?.Last_name}</Text>

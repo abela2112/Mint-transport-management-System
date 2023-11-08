@@ -10,7 +10,7 @@ const Container = styled.div`
 `
 const UserRequests = () => {
     const [requests, setRequests] = useState([])
-    const user = useSelector(state => state.user)
+    const user = useSelector(state => state.user.user)
     const [sortingTerm, setSortingTerm] = useState('')
     const [filters, setFilters] = useState('approved')
     const [filteredRequest, setFilteredRequest] = useState([])

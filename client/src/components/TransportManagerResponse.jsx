@@ -11,6 +11,7 @@ import axios from 'axios'
 
 import styled from 'styled-components'
 import { Background, Mint } from '../asset';
+import { updateRequestById } from '../api/userApi';
 
 
 const Container = styled.div`
@@ -114,7 +115,7 @@ align-items: center;
 justify-content: center;
 width: 400px;
 `
-const TransportManagerResponse = ({ open, setOpen, onSubmit }) => {
+const TransportManagerResponse = ({ open, setOpen, onSubmit, requestId }) => {
     const [cars, setCars] = useState('')
     const [filterdCar, setFilterdCar] = useState([])
     const [isOpen, setIsOpen] = useState(false)
@@ -144,8 +145,10 @@ const TransportManagerResponse = ({ open, setOpen, onSubmit }) => {
     }
 
     const handleSubmit = () => {
+        updateRequestById(requestId, { status: 'approved' }).then(() => console.log('approved successfully')).catch((err) => console.log(err));
+        
+        onSubmit({ requestId, PlateNumber, DriverName: filterdCar?.DriverName || DriverName, DriverPhone: filterdCar?.DriverPhoneNumber, CarModel: filterdCar?.model || CarModel, ReturnDate })
 
-        onSubmit({ PlateNumber, DriverName: filterdCar?.DriverName || DriverName, DriverPhone: filterdCar?.DriverPhone, CarModel: filterdCar?.model || CarModel, ReturnDate })
         handleClose()
     }
     console.log('phone-name', DriverName)
@@ -163,9 +166,7 @@ const TransportManagerResponse = ({ open, setOpen, onSubmit }) => {
             >
                 <DialogTitle id='dialog-title'>Approve Form</DialogTitle>
                 <DialogContent id='dialog-description'>
-
                     <Wrapper>
-
                         <ImgmintContainer>
                             <Img1 src={Mint} />
                         </ImgmintContainer>
@@ -199,7 +200,7 @@ const TransportManagerResponse = ({ open, setOpen, onSubmit }) => {
                                     placeholder="Driver phone"
                                     value={filterdCar?.DriverPhoneNumber || ''}
                                     onChange={(e) => setDriverPhone(e.target.value)}
-                                    readOnly
+
                                 />
                             </LabledInput>
                             <LabledInput>

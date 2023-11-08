@@ -74,7 +74,6 @@ const Register = () => {
          Get Start Now 
         </Title>
         <SignUpForm onSubmit={handleSignUp}>
-
           <Contain>
             <Label>First Name</Label>
             <SignUpInput

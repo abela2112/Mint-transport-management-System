@@ -25,13 +25,13 @@ import StaffMangerPendingRequests from "./pages/StaffMangerPendingRequests";
 import History from "./pages/History";
 import ForgotPassword from "./pages/ForgotPassword";
 import AvailableCar from "./pages/AvailableCar.jsx";
+import Response from "./pages/Response.jsx";
+import SinglResponsePage from "./pages/SinglResponsePage.jsx";
 
 const Container = styled.div`
   width: 100%;
   height: 100%;
 `;
-
-
 
 const StaffLayout = () => (
   <>
@@ -61,8 +61,8 @@ const AdminLayout = () => (
 );
 
 function App() {
-  const user = useSelector((state) => state.user);
-  const token = useSelector((state) => state.token);
+  const user = useSelector((state) => state.user?.user);
+  const token = useSelector((state) => state.user?.token);
   console.log(user, token);
   axios.defaults.baseURL = "http://localhost:5000";
   axios.defaults.headers = {
@@ -82,6 +82,9 @@ function App() {
               <Route path="/request/:id" element={<SingleRequestDetails />} />
               <Route path="/booking" element={<MakeRequest />} />
               <Route path="/search/:searchTerm" element={<SearchPage />} />
+              <Route path="/response" element={<Response />} />
+
+              <Route path="/response/:id" element={<SinglResponsePage />} />
             </Route>
           )}
           {user?.role === "staff-manager" && (
@@ -114,9 +117,19 @@ function App() {
 
           {user?.role === "admin" && (
             <Route path="/" element={<AdminLayout />}>
-              <Route path="/" element={<Navigate to={"/user-request"} />} />
-              <Route path="/user-request" element={<UserRegisterRequests />} />
-              <Route path="/user-request/:id" element={<UserRequestDetail />} />
+              <Route
+                path="/"
+                element={<Navigate to={"/user-register-request"} />}
+              />
+              <Route
+                path="/user-register-request"
+                element={<UserRegisterRequests />}
+              />
+              <Route path="/user-list" element={<UserRegisterRequests />} />
+              <Route
+                path="/user-register-request/:id"
+                element={<UserRequestDetail />}
+              />
               <Route path="/search/:searchTerm" element={<SearchPage />} />
               <Route path="/add-department" element={<AddDepartment />} />
             </Route>

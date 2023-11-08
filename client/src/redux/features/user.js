@@ -13,7 +13,7 @@ const userSlice = createSlice({
       state.isLoading = true;
     },
     loginUserSuccess: (state, action) => {
-      state.user = action.payload.user;
+      state.user = action.payload.data;
       state.token = action.payload.token;
       state.isLoading = false;
     },
