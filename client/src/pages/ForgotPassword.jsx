@@ -2,6 +2,8 @@ import styled from 'styled-components'
 import React, { useState } from 'react'
 import { Background, Mint } from '../asset';
 import { Link } from 'react-router-dom';
+import {forgot} from '../api/userApi'
+
 //import { makeStyles } from '@material-ui/core/styles';
 import {
     Button,
@@ -10,7 +12,10 @@ import {
     DialogContent,
     DialogContentText,
     DialogActions,
+    ClickAwayListener,
   } from "@mui/material";
+import { useSelector } from 'react-redux';
+
 
 
 const Container=styled.div`
@@ -19,20 +24,23 @@ const Container=styled.div`
     justify-content:center;
     width:100vw;
     height:100vh;
-    background-image:url("https://img.freepik.com/premium-vector/phishing-account-concept_23-2148543436.jpg?size=626&ext=jpg&uid=R123836269&ga=GA1.1.1136001642.1699130489&semt=ais");
-    background-repeat: no-repeat;
-    background-size: cover;
+    //background-image:url("https://img.freepik.com/premium-vector/phishing-account-concept_23-2148543436.jpg?size=626&ext=jpg&uid=R123836269&ga=GA1.1.1136001642.1699130489&semt=ais");
+    // background-repeat: no-repeat;
+    // background-size: cover;
+    background-color: #e0e0e0;
    
 `
+
 const Wrapper=styled.div`
-margin-top:50px;
+
 padding:20px;
-border-radius:30px;
+border-radius:25px;
 display:flex;
 align-items:center;
 justify-content:center;
 width:35%;
-height:75vh;
+height:80%;
+margin:auto;
 background-color: #fff;
 flex-direction: column;
   box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
@@ -52,9 +60,9 @@ const Desc = styled.p`
 `;
 
 const InputForm=styled.input`
-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
--webkit-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
--moz-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
+// box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
+// -webkit-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
+// -moz-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
 margin: 5px 0;
 padding: 10px;
 width: 100%;
@@ -102,11 +110,38 @@ const Img1 = styled.img`
 
 const ForgotPassword=()=>{
     const [isOpen, setIsOpen] = useState(false);
-   
-    const handleClick = (e) => {
-        e.preventDefault();
-        setIsOpen(true);
+     const [email,setEmail]=useState('')
+     
+    const handleClick = () => {
+      
+        // window.open('https://mail.google.com/mail/u/0/#inbox', '_blank')
+        console.log("verification send");
+         
       };
+    const handleSubmit=(e)=>{
+      e.preventDefault();
+     email ?  setIsOpen(true) : setIsOpen(false);
+      console.log(email)
+      // fetch("http://localhost:5000/forgot-password",{
+      //    method: "POST",
+      //    crossDomain: true,
+      //    headers:{
+      //         "content-type": "application/json",
+      //        Accept:"application/json",
+      //   "Access-Control-Allow-Origin": "*"
+      //    },
+      //    body: JSON.stringify({
+      //     email,
+      //    })
+      // })
+      //   .then((res)=>res.json())
+      //   .then((data)=>{
+      //     console.log(data,"userRegister")
+      //     alert(data.status)
+      //   })
+      forgot({email}).then((data)=>console.log(data)).catch((err)=>console.log(err))
+      //window.open('https://mail.google.com/mail/u/0/#inbox', '_blank')
+    }
       return (
 
        <Container>
@@ -117,8 +152,15 @@ const ForgotPassword=()=>{
                </ImgmintContainer>
                 <Form>
                       <Lable1>Enter your Email</Lable1>
-                      <InputForm type="email" placeholder="xxx@MinT.gov.et"/>
-                      <ResetButton onClick={handleClick}>Reset Password</ResetButton>
+                      <InputForm 
+                      type="email" 
+                      placeholder="xxx@minT.gov.et"
+                      value={email}
+                      onChange={(e)=>setEmail(e.target.value)}
+                      />
+                     <ResetButton onClick={handleSubmit }>Reset Password</ResetButton>
+                      
+                    
                 </Form>
                 <Desc>Don't have an account <Link to='/' style={{ color: '#e6953b', marginTop: '10px' }}>Sign Up</Link></Desc>
                 
@@ -131,27 +173,24 @@ const ForgotPassword=()=>{
            
           >
             <DialogTitle id="dialog-title">
-              Reseting the password !
+             Email verification
             </DialogTitle>
             <DialogContent id="dialog-description">
               {/* <DialogContentText>Are you sure?</DialogContentText> */}
-              <Lable1>Enter your new password</Lable1>
-              <InputForm type="password" placeholder="new password"/>
-              <Lable1>confirm password</Lable1>
-              <InputForm type="password" placeholder="confirm password"/>
+              Password Reset Link is sent to your email 
             </DialogContent>
             <DialogActions>
-              <Button onClick={() => setIsOpen(false)} style={{backgroundColor:"Red",color:"white"}}>Cancel</Button>
-              <Button
+              <Button onClick={() => setIsOpen(false)} style={{backgroundColor:"green",color:"white"}}>Close</Button>
+              {/* <Button
                 style={{backgroundColor:"Yellow",color:"black"}}
                 autoFocus
                 onClick={() => {
-                   
+                   handleClick()
                   setIsOpen(false);
                 }}
               >
-                Submit
-              </Button>
+               Open Gmail
+              </Button> */}
             </DialogActions>
           </Dialog>
             </Wrapper>
