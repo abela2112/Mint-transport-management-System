@@ -2,20 +2,18 @@ const { StatusCodes } = require("http-status-codes");
 const { UnAuthorizedError } = require("../error");
 const jwt = require("jsonwebtoken");
 const auth = async (req, res, next) => {
-    const {authorization}=req.headers;
-    console.log('authorization',authorization)
-    if(!authorization || ! authorization.startsWith('Bearer ')){
-     throw new UnAuthorizedError('access denied');
-   }
+  const { authorization } = req.headers;
+  console.log("authorization", authorization);
+  if (!authorization || !authorization.startsWith("Bearer ")) {
+    next(new UnAuthorizedError("access denied"));
+  }
 
-    const token=authorization.split(' ')[1];
-    const decoded=await jwt.verify(token,process.env.JWT_SECRET)
-     
-    console.log('decoded',decoded)
-req.user=decoded
-next()
+  const token = authorization.split(" ")[1];
+  const decoded = await jwt.verify(token, process.env.JWT_SECRET);
+  console.log("decoded", decoded);
+  req.user = decoded;
+  next();
 };
-
 
 const verifyTokenAndAdmin = async (req, res, next) => {
   auth(req, res, () => {
@@ -23,7 +21,7 @@ const verifyTokenAndAdmin = async (req, res, next) => {
     if (role === "admin") {
       next();
     } else {
-      throw new UnAuthorizedError("access denied you are not admin");
+      next(new UnAuthorizedError("access denied you are not admin"));
     }
   });
 };
@@ -38,7 +36,7 @@ const verifyTokenAndAccessToRequest = async (req, res, next) => {
     ) {
       next();
     } else {
-      throw new UnAuthorizedError("access denied ");
+      next(new UnAuthorizedError("access denied "));
     }
   });
 };
@@ -49,7 +47,7 @@ const verifyTokenAndAccessToTransportManager = async (req, res, next) => {
     if (role === "transport-manager") {
       next();
     } else {
-      throw new UnAuthorizedError("access denied ");
+      next(new UnAuthorizedError("access denied "));
     }
   });
 };

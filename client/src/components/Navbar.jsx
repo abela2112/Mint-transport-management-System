@@ -4,12 +4,18 @@ import styled from 'styled-components'
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import Badge from '@mui/material/Badge';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Mint, MintText } from '../asset';
 const Container = styled.div`
     width: 100%;
-    height: 40px;
+    height: 60px;
     position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 10;
     background-color: #fff;
+    border-bottom: 2px solid #C9F7FF ;
    
     /* padding: 20px; */
 `
@@ -59,6 +65,7 @@ background-color: transparent;
 border-color: #18616C;
 }
 `
+
 const SearchBox = styled.form` 
 border: 1px solid #C9F7FF;
 display: flex;
@@ -73,7 +80,16 @@ const Hr = styled.hr`
     height: 2px;
     background-color: #C9F7FF;
 `
+const ImgContainer = styled.div`
+display: flex;
+align-items: center;
+`
+const Logo = styled.img`
+height: 40px;
+`
 const Navbar = ({title}) => {
+    const { noOfresponse } = useSelector(state => state.response)
+
     const [searchTerm, setSearchTerm] = useState('')
     const navigate = useNavigate()
     const handleSubmit = (e) => {
@@ -83,6 +99,12 @@ const Navbar = ({title}) => {
     return (
         <Container>
             <Wrapper>
+
+                <ImgContainer>
+                    <Logo src={Mint} />
+                    <Logo src={MintText} />
+                </ImgContainer>
+
                 <Left>
                     <SearchBox onSubmit={handleSubmit}>
                         <Input type='text' placeholder='search...' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
@@ -90,8 +112,8 @@ const Navbar = ({title}) => {
                     </SearchBox>
                 </Left>
                 <Right>
-                    <Badge badgeContent={4} color="primary">
-                        <NotificationsActiveOutlinedIcon />
+                    <Badge badgeContent={noOfresponse} color="primary">
+                        <Link to={'/response'}> <NotificationsActiveOutlinedIcon /></Link>
                     </Badge>
 
 
@@ -101,7 +123,7 @@ const Navbar = ({title}) => {
                     </User>
                 </Right>
             </Wrapper>
-            <Hr />
+            {/* <Hr /> */}
         </Container>
     )
 }

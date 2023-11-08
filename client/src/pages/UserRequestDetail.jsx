@@ -73,7 +73,7 @@ const UserRequestDetail = () => {
                 <Text> department:{request?.department}</Text>
                 <Text> role:{request?.role}</Text>
 
-                <Text>Redistered Date:{request?.createdAt && format(new Date(request?.pickUpDate)
+                <Text>Redistered Date:{request?.createdAt && format(new Date(request?.createdAt)
                     , 'MMMM do yyyy')}</Text>
             </Wrapper>
             <ButtonContainer>

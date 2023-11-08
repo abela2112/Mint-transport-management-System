@@ -13,9 +13,10 @@ import { logOutUser } from '../redux/features/user';
 const Container = styled.div`
     flex: 1;
     padding: 10px;
+    margin-top: 20px;
    // background-color: #C9F7FF;
-    height: 100vh;
-    position: sticky;
+    height:calc( 100vh - 60px);
+    position: fixed;
     top: 0;
     bottom: 0;
 `
@@ -72,23 +73,25 @@ height: 100vh;
 `
 const SideBar = () => {
     const dispatch = useDispatch()
-    const user = useSelector((state) => state.user);
+    const user = useSelector((state) => state.user?.user);
     const navigate = useNavigate()
+    console.log('>> user: ', user)
     return (
 
         <Container>
-            <ImgContainer>
-                <Logo src={Mint} />
-                <Logo src={MintText} />
-            </ImgContainer>
+
             <ListWrapper>
                 <List>
+
+                   
+
                     {user?.role === 'staff' && 
                         <>
                         <ListItem><NavLink className={'nav-link'} to='/booking'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />Booking</NavLink></ListItem>
                         <ListItem><NavLink className={'nav-link'} to='/history'><RestoreOutlinedIcon style={{ marginRight: '10px' }} />History</NavLink></ListItem>
                         </>
                     }
+
                     {user?.role === 'staff-manager' &&
                         <>
                         <ListItem><NavLink className={'nav-link'} to={'/pending-user-request'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />Pending</NavLink></ListItem>

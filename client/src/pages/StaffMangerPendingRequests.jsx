@@ -2,56 +2,109 @@ import React, { useEffect, useState } from 'react'
 import SearchBar from '../components/SearchBar'
 import styled from 'styled-components'
 import axios from 'axios'
-import UserRegisterRequest from './UserRegisterRequest'
-import { useSelector } from 'react-redux'
-import SingleRequest from './SingleRequest'
-const Title = styled.span``
-const Select = styled.select``
-const Option = styled.option``
+import { useDispatch, useSelector } from 'react-redux'
+import { getRequestSuccess } from '../redux/features/request'
+import { DataGrid } from '@mui/x-data-grid';
+import { format } from 'date-fns'
+import DeleteIcon from '@mui/icons-material/Delete';
+import { useNavigate } from 'react-router-dom'
+import { StatusButton } from './AllRequests'
+export const Title = styled.span`
+font-size:18px;
+font-weight: 500;
+margin: 10px 0px;
+`
 const Container = styled.div`
     padding: 20px;
     margin-top: 10px;
 `
-const SortingBox = styled.div`
-border: 1px solid #F5F5F7;
-display:flex;
-align-items: center;
-padding: 5px;
+export const Button = styled.button`
+    padding: 5px 10px;
+    border:none;
+    border-radius:10px;
+    background-color: #3bb077;
+    color: #fff;
+    cursor:pointer;
+    margin-right: 20px;
 
 `
 
+
 const StaffMangerPendingRequests = () => {
-    const [requests, setRequests] = useState([])
-    const user = useSelector((state) => state.user);
+    // const [requests, setRequests] = useState([])
+    const navigate = useNavigate()
+    const { requests } = useSelector(state => state.request)
+    const dispatch = useDispatch()
+    const { user } = useSelector((state) => state.user);
     const [sortingTerm, setSortingTerm] = useState('')
     
     useEffect(() => {
         axios.get(`/api/request?department=${user?.department}`).then(({ data }) => {
-            setRequests(data)
-
+            dispatch(getRequestSuccess(data))
         }).catch((err) => console.log(err))
     }, [])
-    useEffect(() => {
-        sortingTerm && sortingTerm === 'ASC' ? setRequests((requests) => requests?.toSorted((a, b) => new Date(a?.pickUpDate) - new Date(b?.pickUpDate))) : setRequests((requests) => requests?.toSorted((a, b) => new Date(b?.pickUpDate) - new Date(a?.pickUpDate)))
-    }, [sortingTerm])
+    console.log(requests)
+    const columns = [
+        { field: '_id', headerName: 'ID', width: 100 },
+        { field: 'name', headerName: 'Full name', width: 200 },
+        { field: 'phoneNumber', headerName: 'Phone Number', width: 200 },
+        {
+            field: 'pickUpDate',
+            headerName: 'Pick Up Date',
 
-    return (<>
+            width: 150,
+            renderCell: (param) => {
+                return format(new Date(param.row?.pickUpDate), 'MMMM do yyyy')
+            }
+        },
+        {
+            field: 'status',
+            headerName: 'Status',
+            sortable: false,
+            width: 160,
+            renderCell: (param) => {
+                return <StatusButton type={param.row.status}>{param.row.status}</StatusButton>
+            }
+        },
+        {
+            field: 'action',
+            headerName: 'Action',
+            sortable: false,
+            renderCell: (param) => {
+                return <div style={{ display: 'flex' }}>
+                    <>
+                        <Button onClick={() => navigate(`/request/${param.row?._id}`)}>Detail</Button>
+                        <DeleteIcon style={{ color: 'red', cursor: 'pointer' }} />
 
+                    </>
+
+                </div>
+            },
+            width: 160,
+        },
+
+    ];
+
+    return (
         <Container>
-            <div>
-                <SortingBox>
-                    <Title>Sort BY:</Title>
-                    <Select value={sortingTerm} defaultValue={'ASC'} onChange={(e) => setSortingTerm(e.target.value)}>
-                        <Option value={'ASC'}>ASC</Option>
-                        <Option value={'DES'}>DES</Option>
-                    </Select>
-                </SortingBox>
-            </div>
-            {requests?.length > 0 && requests.map((request, i) => (
-                <SingleRequest request={request} key={i} />
-            ))}
-        </Container></>
-    )
+            <Title>Pending Requests</Title>
+            <div style={{ width: '100%', marginTop: '20px' }}>
+                <DataGrid
+                    rows={requests}
+                    columns={columns}
+                    getRowId={(row) => row?._id}
+                    disableRowSelectionOnClick
+                    initialState={{
+                        pagination: {
+                            paginationModel: { page: 0, pageSize: 5 },
+                        },
+                    }}
+                    pageSizeOptions={[5, 10]}
+
+                />
+            </div></Container>
+    );
 }
+
 
 export default StaffMangerPendingRequests
