@@ -23,6 +23,7 @@ const ImgmintContainer = styled.div`
   width: 100px;
   height: 100px;
   margin-left: 5px;
+  margin-top: -70px;
 `;
 
 
@@ -128,6 +129,8 @@ const Container = styled.div`
   display: flex;
   width: 100vw;
   height: 100vh;
+  margin: 0;
+  padding: 0;
 `;
 
 const Desc = styled.p`
@@ -151,7 +154,18 @@ const FormContainer = styled.div`
 const TitleBox = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: 2rem;
 `
+
+const CopyRight = styled.small`
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin-right: 3rem;
+  font-size: 16px;
+  font-weight: 300;
+`
+
 const Login = () => {
   const isLoading = useSelector((state) => state.isLoading);
   console.log(isLoading)
@@ -174,13 +188,14 @@ const Login = () => {
     <Container>
       <LoginContainer>
         <FormContainer>
+              <ImgmintContainer>
+                  <Img1 src={Mint} />
+               </ImgmintContainer>
           <TitleBox>
             <WelcomeTxt>Welcome back</WelcomeTxt>
             <LoginTxt>Login into your account</LoginTxt>
           </TitleBox>
-              <ImgmintContainer>
-                  <Img1 src={Mint} />
-               </ImgmintContainer>
+              
           <LoginForm onSubmit={handleSubmit}>
               
             <div style={{ width: '100%' }}>
@@ -208,9 +223,12 @@ const Login = () => {
             <SubmitButton type="submit" disabled={isLoading}> {isLoading ? <Loader /> : 'Login'}</SubmitButton>
            
           </LoginForm>
-          <Desc>Don't have an account <Link to='/register' style={{ color: '#e6953b', marginTop: '10px' }}>Sign Up</Link></Desc>
+          <Desc>Don't have an account? <Link to='/register' style={{ color: '#e6953b', marginTop: '10px' }}>  Sign Up</Link></Desc>
 
         </FormContainer>
+        <CopyRight>
+          <small>mint&copy;2023 All right reserved</small>
+        </CopyRight>
       </LoginContainer>
       {/* <ImgContainer>
         <Img3 src={Background} />

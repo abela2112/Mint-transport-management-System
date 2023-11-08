@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const SignUpContainer = styled.div`
   display: flex;
+  flex-direction: column;
   font-family: "Poppins", sans-serif;
-  height: 100vh;
   width: 100vw;
   align-items: center;
   justify-content: center;
@@ -12,11 +12,28 @@ export const SignUpContainer = styled.div`
 `;
 export const Title = styled.span`
  font-weight: 500;
- font-size: 30px;
-text-align: left;
+ font-size: 34px;
+text-align: center;
+bottom-margin: 2rem;
 /* padding:10px 20px; */
 
 `
+
+export const ImgmintContainer = styled.div`
+   display:flex;
+   justify-content:center;
+   align-items:center;
+    width: 100px;
+    height: 100px;
+    margin-left: 5px;
+    margin-top: -55px;
+`;
+
+export const Img1 = styled.img`
+    width: 100px;
+    height:100px;
+    object-fit: cover;
+`;
 
 export const SignUpForm = styled.form`
   //width: 400px;
@@ -53,7 +70,6 @@ export const SignUpButton = styled.button`
  width: 200px;
   padding:10px 20px;
   font-size: 16px;
-  margin-top: 20px;
   background-color: #155c68;
   color: #fff;
   border: none;
@@ -89,20 +105,26 @@ export const ImageContainer = styled.div`
   height: 100%;
 `;
 export const TextContainer = styled.div`
-  /* flex: 1; */
-padding: 20px;
   display: flex;
-
   flex-direction: column;
-  width: 70%;
-  height: 90%;
+  width: 60%;
   background-color: #fff;
   box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
--webkit-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
--moz-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
-  /* justify-content: center;
-  align-items: center; */
-  border-radius: 5px;
+ -webkit-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
+ -moz-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
+  justify-content: center;
+  align-items: center;
+  border-radius: 2rem;
+  margin: 5rem 0 3rem 0;
 `;
+
+export const CopyRight = styled.small`
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin-right: 3rem;
+  font-size: 16px;
+  font-weight: 300;
+`
 
 export const Option = styled.option``;
