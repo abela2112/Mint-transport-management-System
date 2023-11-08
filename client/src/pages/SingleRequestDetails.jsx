@@ -54,12 +54,13 @@ const SingleRequestDetails = () => {
         }
         else {
             updateRequestById(id, { isChecked: true }).then(() => console.log('approved successfully')).catch((err) => console.log(err));
-
+              
         }
     }
 
     const handleReject = (e) => {
         e.preventDefault()
+        
         updateRequestById(id, { isChecked: false, status: 'rejected' }).then(() => console.log('rejected successfully')).catch((err) => console.log(err));
     }
     const [request, setRequest] = useState(null)

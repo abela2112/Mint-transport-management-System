@@ -24,6 +24,7 @@ import SearchPage from "./pages/SearchPage.jsx";
 import StaffMangerPendingRequests from "./pages/StaffMangerPendingRequests";
 import History from "./pages/History";
 import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword.jsx";
 
 const Container = styled.div`
   width: 100%;
@@ -148,6 +149,7 @@ function App() {
         <Route path="/home" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:id/:token" element={<ResetPassword />} />
         <Route path="/register" element={<Register />} />
       </Routes>
     </>

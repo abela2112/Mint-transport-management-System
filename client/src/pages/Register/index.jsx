@@ -29,6 +29,8 @@ const Register = () => {
   const [error, setError] = useState('');
   const handleSignUp = (e) => {
     e.preventDefault()
+
+    setError('');
     console.log('Sign up button clicked');
     console.log('First Name:', firstName);
     console.log('Last Name:', lastName);
@@ -44,6 +46,7 @@ const Register = () => {
       .then(() => {
         console.log('Successfully registered');
         setIsOpen(true);
+        setError('');
       }).catch((error) => {
         if (error.response) {
           console.log(error)

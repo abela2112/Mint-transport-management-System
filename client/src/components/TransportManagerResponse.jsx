@@ -115,7 +115,6 @@ const TransportManagerResponse=({ open, setOpen,onSubmit })=>{
        const [returnDate,setReturnDate]=useState('')
 
       
-    
         const handleOpen = () => {
             setIsOpen(true)
         }
@@ -144,14 +143,14 @@ setOpen(false)
                     fullWidth={true}
                     overflow='hidden'
                 >   
-                    <DialogTitle id='dialog-title'>Approve Form</DialogTitle>
-                    <DialogContent id='dialog-description'>
+                    <DialogTitle id='dialog-title' style={{textAlign:"center"}}>Approve Form</DialogTitle>
+                    <DialogContent id='dialog-description' style={{display:"flex", justifyContent:"center", alignContent:"center" ,padding:"20px"}}>
                        
-                    <Wrapper> 
+                  
                    
-                   <ImgmintContainer>
-                  <Img1 src={Mint} />
-               </ImgmintContainer>
+                       <ImgmintContainer>
+                           <Img1 src={Mint} />
+                      </ImgmintContainer>
                    <Form> 
                        <LabledInput>
                            <Lable>Plate Number</Lable>
@@ -203,7 +202,7 @@ setOpen(false)
 
 
              
-                </Wrapper>     
+                
                        
                      </DialogContent>
                     <DialogActions>
