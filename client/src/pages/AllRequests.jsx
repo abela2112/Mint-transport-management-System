@@ -10,7 +10,7 @@ const Container = styled.div`
 const AllRequests = () => {
     const [requests, setRequests] = useState([])
     const [sortingTerm, setSortingTerm] = useState('')
-    const [filters, setFilters] = useState('approved')
+    const [filters, setFilters] = useState('pending')
     const [filteredRequest, setFilteredRequest] = useState([])
     useEffect(() => {
         getAllRequests().then(({ data }) => {

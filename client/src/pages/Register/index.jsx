@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SignUpContainer, Contain, Title, SignUpForm, SignUpInput, SignUpButton, Option, SelectOption, ImageContainer, Image, TextContainer, Label, BottomText } from './RegisterCSS';
 import { Link } from 'react-router-dom';
 import { Background } from '../../asset';
@@ -27,6 +27,8 @@ const Register = () => {
   const [gender, setGender] = useState('male');
   const [confirmPassword, setConfirmPassword]=useState('')
   const [error, setError] = useState('');
+
+
   const handleSignUp = (e) => {
     e.preventDefault()
 
@@ -62,7 +64,11 @@ const Register = () => {
   } 
 
   const [isOpen, setIsOpen] = useState(false);
-
+  useEffect(() => {
+    setTimeout(() => {
+      setError('')
+    }, 5000)
+  }, [])
   return (
 
     <SignUpContainer>

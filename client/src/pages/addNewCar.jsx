@@ -80,7 +80,7 @@ const AddNewCar = () => {
   const [licencePlateNumber, setLicencePlateNumber] = useState("");
   const [DriverName, setDriverName] = useState("");
   const [driverDate, setDriverDate] = useState("");
-  const [driverPhoneNumber, setDriverPhoneNumber] = useState("");
+  const [DriverPhoneNumber, setDriverPhoneNumber] = useState("");
 
   const handleClick = () => {
     console.log("brand:", brand);
@@ -89,14 +89,14 @@ const AddNewCar = () => {
     console.log("licencePlateNumber:", licencePlateNumber);
     console.log("driverName:", DriverName);
     console.log("driverDate:", driverDate);
-    console.log("driverPhoneNumber:", driverPhoneNumber);
+    console.log("driverPhoneNumber:", DriverPhoneNumber);
     addCar({
       brand,
       model,
       licencePlateNumber,
       DriverName,
       driverDate,
-      driverPhoneNumber,
+      DriverPhoneNumber,
       owned,
     })
       .then(() => console.log("car successfully registered"))
@@ -161,7 +161,7 @@ const AddNewCar = () => {
               <SignUpInput
                 type="tel"
                 placeholder="phone number"
-                value={driverPhoneNumber}
+                value={DriverPhoneNumber}
                 onChange={(e) => setDriverPhoneNumber(e.target.value)}
               />
             </InputItem>

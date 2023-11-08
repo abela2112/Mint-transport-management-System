@@ -44,7 +44,7 @@ const SingleRequestDetails = () => {
     const role = useSelector(state => state.user?.role)
     const [isOpen, setIsOpen] = useState(false)
     const handleForm=(data)=>{
-        TransportManagerResponseapi(data)
+        TransportManagerResponseapi(data).then(({ data }) => console.log(data)).catch((err) => console.log(err))
     }
     const handleApprove = (e) => {
         e.preventDefault()

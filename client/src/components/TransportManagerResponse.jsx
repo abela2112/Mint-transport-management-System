@@ -6,14 +6,14 @@ import {
     DialogContentText,
     DialogActions,
 } from '@mui/material'
-import {useState}  from 'react'
-
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 import styled from 'styled-components'
 import { Background, Mint } from '../asset';
 
 
-const Container=styled.div`
+const Container = styled.div`
     display:flex;
     align-items:center;
     justify-content:center;
@@ -38,7 +38,7 @@ const Img1 = styled.img`
   height:100px;
   object-fit: cover;
 `;
-const Wrapper=styled.div`
+const Wrapper = styled.div`
 margin-top:50px;
 padding:20px;
 // border-radius:30px;
@@ -56,7 +56,7 @@ flex-direction: column;
 -moz-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
 `
 
-const Form =styled.form`
+const Form = styled.form`
 display: flex;
 justify-content:center;
 
@@ -70,7 +70,7 @@ const Desc = styled.h1`
   text-align: center;
 `;
 
-const InputForm=styled.input`
+const InputForm = styled.input`
 // box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
 // -webkit-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
 // -moz-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
@@ -81,17 +81,26 @@ border: 1px solid #ccc;
 border-radius: 10px;
 margin-bottom: 10px;
 `
-const Lable=styled.p`
+const Lable = styled.p`
   margin-top:5px;
 `
-const LabledInput=styled.div`
+const LabledInput = styled.div`
 
    display:flex;
    flex-direction:column;
    padding-right:20px;
   
 `
-const ButtonConatainer =styled.button`
+const Select = styled.select`
+margin: 5px 0;
+padding: 10px;
+width:400px;
+border: 1px solid #ccc;
+border-radius: 10px;
+margin-bottom: 10px;
+`
+const Option = styled.option``
+const ButtonConatainer = styled.button`
 background-color: #164E62;
 color: white;
 border: none;
@@ -105,6 +114,7 @@ align-items: center;
 justify-content: center;
 width: 400px;
 `
+
 const TransportManagerResponse=({ open, setOpen,onSubmit })=>{
 
    const [isOpen, setIsOpen] = useState(false)
@@ -211,10 +221,12 @@ setOpen(false)
                     </DialogActions>
                 </Dialog>
             </>
-        )
-    }
-    
-    
+
+
+    )
+}
+
+
 
 
 export default TransportManagerResponse

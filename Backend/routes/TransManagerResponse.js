@@ -15,7 +15,7 @@ const  {
     verifyTokenAndAdmin,
     verifyTokenAndAccessToRequest,
     verifyTokenAndAuth,
-    verifyTokenAndAccessToTarnsManager
+    verifyTokenAndAccessToTransportManager
   }=require('../middleware/auth')
 
 
@@ -24,8 +24,8 @@ const  {
 router.get("/", verifyTokenAndAccessToRequest, getAllResponses);
 router.get("/:id", verifyTokenAndAccessToRequest, getResponseById);
 router.post("/add-new-response", verifyTokenAndAccessToRequest, addNewResponse);
-router.patch("/:id", verifyTokenAndAccessToTarnsManager, updateResponse);
-router.delete("/:id", verifyTokenAndAccessToTarnsManager, deleteResponse);
+router.patch("/:id", verifyTokenAndAccessToTransportManager, updateResponse);
+router.delete("/:id", verifyTokenAndAccessToTransportManager, deleteResponse);
 
 
 

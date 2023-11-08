@@ -173,12 +173,7 @@ const Login = () => {
   return (
     <Container>
       <LoginContainer>
-        
-
         <FormContainer>
-
-          
-
           <TitleBox>
             <WelcomeTxt>Welcome back</WelcomeTxt>
             <LoginTxt>Login into your account</LoginTxt>

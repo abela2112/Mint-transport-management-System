@@ -31,7 +31,7 @@ margin-right: 20px;
 `
 const ButtonBox = styled.div`
     display: flex;
-    align-items: center;
+    align-item9s: center;
     justify-content: flex-end;
 `
 const SubmitButton = styled.button`
