@@ -169,13 +169,13 @@ background-color: white;
 
 
 const MakeRequest = () => {
-  const user = useSelector(state => state.user)
+  const { user } = useSelector(state => state.user)
   const inputArray = [{
     value: ''
   }]
   const navigate = useNavigate()
   const [Passangers, setPassangers] = useState(inputArray)
-  const [name, setName] = useState('Abel Ayalew')
+  const [name, setName] = useState(`${user?.firstName} ${user?.lastName}`)
   const [phoneNumber, setPhoneNumber] = useState('')
   const [destination, setDestination] = useState('')
   const [pickUpDate, setPickUpDate] = useState('')
@@ -233,12 +233,10 @@ const MakeRequest = () => {
   const removeInput = (e) => {
     e.preventDefault()
     const index = e.target.id
-
+    console.log(index)
     if (Passangers.length > 1) {
       setPassangers(arr => {
-
-        return arr.toSpliced(index)
-
+        return [...arr].toSpliced(index, 1)
       })
     }
   }

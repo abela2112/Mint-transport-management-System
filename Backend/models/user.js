@@ -66,7 +66,7 @@ const UserSchema = new mongoose.Schema(
       enum: ["approved", "rejected", "pending"],
       default: "pending",
     },
-
+    
   },
   { timestamps: true }
 );

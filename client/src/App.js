@@ -29,14 +29,17 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword.jsx";
 
 import AvailableCar from "./pages/AvailableCar.jsx";
+
 import UserDetail from "./pages/userDetails.jsx";
+
+import Response from "./pages/Response.jsx";
+import SinglResponsePage from "./pages/SinglResponsePage.jsx";
+
 
 const Container = styled.div `
   width: 100%;
   height: 100%;
 `;
-
-
 
 const StaffLayout = () => (
   <>
@@ -66,8 +69,8 @@ const AdminLayout = () => (
 );
 
 function App() {
-  const user = useSelector((state) => state.user);
-  const token = useSelector((state) => state.token);
+  const user = useSelector((state) => state.user?.user);
+  const token = useSelector((state) => state.user?.token);
   console.log(user, token);
   axios.defaults.baseURL = "http://localhost:5000";
   axios.defaults.headers = {
@@ -87,6 +90,9 @@ function App() {
               <Route path="/request/:id" element={<SingleRequestDetails />} />
               <Route path="/booking" element={<MakeRequest />} />
               <Route path="/search/:searchTerm" element={<SearchPage />} />
+              <Route path="/response" element={<Response />} />
+
+              <Route path="/response/:id" element={<SinglResponsePage />} />
             </Route>
           )}
           {user?.role === "staff-manager" && (
@@ -123,6 +129,7 @@ function App() {
               <Route path="/user-register-request" element={<UserRegisterRequests />} />
               <Route path="/user-request/:id" element={<UserRequestDetail />} />
               <Route path="/user-detail/:id" element={<UserDetail />} />
+    
               <Route path="/search/:searchTerm" element={<SearchPage />} />
               <Route path="/add-department" element={<AddDepartment />} />
               <Route path="/user-list" element={<ShowAllUserForAdmin />} />

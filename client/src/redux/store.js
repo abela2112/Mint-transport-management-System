@@ -1,6 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
 import userReducer from "../redux/features/user";
+import responseReducer from "../redux/features/response";
+import requestReducer from "../redux/features/request";
 // const store = configureStore({
 //   name: 'user',
 //   reducer: userReducer,
@@ -25,8 +27,12 @@ const persistConfig = {
   version: 1,
   storage,
 };
-
-const persistedReducer = persistReducer(persistConfig, userReducer);
+const rootReducer = combineReducers({
+  user: userReducer,
+  response: responseReducer,
+  request: requestReducer,
+});
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
   reducer: persistedReducer,
