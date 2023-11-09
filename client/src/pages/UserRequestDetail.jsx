@@ -4,16 +4,16 @@ import { getRequestById, getUserRegisterRequests, updateRequestById, updateUserR
 import styled from 'styled-components'
 import { format } from 'date-fns'
 import Loader from '../components/Loader'
-const Container = styled.div`
+const Container = styled.div `
     padding: 20px;
 `
-const Wrapper = styled.div`
+const Wrapper = styled.div `
 display: flex;
 flex-direction: column;
     
 `
 const ButtonContainer = styled.div``
-const ApproveButton = styled.button`
+const ApproveButton = styled.button `
 padding: 7px 10px;
 border: none;
 margin: 10px 20px;
@@ -24,7 +24,7 @@ background-color:#e5faf2;
 }
 cursor:pointer;
 `
-const RejectButton = styled.button`
+const RejectButton = styled.button `
 padding: 7px 10px;
 border: none;
 margin: 10px 20px;
@@ -34,7 +34,7 @@ cursor: pointer;
     cursor: not-allowed;
 }
 `
-const Text = styled.span`
+const Text = styled.span `
 padding: 10px;
 `
 const UserRequestDetail = () => {

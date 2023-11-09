@@ -23,7 +23,8 @@ const {
 } = require("../middleware/auth");
 
 
-router.get("/", verifyTokenAndAccessToRequest, getAllResponses);
+
+router.get("/", verifyTokenAndAccessToTransportManager, getAllResponses);
 router.get("/:id", auth, getResponseById);
 router.get("/user/:userId", auth, getUserRequestResponse);
 router.post("/add-new-response", verifyTokenAndAccessToRequest, addNewResponse);

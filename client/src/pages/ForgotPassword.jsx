@@ -60,21 +60,24 @@ const Desc = styled.p`
 `;
 
 const InputForm=styled.input`
-// box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
-// -webkit-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
-// -moz-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
+
 margin: 5px 0;
 padding: 10px;
 width: 100%;
 border: 1px solid #ccc;
 border-radius: 10px;
+&:focus {
+  // border-color: #4285f4;
+  outline:none;
+}
 margin-bottom: 10px;
 `
 const Lable=styled.h3`
   margin-top:5px;
+  color: #777;
 `
 const Lable1=styled.p`
-  
+color: #777;
 `
 
 const ResetButton=styled.button`
@@ -108,13 +111,15 @@ const Img1 = styled.img`
   object-fit: cover;
 `;
 
+
+
 const ForgotPassword=()=>{
     const [isOpen, setIsOpen] = useState(false);
      const [email,setEmail]=useState('')
      
     const handleClick = () => {
       
-        // window.open('https://mail.google.com/mail/u/0/#inbox', '_blank')
+       
         console.log("verification send");
          
       };
@@ -122,25 +127,9 @@ const ForgotPassword=()=>{
       e.preventDefault();
      email ?  setIsOpen(true) : setIsOpen(false);
       console.log(email)
-      // fetch("http://localhost:5000/forgot-password",{
-      //    method: "POST",
-      //    crossDomain: true,
-      //    headers:{
-      //         "content-type": "application/json",
-      //        Accept:"application/json",
-      //   "Access-Control-Allow-Origin": "*"
-      //    },
-      //    body: JSON.stringify({
-      //     email,
-      //    })
-      // })
-      //   .then((res)=>res.json())
-      //   .then((data)=>{
-      //     console.log(data,"userRegister")
-      //     alert(data.status)
-      //   })
+      
       forgot({email}).then((data)=>console.log(data)).catch((err)=>console.log(err))
-      //window.open('https://mail.google.com/mail/u/0/#inbox', '_blank')
+      
     }
       return (
 
@@ -154,10 +143,11 @@ const ForgotPassword=()=>{
                       <Lable1>Enter your Email</Lable1>
                       <InputForm 
                       type="email" 
-                      placeholder="xxx@minT.gov.et"
+                      placeholder="xxx@mint.gov.et"
                       value={email}
                       onChange={(e)=>setEmail(e.target.value)}
                       />
+
                      <ResetButton onClick={handleSubmit }>Reset Password</ResetButton>
                       
                     
