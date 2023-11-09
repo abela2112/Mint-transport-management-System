@@ -31,12 +31,12 @@ export const Button = styled.button`
 
 
 const StaffMangerPendingRequests = () => {
-    // const [requests, setRequests] = useState([])
+ 
     const navigate = useNavigate()
     const { requests } = useSelector(state => state.request)
     const dispatch = useDispatch()
     const { user } = useSelector((state) => state.user);
-    const [sortingTerm, setSortingTerm] = useState('')
+    
     
     useEffect(() => {
         axios.get(`/api/request?department=${user?.department}`).then(({ data }) => {
@@ -75,7 +75,6 @@ const StaffMangerPendingRequests = () => {
                     <>
                         <Button onClick={() => navigate(`/request/${param.row?._id}`)}>Detail</Button>
                         <DeleteIcon style={{ color: 'red', cursor: 'pointer' }} />
-
                     </>
 
                 </div>

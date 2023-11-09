@@ -53,10 +53,6 @@ export const getUserRegisterRequests = (userId) =>
   axios.get(`/api/user/${userId}`);
 export const getAllRequests = () => axios.get(`/api/request?checked=true`);
 export const getRequestById = (id) => axios.get(`/api/request/${id}`);
-
-
-
-
 export const updateRequestById = (id, request) =>
   axios.patch(`/api/request/updateRequest/${id}`, request);
 

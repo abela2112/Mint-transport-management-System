@@ -58,6 +58,11 @@ const getAUser = async (req, res) => {
   const users = await User.findById(id);
   res.status(StatusCodes.OK).json({ users: users });
 };
+const deleteUser = async (req, res) => {
+  const { id } = req.params;
+  const users = await User.findByIdAndDelete(id);
+  res.status(StatusCodes.OK).json({ message:"deleted successfully" });
+};
 
 
 module.exports = {
@@ -67,5 +72,6 @@ module.exports = {
   getAllUsers,
   getAUser,
   getAUser,
+  deleteUser
 };
 

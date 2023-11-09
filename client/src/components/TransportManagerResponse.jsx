@@ -115,7 +115,6 @@ align-items: center;
 justify-content: center;
 width: 400px;
 `
-
 const TransportManagerResponse = ({ open, setOpen, onSubmit, requestId }) => {
     const [cars, setCars] = useState('')
     const [filterdCar, setFilterdCar] = useState([])

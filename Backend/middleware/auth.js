@@ -25,6 +25,7 @@ const verifyTokenAndAdmin = async (req, res, next) => {
     }
   });
 };
+
 const verifyTokenAndAccessToRequest = async (req, res, next) => {
   auth(req, res, () => {
     const { role, userID } = req.user;
@@ -44,7 +45,10 @@ const verifyTokenAndAccessToTransportManager = async (req, res, next) => {
   auth(req, res, () => {
     const { role, userID } = req.user;
     const { id } = req.params;
-    if (role === "transport-manager") {
+    if (
+      role === "transport-manager" 
+      
+    ) {
       next();
     } else {
       next(new UnAuthorizedError("access denied "));
@@ -80,5 +84,4 @@ module.exports = {
   verifyTokenAndAccessToRequest,
   verifyTokenAndAccessToTransportManager,
   verifyTokenAndAuth,
-  
 };

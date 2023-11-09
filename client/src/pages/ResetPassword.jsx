@@ -58,21 +58,24 @@ const Desc = styled.p`
 `;
 
 const InputForm=styled.input`
-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
--webkit-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
--moz-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
+
 margin: 5px 0;
 padding: 10px;
 width: 100%;
 border: 1px solid #ccc;
 border-radius: 10px;
+&:focus {
+  // border-color: #4285f4;
+  outline:none;
+}
 margin-bottom: 10px;
 `
 const Lable=styled.h3`
   margin-top:5px;
+  color: #777;
 `
 const Lable1=styled.p`
-  
+color: #777;
 `
 const Contain = styled.div`
 display: flex;
@@ -130,7 +133,8 @@ const ResetPassword =()=>{
         e.preventDefault();  
         console.log('new password:', newpassword);
         setIsOpen(true);
-
+        setNewPassword(''); // Reset the new password input
+      setConfirmPassword(''); // Reset the confirm password input
         postBack(id,token,newpassword).then((data)=>console.log(data)).catch((err)=>console.log(err)) 
     }
     return (
