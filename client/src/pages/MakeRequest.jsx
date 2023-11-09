@@ -13,19 +13,19 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction:column;
+  // flex-direction:column;
    `
 
 const Wrraper = styled.div`
-// display:flex;
-// // align-items:center;
-// background-color: grey;
-// // justify-content:center;
+display:flex;
+flex-direction: column;
+align-items: flex-start;
+justify-content:center;
 // //  padding :10px;
 // //  margin-top:0px;
 //  //background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyhslcK5oQ2mB4tlTPUCiNTpKEz2qfoQENCw&usqp=CAU");
  width:80%;
-//  flex-wrap:wrap;
+ flex-wrap:wrap;
    
 `
 // const Wrraper = styled.div`
@@ -42,12 +42,14 @@ const Wrraper = styled.div`
 // `
 const Form = styled.form`
 display:flex;
+flex-direction: row;
 justify-content:start;
 align-items:start;
 flex-wrap:wrap;
 // width: 75%;
 `
 const Title = styled.h1`
+color: rgb(21, 92, 104);
 font-size:24px;
 font-weight:300;
 `
@@ -69,6 +71,7 @@ width: calc(100%);
 `
 
 const Label = styled.label`
+  color: rgb(21, 92, 104);
   padding:10px;
 `
 
@@ -79,7 +82,7 @@ const Div = styled.div`
   
   flex-direction:column;
   margin-top: 10px;
-  margin-right: 20px;
+  margin-right: 4rem;
   width: 400px;
 `
 const PassangerDiv = styled.div`
@@ -104,7 +107,7 @@ const ButtonContainer = styled.div`
     justify-content:center;
     margin-top:3rem;
     border-radius:20px;
-    align-items: center;
+    align-items: end;
     gap: 1rem;
 `
 const Cancel = styled.button`
@@ -142,6 +145,7 @@ const Submit = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: 13rem;
   /* box-shadow:0 0 5px yellow,
           0 0 25px yellow; */
   &:hover{
@@ -253,7 +257,7 @@ const MakeRequest = () => {
           <Form >
             <Div>
               <Label>Full Name</Label>
-              <Input placeholder="Full Name" disabled value={name} onChange={(e) => setName(e.target.value)} />
+              <Input placeholder="Full Name" value={name} onChange={(e) => setName(e.target.value)} />
             </Div>
             <Div>
               <Label>Phone No.</Label>
@@ -301,9 +305,7 @@ const MakeRequest = () => {
               <Addbutton onClick={addInput}>Add Passenger</Addbutton>
             </div>
             </Div>
-          </Form>
-
-          <ButtonContainer>
+            <ButtonContainer>
             {/* <Cancel>
               Cancel
             </Cancel> */}
@@ -312,6 +314,7 @@ const MakeRequest = () => {
             </Submit>
             <DialogModal open={isModalOpen} onClose={() => setIsModalOpen(false)} onSubmit={handleSubmit}/>
           </ButtonContainer>
+          </Form>
 
         </Wrraper>
         {/* <CustomModal open={open} handleClose={handleClose

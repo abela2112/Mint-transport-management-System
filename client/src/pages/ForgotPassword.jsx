@@ -18,10 +18,11 @@ const Container=styled.div`
     align-items:center;
     justify-content:center;
     width:100vw;
+    background-color: #e0e0e0;
     height:100vh;
-    background-image:url("https://img.freepik.com/premium-vector/phishing-account-concept_23-2148543436.jpg?size=626&ext=jpg&uid=R123836269&ga=GA1.1.1136001642.1699130489&semt=ais");
-    background-repeat: no-repeat;
-    background-size: cover;
+    // background-image:url("https://img.freepik.com/premium-vector/phishing-account-concept_23-2148543436.jpg?size=626&ext=jpg&uid=R123836269&ga=GA1.1.1136001642.1699130489&semt=ais");
+    // background-repeat: no-repeat;
+    // background-size: cover;
    
 `
 const Wrapper=styled.div`
@@ -31,58 +32,59 @@ border-radius:30px;
 display:flex;
 align-items:center;
 justify-content:center;
-width:35%;
-height:75vh;
+width:30%;
+height:72vh;
 background-color: #fff;
 flex-direction: column;
-  box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
+box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
 -webkit-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
 -moz-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
+
 `
 
 const Form =styled.form`
 display: flex;
 flex-direction: column;
-/* align-items: center; */
+align-items: center;
 width: 100%;
-margin:10px 0;
+margin-top: 3rem;
 `
 const Desc = styled.p`
+  margin-top: 5rem;
   text-align: center;
 `;
 
-const InputForm=styled.input`
-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
--webkit-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
--moz-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
-margin: 5px 0;
-padding: 10px;
-width: 100%;
-border: 1px solid #ccc;
-border-radius: 10px;
-margin-bottom: 10px;
-`
-const Lable=styled.h3`
-  margin-top:5px;
+const InputForm = styled.input`
+  margin: 5px 0;
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-bottom: 10px;
+`;
+const Title=styled.h3`
+  margin-top: 2rem;
 `
 const Lable1=styled.p`
-  
+  text-align: start;
+  margin: 0;
+  padding: 0;
 `
 
-const ResetButton=styled.button`
-background-color: #164E62;
-color: white;
-border: none;
-border-radius: 5px;
-padding: 10px 20px;
-font-size: 16px;
-cursor: pointer;
-margin-top: 20px;
-display:flex;
-align-items: center;
-justify-content: center;
-width: 100%;
-`
+const ResetButton = styled.button`
+  background-color: #164E62;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+`;
 
 const ImgmintContainer = styled.div`
    display:flex;
@@ -92,6 +94,7 @@ const ImgmintContainer = styled.div`
   width: 100px;
   height: 100px;
   margin-left: 5px;
+  margin-top: -9rem;
 `;
 
 const Img1 = styled.img`
@@ -111,16 +114,18 @@ const ForgotPassword=()=>{
 
        <Container>
             <Wrapper>
-                <Lable>Forgot Your password?</Lable>
                 <ImgmintContainer>
                   <Img1 src={Mint} />
-               </ImgmintContainer>
+                </ImgmintContainer>
+                <Title>Forgot Your password?</Title>
+                
                 <Form>
-                      <Lable1>Enter your Email</Lable1>
-                      <InputForm type="email" placeholder="xxx@MinT.gov.et"/>
-                      <ResetButton onClick={handleClick}>Reset Password</ResetButton>
+                  <Lable1>Enter Your Email</Lable1>
+                  <InputForm type="email" placeholder="xxx@MinT.gov.et"/>
+                  <ResetButton onClick={handleClick}>Reset Password</ResetButton>
                 </Form>
-                <Desc>Don't have an account <Link to='/' style={{ color: '#e6953b', marginTop: '10px' }}>Sign Up</Link></Desc>
+
+                <Desc>Don't have an account? <Link to='/register' style={{ color: '#e6953b', marginTop: '10px' }}>Sign Up</Link></Desc>
                 
 
                 <Dialog

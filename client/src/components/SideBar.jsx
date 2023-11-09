@@ -14,14 +14,13 @@ const Container = styled.div`
     flex: 1;
     padding: 10px;
    // background-color: #C9F7FF;
-    height: 100vh;
+    height: 50vh;
     position: sticky;
     top: 0;
     bottom: 0;
 `
 
 const List = styled.ul`
-color: red;
 list-style: none;
 `
 
@@ -38,19 +37,21 @@ cursor: pointer;
 `
 
 const ListItemLogOut = styled.li`
- display:flex;
-padding:10px 20px ;
-margin-bottom: 10px;
-/* background-color: #F5F5F7; */
-border-radius: 5px;
-font-weight: 400;
-/* color: #141522; */
-cursor: pointer;
-color:#8E92BC; 
-&:hover, &:focus{
-    color: #18616C !important;
-    background-color: rgba(211, 248, 255,0.4) !important;
-}
+
+    display: flex;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: 400;
+    cursor: pointer;
+    color: orange;
+    font-weight: 600;
+    margin-top: 27rem;
+    // margin-bottom: 2rem
+    cursor: pointer;
+    &:hover, &:focus{
+        color: #18616C !important;
+        background-color: rgba(211, 248, 255,0.4) !important;
+    }
 `
 
 const Logo = styled.img`
@@ -68,7 +69,7 @@ align-content: space-between;
 box-shadow: 2px 0px 2px 0px rgba(255, 165, 0, 0.75);
 margin-left: -2rem;
 padding: 20px;
-height: 100vh;    
+height: 100vh;
 `
 const SideBar = () => {
     const dispatch = useDispatch()

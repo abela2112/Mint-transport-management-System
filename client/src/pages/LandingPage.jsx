@@ -168,7 +168,7 @@ const LandingPage = () => {
         <Img2 src={MinT}/>
         </ImgmintContainer2>
         <StyledText>
-        <h1> <br/>የኢኖቬሸንና ቴክኖሎጂ ሚንስቴር </h1>
+        <h1> <br/>የኢኖቬሽንና ቴክኖሎጂ ሚንስቴር </h1>
         </StyledText>
         <StyledText2>
         <h2>Transport Management<br/> System </h2>
