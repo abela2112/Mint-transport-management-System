@@ -8,7 +8,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useDispatch, useSelector } from 'react-redux'
 import { getRequestSuccess } from '../redux/features/request'
 import { DataGrid } from '@mui/x-data-grid';
-import { Button } from './StaffMangerPendingRequests'
+import { Button, Title } from './StaffMangerPendingRequests'
 import { format } from 'date-fns'
 import { useNavigate } from 'react-router-dom'
 
@@ -84,7 +84,9 @@ const AllRequests = () => {
 
 
     return (
-        <div style={{ height: 400, width: '100%' }}>
+        <Container>
+            <Title>Requests</Title>
+            <div style={{ height: 400, width: '100%', marginTop: '20px' }}>
             <DataGrid
                 rows={requests}
                 getRowId={(row) => row?._id}
@@ -96,7 +98,7 @@ const AllRequests = () => {
                 }}
                 pageSizeOptions={[5, 10]}
             />
-        </div>
+            </div></Container>
     );
 }
 export default AllRequests

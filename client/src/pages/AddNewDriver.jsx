@@ -31,7 +31,7 @@ margin-right: 20px;
 `
 const ButtonBox = styled.div`
     display: flex;
-    align-item9s: center;
+    align-items: center;
     justify-content: flex-end;
 `
 const SubmitButton = styled.button`
@@ -90,8 +90,7 @@ const AddNewDriver = () => {
 
             <Container>
                 <Wrapper>
-                    {/* <Title>Add new Car</Title> */}
-
+                    <Title>Add new Driver</Title>
                     <FormBox>
                         <InputItem>
                             <Label>name</Label>

@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 const Container = styled.div`
 display: flex;
 width: 100%;
-height: 100%;
+height: 100vh;
 `
 const Main = styled.div`
 flex: 4;

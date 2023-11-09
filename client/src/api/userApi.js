@@ -55,8 +55,7 @@ export const getAllRequests = () => axios.get(`/api/request?checked=true`);
 export const getRequestById = (id) => axios.get(`/api/request/${id}`);
 
 
-  export const getAllRequests = () => axios.get(`/api/request?all=true`);
-  
+
 
 export const updateRequestById = (id, request) =>
   axios.patch(`/api/request/updateRequest/${id}`, request);

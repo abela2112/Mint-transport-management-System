@@ -11,11 +11,12 @@ import SearchBar from './SearchBar';
 import { useDispatch, useSelector } from 'react-redux'
 import { logOutUser } from '../redux/features/user';
 const Container = styled.div`
-    flex: 1;
+   
+    width:315px;
     padding: 10px;
-    margin-top: 20px;
+    margin-top: 30px;
    // background-color: #C9F7FF;
-    height:calc( 100vh - 60px);
+    height:calc( 100vh - 40px);
     position: fixed;
     top: 0;
     bottom: 0;
@@ -47,7 +48,10 @@ border-radius: 5px;
 font-weight: 400;
 /* color: #141522; */
 cursor: pointer;
-color:#8E92BC; 
+color:rgba(255, 165, 0, 0.75); 
+position: absolute;
+bottom: 0;
+
 &:hover, &:focus{
     color: #18616C !important;
     background-color: rgba(211, 248, 255,0.4) !important;
@@ -68,7 +72,7 @@ flex-direction: column;
 align-content: space-between;
 box-shadow: 2px 0px 2px 0px rgba(255, 165, 0, 0.75);
 margin-left: -2rem;
-padding: 20px;
+padding: 20px 30px ;
 height: 100vh;    
 `
 const SideBar = () => {
@@ -118,13 +122,13 @@ const SideBar = () => {
    
                         </>
                     }
-                    
-                </List>
-                <ListItemLogOut onClick={() => {
+                    <ListItemLogOut onClick={() => {
                         dispatch(logOutUser())
                         navigate('/home')
 
                     }}> <SettingsOutlinedIcon style={{ marginRight: '10px' }} />Logout</ListItemLogOut>
+
+                </List>
             </ListWrapper>
         </Container>
 

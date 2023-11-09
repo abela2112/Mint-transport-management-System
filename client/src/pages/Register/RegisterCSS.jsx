@@ -49,7 +49,6 @@ export const SignUpForm = styled.form`
 export const Contain = styled.div`
 display: flex;
 
-width: 400px;
 flex-direction: column;
 margin-bottom: 10px;
 margin-right: 20px;
@@ -64,6 +63,7 @@ export const SignUpInput = styled.input`
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  width: 400px;
 `;
 
 export const SignUpButton = styled.button`
@@ -78,7 +78,7 @@ export const SignUpButton = styled.button`
 `;
 
 export const SelectOption = styled.select`
-  width: 100%;
+  width: 400px;
   padding: 10px;
   border: none;
   border: 1px solid #ccc;
@@ -107,7 +107,7 @@ export const ImageContainer = styled.div`
 export const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 60%;
+  width: 80%;
   background-color: #fff;
   box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
  -webkit-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
