@@ -43,6 +43,7 @@ export const getUserRequests = (userId) =>
 
   export const getAllRequests = () => axios.get(`/api/request?all=true`);
   
+  export const getAllUser=()=> axios.get('api/user')
 
   export const getRequestById = (id) => axios.get(`/api/request/${id}`);
 

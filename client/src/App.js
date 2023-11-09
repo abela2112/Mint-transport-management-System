@@ -14,6 +14,7 @@ import Requests from "./pages/UserRequests";
 import MakeRequest from "./pages/MakeRequest";
 import UserRequests from "./pages/UserRequests";
 import AllRequests from "./pages/AllRequests";
+import ShowAllUserForAdmin from './pages/ShowAllUserForAdmin'
 import SingleRequestDetails from "./pages/SingleRequestDetails";
 import LandingPage from "./pages/LandingPage";
 import AddDepartment from "./pages/AddDepartment";
@@ -28,8 +29,9 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword.jsx";
 
 import AvailableCar from "./pages/AvailableCar.jsx";
+import UserDetail from "./pages/userDetails.jsx";
 
-const Container = styled.div`
+const Container = styled.div `
   width: 100%;
   height: 100%;
 `;
@@ -117,13 +119,16 @@ function App() {
 
           {user?.role === "admin" && (
             <Route path="/" element={<AdminLayout />}>
-              <Route path="/" element={<Navigate to={"/user-request"} />} />
-              <Route path="/user-request" element={<UserRegisterRequests />} />
+              <Route path="/" element={<Navigate to={"/user-register-request"} />} />
+              <Route path="/user-register-request" element={<UserRegisterRequests />} />
               <Route path="/user-request/:id" element={<UserRequestDetail />} />
+              <Route path="/user-detail/:id" element={<UserDetail />} />
               <Route path="/search/:searchTerm" element={<SearchPage />} />
               <Route path="/add-department" element={<AddDepartment />} />
+              <Route path="/user-list" element={<ShowAllUserForAdmin />} />
             </Route>
           )}
+          
         </Route>
         <Route
           path="/transportManager-response"

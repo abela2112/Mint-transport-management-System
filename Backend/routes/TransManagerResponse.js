@@ -21,7 +21,7 @@ const  {
 
   
 
-router.get("/", verifyTokenAndAccessToRequest, getAllResponses);
+router.get("/", verifyTokenAndAccessToTransportManager, getAllResponses);
 router.get("/:id", verifyTokenAndAccessToRequest, getResponseById);
 router.post("/add-new-response", verifyTokenAndAccessToRequest, addNewResponse);
 router.patch("/:id", verifyTokenAndAccessToTransportManager, updateResponse);

@@ -31,6 +31,7 @@ const StaffMangerPendingRequests = () => {
 
         }).catch((err) => console.log(err))
     }, [])
+    console.log(requests)
     useEffect(() => {
         sortingTerm && sortingTerm === 'ASC' ? setRequests((requests) => requests?.toSorted((a, b) => new Date(a?.pickUpDate) - new Date(b?.pickUpDate))) : setRequests((requests) => requests?.toSorted((a, b) => new Date(b?.pickUpDate) - new Date(a?.pickUpDate)))
     }, [sortingTerm])

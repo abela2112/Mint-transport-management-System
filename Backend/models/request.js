@@ -16,7 +16,7 @@ const RequestSchema=new mongoose.Schema({
     type: Date,
     required: true,
   },
-  ReturnDate: {
+  returnDate: {
     type: Date,
     required: true,
   },

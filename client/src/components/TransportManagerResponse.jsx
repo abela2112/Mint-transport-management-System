@@ -138,6 +138,16 @@ setOpen(false)
         const handleSubmit = (e) => {
             
             onSubmit({plateNumber,driverName,driverPhone,carModel,returnDate})
+    //         axios.patch(`/api/car/${id}`, { status: "taken" })
+    // .then((response) => {
+    //   console.log(response.data);
+     
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // });
+
+          
             handleClose()
         }
     
