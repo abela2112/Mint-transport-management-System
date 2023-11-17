@@ -20,6 +20,10 @@ export const addDriver = (driver) =>
 export const TransportManagerResponseapi = (data) =>
   axios.post("/api/TMresponse/add-new-response", data);
 
+export const addDept=(dept)=>axios.post("/api/department/add-department",dept)
+
+export const editUser=(id,edit) => axios.patch(`api/user/${id}`,edit)
+
 export const UserRequestResponseapi = (id) =>
   axios.get(`/api/TMresponse/user/${id}`);
 export const getRequestResponseapiById = (id) =>
@@ -55,9 +59,11 @@ export const getAllRequests = () => axios.get(`/api/request?checked=true`);
 export const getRequestById = (id) => axios.get(`/api/request/${id}`);
 
 
-  export const getAllRequests = () => axios.get(`/api/request?all=true`);
-  
+export const updateCarStatus=(id,status)=>axios.patch(`api/car/${id}`,status)
+export const getAvailableCar=(avalableCar)=>axios.get('api/car/available')
+
   export const getAllUser=()=> axios.get('api/user')
+  export const getSingleUser=(id)=>axios.get(`api/user/${id}`)
 
 export const updateRequestById = (id, request) =>
   axios.patch(`/api/request/updateRequest/${id}`, request);

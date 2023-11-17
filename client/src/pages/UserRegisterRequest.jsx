@@ -20,7 +20,7 @@ flex: 1;
 const Center = styled.div`
 
 flex: 1;`
-export const Button = styled.button`
+export const Buttonn = styled.button`
 border:none;
 padding: 5px 7px;
 border-radius: 10px;
@@ -35,15 +35,15 @@ const Text = styled.span``
 const UserRegisterRequest = ({ request }) => {
     console.log(request)
     return (
-        <Link to={`/user-register-request/${request?._id}`}>
+        <Link to={`/user-request/${request?._id}`}>
             <Container>
                 <Left>
-                    <Text>Full Name:{request?.First_name} {request?.Last_name}</Text>
+                    <Text>Full Name:{request?.firtName} {request?.lastName}</Text>
                 </Left>
                 <Center><Text>email :{request?.phoneNumber}</Text></Center>
                 <Center>position:{request?.position}</Center>
 
-                <Right><Button type={request?.status}>{request?.status}</Button></Right>
+                <Right><Buttonn type={request?.status}>{request?.status}</Buttonn></Right>
             </Container>
         </Link>
     )

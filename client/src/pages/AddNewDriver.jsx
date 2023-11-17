@@ -10,6 +10,7 @@ width: 100%;
 padding: 20px;
 
 `
+
 const Wrapper = styled.div `
 display: flex;
 flex-direction: column;
@@ -19,9 +20,9 @@ justify-content: space-between;
 
 const FormBox = styled.form`
     display: flex;
-    flex-direction: column;
-    
+    flex-direction: column; 
 `
+
 const InputItem = styled.div`
 display: flex;
 flex-direction: column;
@@ -29,6 +30,7 @@ width: 400px;
 margin-top:10px ;
 margin-right: 20px;
 `
+
 const ButtonBox = styled.div`
     display: flex;
     align-item9s: center;
@@ -61,20 +63,27 @@ width: 200px;
 const AddNewDriver = () => {
 
        const [name,setName]=useState("")
-       const [phone,setPhone]=useState("")
-       const [regDate,setRegDate]=useState("")
-       
+       const [phoneNumber,setPhoneNumber]=useState("")
+       const [registeredDate,setRegisteredDate]=useState("")
+       const [error,setError]=useState('')
+
 
        const handleClick=(e)=>{
         
             console.log("name" ,name);
-            console.log("phone" ,phone);
-            console.log("regDate",regDate);
-            addDriver({name,phone,regDate}).then(()=>console.log("driver is succefully registered")).catch((err)=>console.log(err))
+            console.log("phone" ,phoneNumber);
+            console.log("regDate",registeredDate);
+            addDriver({name,phoneNumber,registeredDate}).then(()=>{setPhoneNumber(''); setName('');  setRegisteredDate(''); setError('')}).catch((error)=>{
+                if (error.response) {
+                    console.log(error)
+                  setError(error.response.data.message);
+                } else {
+                  // Handle network errors or other exceptions
+                  console.log('Error:', error);
+                }
+            })
        }
        
-
-
        
        const [isModalOpen, setIsModalOpen] = useState(false);
       
@@ -107,8 +116,8 @@ const AddNewDriver = () => {
                             <SignUpInput 
                             type='tel' 
                             placeholder='phone number' 
-                            value={phone}
-                            onChange={(e)=>setPhone(e.target.value)}
+                            value={phoneNumber}
+                            onChange={(e)=>setPhoneNumber(e.target.value)}
                             />
                         </InputItem>
 
@@ -117,13 +126,13 @@ const AddNewDriver = () => {
                             <Label>Registered date</Label>
                             <SignUpInput 
                             type='date'
-                            value={regDate}
-                            onChange={(e)=>setRegDate(e.target.value)}
+                            value={registeredDate}
+                            onChange={(e)=>setRegisteredDate(e.target.value)}
                             />
                         </InputItem>
 
                     </FormBox>
-
+                    {error && <p style={{color:"red"}}>{error}</p>}
                     <ButtonBox>
 
                        <SubmitButton onClick={handleButtonClick}>submit</SubmitButton>

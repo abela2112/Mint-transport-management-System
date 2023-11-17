@@ -116,6 +116,7 @@ function App() {
               <Route path="/" element={<Navigate to={"/requests"} />} />
               <Route path="/add-new-car" element={<AddNewCar />} />
               <Route path="/add-new-driver" element={<AddNewDriver />} />
+              
               <Route path="/available-car" element={<AvailableCar />} />
               <Route path="/requests" element={<AllRequests />} />
               <Route path="/request/:id" element={<SingleRequestDetails />} />
@@ -126,12 +127,12 @@ function App() {
           {user?.role === "admin" && (
             <Route path="/" element={<AdminLayout />}>
               <Route path="/" element={<Navigate to={"/user-register-request"} />} />
-              <Route path="/user-register-request" element={<UserRegisterRequests />} />
+              <Route path= "/user-register-request"  element={<UserRegisterRequests />} />
               <Route path="/user-request/:id" element={<UserRequestDetail />} />
               <Route path="/user-detail/:id" element={<UserDetail />} />
     
               <Route path="/search/:searchTerm" element={<SearchPage />} />
-              <Route path="/add-department" element={<AddDepartment />} />
+              <Route path="/department" element={<AddDepartment />} />
               <Route path="/user-list" element={<ShowAllUserForAdmin />} />
             </Route>
           )}

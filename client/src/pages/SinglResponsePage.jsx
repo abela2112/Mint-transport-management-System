@@ -14,13 +14,16 @@ const SinglResponsePage = () => {
     const [response, setResponse] = useState(null)
     const { id } = useParams()
     const { user } = useSelector(state => state.user)
+    
     useEffect(() => {
         UpdateResponse(id, { userId: user._id }).then((data) => console.log('seen')).catch((err) => console.log(err))
     }, [id])
+
     useEffect(() => {
         getRequestResponseapiById(id).then(({ data }) => setResponse(data)).catch((err) => console.log(err))
     }, [id])
     console.log(response)
+
     return (
         <Container>
             <Wrapper>

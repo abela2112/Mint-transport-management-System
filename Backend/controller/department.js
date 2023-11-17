@@ -11,6 +11,7 @@ const updateDept = async (req, res) => {
   const dept = await Dept.findByIdAndUpdate(id, { ...req.body }, { new: true });
   res.status(200).json(dept);
 };
+
 const deleteDept = async (req, res) => {
   const { id } = req.params;
   const dept = await Dept.findByIdAndDelete(id);

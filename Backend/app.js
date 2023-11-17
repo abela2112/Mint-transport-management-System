@@ -12,18 +12,22 @@ const notFoundErrorMiddleware = require("./middleware/notFound");
 //router
 const userRoute = require("./routes/user");
 
+
 const carRoute = require("./routes/car");
 const driverRoute = require("./routes/driver");
 const TMresponseRoute=require("./routes/TransManagerResponse")
 const requestRouter=require("./routes/request")
 const forgotPassword=require("./routes/sendMail")
+const deptRounte=require("./routes/department")
+
+
 app.use(cors());
 app.use(express.json());
 app.use("/api/user", userRoute);
 app.use("/api/request",requestRouter)
 app.use("/api/car", carRoute);
 app.use("/api/driver", driverRoute);
-
+app.use("/api/department",deptRounte)
 app.use("/api/TMresponse",TMresponseRoute)
 app.use("/api/forgot",forgotPassword)
 

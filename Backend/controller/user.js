@@ -1,5 +1,5 @@
 
-const User=require('../models/user')
+const User = require('../models/user')
 const bcrypt = require("bcryptjs");
 const { StatusCodes } = require("http-status-codes");
 const { BadRequestError } = require("../error");
@@ -12,7 +12,6 @@ const login = async (req, res) => {
 
   const user = await User.findOne({ email });
   if (!user) throw new BadRequestError("user not found");
-
   if (user.status === "approved" || user.isAdmin) {
     const isPasswordCorrect = await user.comparePassword(password);
     if (!isPasswordCorrect) {
@@ -37,10 +36,11 @@ const updateUser = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     newPassword = await bcrypt.hash(req.body.password, salt);
     // if (!this.isModified("password")) return next();
+    console.log("hashedPassword: " , newPassword)
   }
   const user = await User.findByIdAndUpdate(
     id,
-    { ...req.body, newPassword },
+    { ...req.body, password:newPassword },
     { new: true }
   );
   res

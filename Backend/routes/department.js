@@ -10,21 +10,20 @@ const {
     getDeptById,
   }=require('../controller/department')
 
+
   const {
     auth,
     verifyTokenAndAdmin,
     verifyTokenAndAuth,
   } = require("../middleware/auth");
   
+
   router.get("/", verifyTokenAndAdmin, getAllDepts);
   router.get("/:id", verifyTokenAndAdmin, getDeptById);
-  router.post("/add-new-car", verifyTokenAndAdmin, addNewDept);
+  router.post("/add-department", verifyTokenAndAdmin, addNewDept);
   router.patch("/:id", verifyTokenAndAdmin, updateDept);
   router.delete("/:id", verifyTokenAndAdmin, deleteDept);
-
-
-
-
-
+  
+  
 
 module.exports=router

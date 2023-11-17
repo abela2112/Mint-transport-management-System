@@ -10,6 +10,7 @@ const driverSchema = new mongoose.Schema({
   },
   registeredDate: {
     type: Date,
+    required:[true, "date must be provided"],
     default: Date.now(),
   },
 }, { timestamps: true });

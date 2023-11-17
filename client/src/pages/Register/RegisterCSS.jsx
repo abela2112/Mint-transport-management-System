@@ -8,7 +8,9 @@ export const SignUpContainer = styled.div`
   align-items: center;
   justify-content: center;
   background-color: #e0e0e0;
-  
+  position :relative;
+  margin-top:0px;
+  padding-top:0px;
 `;
 export const Title = styled.span`
  font-weight: 500;
@@ -58,12 +60,28 @@ export const Label = styled.label`
 padding: 5px 0;
  
 `;
+
 export const SignUpInput = styled.input`
   width: calc(100%);
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+
+  &:hover::before {
+    content: attr(title);
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 2px;
+    font-size: 12px;
+    white-space: nowrap;
+    pointer-events: none;
+  }
 `;
 
 export const SignUpButton = styled.button`
