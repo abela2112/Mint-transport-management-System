@@ -183,15 +183,7 @@ const MakeRequest = () => {
   const [returnDate, setReturnDate] = useState('')
   const [description, setDescription] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  // const [open, setOpen] = useState(false);
-  // const handleOpen = () => setOpen(true);
-  // const handleClose = () => {
-  //   setOpen(false)
-  //   navigate('/pending')
-
-  // };
-
-
+ 
   const [isModalOpen, setIsModalOpen] = useState(false);
       
   const handleButtonClick = () => {
@@ -220,9 +212,13 @@ const MakeRequest = () => {
     setIsLoading(true)
        console.log(returnDate)
     createRequest({ name, phoneNumber, destination, pickUpDate, returnDate, description, Passangers }).then(({ data }) => {
-      console.log(' request data', data)
       socket.emit('sendNotificationToStaffmanager', { notificationType: "request", messageId: data?._id, message: 'new request', from: user?._id });
-
+        setPhoneNumber('');
+        setDestination('');
+        setPickUpDate('');
+        setReturnDate('');
+        setDescription('');
+        setPassangers([]);
       setIsLoading(false)
       // handleOpen()
 
@@ -232,6 +228,7 @@ const MakeRequest = () => {
     })
 
   }
+
   const removeInput = (e) => {
     e.preventDefault()
     const index = e.target.id
@@ -246,9 +243,9 @@ const MakeRequest = () => {
 
   return (
     <>
-
+    
       <Container>
-
+      
         <Wrraper>
           <Title><b>REQUEST FORM</b></Title>
           <Form >
@@ -274,7 +271,7 @@ const MakeRequest = () => {
             </Div>
             <Div>
               <Label>Discription</Label>
-              <TextArea
+               <TextArea
                 placeholder="Discription"
                 value={description} 
                 onChange={(e) => setDescription(e.target.value)} 
@@ -294,7 +291,7 @@ const MakeRequest = () => {
                       type='text'
                       size="40"
                     />
-
+                  
                     <Removebutton id={i} onClick={removeInput}>X</Removebutton>
                   </PassangerDiv>
                 );
@@ -303,78 +300,24 @@ const MakeRequest = () => {
             </div>
             </Div>
           </Form>
-
+          
           <ButtonContainer>
             {/* <Cancel>
               Cancel
             </Cancel> */}
-            <Submit type='submit' onClick={handleButtonClick} disabled={isLoading}>
+             <Submit type='submit' onClick={handleButtonClick} disabled={isLoading}>
               {isLoading ? <Loader /> : 'Submit'}
-            </Submit>
+             </Submit>
             <DialogModal open={isModalOpen} onClose={() => setIsModalOpen(false)} onSubmit={handleSubmit}/>
           </ButtonContainer>
 
         </Wrraper>
-        {/* <CustomModal open={open} handleClose={handleClose
-        } handleOpen={handleOpen} /> */}
+       
 
 
       </Container></>
   )
 
-  //     <>
-  //       <Navbar title={'Staff Dashboard'} />
-  //       <Container>
-
-  //         <Wrraper>
-  //           <Title>REQUEST FORM</Title>
-  //           <Form>
-  //             <Div>
-  //               <label>full name</label>
-  //               <Input placeholder="Full Name" />
-  //             </Div>
-  //             <Div>
-  //               <label>phone</label>
-  //               <Input placeholder="Phone" />
-  //             </Div>
-  //             <Div>
-  //               <label>PickUp date</label>
-  //               <Input placeholder="Pickup date" />
-  //             </Div>
-  //             <Div>
-  //               <label>Return date</label>
-  //               <Input placeholder="Return date" />
-  //             </Div>
-  //             <Div>
-  //               <label>destination</label>
-  //               <Input placeholder="Destination" />
-  //             </Div>
-  //             <Div>
-  //               <lable>Number of passanger</lable>
-  //               <Input placeholder="Number of passanger" />
-  //             </Div>
-
-  //           </Form>
-  //           <TextArea placeholder="discription" />
-  //           <div>
-  //             <button onClick={addInput}>+</button>
-  //             {inputArr?.map((item, i) => {
-  //               return (
-  //                 <Input
-  //                   onChange={handleChange}
-  //                   value={item.value}
-  //                   id={i}
-  //                   type={item.type}
-  //                   size="40"
-  //                 />
-  //               );
-  //             })}
-  //             <button onClick={removeInput}>-</button>
-  //           </div>
-  //         </Wrraper>
-  //       </Container>
-  //     </>)
 
 }
-
 export default MakeRequest

@@ -13,13 +13,14 @@ const {
     auth,
     verifyTokenAndAdmin,
     verifyTokenAndAuth,
+    verifyTokenAndAccessToTransportManager
   } = require("../middleware/auth");
   
-  router.get("/", verifyTokenAndAdmin, getAllDriver);
-  router.get("/:id", verifyTokenAndAdmin, getDriverById);
-  router.post("/add-new-driver", verifyTokenAndAdmin, addNewDriver);
-  router.patch("/:id", verifyTokenAndAdmin, updateDriver);
-  router.delete("/:id", verifyTokenAndAdmin, deleteDriver);
+  router.get("/", verifyTokenAndAccessToTransportManager, getAllDriver);
+  router.get("/:id", verifyTokenAndAccessToTransportManager, getDriverById);
+  router.post("/add-new-driver", verifyTokenAndAccessToTransportManager, addNewDriver);
+  router.patch("/:id", verifyTokenAndAccessToTransportManager, updateDriver);
+  router.delete("/:id", verifyTokenAndAccessToTransportManager, deleteDriver);
   
   module.exports = router;
   

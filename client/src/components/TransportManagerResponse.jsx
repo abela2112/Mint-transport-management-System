@@ -11,7 +11,8 @@ import axios from 'axios'
 
 import styled from 'styled-components'
 import { Background, Mint } from '../asset';
-import { updateRequestById } from '../api/userApi';
+import { getAvailableCar, updateCarStatus, updateRequestById } from '../api/userApi';
+import { useParams } from 'react-router-dom';
 
 
 const Container = styled.div`
@@ -124,10 +125,17 @@ const TransportManagerResponse = ({ open, setOpen, onSubmit, requestId }) => {
     const [DriverPhone, setDriverPhone] = useState('')
     const [CarModel, setCarModel] = useState('')
     const [ReturnDate, setReturnDate] = useState('')
+    const {id} =useParams()
     useEffect(() => {
-        axios.get('/api/car').then(({ data }) => {
+
+        // axios.get('/api/car').then(({ data }) => {
+        //     setCars(data)
+        // }).catch(err => console.log(err))
+
+        getAvailableCar().then(({ data }) => {
             setCars(data)
-        }).catch(err => console.log(err))
+      }).catch((error)=>console.log(error))
+
     }, [])
 
     useEffect(() => {
@@ -149,7 +157,9 @@ const TransportManagerResponse = ({ open, setOpen, onSubmit, requestId }) => {
 
     const handleSubmit = () => {
         updateRequestById(requestId, { status: 'approved' }).then(() => console.log('approved successfully')).catch((err) => console.log(err));
+
         onSubmit({ requestId, PlateNumber, DriverName, DriverPhone, CarModel, ReturnDate })
+          updateCarStatus(id,{status:"taken"}).then(()=>console.log("status updated")).catch((err)=>console.log(err))
 
         handleClose()
     }

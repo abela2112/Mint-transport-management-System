@@ -16,7 +16,6 @@ import {
 import { io } from 'socket.io-client';
 
 
-
 const Register = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -28,12 +27,15 @@ const Register = () => {
   const [gender, setGender] = useState('male');
   const [confirmPassword, setConfirmPassword]=useState('')
   const [error, setError] = useState('');
+
   const [isLoading, setIsLoading] = useState(false)
   const socket = io("http://localhost:5000");
 
+
+
   const handleSignUp = (e) => {
     e.preventDefault()
-
+  
     setError('');
     console.log('Sign up button clicked');
     console.log('First Name:', firstName);
@@ -47,10 +49,16 @@ const Register = () => {
       // Make the API request to your backend using Axios
     setIsLoading(true)
       signUp({ firstName, lastName, email, position, department, password, phoneNumber })
-        .then(({ data }) => {
-        console.log('Successfully registered');
+      .then(() => { 
         setIsOpen(true);
-          setIsLoading(false)
+        setFirstName('');
+        setLastName('');
+        setEmail('');
+        setPhoneNumber('');
+        setPosition('');
+        setPassword('');
+        setDepartment('');
+        setConfirmPassword('');
         setError('');
           console.log('Successfully registered', data);
           socket.emit('sendNotificationToAdmin', { notificationType: "user-register-request", messageId: data.user?._id, message: 'new user register request', from: data.user?._id });
@@ -78,6 +86,7 @@ const Register = () => {
   return (
 
     <SignUpContainer>
+     
       <TextContainer>
         <ImgmintContainer>
           <Img1 src={Mint} />
@@ -94,6 +103,7 @@ const Register = () => {
               placeholder="First Name"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
+              title="Enter your First name"
             />
           </Contain>
           <Contain>
@@ -104,6 +114,7 @@ const Register = () => {
               placeholder="Last Name"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
+              title="Enter your last name"
             />
           </Contain>
           <Contain>
@@ -113,28 +124,31 @@ const Register = () => {
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              title="Enter your organization email like firstName.lastName@mint.gov.et"
             />
           </Contain>
           <Contain>
 
             <Label>Department</Label>
-            <SelectOption onChange={(e) => setDepartment(e.target.value)}>
+            <SelectOption title="select your department" onChange={(e) => setDepartment(e.target.value)}>
               <Option disabled selected>Select Option</Option>
               <Option>aaaa</Option>
               <Option>bbbb</Option>
               <Option>cccc</Option>
             </SelectOption>
           </Contain>
-          <Contain>
 
+          <Contain>
+             
             <Label>Position</Label>
-            <SelectOption onChange={(e) => setPosition(e.target.value)}>
+            <SelectOption title="select your position" onChange={(e) => setPosition(e.target.value)}>
               <Option disabled selected>Select Option</Option>
               <Option>CEO</Option>
               <Option>Desk</Option>
               <Option>Expert</Option>
             </SelectOption>
           </Contain>
+
           <Contain>
           
             <Label>Password</Label>
@@ -143,6 +157,7 @@ const Register = () => {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              title="Your password must containe al-least one number one special character and one letter"
             />
           </Contain>
           <Contain>
@@ -153,6 +168,7 @@ const Register = () => {
               placeholder="phone"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
+              title="Your phone number must be 10 digit number"
             />
           </Contain>
           {/* <Contain>
@@ -176,6 +192,7 @@ const Register = () => {
               placeholder="Confirm Password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
+              title="confirm password must be the same as the main password"
             />
           </Contain>
           

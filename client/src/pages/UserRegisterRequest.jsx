@@ -41,7 +41,7 @@ const UserRegisterRequest = ({ request }) => {
                 <Left>
                     <Text>Full Name:{request?.firstName} {request?.lastName}</Text>
                 </Left>
-                <Center><Text>email :{request?.phoneNumber}</Text></Center>
+                <Center><Text>email :{request?.email}</Text></Center>
                 <Center>position:{request?.position}</Center>
                 <Right><Button type={request?.status}>{request?.status}</Button></Right>
             </Container>

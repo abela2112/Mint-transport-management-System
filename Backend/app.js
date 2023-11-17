@@ -18,6 +18,7 @@ const notFoundErrorMiddleware = require("./middleware/notFound");
 const userRoute = require("./routes/user");
 //creating socket server
 
+
 const options =  {
   pingTimeout: 60000,
     cors: {
@@ -30,6 +31,8 @@ const driverRoute = require("./routes/driver");
 const TMresponseRoute=require("./routes/TransManagerResponse")
 const requestRouter=require("./routes/request")
 const forgotPassword=require("./routes/sendMail")
+const deptRoute=require("./routes/department")
+
 io.on('connection',(socket)=>{
     console.log('connection created')
     
@@ -135,14 +138,13 @@ io.on('connection',(socket)=>{
     socket.on('disconnect',()=>console.log('disconnected'))
 })
 
-
 app.use(cors());
 app.use(express.json());
 app.use("/api/user", userRoute);
 app.use("/api/request",requestRouter)
 app.use("/api/car", carRoute);
 app.use("/api/driver", driverRoute);
-
+app.use("/api/department",deptRoute)
 app.use("/api/TMresponse",TMresponseRoute)
 app.use("/api/forgot",forgotPassword)
 
@@ -158,6 +160,5 @@ httpServer.listen(process.env.PORT || 5000 ,async()=>{
    
     console.log('httpServer is listening')});
 // WARNING !!! app.listen(3000); will not work here, as it creates a new HTTP server
-
 
 

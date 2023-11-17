@@ -26,10 +26,35 @@ const UserSchema = new mongoose.Schema(
       enum: ["CEO", "Desk", "Expert"],
       default: "EXPERT",
     },
+
+
     password: {
       type: String,
       required: [true, "password must be provided"],
     },
+
+    // password: {
+    //   type: String,
+    //   required: [true, "password must be provided"],
+    //   validate: [
+    //     {
+    //       validator: function (password) {
+    //         // The regular expression pattern to enforce password requirements
+    //         const pattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]+$/;
+    
+    //         return pattern.test(password);
+    //       },
+    //       message: "password must contain at least one letter, one number, and one special character",
+    //     },
+    //     {
+    //       validator: function (password) {
+    //         return password.length >= 5;
+    //       },
+    //       message: "password must be at least 5 characters long",
+    //     },
+    //   ],
+    // },
+
     department: {
       type: String,
       required: [true, "department must be provided"],

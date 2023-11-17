@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { Mint2, MinT } from '../asset';
 import TMSFooter from '../components/TMSFooter';
 
+
 const FirstContainer = styled.section`
   background: #164E62;
   height: 100vh;
@@ -15,6 +16,7 @@ const FirstContainer = styled.section`
   display: flex;
   flex-direction: column;
 `;
+
 
 const ThirdContainer = styled.div`
   background-color: white;

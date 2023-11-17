@@ -10,7 +10,7 @@ import {
 } from "../redux/features/userlist";
 export const getAllUserApi = () => axios.get("/api/user");
 export const signUp = (user) => axios.post("/api/user/register", user);
-
+export const getSingleUser=(id)=>axios.get(`api/user/${id}`)
 export const forgot = (data) => axios.post("api/forgot/forgot-password", data);
 export const getResetPassword = (id, token) =>
   axios.get(`api/forgot/reset-password/${id}/${token}`);
@@ -23,6 +23,10 @@ export const addDriver = (driver) =>
   axios.post("/api/driver/add-new-driver", driver);
 export const TransportManagerResponseapi = (data) =>
   axios.post("/api/TMresponse/add-new-response", data);
+
+export const addDept=(dept)=>axios.post("/api/department/add-department",dept)
+
+export const editUser=(id,edit) => axios.patch(`api/user/${id}`,edit)
 
 export const UserRequestResponseapi = (id) =>
   axios.get(`/api/TMresponse/user/${id}`);
@@ -68,6 +72,9 @@ export const getUserRegisterRequests = (userId) =>
   axios.get(`/api/user/${userId}`);
 export const getAllRequests = () => axios.get(`/api/request?checked=true`);
 export const getRequestById = (id) => axios.get(`/api/request/${id}`);
+export const updateCarStatus=(id,status)=>axios.patch(`api/car/${id}`,status)
+export const getAvailableCar=(avalableCar)=>axios.get('api/car/available')
+
 export const updateRequestById = (id, request) =>
   axios.patch(`/api/request/updateRequest/${id}`, request);
 

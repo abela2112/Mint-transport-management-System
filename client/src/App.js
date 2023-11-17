@@ -114,7 +114,6 @@ function App() {
               <Route path="/history" element={<UserRequests />} />
               <Route path="/request/:id" element={<SingleRequestDetails />} />
               <Route path="/booking" element={<MakeRequest />} />
-              <Route path="/search/:searchTerm" element={<SearchPage />} />
               <Route path="/response" element={<Response />} />
               <Route path="/response/:id" element={<SinglResponsePage />} />
             </Route>
@@ -131,7 +130,7 @@ function App() {
               />
               <Route path="/requests-history" element={<History />} />
               <Route path="/request/:id" element={<SingleRequestDetails />} />
-              <Route path="/search/:searchTerm" element={<SearchPage />} />
+              
             </Route>
           )}
 
@@ -140,15 +139,16 @@ function App() {
               <Route path="/" element={<Navigate to={"/requests"} />} />
               <Route path="/add-new-car" element={<AddNewCar />} />
               <Route path="/add-new-driver" element={<AddNewDriver />} />
+              
               <Route path="/available-car" element={<AvailableCar />} />
               <Route path="/requests" element={<AllRequests />} />
               <Route path="/request/:id" element={<SingleRequestDetails />} />
-              <Route path="/search/:searchTerm" element={<SearchPage />} />
+              
             </Route>
           )}
 
           {user?.role === "admin" && (
-            <Route path="/" element={<AdminLayout />}>
+            <Route path="/" element={<AdminLayout />}
               <Route
                 path="/"
                 element={<Navigate to={"/user-register-request"} />}
@@ -165,9 +165,10 @@ function App() {
                 path="/user-register-request/:id"
                 element={<UserRequestDetail />}
               />
+               
               <Route path="/user-detail/:id" element={<UserDetail />} />
-
-              <Route path="/add-department" element={<AddDepartment />} />
+              <Route path="/search/:searchTerm" element={<SearchPage />} />
+              <Route path="/department" element={<AddDepartment />} />
               <Route path="/user-list" element={<ShowAllUserForAdmin />} />
             </Route>
           )}

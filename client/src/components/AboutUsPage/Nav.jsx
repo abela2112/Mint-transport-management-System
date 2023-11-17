@@ -5,12 +5,14 @@ import { Mint2} from '../../asset';
 const Container = styled.div`
   width: 100%;
   height: 40px;
-  position: fixed;
+  position: absolute;
   background-color: #E6953C;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
+  top:0;
+  z-index:2;
 `;
 const LogoContainer = styled.div`
   margin-right: 20px;
