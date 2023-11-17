@@ -161,7 +161,7 @@ const FourthContainer = styled.div`
 color:#E6953C;
 position: absolute;
 top: 100px;
-left: 800px;
+left: 1000px;
 font-size: 42px;
 font-weight: bold;
 text-align: center;
@@ -172,7 +172,7 @@ const List = styled.ul`
   text-align: center;
 position: absolute;
 top: 190px;
-left: 800px;
+left: 1000px;
 
   
 `;
@@ -192,6 +192,7 @@ const Button = styled.button`
   border: none;
   border-radius: 5px;
   font-weight: 700;
+  margin-left: 175px;
   cursor: pointer;
   transition: background-color 0.3s;
   &:hover {
@@ -202,11 +203,12 @@ const Button = styled.button`
    position: absolute;
    top: 550px;
    left: 1030px;
+   
 `;
 
 const SignUpButton = styled(Button)`
   background-color: white; 
-  margin-left: 10px; 
+  margin-left: 30px; 
   position: absolute;
   top: 550px;
   left: 900px;

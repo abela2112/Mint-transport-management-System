@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import CustomModal from '../components/Modal'
 import DialogModal from '../components/DialogModal'
 import { useSelector } from 'react-redux'
+import { io } from 'socket.io-client'
 
 const Container = styled.div`
   display: flex;
@@ -182,15 +183,7 @@ const MakeRequest = () => {
   const [returnDate, setReturnDate] = useState('')
   const [description, setDescription] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  // const [open, setOpen] = useState(false);
-  // const handleOpen = () => setOpen(true);
-  // const handleClose = () => {
-  //   setOpen(false)
-  //   navigate('/pending')
-
-  // };
-
-
+ 
   const [isModalOpen, setIsModalOpen] = useState(false);
       
   const handleButtonClick = () => {
@@ -212,23 +205,20 @@ const MakeRequest = () => {
     })
 
   }
-
-
+  const socket = io("http://localhost:5000");
 
   const handleSubmit = () => {
    
     setIsLoading(true)
        console.log(returnDate)
     createRequest({ name, phoneNumber, destination, pickUpDate, returnDate, description, Passangers }).then(({ data }) => {
-      
-        console.log(data);
+      socket.emit('sendNotificationToStaffmanager', { notificationType: "request", messageId: data?._id, message: 'new request', from: user?._id });
         setPhoneNumber('');
         setDestination('');
         setPickUpDate('');
         setReturnDate('');
         setDescription('');
         setPassangers([]);
-        
       setIsLoading(false)
       // handleOpen()
 
@@ -322,65 +312,12 @@ const MakeRequest = () => {
           </ButtonContainer>
 
         </Wrraper>
-        {/* <CustomModal open={open} handleClose={handleClose
-        } handleOpen={handleOpen} /> */}
+       
 
 
       </Container></>
   )
 
-  //     <>
-  //       <Navbar title={'Staff Dashboard'} />
-  //       <Container>
-
-  //         <Wrraper>
-  //           <Title>REQUEST FORM</Title>
-  //           <Form>
-  //             <Div>
-  //               <label>full name</label>
-  //               <Input placeholder="Full Name" />
-  //             </Div>
-  //             <Div>
-  //               <label>phone</label>
-  //               <Input placeholder="Phone" />
-  //             </Div>
-  //             <Div>
-  //               <label>PickUp date</label>
-  //               <Input placeholder="Pickup date" />
-  //             </Div>
-  //             <Div>
-  //               <label>Return date</label>
-  //               <Input placeholder="Return date" />
-  //             </Div>
-  //             <Div>
-  //               <label>destination</label>
-  //               <Input placeholder="Destination" />
-  //             </Div>
-  //             <Div>
-  //               <lable>Number of passanger</lable>
-  //               <Input placeholder="Number of passanger" />
-  //             </Div>
-
-  //           </Form>
-  //           <TextArea placeholder="discription" />
-  //           <div>
-  //             <button onClick={addInput}>+</button>
-  //             {inputArr?.map((item, i) => {
-  //               return (
-  //                 <Input
-  //                   onChange={handleChange}
-  //                   value={item.value}
-  //                   id={i}
-  //                   type={item.type}
-  //                   size="40"
-  //                 />
-  //               );
-  //             })}
-  //             <button onClick={removeInput}>-</button>
-  //           </div>
-  //         </Wrraper>
-  //       </Container>
-  //     </>)
 
 }
 export default MakeRequest

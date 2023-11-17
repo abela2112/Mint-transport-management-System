@@ -142,6 +142,9 @@ const TransportManagerResponse = ({ open, setOpen, onSubmit, requestId }) => {
         PlateNumber && setFilterdCar(
             ...cars.filter(car => car?.licencePlateNumber === PlateNumber)
         )
+        setDriverName(filterdCar?.DriverName)
+        setDriverPhone(filterdCar?.DriverPhoneNumber)
+        setCarModel(filterdCar?.model)
     }, [PlateNumber])
     console.log(PlateNumber)
    
@@ -154,9 +157,9 @@ const TransportManagerResponse = ({ open, setOpen, onSubmit, requestId }) => {
 
     const handleSubmit = () => {
         updateRequestById(requestId, { status: 'approved' }).then(() => console.log('approved successfully')).catch((err) => console.log(err));
-        
-        onSubmit({ requestId, PlateNumber, DriverName: filterdCar?.DriverName || DriverName, DriverPhone: filterdCar?.DriverPhoneNumber, CarModel: filterdCar?.model || CarModel, ReturnDate })
-        updateCarStatus(id,{status:"taken"}).then(()=>console.log("status updated")).catch((err)=>console.log(err))
+
+        onSubmit({ requestId, PlateNumber, DriverName, DriverPhone, CarModel, ReturnDate })
+          updateCarStatus(id,{status:"taken"}).then(()=>console.log("status updated")).catch((err)=>console.log(err))
 
         handleClose()
     }
@@ -198,7 +201,7 @@ const TransportManagerResponse = ({ open, setOpen, onSubmit, requestId }) => {
                                 <InputForm
                                     type="text"
                                     placeholder="Driver name"
-                                    value={filterdCar?.DriverName || ''}
+                                    value={DriverName}
                                     onChange={(e) => setDriverName(e.target.value)}
                                 />
                             </LabledInput>
@@ -207,7 +210,7 @@ const TransportManagerResponse = ({ open, setOpen, onSubmit, requestId }) => {
                                 <InputForm
                                     type="tel"
                                     placeholder="Driver phone"
-                                    value={filterdCar?.DriverPhoneNumber || ''}
+                                    value={DriverPhone}
                                     onChange={(e) => setDriverPhone(e.target.value)}
 
                                 />
@@ -217,7 +220,7 @@ const TransportManagerResponse = ({ open, setOpen, onSubmit, requestId }) => {
                                 <InputForm
                                     type="text"
                                     placeholder="Car Model"
-                                    value={filterdCar?.model || ''}
+                                    value={CarModel}
                                     onChange={(e) => setCarModel(e.target.value)}
                                 />
                             </LabledInput>

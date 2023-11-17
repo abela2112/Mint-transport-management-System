@@ -102,6 +102,7 @@ const ImgmintContainer = styled.div`
   width: 100px;
   height: 100px;
   margin-left: 5px;
+  margin-top: -125px;
 `;
 
 const Img1 = styled.img`
@@ -143,6 +144,7 @@ const ResetPassword = () => {
         })
         .catch((err) => console.log(err));
     }
+
   };
   return (
     <Container>
@@ -231,3 +233,4 @@ const ResetPassword = () => {
 };
 
 export default ResetPassword;
+

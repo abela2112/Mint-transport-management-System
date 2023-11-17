@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { getRequestById, TransportManagerResponseapi,updateRequestById } from '../api/userApi'
+import { getRequestById, TransportManagerResponseapi, updateRequestById } from '../api/userApi'
 import styled from 'styled-components'
 import { format } from 'date-fns'
 import Loader from '../components/Loader'
@@ -8,6 +8,8 @@ import { useSelector } from 'react-redux'
 import { Buttonn } from './UserRegisterRequest'
 import TransportManagerResponse from '../components/TransportManagerResponse'
 
+import { io } from 'socket.io-client'
+import { Skeleton } from '@mui/material'
 import {
     Button,
     Dialog,
@@ -16,6 +18,7 @@ import {
     DialogContentText,
     DialogActions,
   } from "@mui/material";
+
 
 const Container = styled.div`
     padding: 20px;
@@ -80,35 +83,15 @@ const Title=styled.h1`
 `
 
 const SingleRequestDetails = () => {
-    const role = useSelector(state => state.user.user?.role)
+
+    const { user } = useSelector(state => state.user)
     const [isOpen, setIsOpen] = useState(false)
     const [isOpenRejectForStaff,setIsOpenRejectForStaff]=useState(false)
     const [isOpenApproveForStaff, setIsOpenApproveForStaff] = useState(false)
-    const handleForm=(data)=>{
-        TransportManagerResponseapi(data).then(({ data }) => console.log(data)).catch((err) => console.log(err))
-    }
-    const handleApprove = () => {
-      
-        if(role === 'staff-manager'){
-            setIsOpenApproveForStaff(true);
-        }
-        if (role === 'transport-manager') {
-            setIsOpen(true)
-            
-        }
-        else {
-            updateRequestById(id, { isChecked: true }).then(() => console.log('approved successfully')).catch((err) => console.log(err));
-              
-        }
-    }
-
-    const handleReject = () => {
-      
-        updateRequestById(id, { isChecked: false, status: 'rejected' }).then(() => console.log('rejected successfully')).catch((err) => console.log(err));
-    }
     const [request, setRequest] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
     const { id } = useParams()
+    const socket = io("http://localhost:5000");
     useEffect(() => {
         setIsLoading(true)
         getRequestById(id).then(({ data }) => {
@@ -120,13 +103,56 @@ const SingleRequestDetails = () => {
             console.log(err)
         })
     }, [id])
+    const handleForm = (data) => {
+        TransportManagerResponseapi(data)
+            .then(({ data }) => {
+                console.log('data. transport response', data)
+                socket.emit('sendNotificationToStaff', { notificationType: "response", messageId: data?._id, message: 'your request has been approved ', from: user?._id, to: request?.userCreated });
+                getRequestById(data?.requestId).then(({ data }) => {
+                    console.log('single request', data)
+                    setRequest(data)
+                })
+            })
+            .catch((err) => console.log(err))
+    }
+    const handleApprove = (e) => {
+        e.preventDefault()
+        
+        if(role === 'staff-manager'){
+            setIsOpenApproveForStaff(true);
+        }
+        if (role === 'transport-manager') {
+            setIsOpen(true)
+            
+        }
+        else {
+            updateRequestById(id, { isChecked: true }).then(({ data }) => {
+                socket.emit('sendNotificationToTransportManager', { notificationType: "request", messageId: data?._id, message: 'new request', from: user?._id });
+                console.log('approved successfully', data)
+                setRequest(data)
+            }).catch((err) => console.log(err));
+        }
+    }
+
+    const handleReject = (e) => {
+        e.preventDefault()
+        updateRequestById(id, { isChecked: false, status: 'rejected' }).then(({ data }) => {
+            console.log('rejected data', data)
+            socket.emit('sendNotificationToStaff', { notificationType: "response", messageId: data?._id, message: 'your request has been rejected ', from: user?._id, to: data?.userCreated });
+            console.log('rejected successfully')
+            setRequest(data)
+        }).catch((err) => console.log(err));
+    }
+
+
     if (isLoading) return <Loader />
     console.log(request)
 
     return (
-        <Container>
-
-            <Wrapper>
+        <>
+            {request ?
+                <Container>
+                    <Wrapper>
                <Title>Request Detail</Title>
             <InfoContainer>
                  
@@ -159,11 +185,27 @@ const SingleRequestDetails = () => {
                     </ButtonContainer>
 
             </Wrapper>
-            
-            <TransportManagerResponse open={isOpen} setOpen={setIsOpen} onSubmit={handleForm} requestId={id} />
+//                     <ButtonContainer>
+//                         {user?.role === 'staff-manager' &&
+//                             <>
+//                                 <ApproveButton disabled={request?.status === 'approved' || request?.status === 'rejected' || request?.isChecked ? true : false} onClick={handleApprove} >{request?.isChecked ? "Checked" : "Approved"}</ApproveButton>
+//                                 <RejectButton disabled={request?.status === 'rejected' || request?.status === 'approved' || request?.isChecked ? true : false} onClick={handleReject}>Reject</RejectButton>
+//                             </>
+//                         }
+//                         {user?.role === 'transport-manager' &&
+//                             <>
+//                                 <ApproveButton disabled={request?.status === 'approved' || request?.status === 'rejected' ? true : false} onClick={handleApprove} >Approved</ApproveButton>
+//                                 <RejectButton disabled={request?.status === 'rejected' || request?.status === 'approved' ? true : false} onClick={handleReject}>Reject</RejectButton>
+//                             </>}
+//                         {(user?.role !== 'transport-manager' && user?.role !== 'staff-manager') &&
+//                             <>
+//                                 <Button type={request?.status}>{request?.status}</Button>
+//                             </>}
 
-
-            <Dialog
+//                     </ButtonContainer>
+                    {user?.role === 'transport-manager' &&  <TransportManagerResponse open={isOpen} setOpen={setIsOpen} onSubmit={handleForm} requestId={id} />
+                    }
+                    <Dialog
             open={isOpenApproveForStaff}
             onClose={() => setIsOpenApproveForStaff(false)}
             aria-labelledby="dialog-title"
@@ -217,11 +259,24 @@ const SingleRequestDetails = () => {
                 Yes
               </Button>
             </DialogActions>
-          </Dialog>
+          </Dialog>           
+                </Container> :
+                <Container>
+                    <Wrapper>
+                        <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
+                        <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
+                        <Skeleton variant="text" animation="wave" sx={{ fontSize: '2rem' }} />
+                        <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
+                        <Skeleton variant="text" animation="wave" sx={{ fontSize: '2rem' }} />
+                        <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
+                    </Wrapper>
+                </Container>
+                }
 
-
-        </Container>
-   )
- }
+        </>
+    )
+}
 
 export default SingleRequestDetails
+
+

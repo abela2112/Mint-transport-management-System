@@ -14,7 +14,8 @@ const {
 
   auth,
   verifyTokenAndStaffManager,
-  verifyTokenAndAccessToTransportManager,  verifyTokenAndAdmin,
+  verifyTokenAndAccessToTransportManager,
+  verifyTokenAndAdmin,
   verifyTokenAndAccessToRequest,
   verifyTokenAndAuth,
 } = require("../middleware/auth");

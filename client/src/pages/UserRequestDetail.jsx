@@ -24,6 +24,16 @@ const Container = styled.div `
 `
 const Wrapper = styled.div `
 display: flex;
+
+//align-items:left;
+justify-content:space-between;
+//flex-direction: column;
+ //gap:1rem;
+ //padding:20px;
+ //box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
+ //-webkit-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
+ //-moz-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
+
 flex-direction: column;
 padding:30px;
 //background-color:pink;
@@ -61,6 +71,24 @@ cursor: pointer;
 &:disabled{
     cursor: not-allowed;
 }
+`
+const ImageContainer = styled.div`
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  
+
+`
+const Image = styled.img`
+   width:100px;
+   height:100px;
+   border-radius:50%;
+   object-fit:cover;
+`
+const InfoContainer = styled.div`
+  display:flex;
+  flex-direction:column;
+  flex:2;
 `
 const Text = styled.span `
 padding: 10px;
@@ -133,30 +161,33 @@ box-shadow: 0.5px 0.5px  grey;
 
 
 const UserRequestDetail = () => {
-
-      const [isOpen,setIsOpen]=useState(false)
+  const [request, setRequest] = useState(null)
+    const [isLoading, setIsLoading] = useState(false)
+    const { id } = useParams()
+    const { user } = useSelector(state => state.user)
+    const [isOpen,setIsOpen]=useState(false)
       const [isOpenApproved,setIsOpenApproved]=useState(false)
       const [isOpenReject,setIsOpenReject]=useState(false)
       const [position,setPosition]=useState('')
       const [password,setPassword]=useState('')
       const [department,setDepartment]=useState('')
-     
-           
-            
-    const handleApprove = () => {
-      
-        updateUserRegisterRequestById(id, { status: 'approved' }).then(() => console.log('approved successfully')).catch((err) => console.log(err));
-    }
-    const handleReject = () => {
-       
-        updateUserRegisterRequestById(id, { status: 'rejected' }).then(() => console.log('rejected successfully')).catch((err) => console.log(err));
-    }
 
-    const [request, setRequest] = useState(null)
-    const [isLoading, setIsLoading] = useState(false)
-    const { id } = useParams()
-    const { user } = useSelector(state => state.user)
-
+  
+    const handleApprove = (e) => {
+        e.preventDefault()
+        updateUserRegisterRequestById(id, { status: 'approved' }).then(({ data }) => {
+            console.log('approved successfully')
+            setRequest(data.user)
+        }).catch((err) => console.log(err));
+    }
+    const handleReject = (e) => {
+        e.preventDefault()
+        updateUserRegisterRequestById(id, { status: 'rejected' }).then(({ data }) => {
+            console.log('rejected successfully', data)
+            setRequest(data.user)
+    }
+        ).catch((err) => console.log(err));
+    }
 
     useEffect(()=>{
         
@@ -168,12 +199,10 @@ const UserRequestDetail = () => {
         }
 
     },[isOpen])
-   
-
     useEffect(() => {
         setIsLoading(true)
         getUserRegisterRequests(id).then(({ data }) => {
-            console.log(data)
+            console.log('user request data', data)
             setIsLoading(false)
             setRequest(data.users)
         }).catch((err) => {
@@ -183,22 +212,11 @@ const UserRequestDetail = () => {
     }, [id])
     if (isLoading) return <Loader />
     console.log(request)
-
-
-
       const  handleSubmit=()=>{
             console.log(position)
             console.log(password)
             console.log(department)
-             
-
-            // useEffect(() => {
-            //     UpdateResponse(id, { userId: user._id }).then((data) => console.log('seen')).catch((err) => console.log(err))
-            // }, [id])
-
-
             editUser(id,{position,password,department}).then(({data})=>{
-
                 setPosition('')
                 setPassword('')
                 setDepartment('')
@@ -209,13 +227,10 @@ const UserRequestDetail = () => {
 
       }
 
-
-
     return (
         <Container>
-
             <Wrapper>
-                <div style={{display:"flex" }}>
+   <div style={{display:"flex" }}>
                 <ImageContainer>
                    <Image src="https://media.istockphoto.com/id/1131164548/vector/avatar-5.jpg?s=612x612&w=0&k=20&c=CK49ShLJwDxE4kiroCR42kimTuuhvuo2FH5y_6aSgEo="/>
                    <Text> {(request?.firstName?.toUpperCase())} {request?.lastName?.toUpperCase()} </Text>
@@ -235,7 +250,7 @@ const UserRequestDetail = () => {
                 
                 </InfoContainer>
               </div>
-                    <ButtonContainer>
+               <ButtonContainer>
                 <ApproveButton disabled={request?.status === 'approved' || request?.status === 'rejected' ? true : false} onClick={()=>setIsOpenApproved(true)} >Approved</ApproveButton>
                 <RejectButton disabled={request?.status === 'rejected' || request?.status === 'approved' ? true : false} onClick={()=>setIsOpenReject(true)}>Reject</RejectButton>
                 <EditButton onClick={()=>setIsOpen(true)}>
@@ -361,9 +376,6 @@ const UserRequestDetail = () => {
               </Button>
             </DialogActions>
           </Dialog>
-
-    
-
         </Container>
     )
 }

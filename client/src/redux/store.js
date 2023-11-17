@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
 import userReducer from "../redux/features/user";
+import usersReducer from "../redux/features/userlist";
 import responseReducer from "../redux/features/response";
 import requestReducer from "../redux/features/request";
 // const store = configureStore({
@@ -31,6 +32,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   response: responseReducer,
   request: requestReducer,
+  users: usersReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

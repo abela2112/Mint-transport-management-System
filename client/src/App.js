@@ -2,25 +2,25 @@ import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 
 import Register from "./pages/Register/index";
 import Login from "./pages/Login/index";
-
+import io from "socket.io-client";
 import axios from "axios";
 import SideBar from "./components/SideBar";
 import styled from "styled-components";
 import Layout from "./layout";
 import AddNewCar from "./pages/addNewCar";
 import AddNewDriver from "./pages/AddNewDriver";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Requests from "./pages/UserRequests";
 import MakeRequest from "./pages/MakeRequest";
 import UserRequests from "./pages/UserRequests";
 import AllRequests from "./pages/AllRequests";
-import ShowAllUserForAdmin from './pages/ShowAllUserForAdmin'
+import ShowAllUserForAdmin from "./pages/ShowAllUserForAdmin";
 import SingleRequestDetails from "./pages/SingleRequestDetails";
 import LandingPage from "./pages/LandingPage";
 import AddDepartment from "./pages/AddDepartment";
 import UserRegisterRequests from "./pages/UserRegisterRequests";
 import UserRequestDetail from "./pages/UserRequestDetail";
-import TransManagerResponse from "./pages/TransManagerResponse"
+import TransManagerResponse from "./pages/TransManagerResponse";
 import SearchPage from "./pages/SearchPage.jsx";
 import StaffMangerPendingRequests from "./pages/StaffMangerPendingRequests";
 import History from "./pages/History";
@@ -34,9 +34,13 @@ import UserDetail from "./pages/userDetails.jsx";
 
 import Response from "./pages/Response.jsx";
 import SinglResponsePage from "./pages/SinglResponsePage.jsx";
+import { useEffect, useState } from "react";
+import { setNotification } from "./redux/features/user.js";
+import Notification from "./pages/Notification.jsx";
+import Alert from "./components/Alert.jsx";
+import AlertDisplay from "./components/Alert.jsx";
 
-
-const Container = styled.div `
+const Container = styled.div`
   width: 100%;
   height: 100%;
 `;
@@ -71,6 +75,11 @@ const AdminLayout = () => (
 function App() {
   const user = useSelector((state) => state.user?.user);
   const token = useSelector((state) => state.user?.token);
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("");
+
+  console.log(" user?.notifications", user?.notifications);
+  const dispatch = useDispatch();
   console.log(user, token);
   axios.defaults.baseURL = "http://localhost:5000";
   axios.defaults.headers = {
@@ -78,8 +87,24 @@ function App() {
     "Content-type": "application/json",
   };
 
+  useEffect(() => {
+    let socket = io("http://localhost:5000");
+    socket.emit("setup", user);
+    socket.on("messagerecieved", (message) => {
+      console.log("user notif", message);
+      // setOpen(true);
+      // console.log("message", message);
+      // // setMessage(message?.message);
+      dispatch(setNotification(message));
+    });
+    socket.on("notification", (message) =>
+      console.log("notification", message)
+    );
+  }, []);
+
   return (
     <>
+      <AlertDisplay open={open} setOpen={setOpen} message={message} />
       <Routes>
         <Route path="/" element={user ? <Layout /> : <Navigate to={"/home"} />}>
           {user?.role === "staff" && (
@@ -89,9 +114,7 @@ function App() {
               <Route path="/history" element={<UserRequests />} />
               <Route path="/request/:id" element={<SingleRequestDetails />} />
               <Route path="/booking" element={<MakeRequest />} />
-              <Route path="/search/:searchTerm" element={<SearchPage />} />
               <Route path="/response" element={<Response />} />
-
               <Route path="/response/:id" element={<SinglResponsePage />} />
             </Route>
           )}
@@ -107,7 +130,7 @@ function App() {
               />
               <Route path="/requests-history" element={<History />} />
               <Route path="/request/:id" element={<SingleRequestDetails />} />
-              <Route path="/search/:searchTerm" element={<SearchPage />} />
+              
             </Route>
           )}
 
@@ -120,28 +143,42 @@ function App() {
               <Route path="/available-car" element={<AvailableCar />} />
               <Route path="/requests" element={<AllRequests />} />
               <Route path="/request/:id" element={<SingleRequestDetails />} />
-              <Route path="/search/:searchTerm" element={<SearchPage />} />
+              
             </Route>
           )}
 
           {user?.role === "admin" && (
-            <Route path="/" element={<AdminLayout />}>
-              <Route path="/" element={<Navigate to={"/user-register-request"} />} />
-              <Route path= "/user-register-request"  element={<UserRegisterRequests />} />
-              <Route path="/user-request/:id" element={<UserRequestDetail />} />
+            <Route path="/" element={<AdminLayout />}
+              <Route
+                path="/"
+                element={<Navigate to={"/user-register-request"} />}
+              />
+              <Route
+                path="/user-register-request"
+                element={<UserRegisterRequests />}
+              />
+              <Route
+                path="/pending-user-register-request"
+                element={<UserRegisterRequests type={"pending"} />}
+              />
+              <Route
+                path="/user-register-request/:id"
+                element={<UserRequestDetail />}
+              />
+               
               <Route path="/user-detail/:id" element={<UserDetail />} />
-    
               <Route path="/search/:searchTerm" element={<SearchPage />} />
               <Route path="/department" element={<AddDepartment />} />
               <Route path="/user-list" element={<ShowAllUserForAdmin />} />
             </Route>
           )}
-          
+          <Route path="/search/:searchTerm" element={<SearchPage />} />
         </Route>
         <Route
           path="/transportManager-response"
           element={<TransManagerResponse />}
         />
+        <Route path="/notification" element={<Notification />} />
         <Route path="/home" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -152,8 +189,4 @@ function App() {
   );
 }
 
-
- 
-
 export default App;
-

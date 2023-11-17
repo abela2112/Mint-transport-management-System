@@ -20,7 +20,7 @@ flex: 1;
 const Center = styled.div`
 
 flex: 1;`
-export const Buttonn = styled.button`
+export const Button = styled.button`
 border:none;
 padding: 5px 7px;
 border-radius: 10px;
@@ -31,19 +31,19 @@ border-radius: 10px;
   color: ${({ type }) => type === 'rejected' && '#d95087'};
   color: ${({ type }) => type === 'pending' && '#3bb077'};
 `
+
 const Text = styled.span``
 const UserRegisterRequest = ({ request }) => {
-    console.log(request)
+
     return (
-        <Link to={`/user-request/${request?._id}`}>
+        <Link to={`/user-register-request/${request?._id}`}>
             <Container>
                 <Left>
-                    <Text>Full Name:{request?.firtName} {request?.lastName}</Text>
+                    <Text>Full Name:{request?.firstName} {request?.lastName}</Text>
                 </Left>
-                <Center><Text>email :{request?.phoneNumber}</Text></Center>
+                <Center><Text>email :{request?.email}</Text></Center>
                 <Center>position:{request?.position}</Center>
-
-                <Right><Buttonn type={request?.status}>{request?.status}</Buttonn></Right>
+                <Right><Button type={request?.status}>{request?.status}</Button></Right>
             </Container>
         </Link>
     )

@@ -5,6 +5,8 @@ import styled from 'styled-components'
  import { format } from 'date-fns'
 import Loader from '../components/Loader'
 import axios from 'axios'
+import { Avatar, Skeleton } from '@mui/material'
+import { stringAvatar } from '../utils'
 const Container = styled.div `
     padding: 20px;
 `
@@ -52,6 +54,7 @@ const ImageContainer=styled.div`
   flex:1;
   display:flex;
   flex-direction:column;
+  align-items: center;
   
 
 `
@@ -96,9 +99,11 @@ const UserDetail = () => {
         <Container>
 
             <Wrapper>
-                <ImageContainer>
-                    <Image src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZSUyMHBpY3R1cmV8ZW58MHx8MHx8fDA%3D"/>
-                    <Text><b>Full Name:</b>{user?.firstName} {user?.lastName}</Text>
+                {
+                    user ? (<> <ImageContainer>
+                        {/* <Image src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZSUyMHBpY3R1cmV8ZW58MHx8MHx8fDA%3D"/>*/}
+                        <Avatar {...stringAvatar(`${user?.firstName} ${user?.lastName}`)} alt={''} sx={{ width: 100, height: 100 }} />
+                        <Text><b>Full Name:</b>{user?.firstName} {user?.lastName}</Text> 
                 </ImageContainer>
                 <InfoContainer>
                 <Text><b>email:</b>{user?.email}</Text>
@@ -109,7 +114,22 @@ const UserDetail = () => {
                 
                  <Text><b>Redistered Date:</b>{user?.createdAt && format(new Date(user?.createdAt)
                     , 'MMMM do yyyy')}</Text> 
-              </InfoContainer>
+                        </InfoContainer></>) : (
+                        <>
+                            <ImageContainer>
+                                <Skeleton variant="circular" width={100} height={100} />
+                                <Skeleton variant="text" sx={{ fontSize: '2rem', width: 40 }} />
+                            </ImageContainer>
+                            <InfoContainer>
+                                <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
+                                <Skeleton variant="text" animation="wave" sx={{ fontSize: '2rem' }} />
+                                <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
+                                <Skeleton variant="text" animation="wave" sx={{ fontSize: '2rem' }} />
+                                <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
+                                </InfoContainer>
+                        </>
+                    )
+                }
             </Wrapper>
             <ButtonContainer>
                 {/* <ApproveButton disabled={request?.status === 'approved' || request?.status === 'rejected' ? true : false} onClick={handleApprove} >Approved</ApproveButton>

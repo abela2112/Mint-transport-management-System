@@ -7,11 +7,11 @@ import { useSelector } from 'react-redux'
 const Container = styled.div`
 display: flex;
 width: 100%;
-height: 100%;
+height: 100vh;
 `
 const Main = styled.div`
 flex: 4;
-margin-left: 25%;
+margin-left: 315px;
 height: 100%;
 position: relative;
 overflow-y: scroll;
@@ -26,7 +26,7 @@ const Layout = () => {
         <Container>
             <SideBar />
             <Main>
-                <Navbar title={`${user?.firstName} ${user?.lastName}`} />
+                <Navbar />
                 <InnerContainer>
                     <Outlet />
                 </InnerContainer>
