@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import CarCard from '../components/CarCard'
+import { getAvailableCar } from '../api/userApi'
 const Wrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
@@ -13,9 +14,12 @@ const Title = styled.span``
 const AvailableCar = () => {
     const [cars, setCars] = useState([])
     useEffect(()=>{
-        axios.get(`/api/car`).then(({ data }) => {
-            setCars(data)
-        }).catch(err => console.log(err));
+        // axios.get(`/api/car`).then(({ data }) => {
+        //     setCars(data)
+        // }).catch(err => console.log(err));
+        getAvailableCar().then(({ data }) => {
+              setCars(data)
+        }).catch((error)=>console.log(error))
     },[])
     console.log(cars)
 

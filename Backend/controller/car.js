@@ -8,9 +8,13 @@ const addNewCar = async (req, res) => {
 
 const updateCar = async (req, res) => {
   const { id } = req.params;
+  console.log("req",req.body)
+  console.log("id",id)
   const car = await Car.findByIdAndUpdate(id, { ...req.body }, { new: true });
   res.status(200).json(car);
+  console.log(car);
 };
+
 const deleteCar = async (req, res) => {
   const { id } = req.params;
   const car = await Car.findByIdAndDelete(id);
@@ -21,6 +25,19 @@ const getAllcars = async (req, res) => {
   const cars = await Car.find();
   res.status(200).json(cars);
 };
+
+const getAvailableCar = async (req, res) => {
+  try {
+    const availableCars = await Car.find({ status: "available" });
+    console.log("Available cars:", availableCars);
+    res.status(200).json(availableCars);
+  } catch (error) {
+    console.error("Error retrieving available cars:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+
 
 const getCarById = async (req, res) => {
   const { id } = req.params;
@@ -34,4 +51,5 @@ module.exports = {
   deleteCar,
   getAllcars,
   getCarById,
+  getAvailableCar,
 };

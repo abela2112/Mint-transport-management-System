@@ -5,6 +5,7 @@ const {
   deleteCar,
   getAllcars,
   getCarById,
+  getAvailableCar,
 } = require("../controller/car");
 
 
@@ -21,6 +22,7 @@ const {
 
 
 router.get("/", verifyTokenAndAccessToTransportManager, getAllcars);
+router.get("/available", verifyTokenAndAccessToTransportManager,getAvailableCar)
 router.get("/:id", verifyTokenAndAccessToTransportManager, getCarById);
 router.post("/add-new-car", verifyTokenAndAccessToTransportManager, addNewCar);
 router.patch("/:id", verifyTokenAndAccessToTransportManager, updateCar);

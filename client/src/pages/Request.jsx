@@ -40,10 +40,14 @@ align-items:center;
 flex-wrap:wrap;
 
 `
+
 const Title = styled.h1`
 font-size:24px;
 font-weight:300;
+
 `
+
+
 const Input = styled.input`
 flex:1;
 min-width:40%;

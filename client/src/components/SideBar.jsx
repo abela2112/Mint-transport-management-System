@@ -36,12 +36,30 @@ font-weight: 400;
 color: red;
 cursor: pointer;
 /* color:#8E92BC; */ 
+
+&:hover::before {
+    content: attr(title);
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 2px;
+    font-size: 12px;
+    white-space: nowrap;
+    pointer-events: none;
+  }
 `
 
 const ListItemLogOut = styled.li`
  display:flex;
 padding:10px 20px ;
 margin-bottom: 10px;
+position:absolute;
+margin-bottom:40px;
+bottom:0;
 /* background-color: #F5F5F7; */
 border-radius: 5px;
 font-weight: 400;
@@ -51,26 +69,33 @@ color:#8E92BC;
 &:hover, &:focus{
     color: #18616C !important;
     background-color: rgba(211, 248, 255,0.4) !important;
-}
+};
+
 `
 
 const Logo = styled.img`
 height: 40px;
 `
+
 const ImgContainer = styled.div`
 margin-bottom: 1.5rem;
 display: flex;
 align-items: center;
 `
+
 const ListWrapper = styled.div`
 display: flex;
+
 flex-direction: column;
 align-content: space-between;
 box-shadow: 2px 0px 2px 0px rgba(255, 165, 0, 0.75);
 margin-left: -2rem;
 padding: 20px;
-height: 100vh;    
+height: 100vh; 
+width:315px;  
+position: relative;
 `
+
 const SideBar = () => {
     const dispatch = useDispatch()
     const user = useSelector((state) => state.user?.user);
@@ -82,8 +107,6 @@ const SideBar = () => {
 
             <ListWrapper>
                 <List>
-
-                   
 
                     {user?.role === 'staff' && 
                         <>
@@ -120,11 +143,13 @@ const SideBar = () => {
                     }
                     
                 </List>
-                <ListItemLogOut onClick={() => {
+                
+                <ListItemLogOut title="login" onClick={() => {
                         dispatch(logOutUser())
                         navigate('/home')
 
                     }}> <SettingsOutlinedIcon style={{ marginRight: '10px' }} />Logout</ListItemLogOut>
+
             </ListWrapper>
         </Container>
 

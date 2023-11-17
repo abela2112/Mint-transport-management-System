@@ -220,7 +220,15 @@ const MakeRequest = () => {
     setIsLoading(true)
        console.log(returnDate)
     createRequest({ name, phoneNumber, destination, pickUpDate, returnDate, description, Passangers }).then(({ data }) => {
-      console.log(data)
+      
+        console.log(data);
+        setPhoneNumber('');
+        setDestination('');
+        setPickUpDate('');
+        setReturnDate('');
+        setDescription('');
+        setPassangers([]);
+        
       setIsLoading(false)
       // handleOpen()
 
@@ -230,6 +238,7 @@ const MakeRequest = () => {
     })
 
   }
+
   const removeInput = (e) => {
     e.preventDefault()
     const index = e.target.id
@@ -244,9 +253,9 @@ const MakeRequest = () => {
 
   return (
     <>
-
+    
       <Container>
-
+      
         <Wrraper>
           <Title><b>REQUEST FORM</b></Title>
           <Form >
@@ -272,7 +281,7 @@ const MakeRequest = () => {
             </Div>
             <Div>
               <Label>Discription</Label>
-              <TextArea
+               <TextArea
                 placeholder="Discription"
                 value={description} 
                 onChange={(e) => setDescription(e.target.value)} 
@@ -292,7 +301,7 @@ const MakeRequest = () => {
                       type='text'
                       size="40"
                     />
-
+                  
                     <Removebutton id={i} onClick={removeInput}>X</Removebutton>
                   </PassangerDiv>
                 );
@@ -301,14 +310,14 @@ const MakeRequest = () => {
             </div>
             </Div>
           </Form>
-
+          
           <ButtonContainer>
             {/* <Cancel>
               Cancel
             </Cancel> */}
-            <Submit type='submit' onClick={handleButtonClick} disabled={isLoading}>
+             <Submit type='submit' onClick={handleButtonClick} disabled={isLoading}>
               {isLoading ? <Loader /> : 'Submit'}
-            </Submit>
+             </Submit>
             <DialogModal open={isModalOpen} onClose={() => setIsModalOpen(false)} onSubmit={handleSubmit}/>
           </ButtonContainer>
 
@@ -374,5 +383,4 @@ const MakeRequest = () => {
   //     </>)
 
 }
-
 export default MakeRequest

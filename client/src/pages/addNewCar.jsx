@@ -81,7 +81,7 @@ const AddNewCar = () => {
   const [DriverName, setDriverName] = useState("");
   const [driverDate, setDriverDate] = useState("");
   const [DriverPhoneNumber, setDriverPhoneNumber] = useState("");
-
+  const [error,setError]=useState('')
   const handleClick = () => {
     console.log("brand:", brand);
     console.log("model:", model);
@@ -99,8 +99,25 @@ const AddNewCar = () => {
       DriverPhoneNumber,
       owned,
     })
-      .then(() => console.log("car successfully registered"))
-      .catch((err) => console.log(err));
+      .then(() =>{
+        setBrand('');
+        setModel('');
+        setOwned('');
+        setLicencePlateNumber('')
+        setDriverName('');
+        setDriverDate('');
+        setDriverPhoneNumber('');
+        setError('');
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error)
+        setError(error.response.data.message);
+      } else {
+        // Handle network errors or other exceptions
+        console.log('Error:', error);
+      }
+      });
   };
   const [isOpen, setIsOpen] = useState(false);
 
@@ -173,7 +190,7 @@ const AddNewCar = () => {
               </Select>
             </InputItem>
           </FormBox>
-
+          {error && <p style={{color:"red"}}>{error}</p>}
           <ButtonBox>
             <SubmitButton onClick={() => setIsOpen(true)}>submit</SubmitButton>
           </ButtonBox>
@@ -186,7 +203,7 @@ const AddNewCar = () => {
             aria-describedby="dialog-description"
           >
             <DialogTitle id="dialog-title">
-              Add the New data to the database?
+              Add the New car to the database?
             </DialogTitle>
             <DialogContent id="dialog-description">
               <DialogContentText>Are you sure?</DialogContentText>
