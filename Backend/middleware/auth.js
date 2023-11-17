@@ -73,7 +73,7 @@ const verifyTokenAndAuth = async (req, res, next) => {
     if (id === userID || role === "admin") {
       next();
     } else {
-      throw new UnAuthorizedError("access denied");
+      next(new UnAuthorizedError("access denied"));
     }
   });
 };

@@ -13,6 +13,7 @@ import {
   DialogContentText,
   DialogActions,
 } from "@mui/material";
+import { io } from 'socket.io-client';
 
 
 
@@ -27,7 +28,8 @@ const Register = () => {
   const [gender, setGender] = useState('male');
   const [confirmPassword, setConfirmPassword]=useState('')
   const [error, setError] = useState('');
-
+  const [isLoading, setIsLoading] = useState(false)
+  const socket = io("http://localhost:5000");
 
   const handleSignUp = (e) => {
     e.preventDefault()
@@ -43,15 +45,19 @@ const Register = () => {
     console.log('department:', department);
     
       // Make the API request to your backend using Axios
-     
+    setIsLoading(true)
       signUp({ firstName, lastName, email, position, department, password, phoneNumber })
-      .then(() => {
+        .then(({ data }) => {
         console.log('Successfully registered');
         setIsOpen(true);
+          setIsLoading(false)
         setError('');
+          console.log('Successfully registered', data);
+          socket.emit('sendNotificationToAdmin', { notificationType: "user-register-request", messageId: data.user?._id, message: 'new user register request', from: data.user?._id });
       }).catch((error) => {
         if (error.response) {
           console.log(error)
+          setIsLoading(false)
         setError(error.response.data.message);
       } else {
         // Handle network errors or other exceptions
@@ -182,7 +188,7 @@ const Register = () => {
 
             <p>Already have an account? <Link className='link' to={'/login'} style={{ color: '#e6953b' }}>Sign in</Link>  </p>
           </BottomText>
-          <SignUpButton    onClick={()=>(password !== confirmPassword) ? setIsOpen(true) : setIsOpen(false)} >Sign up</SignUpButton>
+          <SignUpButton disabled={isLoading} onClick={() => (password !== confirmPassword) ? setIsOpen(true) : setIsOpen(false)} >Sign up</SignUpButton>
         
         </SignUpForm>
 
@@ -199,7 +205,7 @@ const Register = () => {
             {password !== confirmPassword ? (
               <DialogContentText>Password doesn't match! Please confirm again</DialogContentText>
             ) : (
-              <DialogContentText>Congratulations! You have successfully registered.</DialogContentText>
+                <DialogContentText>Congratulations! You have successfully registered check your admin for approval</DialogContentText>
             )}
             {password !== confirmPassword && (
               <Contain>

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Background, Mint } from '../../asset';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch,useSelector } from 'react-redux';
 import { login } from '../../api/userApi';
 import Loader from '../../components/Loader'
+import { setError } from '../../redux/features/user';
 const LoginContainer = styled.div`
   flex: 1;
   display: flex;
@@ -165,10 +166,14 @@ const CopyRight = styled.small`
   font-size: 16px;
   font-weight: 300;
 `
+const Error = styled.p`
+  color: red;
+`
 
 const Login = () => {
-  const isLoading = useSelector((state) => state.isLoading);
+  const { isLoading, error } = useSelector((state) => state.user);
   console.log(isLoading)
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -181,9 +186,12 @@ const Login = () => {
     console.log('Email:', email);
     console.log('Password:', password);
     login(dispatch, navigate, { email, password })
-
   };
 
+
+  useEffect(() => {
+    setTimeout(() => { dispatch(setError('')) }, 5000)
+  }, [dispatch])
   return (
     <Container>
       <LoginContainer>
@@ -218,8 +226,9 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <Link to="/forgot-password" style={{ color: '#e6953b', marginTop: '10px', textAlign: 'right', textDecoration: 'none' }}>Forgot Password?</Link>
 
+            <Link to="/forgot-password" style={{ color: '#e6953b', marginTop: '10px', textAlign: 'right', textDecoration: 'none' }}>Forgot Password?</Link>
+            {error && <Error>Something went wrong please try again</Error>}
             <SubmitButton type="submit" disabled={isLoading}> {isLoading ? <Loader /> : 'Login'}</SubmitButton>
            
           </LoginForm>

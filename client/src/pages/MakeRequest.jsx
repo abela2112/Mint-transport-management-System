@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import CustomModal from '../components/Modal'
 import DialogModal from '../components/DialogModal'
 import { useSelector } from 'react-redux'
+import { io } from 'socket.io-client'
 
 const Container = styled.div`
   display: flex;
@@ -212,15 +213,16 @@ const MakeRequest = () => {
     })
 
   }
-
-
+  const socket = io("http://localhost:5000");
 
   const handleSubmit = () => {
    
     setIsLoading(true)
        console.log(returnDate)
     createRequest({ name, phoneNumber, destination, pickUpDate, returnDate, description, Passangers }).then(({ data }) => {
-      console.log(data)
+      console.log(' request data', data)
+      socket.emit('sendNotificationToStaffmanager', { notificationType: "request", messageId: data?._id, message: 'new request', from: user?._id });
+
       setIsLoading(false)
       // handleOpen()
 

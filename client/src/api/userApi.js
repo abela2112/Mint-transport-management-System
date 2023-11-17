@@ -4,14 +4,18 @@ import {
   loginUserFetch,
   loginUserSuccess,
 } from "../redux/features/user";
-
+import {
+  getAllUsersFetch,
+  getAllUsersSuccess,
+} from "../redux/features/userlist";
+export const getAllUserApi = () => axios.get("/api/user");
 export const signUp = (user) => axios.post("/api/user/register", user);
 
-
-export const forgot=(data)=> axios.post("api/forgot/forgot-password",data)
-export const getResetPassword=(id,token)=>axios.get(`api/forgot/reset-password/${id}/${token}`)
-export const postBack = (id, token, password) => axios.post(`api/forgot/change-password/${id}/${token}`, { password });
-
+export const forgot = (data) => axios.post("api/forgot/forgot-password", data);
+export const getResetPassword = (id, token) =>
+  axios.get(`api/forgot/reset-password/${id}/${token}`);
+export const postBack = (id, token, password) =>
+  axios.post(`api/forgot/change-password/${id}/${token}`, { password });
 
 export const addCar = (car) => axios.post("/api/car/add-new-car", car);
 export const signIn = (user) => axios.post("/api/user/login", user);
@@ -27,8 +31,7 @@ export const getRequestResponseapiById = (id) =>
 export const UpdateResponse = (responseId, data) =>
   axios.patch(`/api/TMresponse/notify/${responseId}`, data);
 
-export const login = (dispatch,navigate, user) => {
-
+export const login = (dispatch, navigate, user) => {
   dispatch(loginUserFetch());
   signIn(user)
     .then(({ data }) => {
@@ -40,6 +43,18 @@ export const login = (dispatch,navigate, user) => {
     .catch((err) => {
       console.log(err);
       dispatch(loginUserFailure());
+    });
+};
+export const getAlluser = (dispatch) => {
+  dispatch(getAllUsersFetch());
+  getAllUserApi()
+    .then(({ data }) => {
+      console.log(">>> data", data);
+      dispatch(getAllUsersSuccess(data));
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch(getAllUsersFetch());
     });
 };
 

@@ -75,6 +75,9 @@ export const SignUpButton = styled.button`
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  &:disabled{
+    cursor: not-allowed;
+  }
 `;
 
 export const SelectOption = styled.select`

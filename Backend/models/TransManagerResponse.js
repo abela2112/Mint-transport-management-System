@@ -28,10 +28,7 @@ const TResponseSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    seenBy: {
-      type: Map,
-      of: Boolean,
-    },
+    
   },
   { timestamps: true }
 );

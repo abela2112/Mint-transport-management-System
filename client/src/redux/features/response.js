@@ -7,7 +7,7 @@ const initialState = {
   error: false,
 };
 const responseSlice = createSlice({
-  name: "notification",
+  name: "response",
   initialState,
   reducers: {
     getResponseFetch: (state) => {

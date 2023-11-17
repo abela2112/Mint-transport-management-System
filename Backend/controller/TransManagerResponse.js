@@ -18,21 +18,21 @@ const updateResponse = async (req, res) => {
   );
   res.status(200).json(response);
 };
-const notify = async (req, res) => {
-  const { responseId } = req.params;
-  const { userId } = req.body;
-  const seenedResponse = await TResponse.findById(responseId);
-  console.log(">>>", seenedResponse);
-  seenedResponse?.seenBy.set(userId, true);
-  const updateResponse = await TResponse.findByIdAndUpdate(
-    responseId,
-    { seenBy: seenedResponse.seenBy },
-    { new: true }
-  );
-  res.status(200).json({ message: "success" });
+// const notify = async (req, res) => {
+//   const { responseId } = req.params;
+//   const { userId } = req.body;
+//   const seenedResponse = await TResponse.findById(responseId);
+//   console.log(">>>", seenedResponse);
+//   seenedResponse?.seenBy.set(userId, true);
+//   const updateResponse = await TResponse.findByIdAndUpdate(
+//     responseId,
+//     { seenBy: seenedResponse.seenBy },
+//     { new: true }
+//   );
+//   res.status(200).json({ message: "success" });
 
 
-};
+// };
 const deleteResponse = async (req, res) => {
   const { id } = req.params;
   const response = await TResponse.findByIdAndDelete(id);
@@ -69,5 +69,5 @@ module.exports = {
   getAllResponses,
   getResponseById,
   getUserRequestResponse,
-  notify,
+  
 };

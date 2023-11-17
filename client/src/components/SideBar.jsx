@@ -117,8 +117,9 @@ const SideBar = () => {
                         <>
 
                         <ListItem><NavLink className={'nav-link'} to='/user-list'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />User</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to={'/pending-user-register-request'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />Pending Requests</NavLink></ListItem>
                         <ListItem><NavLink className={'nav-link'} to={'/user-register-request'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />User Register Requests</NavLink></ListItem>
-                        <ListItem><NavLink className={'nav-link'} to={'/department'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />Department</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to={'/Add-department'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />Department</NavLink></ListItem>
    
                         </>
                     }

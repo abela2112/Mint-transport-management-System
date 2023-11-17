@@ -7,7 +7,9 @@ const {
   updateUser,
   getAllUsers,
   getAUser,
-  deleteUser
+  deleteUser,
+  deleteNotification,
+  updateNotification,
 } = require("../controller/user");
 
 const {
@@ -21,4 +23,7 @@ router.post("/login", login);
 router.post("/register", register);
 router.patch("/:id", verifyTokenAndAuth, updateUser);
 router.delete("/:id", verifyTokenAndAuth, deleteUser);
+router.delete("/notification/:id", auth, deleteNotification);
+router.patch("/notification/:id", auth, updateNotification);
+
 module.exports = router;

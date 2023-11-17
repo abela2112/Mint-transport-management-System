@@ -54,7 +54,7 @@ const StaffMangerPendingRequests = () => {
 
             width: 150,
             renderCell: (param) => {
-                return format(new Date(param.row?.pickUpDate), 'MMMM do yyyy')
+                return format(param.row?.pickUpDate && new Date(param.row?.pickUpDate), 'MMMM do yyyy')
             }
         },
         {
@@ -79,7 +79,7 @@ const StaffMangerPendingRequests = () => {
 
                 </div>
             },
-            width: 160,
+            width: 150,
         },
 
     ];
@@ -89,7 +89,7 @@ const StaffMangerPendingRequests = () => {
             <Title>Pending Requests</Title>
             <div style={{ width: '100%', marginTop: '20px' }}>
                 <DataGrid
-                    rows={requests}
+                    rows={requests && requests}
                     columns={columns}
                     getRowId={(row) => row?._id}
                     disableRowSelectionOnClick

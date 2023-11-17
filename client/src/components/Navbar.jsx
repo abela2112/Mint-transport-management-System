@@ -7,6 +7,8 @@ import Badge from '@mui/material/Badge';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Mint, MintText } from '../asset';
+import { Avatar } from '@mui/material';
+import { stringAvatar } from '../utils';
 const Container = styled.div`
     width: 100%;
     height: 60px;
@@ -16,16 +18,14 @@ const Container = styled.div`
     z-index: 10;
     background-color: #fff;
     border-bottom: 2px solid #C9F7FF ;
-   
     /* padding: 20px; */
 `
 const Wrapper = styled.div`
 display: flex;
 align-items: center;
-justify-content: space-between;
+/* justify-content: space-between; */
 padding: 5px;
 `
-
 const Left = styled.div`
 padding: 0 10px;
 `
@@ -43,12 +43,13 @@ const UserName = styled.span`
 const User = styled.div`
     display: flex;
     align-items: center;
-    margin: 0 10px;
+    margin: 0 20px 0 10px;
 
 `
 const Img = styled.img`
 height: 40px;
 width: 40px;
+border-radius: 50%;
 object-fit: cover;
 margin-left:10px;
 
@@ -58,9 +59,7 @@ flex: 2;
 color:#54577A;
 padding: 10px;
 border: none;
-
 background-color: transparent;
-
 &:focus{
 border-color: #18616C;
 }
@@ -84,27 +83,53 @@ const ImgContainer = styled.div`
 display: flex;
 align-items: center;
 `
+const Center = styled.div`
+flex: 4;
+display: flex;
+align-items: center;
+justify-content: space-between;
+`
+const LeftWrraper = styled.div`
+flex: 1;
+display: flex;
+align-items: center;
+`
 const Logo = styled.img`
 height: 40px;
 `
-const Navbar = ({title}) => {
-    const { noOfresponse } = useSelector(state => state.response)
+const UserRole = styled.span`
+font-weight: 300;
+font-size: 14px;
 
+`
+const UserDetail = styled.div`
+margin-left: 5px;
+display: flex;
+flex-direction: column;
+`
+const Navbar = () => {
+    const { user, noOfNotifications } = useSelector(state => state.user)
+    console.log(' user?.notifications', noOfNotifications)
     const [searchTerm, setSearchTerm] = useState('')
     const navigate = useNavigate()
     const handleSubmit = (e) => {
         e.preventDefault()
         navigate(`/search/${searchTerm}`)
     }
+
+    const title = `${user?.firstName} ${user?.lastName}`
+
     return (
         <Container>
             <Wrapper>
-
-                <ImgContainer>
+                <LeftWrraper>
+                    <ImgContainer>
                     <Logo src={Mint} />
                     <Logo src={MintText} />
                 </ImgContainer>
+                </LeftWrraper>
 
+                <Center>
                 <Left>
                     <SearchBox onSubmit={handleSubmit}>
                         <Input type='text' placeholder='search...' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
@@ -112,16 +137,24 @@ const Navbar = ({title}) => {
                     </SearchBox>
                 </Left>
                 <Right>
-                    <Badge badgeContent={noOfresponse} color="primary">
-                        <Link to={'/response'}> <NotificationsActiveOutlinedIcon /></Link>
+                        <Badge badgeContent={noOfNotifications} color="primary">
+                            <Link to={'/notification'}> <NotificationsActiveOutlinedIcon /></Link>
                     </Badge>
 
 
                     <User>
-                        <UserName>{title}</UserName>
-                        <Img src='' />
+                            {/* <Img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZSUyMHBpY3R1cmV8ZW58MHx8MHx8fDA%3D" /> */}
+                            <Avatar {...stringAvatar(`${title}`)} alt={title} />
+                            <UserDetail>
+                                <UserName>{title}</UserName>
+                                <UserRole>{user?.role}</UserRole>
+                            </UserDetail>
+
+
+
                     </User>
                 </Right>
+                </Center>
             </Wrapper>
             {/* <Hr /> */}
         </Container>

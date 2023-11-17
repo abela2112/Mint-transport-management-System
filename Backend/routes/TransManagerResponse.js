@@ -8,7 +8,7 @@ const {
   getAllResponses,
   getResponseById,
   getUserRequestResponse,
-  notify,
+ 
 } = require("../controller/TransManagerResponse");
 
 const {
@@ -29,7 +29,7 @@ router.get("/:id", auth, getResponseById);
 router.get("/user/:userId", auth, getUserRequestResponse);
 router.post("/add-new-response", verifyTokenAndAccessToRequest, addNewResponse);
 router.patch("/:id", auth, updateResponse);
-router.patch("/notify/:responseId", auth, notify);
+//router.patch("/notify/:responseId", auth, notify);
 router.delete("/:id", verifyTokenAndAccessToTransportManager, deleteResponse);
 
 

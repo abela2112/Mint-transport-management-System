@@ -31,18 +31,18 @@ border-radius: 10px;
   color: ${({ type }) => type === 'rejected' && '#d95087'};
   color: ${({ type }) => type === 'pending' && '#3bb077'};
 `
+
 const Text = styled.span``
 const UserRegisterRequest = ({ request }) => {
-    console.log(request)
+
     return (
         <Link to={`/user-register-request/${request?._id}`}>
             <Container>
                 <Left>
-                    <Text>Full Name:{request?.First_name} {request?.Last_name}</Text>
+                    <Text>Full Name:{request?.firstName} {request?.lastName}</Text>
                 </Left>
                 <Center><Text>email :{request?.phoneNumber}</Text></Center>
                 <Center>position:{request?.position}</Center>
-
                 <Right><Button type={request?.status}>{request?.status}</Button></Right>
             </Container>
         </Link>

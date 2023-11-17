@@ -108,6 +108,7 @@ const ImgmintContainer = styled.div`
   width: 100px;
   height: 100px;
   margin-left: 5px;
+  margin-top: -125px;
 `;
 
 const Img1 = styled.img`
@@ -141,10 +142,11 @@ const ResetPassword =()=>{
 
         <Container>
         <Wrapper>
-            <Lable>Resetting your password?</Lable>
-            <ImgmintContainer>
+          <ImgmintContainer>
               <Img1 src={Mint} />
            </ImgmintContainer>
+            <Lable>Resetting your password?</Lable>
+            
             <Form>
                 <Contain>
                   <Lable1>Enter New password</Lable1>

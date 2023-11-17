@@ -103,6 +103,7 @@ const ImgmintContainer = styled.div`
   width: 100px;
   height: 100px;
   margin-left: 5px;
+  margin-top: -250px;
 `;
 
 const Img1 = styled.img`
@@ -135,10 +136,10 @@ const ForgotPassword=()=>{
 
        <Container>
             <Wrapper>
-                <Lable>Forgot Your password?</Lable>
                 <ImgmintContainer>
                   <Img1 src={Mint} />
                </ImgmintContainer>
+                <Lable>Forgot Your password?</Lable>
                 <Form>
                       <Lable1>Enter your Email</Lable1>
                       <InputForm 
@@ -152,7 +153,7 @@ const ForgotPassword=()=>{
                       
                     
                 </Form>
-                <Desc>Don't have an account <Link to='/' style={{ color: '#e6953b', marginTop: '10px' }}>Sign Up</Link></Desc>
+                <Desc>Don't have an account <Link to='/register' style={{ color: '#e6953b', marginTop: '10px' }}>Sign Up</Link></Desc>
                 
 
                 <Dialog

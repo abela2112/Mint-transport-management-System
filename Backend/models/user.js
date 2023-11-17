@@ -1,6 +1,7 @@
-const mongoose=require('mongoose')
-const bcrypt=require('bcryptjs')
-const jwt=require('jsonwebtoken')
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const { v4: uuidv4 } = require("uuid");
 
 const UserSchema = new mongoose.Schema(
   {
@@ -31,7 +32,7 @@ const UserSchema = new mongoose.Schema(
     },
     department: {
       type: String,
-      required:[true, "department must be provided"],
+      required: [true, "department must be provided"],
     },
     // phoneNumber: {
     //   type: String,
@@ -42,16 +43,19 @@ const UserSchema = new mongoose.Schema(
       validate: {
         validator: function (value) {
           // Remove any non-digit characters
-          const phoneNumberDigits = value.replace(/\D/g, '');
-  
+          const phoneNumberDigits = value.replace(/\D/g, "");
+
           // Check if the resulting string has exactly 10 digits and consists of only numeric characters
-          return /^\d{10}$/.test(phoneNumberDigits) && phoneNumberDigits.length === 10;
+          return (
+            /^\d{10}$/.test(phoneNumberDigits) &&
+            phoneNumberDigits.length === 10
+          );
         },
-        message: 'Phone number must be a 10-digit number',
+        message: "Phone number must be a 10-digit number",
       },
-      required: [true, 'Phone number must be provided'],
+      required: [true, "Phone number must be provided"],
     },
-  
+
     // isAdmin: {
     //   type: Boolean,
     //   default: false,
@@ -66,15 +70,37 @@ const UserSchema = new mongoose.Schema(
       enum: ["approved", "rejected", "pending"],
       default: "pending",
     },
-    
+    notifications: [
+      {
+        to: { type: String },
+        from: { type: String },
+        notificationType: { type: String },
+        messageId: { type: String },
+        id: {
+          type: String,
+          default: uuidv4, // Using uuid to generate a unique ID
+        },
+        message: { type: String },
+        seen: {
+          type: Boolean,
+          default: false,
+        },
+        time: {
+          type: Date,
+          default: Date.now(),
+        },
+      },
+    ],
   },
   { timestamps: true }
 );
 
 UserSchema.pre("save", async function (next) {
   const salt = await bcrypt.genSalt(10);
+  if (!this.isModified) {
+    next();
+  }
   this.password = await bcrypt.hash(this.password, salt);
-  if (!this.isModified("password")) return next();
 });
 
 UserSchema.methods.comparePassword = async function (canditatePassword) {
@@ -90,5 +116,5 @@ UserSchema.methods.createJWT = function () {
   );
 };
 
-module.exports=mongoose.model('User',UserSchema)
+module.exports = mongoose.model("User", UserSchema);
 //match: [/^[\w.-]+@MinT\.gov\.et$/, "please provide valid email"],

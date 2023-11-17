@@ -1,8 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   requests: [],
-  unSeenRequest: [],
-  noOfrequest: 0,
   isLoading: false,
   error: false,
 };
@@ -14,7 +12,7 @@ const requestSlice = createSlice({
       state.isLoading = true;
     },
     getRequestSuccess: (state, action) => {
-      state.requests = action.payload?.data;
+      state.requests = action.payload.data;
       // state.unSeenRequest = action.payload.filter(
       //   (request) => request.seen === false
       // );
@@ -26,7 +24,11 @@ const requestSlice = createSlice({
       state.error = true;
     },
     updateRequest: (state, action) => {
-      
+      state.requests = state.requests.map((request) => {
+        if (request._id == action.payload._id) {
+          return action.payload;
+        } else return request;
+      });
     },
   },
 });
