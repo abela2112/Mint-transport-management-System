@@ -17,7 +17,7 @@ import {
     DialogContent,
     DialogContentText,
     DialogActions,
-  } from "@mui/material";
+} from "@mui/material";
 
 
 const Container = styled.div`
@@ -70,14 +70,14 @@ span {
   }
 `
 
-const InfoContainer=styled.div`
+const InfoContainer = styled.div`
 display: flex;
 flex-direction: column;
 padding:30px;
 flex:4;
 `
 
-const Title=styled.h1`
+const Title = styled.h1`
    position:absolute;
    top:0;
 `
@@ -85,8 +85,9 @@ const Title=styled.h1`
 const SingleRequestDetails = () => {
 
     const { user } = useSelector(state => state.user)
+    let role = user?.role
     const [isOpen, setIsOpen] = useState(false)
-    const [isOpenRejectForStaff,setIsOpenRejectForStaff]=useState(false)
+    const [isOpenRejectForStaff, setIsOpenRejectForStaff] = useState(false)
     const [isOpenApproveForStaff, setIsOpenApproveForStaff] = useState(false)
     const [request, setRequest] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
@@ -117,13 +118,13 @@ const SingleRequestDetails = () => {
     }
     const handleApprove = (e) => {
         e.preventDefault()
-        
-        if(role === 'staff-manager'){
+
+        if (role === 'staff-manager') {
             setIsOpenApproveForStaff(true);
         }
         if (role === 'transport-manager') {
             setIsOpen(true)
-            
+
         }
         else {
             updateRequestById(id, { isChecked: true }).then(({ data }) => {
@@ -153,115 +154,115 @@ const SingleRequestDetails = () => {
             {request ?
                 <Container>
                     <Wrapper>
-               <Title>Request Detail</Title>
-            <InfoContainer>
-                 
-                <Text><span><b>Full Name :</b></span>{request?.name}</Text>
-                <Text><span><b>destination :</b></span>{request?.destination}</Text>
-                <Text><span><b>Phone Number :</b></span>{request?.phoneNumber}</Text>
-                <Text><span><b>description :</b> </span>{request?.description}</Text>
-                <Text><span><b>Pick Up date :</b></span>{request?.pickUpDate && format(new Date(request?.pickUpDate)
-                    , 'MMMM do yyyy')}</Text>
-                <Text><span><b>return date:</b></span>{request?.pickUpDate && format(new Date(request?.pickUpDate)
-                    , 'MMMM do yyyy')}</Text>
-            </InfoContainer>
+                        <Title>Request Detail</Title>
+                        <InfoContainer>
 
-<ButtonContainer>
-                {role === 'staff-manager' &&   
-                    <>
-                        <ApproveButton disabled={request?.status === 'approved' || request?.status === 'rejected' || request?.isChecked ? true : false} onClick={()=>setIsOpenApproveForStaff(true)} >{request?.isChecked ? "Checked" : "Approved"}</ApproveButton>
-                        <RejectButton disabled={request?.status === 'rejected' || request?.status === 'approved' || request?.isChecked ? true : false} onClick={()=>setIsOpenRejectForStaff(true)}>Reject</RejectButton>
-                    </>}
-                {role === 'transport-manager' &&   
-                    <>
-                        <ApproveButton disabled={request?.status === 'approved' || request?.status === 'rejected'  ? true : false} onClick={handleApprove} >Approved</ApproveButton>
-                        <RejectButton disabled={request?.status === 'rejected' || request?.status === 'approved' || request?.isChecked ? true : false} onClick={handleReject}>Reject</RejectButton>
-                    </>}
-                {(role !== 'transport-manager' && role !=='staff-manager') &&   
-                    <>
-                        <Buttonn type={request?.status}>{request?.status}</Buttonn>
-                        </>}
+                            <Text><span><b>Full Name :</b></span>{request?.name}</Text>
+                            <Text><span><b>destination :</b></span>{request?.destination}</Text>
+                            <Text><span><b>Phone Number :</b></span>{request?.phoneNumber}</Text>
+                            <Text><span><b>description :</b> </span>{request?.description}</Text>
+                            <Text><span><b>Pick Up date :</b></span>{request?.pickUpDate && format(new Date(request?.pickUpDate)
+                                , 'MMMM do yyyy')}</Text>
+                            <Text><span><b>return date:</b></span>{request?.pickUpDate && format(new Date(request?.pickUpDate)
+                                , 'MMMM do yyyy')}</Text>
+                        </InfoContainer>
 
-                    </ButtonContainer>
+                        <ButtonContainer>
+                            {role === 'staff-manager' &&
+                                <>
+                                    <ApproveButton disabled={request?.status === 'approved' || request?.status === 'rejected' || request?.isChecked ? true : false} onClick={() => setIsOpenApproveForStaff(true)} >{request?.isChecked ? "Checked" : "Approved"}</ApproveButton>
+                                    <RejectButton disabled={request?.status === 'rejected' || request?.status === 'approved' || request?.isChecked ? true : false} onClick={() => setIsOpenRejectForStaff(true)}>Reject</RejectButton>
+                                </>}
+                            {role === 'transport-manager' &&
+                                <>
+                                    <ApproveButton disabled={request?.status === 'approved' || request?.status === 'rejected' ? true : false} onClick={handleApprove} >Approved</ApproveButton>
+                                    <RejectButton disabled={request?.status === 'rejected' || request?.status === 'approved' || request?.isChecked ? true : false} onClick={handleReject}>Reject</RejectButton>
+                                </>}
+                            {(role !== 'transport-manager' && role !== 'staff-manager') &&
+                                <>
+                                    <Buttonn type={request?.status}>{request?.status}</Buttonn>
+                                </>}
 
-            </Wrapper>
-//                     <ButtonContainer>
-//                         {user?.role === 'staff-manager' &&
-//                             <>
-//                                 <ApproveButton disabled={request?.status === 'approved' || request?.status === 'rejected' || request?.isChecked ? true : false} onClick={handleApprove} >{request?.isChecked ? "Checked" : "Approved"}</ApproveButton>
-//                                 <RejectButton disabled={request?.status === 'rejected' || request?.status === 'approved' || request?.isChecked ? true : false} onClick={handleReject}>Reject</RejectButton>
-//                             </>
-//                         }
-//                         {user?.role === 'transport-manager' &&
-//                             <>
-//                                 <ApproveButton disabled={request?.status === 'approved' || request?.status === 'rejected' ? true : false} onClick={handleApprove} >Approved</ApproveButton>
-//                                 <RejectButton disabled={request?.status === 'rejected' || request?.status === 'approved' ? true : false} onClick={handleReject}>Reject</RejectButton>
-//                             </>}
-//                         {(user?.role !== 'transport-manager' && user?.role !== 'staff-manager') &&
-//                             <>
-//                                 <Button type={request?.status}>{request?.status}</Button>
-//                             </>}
+                        </ButtonContainer>
 
-//                     </ButtonContainer>
-                    {user?.role === 'transport-manager' &&  <TransportManagerResponse open={isOpen} setOpen={setIsOpen} onSubmit={handleForm} requestId={id} />
-                    }
+                    </Wrapper>
+
+   
+                        {/* //                             <>
+                        //                                 <ApproveButton disabled={request?.status === 'approved' || request?.status === 'rejected' || request?.isChecked ? true : false} onClick={handleApprove} >{request?.isChecked ? "Checked" : "Approved"}</ApproveButton>
+                        //                                 <RejectButton disabled={request?.status === 'rejected' || request?.status === 'approved' || request?.isChecked ? true : false} onClick={handleReject}>Reject</RejectButton>
+                        //                             </>
+                        //                         }
+                        //                         {user?.role === 'transport-manager' &&
+                        //                             <>
+                        //                                 <ApproveButton disabled={request?.status === 'approved' || request?.status === 'rejected' ? true : false} onClick={handleApprove} >Approved</ApproveButton>
+                        //                                 <RejectButton disabled={request?.status === 'rejected' || request?.status === 'approved' ? true : false} onClick={handleReject}>Reject</RejectButton>
+                        //                             </>}
+                        //                         {(user?.role !== 'transport-manager' && user?.role !== 'staff-manager') &&
+                        //                             <>
+                        //                                 <Button type={request?.status}>{request?.status}</Button>
+                        //                             </>}
+
+                        //                     </ButtonContainer> */}
+                        { role === 'transport-manager' && <TransportManagerResponse open={isOpen} setOpen={setIsOpen} onSubmit={handleForm} requestId={id} />}
+
                     <Dialog
-            open={isOpenApproveForStaff}
-            onClose={() => setIsOpenApproveForStaff(false)}
-            aria-labelledby="dialog-title"
-            aria-describedby="dialog-description"
-          >
-            <DialogTitle id="dialog-title">
-              Do you want to approve?
-            </DialogTitle>
-            <DialogContent id="dialog-description">
-              {/* <DialogContentText></DialogContentText> */}
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={() => setIsOpenApproveForStaff(false)} style={{backgroundColor:"Red",color:"white"}}>No</Button>
-              <Button
-                style={{backgroundColor:"Yellow",color:"white"}}
-                autoFocus
-                onClick={() => {
-                    handleApprove()
-                    setIsOpenApproveForStaff(false);
-                }}
-              >
-                Yes
-              </Button>
-            </DialogActions>
-          </Dialog>
+                        open={isOpenApproveForStaff}
+                        onClose={() => setIsOpenApproveForStaff(false)}
+                        aria-labelledby="dialog-title"
+                        aria-describedby="dialog-description"
+                    >
+                        <DialogTitle id="dialog-title">
+                            Do you want to approve?
+                        </DialogTitle>
+                        <DialogContent id="dialog-description">
+                            {/* <DialogContentText></DialogContentText> */}
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={() => setIsOpenApproveForStaff(false)} style={{ backgroundColor: "Red", color: "white" }}>No</Button>
+                            <Button
+                                style={{ backgroundColor: "Yellow", color: "white" }}
+                                autoFocus
+                                onClick={() => {
+                                    handleApprove()
+                                    setIsOpenApproveForStaff(false);
+                                }}
+                            >
+                                Yes
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
 
 
-         
-          <Dialog
-            open={isOpenRejectForStaff}
-            onClose={() => setIsOpenRejectForStaff(false)}
-            aria-labelledby="dialog-title"
-            aria-describedby="dialog-description"
-          >
-            <DialogTitle id="dialog-title">
-              Do you want to approve?
-            </DialogTitle>
-            <DialogContent id="dialog-description">
-              {/* <DialogContentText></DialogContentText> */}
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={() => setIsOpenRejectForStaff(false)} style={{backgroundColor:"Red",color:"white"}}>No</Button>
-              <Button
-                style={{backgroundColor:"Yellow",color:"white"}}
-                autoFocus
-                onClick={() => {
-                    handleReject()
-                    setIsOpenRejectForStaff(false);
-                }}
-              >
-                Yes
-              </Button>
-            </DialogActions>
-          </Dialog>           
+
+                    <Dialog
+                        open={isOpenRejectForStaff}
+                        onClose={() => setIsOpenRejectForStaff(false)}
+                        aria-labelledby="dialog-title"
+                        aria-describedby="dialog-description"
+                    >
+                        <DialogTitle id="dialog-title">
+                            Do you want to approve?
+                        </DialogTitle>
+                        <DialogContent id="dialog-description">
+                            {/* <DialogContentText></DialogContentText> */}
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={() => setIsOpenRejectForStaff(false)} style={{ backgroundColor: "Red", color: "white" }}>No</Button>
+                            <Button
+                                style={{ backgroundColor: "Yellow", color: "white" }}
+                                autoFocus
+                                onClick={() => {
+                                    handleReject()
+                                    setIsOpenRejectForStaff(false);
+                                }}
+                            >
+                                Yes
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
                 </Container> :
-                <Container>
+                (<Container>
                     <Wrapper>
                         <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
                         <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
@@ -270,8 +271,8 @@ const SingleRequestDetails = () => {
                         <Skeleton variant="text" animation="wave" sx={{ fontSize: '2rem' }} />
                         <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
                     </Wrapper>
-                </Container>
-                }
+                </Container>)
+            }
 
         </>
     )
