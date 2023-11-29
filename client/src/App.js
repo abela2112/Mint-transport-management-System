@@ -23,6 +23,7 @@ import UserRequestDetail from "./pages/UserRequestDetail";
 import TransManagerResponse from "./pages/TransManagerResponse";
 import SearchPage from "./pages/SearchPage.jsx";
 import StaffMangerPendingRequests from "./pages/StaffMangerPendingRequests";
+import StaffPetrolRequest from "./pages/StaffPetrolRequest"
 import History from "./pages/History";
 import ForgotPassword from "./pages/ForgotPassword";
 
@@ -129,6 +130,7 @@ function App() {
                 element={<StaffMangerPendingRequests />}
               />
               <Route path="/requests-history" element={<History />} />
+              <Route path="/petrol-request" element={<StaffPetrolRequest />} />
               <Route path="/request/:id" element={<SingleRequestDetails />} />
               
             </Route>
@@ -148,10 +150,10 @@ function App() {
           )}
 
           {user?.role === "admin" && (
-            <Route path="/" element={<AdminLayout />}
+            <Route path="/" element={<AdminLayout />}>
               <Route
                 path="/"
-                element={<Navigate to={"/user-register-request"} />}
+                element={<Navigate to={"/user-list"} />}
               />
               <Route
                 path="/user-register-request"
@@ -166,7 +168,7 @@ function App() {
                 element={<UserRequestDetail />}
               />
                
-              <Route path="/user-detail/:id" element={<UserDetail />} />
+              <Route path="/user-detail/:id" element={<UserRequestDetail />} />
               <Route path="/search/:searchTerm" element={<SearchPage />} />
               <Route path="/department" element={<AddDepartment />} />
               <Route path="/user-list" element={<ShowAllUserForAdmin />} />

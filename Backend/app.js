@@ -108,7 +108,7 @@ io.on('connection',(socket)=>{
       }
     });
     
-    socket.on("sendNotificationToAdmin", async ({data}) => {
+    socket.on("sendNotificationToAdmin", async (data) => {
         console.log('message received',{data})
         try {
           // Find admin users in the database
@@ -153,12 +153,7 @@ app.use(errorHandleMiddleware);
 app.use(notFoundErrorMiddleware);
 
 
-
-
-
 httpServer.listen(process.env.PORT || 5000 ,async()=>{
    
-    console.log('httpServer is listening')});
+    console.log('Server is listening')});
 // WARNING !!! app.listen(3000); will not work here, as it creates a new HTTP server
-
-

@@ -3,7 +3,7 @@ import { SignUpContainer, Contain, Title, SignUpForm, SignUpInput, SignUpButton,
 import { Link } from 'react-router-dom';
 import { Background, Mint } from '../../asset';
 import { signUp } from '../../api/userApi';
-
+import {getAllDepartment} from  '../../api/userApi'
 
 import {
   Button,
@@ -24,10 +24,11 @@ const Register = () => {
   const [position, setPosition] = useState('');
   const [password, setPassword] = useState('');
   const [department, setDepartment] = useState('');
-  const [gender, setGender] = useState('male');
+  //const [gender, setGender] = useState('male');
   const [confirmPassword, setConfirmPassword]=useState('')
   const [error, setError] = useState('');
-
+  const [deptArray,setDeptArray]=useState([])
+  
   const [isLoading, setIsLoading] = useState(false)
   const socket = io("http://localhost:5000");
 
@@ -49,7 +50,7 @@ const Register = () => {
       // Make the API request to your backend using Axios
     setIsLoading(true)
       signUp({ firstName, lastName, email, position, department, password, phoneNumber })
-      .then(() => { 
+      .then(({data}) => { 
         setIsOpen(true);
         setFirstName('');
         setLastName('');
@@ -60,6 +61,7 @@ const Register = () => {
         setDepartment('');
         setConfirmPassword('');
         setError('');
+        setIsLoading(false);
           console.log('Successfully registered', data);
           socket.emit('sendNotificationToAdmin', { notificationType: "user-register-request", messageId: data.user?._id, message: 'new user register request', from: data.user?._id });
       }).catch((error) => {
@@ -83,6 +85,11 @@ const Register = () => {
       setError('')
     }, 5000)
   }, [])
+  useEffect(()=>{
+       getAllDepartment().then(({data})=>setDeptArray(data)).catch((error)=>console.log(error))
+      
+  },[])
+
   return (
 
     <SignUpContainer>
@@ -130,12 +137,22 @@ const Register = () => {
           <Contain>
 
             <Label>Department</Label>
-            <SelectOption title="select your department" onChange={(e) => setDepartment(e.target.value)}>
+            {/* <SelectOption title="select your department" onChange={(e) => setDepartment(e.target.value)}>
               <Option disabled selected>Select Option</Option>
-              <Option>aaaa</Option>
+             
               <Option>bbbb</Option>
               <Option>cccc</Option>
-            </SelectOption>
+            </SelectOption> */}
+            <SelectOption
+title="select your department"
+placeholder="department"
+value={department}
+onChange={(e) => setDepartment(e.target.value)}
+>
+{deptArray.map((dept, i) => (
+    <Option key={i} value={dept?.deptName} >{dept?.deptName} </Option>
+))}
+</SelectOption>
           </Contain>
 
           <Contain>
@@ -206,7 +223,7 @@ const Register = () => {
             <p>Already have an account? <Link className='link' to={'/login'} style={{ color: '#e6953b' }}>Sign in</Link>  </p>
           </BottomText>
           <SignUpButton disabled={isLoading} onClick={() => (password !== confirmPassword) ? setIsOpen(true) : setIsOpen(false)} >Sign up</SignUpButton>
-        
+        {/*  */}
         </SignUpForm>
 
         <Dialog

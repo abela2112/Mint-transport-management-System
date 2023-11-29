@@ -17,6 +17,8 @@ export const getResetPassword = (id, token) =>
 export const postBack = (id, token, password) =>
   axios.post(`api/forgot/change-password/${id}/${token}`, { password });
 
+export const getAllDepartment=()=>axios.get("/api/department/getAll")
+
 export const addCar = (car) => axios.post("/api/car/add-new-car", car);
 export const signIn = (user) => axios.post("/api/user/login", user);
 export const addDriver = (driver) =>
@@ -72,8 +74,8 @@ export const getUserRegisterRequests = (userId) =>
   axios.get(`/api/user/${userId}`);
 export const getAllRequests = () => axios.get(`/api/request?checked=true`);
 export const getRequestById = (id) => axios.get(`/api/request/${id}`);
-export const updateCarStatus=(id,status)=>axios.patch(`api/car/${id}`,status)
-export const getAvailableCar=(avalableCar)=>axios.get('api/car/available')
+export const updateCarStatus=(id,status)=>axios.patch(`/api/car/update/${id}`,status)
+export const getAvailableCar=(avalableCar)=>axios.get('/api/car/available')
 
 export const updateRequestById = (id, request) =>
   axios.patch(`/api/request/updateRequest/${id}`, request);

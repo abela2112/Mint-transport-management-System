@@ -41,6 +41,7 @@ const verifyTokenAndAccessToRequest = async (req, res, next) => {
     }
   });
 };
+
 const verifyTokenAndAccessToTransportManager = async (req, res, next) => {
   auth(req, res, () => {
     const { role, userID } = req.user;

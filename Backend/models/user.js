@@ -120,12 +120,24 @@ const UserSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+// UserSchema.pre("save", async function (next) {
+//   const salt = await bcrypt.genSalt(10);
+//    this.password = await bcrypt.hash(this.password, salt);
+   
+//   if (!this.isModified) {
+//     next();
+//   }
+ 
+// });
+
 UserSchema.pre("save", async function (next) {
-  const salt = await bcrypt.genSalt(10);
-  if (!this.isModified) {
-    next();
+  if (!this.isModified("password")) {
+    return next();
   }
+
+  const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
+  next();
 });
 
 UserSchema.methods.comparePassword = async function (canditatePassword) {

@@ -8,8 +8,34 @@ import { format } from 'date-fns'
 const Wrapper = styled.div`
 display: flex;
 flex-direction: column;
+padding:50px;
+
+//background-color:pink;
+box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
+ -webkit-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
+ -moz-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
+    position:relative;
 `
-const Text = styled.span``
+const Text = styled.span`
+padding: 10px;
+word-spacing: 0.3em;
+span {
+    margin-right: 1em;
+    width: 200px; /* Adjust the width as needed */
+    text-align: left;
+  }
+`
+const Title = styled.h1`
+   position:absolute;
+   top:0;
+`
+const InfoContainer = styled.div`
+display: flex;
+flex-direction: column;
+padding:30px;
+flex:4;
+`
+
 const SinglResponsePage = () => {
     const [response, setResponse] = useState(null)
     const { id } = useParams()
@@ -25,12 +51,17 @@ const SinglResponsePage = () => {
 
     return (
         <Container>
+            
             <Wrapper>
-                <Text>Driver Name:{response?.DriverName}</Text>
-                <Text>Driver Phone:{response?.DriverPhone}</Text>
-                <Text>Plate Number:{response?.PlateNumber}</Text>
-                <Text>Return date:{response?.ReturnDate && format(new Date(response?.ReturnDate)
+            <Title>Response Detail</Title>
+
+              <InfoContainer>
+                <Text><span><b>Driver Name:</b></span>{response?.DriverName}</Text>
+                <Text><span><b>Driver Phone:</b></span>{response?.DriverPhone}</Text>
+                <Text><span><b>Plate Number:</b></span>{response?.PlateNumber}</Text>
+                <Text><span><b>Return date:</b></span>{response?.ReturnDate && format(new Date(response?.ReturnDate)
                     , 'MMMM do yyyy')}</Text>
+               </InfoContainer>     
             </Wrapper>
         </Container>
     )
