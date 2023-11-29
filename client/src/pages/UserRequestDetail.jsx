@@ -7,7 +7,7 @@ import Loader from '../components/Loader'
 import { useSelector } from 'react-redux'
 import {editUser} from '../api/userApi'
 import {getSingleUser} from '../api/userApi'
-
+import {getAllDepartment} from   '../api/userApi'
 
 import {
     Button,
@@ -72,24 +72,26 @@ cursor: pointer;
     cursor: not-allowed;
 }
 `
-const ImageContainer = styled.div`
-  flex:1;
-  display:flex;
-  flex-direction:column;
+// const ImageContainer= styled.div`
+//   flex:1;
+//   display:flex;
+//   flex-direction:column;
   
 
-`
-const Image = styled.img`
-   width:100px;
-   height:100px;
-   border-radius:50%;
-   object-fit:cover;
-`
-const InfoContainer = styled.div`
-  display:flex;
-  flex-direction:column;
-  flex:2;
-`
+// `
+// const Image = styled.img`
+//    width:100px;
+//    height:100px;
+//    border-radius:50%;
+//    object-fit:cover;
+// `
+
+// const InfoContainer = styled.div`
+//   display:flex;
+//   flex-direction:column;
+//   flex:2;
+// `
+
 const Text = styled.span `
 padding: 10px;
 `
@@ -157,8 +159,19 @@ box-shadow: 0.5px 0.5px  grey;
     transform: scaleX(1.1);
  }
 `
+const Select=styled.select`
+min-width:50%;
+padding :10px;
+transition:transform 2s;
+border-radius:5px;
+box-shadow: 0.5px 0.5px  grey;
+ &:hover{
+    transform: scaleX(1.1);
+ }
+`
+const Option=styled.option`
 
-
+`
 
 const UserRequestDetail = () => {
   const [request, setRequest] = useState(null)
@@ -171,17 +184,18 @@ const UserRequestDetail = () => {
       const [position,setPosition]=useState('')
       const [password,setPassword]=useState('')
       const [department,setDepartment]=useState('')
-
+      const [role,setRole]=useState('')
+      const [deptArray,setDeptArray]=useState([])
   
-    const handleApprove = (e) => {
-        e.preventDefault()
+    const handleApprove = () => {
+       
         updateUserRegisterRequestById(id, { status: 'approved' }).then(({ data }) => {
             console.log('approved successfully')
             setRequest(data.user)
         }).catch((err) => console.log(err));
     }
-    const handleReject = (e) => {
-        e.preventDefault()
+    const handleReject = () => {
+        
         updateUserRegisterRequestById(id, { status: 'rejected' }).then(({ data }) => {
             console.log('rejected successfully', data)
             setRequest(data.user)
@@ -195,6 +209,7 @@ const UserRequestDetail = () => {
             getSingleUser(id).then(({data})=>{
                 setPosition(data.users.position)
                 setDepartment(data.users.department)
+                setRole(data.users.role)
             }).catch((error)=>console.log(error))
         }
 
@@ -210,16 +225,24 @@ const UserRequestDetail = () => {
             console.log(err)
         })
     }, [id])
+
+    useEffect(()=>{
+      getAllDepartment().then(({data})=>setDeptArray(data)).catch((error)=>console.log(error))
+     
+ },[])
+
     if (isLoading) return <Loader />
     console.log(request)
       const  handleSubmit=()=>{
             console.log(position)
             console.log(password)
             console.log(department)
-            editUser(id,{position,password,department}).then(({data})=>{
+            console.log(role)
+            editUser(id,{position,password,department,role}).then(({data})=>{
                 setPosition('')
                 setPassword('')
                 setDepartment('')
+                setRole('')
                 setRequest(data?.user)
                 console.log(data?.user?.user)
             }).catch((error)=>console.log(error))
@@ -237,6 +260,7 @@ const UserRequestDetail = () => {
                 </ImageContainer>
                 
                 <InfoContainer>
+                
                 
                
                 <Text><b>email:</b>{request?.email}</Text>
@@ -273,7 +297,7 @@ const UserRequestDetail = () => {
             <DialogContent id="dialog-description">
               
               <Form>
-                    <InputContainer>
+                    {/* <InputContainer>
                         <Text>Position</Text>
                          <Input 
                          type="text"
@@ -282,15 +306,48 @@ const UserRequestDetail = () => {
                          onChange={(e)=>setPosition(e.target.value)}
                          />
                          
+                    </InputContainer> */}
+
+                    <InputContainer>
+                     <Text>Position</Text>
+                     <Select onChange={(e)=>setPosition(e.target.value)}>
+                         <Option disabled selected>{position}</Option>
+                         <Option>CEO</Option>
+                         <Option>Desk</Option>
+                         <Option>Expert</Option>
+                     </Select>
+                    </InputContainer>
+
+                    {/* <InputContainer>
+                        <Text>Role</Text>
+                         <Input 
+                         type="text"
+                         placeholder="role"
+                         value={role}
+                         onChange={(e)=>setRole(e.target.value)}
+                         />
+                         
+                    </InputContainer> */}
+                     <InputContainer>
+                     <Text>Role</Text>
+                     <Select onChange={(e)=>setRole(e.target.value)}>
+                         <Option disabled selected>{role}</Option>
+                         <Option>staff</Option>
+                         <Option>staff-manager</Option>
+                         <Option>transport-manager</Option>
+                     </Select>
                     </InputContainer>
                     <InputContainer>
                         <Text>Department</Text>
-                         <Input 
-                         type="text"
-                         placeholder="department"
-                        value={department}
-                        onChange={(e)=>setDepartment(e.target.value)}
-                         />
+                        <Select
+                         
+                        onChange={(e) => setDepartment(e.target.value)}
+                       >
+                 <Option disabled selected>{department}</Option>       
+                 {deptArray.map((dept, i) => (
+                   <Option key={i} value={dept?.deptName} >{dept?.deptName} </Option>
+                 ))}
+                        </Select>
                          
                     </InputContainer>
                     <InputContainer>
@@ -309,7 +366,7 @@ const UserRequestDetail = () => {
             <DialogActions>
               <Button onClick={() => setIsOpen(false)} style={{backgroundColor:"Red",color:"white"}}>Cancel</Button>
               <Button
-                style={{backgroundColor:"Yellow",color:"white"}}
+                style={{backgroundColor:"Yellow",color:"black"}}
                 autoFocus
                 onClick={() => {
                   handleSubmit();
@@ -337,7 +394,7 @@ const UserRequestDetail = () => {
             <DialogActions>
               <Button onClick={() => setIsOpenApproved(false)} style={{backgroundColor:"Red",color:"white"}}>No</Button>
               <Button
-                style={{backgroundColor:"Yellow",color:"white"}}
+                style={{backgroundColor:"Yellow",color:"black"}}
                 autoFocus
                 onClick={() => {
                     handleApprove()
@@ -365,7 +422,7 @@ const UserRequestDetail = () => {
             <DialogActions>
               <Button onClick={() => setIsOpenReject(false)} style={{backgroundColor:"Red",color:"white"}}>No</Button>
               <Button
-                style={{backgroundColor:"Yellow",color:"white"}}
+                style={{backgroundColor:"Yellow",color:"black"}}
                 autoFocus
                 onClick={() => {
                     handleReject()
@@ -379,5 +436,5 @@ const UserRequestDetail = () => {
         </Container>
     )
 }
-
+//length
 export default UserRequestDetail

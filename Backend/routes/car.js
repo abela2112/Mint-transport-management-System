@@ -24,10 +24,10 @@ const {
 
 router.get("/", verifyTokenAndAccessToTransportManager, getAllcars);
 router.get("/available", verifyTokenAndAccessToTransportManager,getAvailableCar)
+router.patch("/update/:id", verifyTokenAndAccessToTransportManager, updateCar);
 router.get("/:id", verifyTokenAndAccessToTransportManager, getCarById);
 router.post("/add-new-car", verifyTokenAndAccessToTransportManager, addNewCar);
-router.patch("/:id", verifyTokenAndAccessToTransportManager, updateCar);
+
 router.delete("/:id", verifyTokenAndAccessToTransportManager, deleteCar);
 
 module.exports = router;
-

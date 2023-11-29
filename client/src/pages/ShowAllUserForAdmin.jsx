@@ -18,6 +18,13 @@ export const EditButton = styled.button`
   cursor: pointer;
   border-radius: 10px;
 `
+
+const TableContainer = styled.div`
+  .table-cell {
+    font-size: 18px;
+  }
+`;
+
 const rows = [
   { id: 1, lastName: '', firstName: 'Jon', phoneNumber: '0921742834' },
   { id: 2, lastName: 'Lannister', firstName: 'Cersei', phoneNumber: '0923784555' },
@@ -57,15 +64,16 @@ export default function ShowAllUserForAdmin() {
     }).catch((err) => console.log(err))
   }
   const columns = [
-    { field: 'firstName', headerName: 'First Name', width: 170 },
-    { field: 'lastName', headerName: 'Last name', width: 200 },
-    { field: 'email', headerName: 'email', width: 200 },
-    { field: 'role', headerName: 'role', width: 200 },
-
+    { field: 'firstName', headerName: 'First Name', width: 170, cellClassName: 'table-cell' },
+    { field: 'lastName', headerName: 'Last name', width: 200, cellClassName: 'table-cell' },
+    { field: 'email', headerName: 'email', width: 200, cellClassName: 'table-cell' },
+    { field: 'role', headerName: 'role', width: 200, cellClassName: 'table-cell' },
+  
     {
       field: 'phoneNumber',
       headerName: 'Phone Number',
       width: 170,
+      cellClassName: 'table-cell',
     },
 
     {
@@ -83,9 +91,10 @@ export default function ShowAllUserForAdmin() {
     },
   ];
   return (
-
+  <TableContainer>
     <div style={{ height: 'calc(100vh - 80px)', width: '100%' }}>
       <DataGrid
+      
         rows={allUsers}
         columns={columns}
         disableRowSelectionOnClick
@@ -99,5 +108,6 @@ export default function ShowAllUserForAdmin() {
 
       />
     </div>
+    </TableContainer>
   );
 }

@@ -8,6 +8,7 @@ const {
     deleteDept,
     getAllDepts,
     getDeptById,
+    getAll
   }=require('../controller/department')
 
 
@@ -17,7 +18,7 @@ const {
     verifyTokenAndAuth,
   } = require("../middleware/auth");
   
-
+  router.get("/getAll",getAll);
   router.get("/", verifyTokenAndAdmin, getAllDepts);
   router.get("/:id", verifyTokenAndAdmin, getDeptById);
   router.post("/add-department", verifyTokenAndAdmin, addNewDept);

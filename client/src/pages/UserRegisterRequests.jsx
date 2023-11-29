@@ -17,14 +17,16 @@ const Container = styled.div`
 const UserRegisterRequests = ({ type }) => {
     //const [requests, setRequests] = useState([])
     const { requests } = useSelector(state => state.request)
+
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [filteredReq, setFilteredReq] = useState([])
     useEffect(() => {
-        getAllUserRegisterRequests().then(({ data }) => {
-            dispatch(getRequestSuccess(data))
+        getAllUserRegisterRequests().then(({data }) => {
+            dispatch(getRequestSuccess(data.users))
         }).catch((err) => console.log(err))
         if (type === 'pending') {
+            console.log(filteredReq)
             setFilteredReq([...requests].filter((request) => request.status === 'pending'))
         }
     }, [type])

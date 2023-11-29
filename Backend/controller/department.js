@@ -23,6 +23,11 @@ const getAllDepts = async (req, res) => {
   res.status(200).json(depts);
 };
 
+const getAll=async(req,res)=>{
+  const depts=await Dept.find()
+  res.status(200).json(depts);
+}
+
 const getDeptById = async (req, res) => {
   const { id } = req.params;
   const dept = await Dept.findById(id);
@@ -35,4 +40,5 @@ module.exports = {
   deleteDept,
   getAllDepts,
   getDeptById,
+  getAll
 };

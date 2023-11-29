@@ -116,8 +116,8 @@ const SingleRequestDetails = () => {
             })
             .catch((err) => console.log(err))
     }
-    const handleApprove = (e) => {
-        e.preventDefault()
+    const handleApprove = () => {
+      
 
         if (role === 'staff-manager') {
             setIsOpenApproveForStaff(true);
@@ -135,8 +135,8 @@ const SingleRequestDetails = () => {
         }
     }
 
-    const handleReject = (e) => {
-        e.preventDefault()
+    const handleReject = () => {
+        
         updateRequestById(id, { isChecked: false, status: 'rejected' }).then(({ data }) => {
             console.log('rejected data', data)
             socket.emit('sendNotificationToStaff', { notificationType: "response", messageId: data?._id, message: 'your request has been rejected ', from: user?._id, to: data?.userCreated });
@@ -250,7 +250,7 @@ const SingleRequestDetails = () => {
                         <DialogActions>
                             <Button onClick={() => setIsOpenRejectForStaff(false)} style={{ backgroundColor: "Red", color: "white" }}>No</Button>
                             <Button
-                                style={{ backgroundColor: "Yellow", color: "white" }}
+                                style={{ backgroundColor: "Yellow", color: "black" }}
                                 autoFocus
                                 onClick={() => {
                                     handleReject()

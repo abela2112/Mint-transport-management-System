@@ -32,12 +32,13 @@ const AllRequests = () => {
     const { requests } = useSelector(state => state.request)
     console.log(requests)
     const navigate = useNavigate()
-
+   
 
     const dispatch = useDispatch()
     useEffect(() => {
         getAllRequests().then(({ data }) => {
-            dispatch(getRequestSuccess(data))
+            dispatch(getRequestSuccess(data.data))
+            console.log(data.data)
         }).catch((err) => console.log(err))
     }, [])
 
@@ -63,6 +64,7 @@ const AllRequests = () => {
                 return <StatusButton type={param.row.status} >{param.row.status}</StatusButton>
             }
         },
+        
         {
             field: 'action',
             headerName: 'Action',

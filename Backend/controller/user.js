@@ -24,6 +24,7 @@ const login = async (req, res) => {
   }
 };
 
+
 const register = async (req, res) => {
   const user = await User.create({ ...req.body });
   res.status(200).json({ user: user });
@@ -47,6 +48,7 @@ const updateUser = async (req, res) => {
     .status(StatusCodes.OK)
     .json({ user: user, message: "updated successfully" });
 };
+
 
 const getAllUsers = async (req, res) => {
   const users = await User.find({});

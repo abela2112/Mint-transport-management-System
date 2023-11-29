@@ -189,9 +189,9 @@ const Login = () => {
   };
 
 
-  useEffect(() => {
-    setTimeout(() => { dispatch(setError('')) }, 5000)
-  }, [dispatch])
+  // useEffect(() => {
+  //   setTimeout(() => { dispatch(setError('')) }, 5000)
+  // }, [dispatch])
   return (
     <Container>
       <LoginContainer>
@@ -228,7 +228,7 @@ const Login = () => {
             </div>
 
             <Link to="/forgot-password" style={{ color: '#e6953b', marginTop: '10px', textAlign: 'right', textDecoration: 'none' }}>Forgot Password?</Link>
-            {error && <Error>Something went wrong please try again</Error>}
+            {/* {error && <Error>Something went wrong please try again</Error>} */}
             <SubmitButton type="submit" disabled={isLoading}> {isLoading ? <Loader /> : 'Login'}</SubmitButton>
            
           </LoginForm>

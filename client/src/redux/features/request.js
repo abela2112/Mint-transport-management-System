@@ -12,7 +12,7 @@ const requestSlice = createSlice({
       state.isLoading = true;
     },
     getRequestSuccess: (state, action) => {
-      state.requests = action.payload.data;
+      state.requests = action.payload;
       // state.unSeenRequest = action.payload.filter(
       //   (request) => request.seen === false
       // );

@@ -20,9 +20,9 @@ const AvailableCar = () => {
         getAvailableCar().then(({ data }) => {
               setCars(data)
         }).catch((error)=>console.log(error))
-    },[])
-    console.log(cars)
-
+    },[]) 
+    console.log(cars) 
+    
     return (
         <Container>
             <Title>Available car</Title>

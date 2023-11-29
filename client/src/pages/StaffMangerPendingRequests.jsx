@@ -40,7 +40,7 @@ const StaffMangerPendingRequests = () => {
     
     useEffect(() => {
         axios.get(`/api/request?department=${user?.department}`).then(({ data }) => {
-            dispatch(getRequestSuccess(data))
+            dispatch(getRequestSuccess(data.data))
         }).catch((err) => console.log(err))
     }, [])
     console.log(requests)

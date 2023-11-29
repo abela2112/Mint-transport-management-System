@@ -20,7 +20,7 @@ flex: 1;
 const Center = styled.div`
 
 flex: 1;`
-export const Button = styled.button`
+export const Buttonn = styled.button`
 border:none;
 padding: 5px 7px;
 border-radius: 10px;
@@ -43,7 +43,7 @@ const UserRegisterRequest = ({ request }) => {
                 </Left>
                 <Center><Text>email :{request?.email}</Text></Center>
                 <Center>position:{request?.position}</Center>
-                <Right><Button type={request?.status}>{request?.status}</Button></Right>
+                <Right><Buttonn type={request?.status}>{request?.status}</Buttonn></Right>
             </Container>
         </Link>
     )
