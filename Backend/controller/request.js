@@ -9,11 +9,11 @@ const getALLRequests = async (req, res) => {
   let requests;
   try {
     if (checked) {
-      requests = await Request.find({ isChecked: true });
+      requests = await Request.find({ isChecked: true }).sort({updatedAt:-1});
     } else if (all) {
-      requests = await Request.find();
+      requests = await Request.find().sort({updatedAt:-1});
     } else if (department) {
-      console.log("department", department);
+      // console.log("department", department);
       requests = await Request.aggregate([
         {
           $match: {
@@ -36,7 +36,7 @@ const getALLRequests = async (req, res) => {
             "userDetails.department": `${department}`, // The specific property to filter by
           },
         },
-      ]);
+      ]).sort({ updatedAt: -1 });
     }
   
     res.status(StatusCodes.OK).json({ data: requests });

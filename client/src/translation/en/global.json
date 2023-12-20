@@ -1,11 +1,11 @@
 {
-    "Service":"Service--eng",
+    "Service":"Service",
     "AddnewDriver":{
         "title":"Add new driver",
         "name":"name",
         "phoneNumber":"Phone Number",
         "registeredDate":"Registered Date",
-         "submit":"Submit"
+        "submit":"Submit"
     },
     "sidebar":{
         "requests":"Requests",

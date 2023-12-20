@@ -52,7 +52,7 @@ const updateUser = async (req, res) => {
 
 const getAllUsers = async (req, res) => {
   const users = await User.find({});
-  res.status(StatusCodes.OK).json({ users: users });
+  res.status(StatusCodes.OK).json({ users: users }).sort({ updatedAt: -1 });
 };
 
 const getAUser = async (req, res) => {
