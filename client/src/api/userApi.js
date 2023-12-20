@@ -20,6 +20,7 @@ export const postBack = (id, token, password) =>
 export const getAllDepartment=()=>axios.get("/api/department/getAll")
 
 export const addCar = (car) => axios.post("/api/car/add-new-car", car);
+export const staffRequest=(request)=>axios.post("api/staff-request/staff-petrol-request",request)
 export const signIn = (user) => axios.post("/api/user/login", user);
 export const addDriver = (driver) =>
   axios.post("/api/driver/add-new-driver", driver);
@@ -43,7 +44,7 @@ export const login = (dispatch, navigate, user) => {
     .then(({ data }) => {
       console.log(">>>", data);
       dispatch(loginUserSuccess(data));
-
+      
       navigate("/");
     })
     .catch((err) => {
@@ -73,9 +74,12 @@ export const getUserRequests = (userId) =>
 export const getUserRegisterRequests = (userId) =>
   axios.get(`/api/user/${userId}`);
 export const getAllRequests = () => axios.get(`/api/request?checked=true`);
+export const getAllPetrolRequests = () => axios.get(`/api/staff-request/getAll`);
+export const getAPetrolRequest=(id)=>axios.get(`api/staff-request/${id}/getOne`)
 export const getRequestById = (id) => axios.get(`/api/request/${id}`);
 export const updateCarStatus=(id,status)=>axios.patch(`/api/car/update/${id}`,status)
 export const getAvailableCar=(avalableCar)=>axios.get('/api/car/available')
+export const updateAPetrolRequest=(id,data)=>axios.put(`/api/staff-request/${id}`,data)
 
 export const updateRequestById = (id, request) =>
   axios.patch(`/api/request/updateRequest/${id}`, request);

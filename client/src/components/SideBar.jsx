@@ -96,6 +96,8 @@ const SideBar = () => {
     const user = useSelector((state) => state.user?.user);
     const navigate = useNavigate()
 
+    console.log('>> user: ', user)
+
     return (
 
         <Container>
@@ -105,9 +107,10 @@ const SideBar = () => {
 
                     {user?.role === 'staff' &&
                         <>
-                        <ListItem title='Booking'>
-                            <NavLink className={'nav-link'} to='/booking' > <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />Booking</NavLink></ListItem>
-                        <ListItem><NavLink className={'nav-link'} to='/history'><RestoreOutlinedIcon style={{ marginRight: '10px' }} />History</NavLink></ListItem>
+
+                        <ListItem><NavLink className={'nav-link'} to='/booking'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />ቦታ ማስያዝ</NavLink></ListItem>  
+                        <ListItem><NavLink className={'nav-link'} to='/history'><RestoreOutlinedIcon style={{ marginRight: '10px' }} />ታሪክ</NavLink></ListItem>
+
                         </>
                     }
 
@@ -122,11 +125,13 @@ const SideBar = () => {
                     }
                     {user?.role === 'transport-manager' &&
                         <>
+
                         <ListItem><NavLink className={'nav-link'} to='/requests'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.requests')}</NavLink></ListItem>
                         <ListItem><NavLink className={'nav-link'} to='/pending-requests'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.pendingRequests')}</NavLink></ListItem>
                         <ListItem><NavLink className={'nav-link'} to={'/add-new-car'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.AddnewCar')}</NavLink></ListItem>
                         <ListItem><NavLink className={'nav-link'} to='/add-new-driver'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.AddnewDriver')}</NavLink></ListItem>
                         <ListItem><NavLink className={'nav-link'} to={'/available-car'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.AvailableCar')}</NavLink></ListItem>
+
 
                         </>
                     }

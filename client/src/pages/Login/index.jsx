@@ -6,7 +6,7 @@ import { useDispatch,useSelector } from 'react-redux';
 import { login } from '../../api/userApi';
 import Loader from '../../components/Loader'
 import { setError } from '../../redux/features/user';
-const LoginContainer = styled.div`
+const LoginContainer = styled.div `
   flex: 1;
   display: flex;
   height: 100%;
