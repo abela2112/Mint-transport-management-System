@@ -1,12 +1,14 @@
 
 
     {
-        "Service":"Service--eng",
+        "Service":"Service",
+        
         "login": {
-            "title":"ይግቡ",
-            "username":"የመጠቀሚያ ስም",
+            "heading":"እንክን ደህና መጡ",
+            "title":"ወደ አካዉኒቶ ይግቡ",
+            "email":"ኢሜል አድራሻ",
             "password":"የይለፍ ቃል",
-            "submit":"አስገባ"
+            "login":"ግባ"
         },
         "AddnewDriver":{
             "title":"አዲስ ሹፌር መዝግብ",

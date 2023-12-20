@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getAllRequests } from '../api/userApi'
 import styled from 'styled-components'
-import SingleRequest from './SingleRequest'
-import SearchBar from '../components/SearchBar'
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import { useDispatch, useSelector } from 'react-redux'
@@ -49,7 +47,7 @@ const AllRequests = ({ type }) => {
     const columns = [
         { field: '_id', headerName: 'ID', width: 100 },
         { field: 'name', headerName: 'Full name', width: 200 },
-        { field: 'phoneNumber', headerName: 'Phone Number', width: 200 },
+        { field: 'phoneNumber', headerName: 'Phone Number', width: 250 },
         {
             field: 'pickUpDate',
             headerName: 'Pick Up Date',
