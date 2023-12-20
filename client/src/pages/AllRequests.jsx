@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getAllRequests } from '../api/userApi'
 import styled from 'styled-components'
-import SingleRequest from './SingleRequest'
-import SearchBar from '../components/SearchBar'
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import { useDispatch, useSelector } from 'react-redux'
@@ -28,24 +26,28 @@ const Container = styled.div`
     margin-top: 20px;
     padding: 20px;
 `
-const AllRequests = () => {
+const AllRequests = ({ type }) => {
     const { requests } = useSelector(state => state.request)
-    console.log(requests)
     const navigate = useNavigate()
-   
-
     const dispatch = useDispatch()
+    const [filteredReq, setFilteredReq] = useState([])
     useEffect(() => {
         getAllRequests().then(({ data }) => {
             dispatch(getRequestSuccess(data.data))
-            console.log(data.data)
         }).catch((err) => console.log(err))
-    }, [])
+        if (type === 'pending') {
+            console.log(filteredReq)
+            setFilteredReq([...requests].filter((request) => request.status === 'pending'))
+        }
+        else {
+            setFilteredReq(requests)
+        }
+    }, [type])
 
     const columns = [
         { field: '_id', headerName: 'ID', width: 100 },
         { field: 'name', headerName: 'Full name', width: 200 },
-        { field: 'phoneNumber', headerName: 'Phone Number', width: 200 },
+        { field: 'phoneNumber', headerName: 'Phone Number', width: 250 },
         {
             field: 'pickUpDate',
             headerName: 'Pick Up Date',
@@ -74,9 +76,7 @@ const AllRequests = () => {
                     <>
                         <Button onClick={() => navigate(`/request/${param.row?._id}`)}>Detail</Button>
                         <DeleteIcon style={{ color: 'red', cursor: 'pointer' }} />
-
                     </>
-
                 </div>
             },
             width: 160,
@@ -88,10 +88,10 @@ const AllRequests = () => {
 
     return (
         <Container>
-            <Title>Requests</Title>
+            <Title>{type && type}Requests</Title>
             <div style={{ height: 400, width: '100%', marginTop: '20px' }}>
             <DataGrid
-                rows={requests}
+                    rows={filteredReq}
                 getRowId={(row) => row?._id}
                 columns={columns}
                 initialState={{

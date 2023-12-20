@@ -212,19 +212,15 @@ onChange={(e) => setDepartment(e.target.value)}
               title="አረጋግጥ የይለፍ ቃል ከዋናው የይለፍ ቃል ጋር አንድ አይነት መሆን አለበት"
             />
           </Contain>
-          
-         
 
-          {error && <p style={{color:"red"}}>{error}</p>}
-          
-         
           <BottomText>
 
             <p>መለያ አለህ? <Link className='link' to={'/login'} style={{ color: '#e6953b' }}>Sign in</Link>  </p>
           </BottomText>
           <SignUpButton disabled={isLoading} onClick={() => (password !== confirmPassword) ? setIsOpen(true) : setIsOpen(false)} >Sign up</SignUpButton>
-        {/*  */}
+       
         </SignUpForm>
+        {error && <p style={{ color: "red" }}>{error}</p>}
 
         <Dialog
           open={isOpen}

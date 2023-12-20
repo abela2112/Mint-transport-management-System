@@ -7,22 +7,34 @@ import { getRequestSuccess } from '../redux/features/request'
 import { DataGrid } from '@mui/x-data-grid'
 import { useNavigate } from 'react-router-dom'
 import { Title } from './StaffMangerPendingRequests'
-import { EditButton } from './ShowAllUserForAdmin'
+import { EditButton, swipeUp } from './ShowAllUserForAdmin'
 const Container = styled.div`
     padding: 20px;
-    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    transition: all 0.3s ease-in-out;
+    animation: ${swipeUp} 2s ease-out;
+   
 `
 
+const TableContainer = styled.div`
 
+  .table-cell {
+    font-size: 18px;
+  }
+`;
 const UserRegisterRequests = ({ type }) => {
-    //const [requests, setRequests] = useState([])
+
     const { requests } = useSelector(state => state.request)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [filteredReq, setFilteredReq] = useState([])
     useEffect(() => {
-        getAllUserRegisterRequests().then(({data }) => {
+        getAllUserRegisterRequests().then(({ data }) => {
             dispatch(getRequestSuccess(data.users))
         }).catch((err) => console.log(err))
         if (type === 'pending') {
@@ -31,15 +43,16 @@ const UserRegisterRequests = ({ type }) => {
         }
     }, [type])
     const columns = [
-        { field: 'firstName', headerName: 'First Name', width: 170 },
-        { field: 'lastName', headerName: 'Last name', width: 200 },
-        { field: 'email', headerName: 'email', width: 200 },
-        { field: 'role', headerName: 'role', width: 200 },
+        { field: 'firstName', headerName: 'First Name', cellClassName: 'table-cell', width: 170 },
+        { field: 'lastName', headerName: 'Last name', cellClassName: 'table-cell', width: 200 },
+        { field: 'email', headerName: 'email', cellClassName: 'table-cell', width: 200 },
+        { field: 'role', headerName: 'role', cellClassName: 'table-cell', width: 200 },
 
         {
             field: 'phoneNumber',
             headerName: 'Phone Number',
             width: 170,
+            cellClassName: 'table-cell'
         },
 
         {
@@ -59,13 +72,9 @@ const UserRegisterRequests = ({ type }) => {
 
     return (
         <Container>
-            {/* {filteredReq?.length > 0 && type === 'pending' ? filteredReq.map((request, i) => (
-                <UserRegisterRequest request={request} key={i} />
-            )) : requests?.length > 0 && requests.map((request, i) => (
-                <UserRegisterRequest request={request} key={i} />
-            ))} */}
+
             <Title>{type && type} user register request</Title>
-            <div style={{ height: 'calc(100vh - 80px)', width: '100%' }}>
+            <TableContainer style={{ height: '60%', width: '100%' }}>
                 <DataGrid
                     rows={filteredReq?.length > 0 && type === 'pending' ? filteredReq : requests}
                     columns={columns}
@@ -79,7 +88,7 @@ const UserRegisterRequests = ({ type }) => {
                     pageSizeOptions={[5, 10]}
 
                 />
-            </div>
+            </TableContainer>
         </Container>
     )
 }

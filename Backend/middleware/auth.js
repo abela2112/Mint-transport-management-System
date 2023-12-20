@@ -8,7 +8,7 @@ const auth = async (req, res, next) => {
     next(new UnAuthorizedError("access denied"));
   }
 
-  const token = authorization.split(" ")[1];
+  const token = authorization?.split(" ")[1];
   const decoded = await jwt.verify(token, process.env.JWT_SECRET);
   console.log("decoded", decoded);
   req.user = decoded;
@@ -46,10 +46,7 @@ const verifyTokenAndAccessToTransportManager = async (req, res, next) => {
   auth(req, res, () => {
     const { role, userID } = req.user;
     const { id } = req.params;
-    if (
-      role === "transport-manager" 
-      
-    ) {
+    if (role === "transport-manager") {
       next();
     } else {
       next(new UnAuthorizedError("access denied "));
@@ -69,9 +66,8 @@ const verifyTokenAndStaffManager = async (req, res, next) => {
 
 const verifyTokenAndAuth = async (req, res, next) => {
   auth(req, res, () => {
-    const { userID, role } = req.user;
     const { id } = req.params;
-    if (id === userID || role === "admin") {
+    if (id === req?.user?.userID || req?.user?.role === "admin") {
       next();
     } else {
       next(new UnAuthorizedError("access denied"));

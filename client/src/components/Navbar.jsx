@@ -9,6 +9,8 @@ import { useSelector } from 'react-redux';
 import { Mint, MintText } from '../asset';
 import { Avatar } from '@mui/material';
 import { stringAvatar } from '../utils';
+import { useTranslation } from 'react-i18next';
+import { Language } from '@mui/icons-material';
 const Container = styled.div`
     width: 100%;
     height: 60px;
@@ -17,7 +19,8 @@ const Container = styled.div`
     right: 0;
     z-index: 10;
     background-color: #fff;
-    border-bottom: 2px solid #C9F7FF ;
+    color:#023047 ;
+   // border-bottom: 2px solid #C9F7FF ;
     /* padding: 20px; */
 `
 const Wrapper = styled.div`
@@ -33,6 +36,8 @@ padding: 0 10px;
 const Right = styled.div`
 display: flex;
 align-items: center;
+justify-content: space-between;
+gap: 1rem;
 `
 const Title = styled.span`
     
@@ -72,13 +77,9 @@ align-items: center;
 justify-content: space-between;
 border-radius: 5px;
 width: 400px;
-background-color: rgba(222, 222, 222,0.1);
+background-color:rgba(245, 245, 245,0.5);
 `
-const Hr = styled.hr`
-    width: 100%;
-    height: 2px;
-    background-color: #C9F7FF;
-`
+
 const ImgContainer = styled.div`
 display: flex;
 align-items: center;
@@ -108,6 +109,7 @@ display: flex;
 flex-direction: column;
 `
 const Navbar = () => {
+    const { t, i18n } = useTranslation('global')
     const { user, noOfNotifications } = useSelector(state => state.user)
     console.log(' user?.notifications', noOfNotifications)
     const [searchTerm, setSearchTerm] = useState('')
@@ -116,7 +118,13 @@ const Navbar = () => {
         e.preventDefault()
         navigate(`/search/${searchTerm}`)
     }
-
+    const handleLanguage = () => {
+        if (i18n.language === 'en') {
+            i18n.changeLanguage('ኣማ')
+        } else {
+            i18n.changeLanguage('en')
+        }
+    }
     const title = `${user?.firstName} ${user?.lastName}`
 
     return (
@@ -137,6 +145,9 @@ const Navbar = () => {
                     </SearchBox>
                 </Left>
                 <Right>
+                        <Badge badgeContent={i18n.language} color="primary" >
+                            <Language onClick={() => handleLanguage()} />
+                        </Badge>
                         <Badge badgeContent={noOfNotifications} color="primary">
                             <Link to={'/notification'}> <NotificationsActiveOutlinedIcon /></Link>
                     </Badge>

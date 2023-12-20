@@ -7,7 +7,7 @@ import AboutUsPage from'../components/AboutUsPage/AboutUsPage'
 import styled from 'styled-components';
 import { Mint2, MinT } from '../asset';
 import TMSFooter from '../components/TMSFooter';
-
+import { useTranslation } from 'react-i18next';
 
 const FirstContainer = styled.section`
   background: #164E62;
@@ -223,7 +223,7 @@ const SignUpButton = styled(Button)`
 `;
 
 const LandingPage = () => {
-
+  const { t, i18n } = useTranslation('global')
   const navigate = useNavigate();
   //const [isOpen, setIsOpen] = useState(false);
   return (
@@ -255,7 +255,7 @@ const LandingPage = () => {
         </ThirdContainer>
         <FourthContainer>
         <div>
-        <StyledText3> SERVICES</StyledText3>
+              <StyledText3> {t('Service')}</StyledText3>
         <List>
          <ListItem> ORDER A VEHICLE </ListItem>
          <ListItem> SCHEDULING </ListItem>

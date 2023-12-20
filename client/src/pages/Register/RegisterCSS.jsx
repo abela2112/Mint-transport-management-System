@@ -15,8 +15,8 @@ export const SignUpContainer = styled.div`
 export const Title = styled.span`
  font-weight: 500;
  font-size: 34px;
-text-align: center;
-bottom-margin: 2rem;
+ text-align: center;
+ margin-bottom: 2rem;
 /* padding:10px 20px; */
 
 `
@@ -41,9 +41,6 @@ export const SignUpForm = styled.form`
   //width: 400px;
   
   padding: 20px;
-  /* background-color: #f2f2f2; */
-  /* border-radius: 1px; */
-  /* box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1); */
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

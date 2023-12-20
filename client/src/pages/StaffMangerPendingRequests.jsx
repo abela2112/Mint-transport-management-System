@@ -10,9 +10,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom'
 import { StatusButton } from './AllRequests'
 export const Title = styled.span`
-font-size:18px;
+font-size:24px;
 font-weight: 500;
-margin: 10px 0px;
+margin-bottom: 20px;
+color: #000;
+text-transform: capitalize;
 `
 const Container = styled.div`
     padding: 20px;
@@ -101,7 +103,8 @@ const StaffMangerPendingRequests = () => {
                     pageSizeOptions={[5, 10]}
 
                 />
-            </div></Container>
+            </div>
+        </Container>
     );
 }
 

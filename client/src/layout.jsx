@@ -8,16 +8,23 @@ const Container = styled.div`
 display: flex;
 width: 100%;
 height: 100vh;
+background: #f5f5f5;
 `
 const Main = styled.div`
 flex: 4;
-margin-left: 315px;
+margin-left: 16rem;
 height: 100%;
 position: relative;
-overflow-y: scroll;
+overflow:hidden;
+
 `
 const InnerContainer = styled.div`
-margin-top:60px;`
+margin-top:60px;
+background-color:#f5f5f5;
+width: 100%;
+padding: 0 20px 20px 20px;
+height: 100%;
+`
 
 const Layout = () => {
     const { user } = useSelector(state => state.user)
@@ -30,8 +37,6 @@ const Layout = () => {
                 <InnerContainer>
                     <Outlet />
                 </InnerContainer>
-
-
             </Main>
         </Container>
     )

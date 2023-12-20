@@ -9,11 +9,11 @@ const getALLRequests = async (req, res) => {
   let requests;
   try {
     if (checked) {
-      requests = await Request.find({ isChecked: true });
+      requests = await Request.find({ isChecked: true }).sort({updatedAt:-1});
     } else if (all) {
-      requests = await Request.find();
+      requests = await Request.find().sort({updatedAt:-1});
     } else if (department) {
-      console.log("department", department);
+      // console.log("department", department);
       requests = await Request.aggregate([
         {
           $match: {
@@ -36,7 +36,7 @@ const getALLRequests = async (req, res) => {
             "userDetails.department": `${department}`, // The specific property to filter by
           },
         },
-      ]);
+      ]).sort({ updatedAt: -1 });
     }
   
     res.status(StatusCodes.OK).json({ data: requests });
@@ -49,10 +49,12 @@ const getALLRequests = async (req, res) => {
 const getRequest = async (req, res) => {
   const { id } = req.params;
   try {
-    const request = await Request.findById(id);
-    console.log("request", request);
+    const request = await Request.findOne({ _id: id }).populate("userCreated","firstName lastName email position department role");
+    console.log("request populated", request);
+    console.log("request populated id", request?.userCreated);
     res.status(StatusCodes.OK).json(request);
   } catch (error) {
+    console.log("error", error);
     res.status(StatusCodes.BAD_REQUEST).json(error);
   }
 };
