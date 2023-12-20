@@ -1,0 +1,40 @@
+
+
+    {
+        "Service":"Service--eng",
+        "login": {
+            "title":"ይግቡ",
+            "username":"የመጠቀሚያ ስም",
+            "password":"የይለፍ ቃል",
+            "submit":"አስገባ"
+        },
+        "AddnewDriver":{
+            "title":"አዲስ ሹፌር መዝግብ",
+            "name":"ስም",
+            "phoneNumber":"ስልክ ቁጥር",
+            "registeredDate":"የተመዘገበት ቀን",
+            "submit":"መዝግብ"
+        },
+        "sidebar":{
+            "requests":"ትእዛዞች",
+            "pendingRequests":"ጥብቃ ላይ ያሉ ትእዛዞች",
+            "AddnewCar":"አዲስ መኪና መዝግብ",
+            "AddnewDriver":"አዲስ ሹፌር መዝግብ",
+            "AvailableCar":"ስራ ያልያዙ መኪና",
+            "logOut":"ዉጣ"
+    
+        }
+        ,"AddnewCar":{
+            "title":"አዲስ መኪና መዝግብ",
+            "brandName":"የመኪና ኣምራች ስም",
+            "modelName":"የመኪናው ሞዴል",
+            "licencePlateNo":"የመኪናው ታርጋ ቁጥር",
+            "RegisteredDate":"የተመዘገበት ቀን",
+            "Driver'sName":"የሹፌር ስም",
+            "Driver'sPhoneNumber":"የሹፌር ስልክ",
+            "Owned":"የመኪና ባለቤት",
+            "rent":"ኪራይ",
+            "own":"የራስ",
+            "submit":"መዝግብ"
+        }
+    }

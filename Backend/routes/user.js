@@ -18,7 +18,7 @@ const {
   verifyTokenAndAuth,
 } = require("../middleware/auth");
 router.get("/", verifyTokenAndAdmin, getAllUsers);
-router.get("/:id", verifyTokenAndAdmin, getAUser);
+router.get("/:id", verifyTokenAndAuth, getAUser);
 router.post("/login", login);
 router.post("/register", register);
 router.patch("/:id", verifyTokenAndAuth, updateUser);

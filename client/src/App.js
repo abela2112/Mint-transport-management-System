@@ -23,7 +23,7 @@ import UserRequestDetail from "./pages/UserRequestDetail";
 import TransManagerResponse from "./pages/TransManagerResponse";
 import SearchPage from "./pages/SearchPage.jsx";
 import StaffMangerPendingRequests from "./pages/StaffMangerPendingRequests";
-import StaffPetrolRequest from "./pages/StaffPetrolRequest"
+import StaffPetrolRequest from "./pages/StaffPetrolRequest";
 import History from "./pages/History";
 import ForgotPassword from "./pages/ForgotPassword";
 
@@ -76,12 +76,8 @@ const AdminLayout = () => (
 function App() {
   const user = useSelector((state) => state.user?.user);
   const token = useSelector((state) => state.user?.token);
-  const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState("");
-
-  console.log(" user?.notifications", user?.notifications);
   const dispatch = useDispatch();
-  console.log(user, token);
+  const [alert, setAlert] = useState(false);
   axios.defaults.baseURL = "http://localhost:5000";
   axios.defaults.headers = {
     Authorization: "Bearer " + token,
@@ -89,13 +85,17 @@ function App() {
   };
 
   useEffect(() => {
+    token &&
+      axios
+        .get(`/api/user/${user?._id}`)
+        .then(({ data }) => console.log(data))
+        .catch((error) => console.log(error));
+  }, []);
+  useEffect(() => {
     let socket = io("http://localhost:5000");
     socket.emit("setup", user);
     socket.on("messagerecieved", (message) => {
       console.log("user notif", message);
-      // setOpen(true);
-      // console.log("message", message);
-      // // setMessage(message?.message);
       dispatch(setNotification(message));
     });
     socket.on("notification", (message) =>
@@ -105,7 +105,7 @@ function App() {
 
   return (
     <>
-      <AlertDisplay open={open} setOpen={setOpen} message={message} />
+      {/* <AlertDisplay open={open} setOpen={setOpen} message={message} /> */}
       <Routes>
         <Route path="/" element={user ? <Layout /> : <Navigate to={"/home"} />}>
           {user?.role === "staff" && (
@@ -132,7 +132,6 @@ function App() {
               <Route path="/requests-history" element={<History />} />
               <Route path="/petrol-request" element={<StaffPetrolRequest />} />
               <Route path="/request/:id" element={<SingleRequestDetails />} />
-              
             </Route>
           )}
 
@@ -140,21 +139,20 @@ function App() {
             <Route path="/" element={<TransportManagerLayout />}>
               <Route path="/" element={<Navigate to={"/requests"} />} />
               <Route path="/add-new-car" element={<AddNewCar />} />
+              <Route
+                path="/pending-requests"
+                element={<AllRequests type={"pending"} />}
+              />
               <Route path="/add-new-driver" element={<AddNewDriver />} />
-              
               <Route path="/available-car" element={<AvailableCar />} />
               <Route path="/requests" element={<AllRequests />} />
               <Route path="/request/:id" element={<SingleRequestDetails />} />
-              
             </Route>
           )}
 
           {user?.role === "admin" && (
             <Route path="/" element={<AdminLayout />}>
-              <Route
-                path="/"
-                element={<Navigate to={"/user-list"} />}
-              />
+              <Route path="/" element={<Navigate to={"/user-list"} />} />
               <Route
                 path="/user-register-request"
                 element={<UserRegisterRequests />}
@@ -167,7 +165,7 @@ function App() {
                 path="/user-register-request/:id"
                 element={<UserRequestDetail />}
               />
-               
+
               <Route path="/user-detail/:id" element={<UserRequestDetail />} />
               <Route path="/search/:searchTerm" element={<SearchPage />} />
               <Route path="/department" element={<AddDepartment />} />

@@ -9,7 +9,7 @@ import { Buttonn } from './UserRegisterRequest'
 import TransportManagerResponse from '../components/TransportManagerResponse'
 
 import { io } from 'socket.io-client'
-import { Skeleton } from '@mui/material'
+import { Avatar, Skeleton } from '@mui/material'
 import {
     Button,
     Dialog,
@@ -18,20 +18,25 @@ import {
     DialogContentText,
     DialogActions,
 } from "@mui/material";
+import StaffApproveModal from '../components/Modals/StaffApproveModal'
+import StaffRejectModal from '../components/Modals/StaffRejectModal'
+import { stringAvatar } from '../utils'
+import { Accessibility, Badge, Business, Mail, Person } from '@mui/icons-material'
 
 
 const Container = styled.div`
     padding: 20px;
 `
 const Wrapper = styled.div`
+flex: 2;
 display: flex;
 flex-direction: column;
 padding:50px;
-//background-color:pink;
+background-color:#fff;
 box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
- -webkit-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
- -moz-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
-    position:relative;
+-webkit-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
+-moz-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
+position:relative;
 `
 const ButtonContainer = styled.div`
  position:absolute;
@@ -42,7 +47,7 @@ const ApproveButton = styled.button`
 padding: 7px 10px;
 border: none;
 margin: 10px 20px;
-background-color: #4caf50;
+background-color: #EE8624;
 color: #fff;
 &:disabled{
     cursor: not-allowed;
@@ -78,10 +83,46 @@ flex:4;
 `
 
 const Title = styled.h1`
-   position:absolute;
-   top:0;
+font-size: 24px;
+color: #023047;
+`
+const UserDetailWrapper = styled.div`
+padding: 5px 10px ;
+flex: 1;
+background-color: white;
+display: flex;
+flex-direction: column;
+gap: 1rem;
+width: 100%;
+justify-content: center;
+align-items: center;
+/* border-radius:20px; */
+box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
+-webkit-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
+-moz-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
 `
 
+const MainWrapper = styled.div`
+    display: flex;
+    gap: 4rem;
+   
+    
+`
+const P = styled.div`
+display: flex;
+align-items: center;
+gap: 1rem;
+font-size: 18px;
+color: #8e8b8b;
+font-weight: 300;
+    
+`
+const UserContent = styled.div`
+display: flex;
+flex-direction: column;
+gap: 1rem;
+    
+`
 const SingleRequestDetails = () => {
 
     const { user } = useSelector(state => state.user)
@@ -92,6 +133,8 @@ const SingleRequestDetails = () => {
     const [request, setRequest] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
     const { id } = useParams()
+    const title = `${request?.userCreated?.firstName} ${request?.userCreated?.lastName}`
+    const userCreated = request?.userCreated
     const socket = io("http://localhost:5000");
     useEffect(() => {
         setIsLoading(true)
@@ -117,7 +160,7 @@ const SingleRequestDetails = () => {
             .catch((err) => console.log(err))
     }
     const handleApprove = () => {
-      
+
 
         if (role === 'staff-manager') {
             setIsOpenApproveForStaff(true);
@@ -136,7 +179,7 @@ const SingleRequestDetails = () => {
     }
 
     const handleReject = () => {
-        
+
         updateRequestById(id, { isChecked: false, status: 'rejected' }).then(({ data }) => {
             console.log('rejected data', data)
             socket.emit('sendNotificationToStaff', { notificationType: "response", messageId: data?._id, message: 'your request has been rejected ', from: user?._id, to: data?.userCreated });
@@ -146,17 +189,18 @@ const SingleRequestDetails = () => {
     }
 
 
-    if (isLoading) return <Loader />
-    console.log(request)
-
+    //if (isLoading) return <Loader />
+    console.log('request', request)
     return (
         <>
-            {request ?
-                <Container>
-                    <Wrapper>
-                        <Title>Request Detail</Title>
-                        <InfoContainer>
 
+            <Container>
+                <MainWrapper>
+                    {request ?
+                        <>  <Wrapper>
+                        <Title>Request Detail</Title>
+
+                            <InfoContainer>
                             <Text><span><b>Full Name :</b></span>{request?.name}</Text>
                             <Text><span><b>destination :</b></span>{request?.destination}</Text>
                             <Text><span><b>Phone Number :</b></span>{request?.phoneNumber}</Text>
@@ -167,112 +211,64 @@ const SingleRequestDetails = () => {
                                 , 'MMMM do yyyy')}</Text>
                         </InfoContainer>
 
-                        <ButtonContainer>
-                            {role === 'staff-manager' &&
-                                <>
-                                    <ApproveButton disabled={request?.status === 'approved' || request?.status === 'rejected' || request?.isChecked ? true : false} onClick={() => setIsOpenApproveForStaff(true)} >{request?.isChecked ? "Checked" : "Approved"}</ApproveButton>
-                                    <RejectButton disabled={request?.status === 'rejected' || request?.status === 'approved' || request?.isChecked ? true : false} onClick={() => setIsOpenRejectForStaff(true)}>Reject</RejectButton>
-                                </>}
-                            {role === 'transport-manager' &&
-                                <>
-                                    <ApproveButton disabled={request?.status === 'approved' || request?.status === 'rejected' ? true : false} onClick={handleApprove} >Approved</ApproveButton>
-                                    <RejectButton disabled={request?.status === 'rejected' || request?.status === 'approved' || request?.isChecked ? true : false} onClick={handleReject}>Reject</RejectButton>
-                                </>}
-                            {(role !== 'transport-manager' && role !== 'staff-manager') &&
-                                <>
-                                    <Buttonn type={request?.status}>{request?.status}</Buttonn>
-                                </>}
+                            <ButtonContainer>
+                                {role === 'staff-manager' &&
+                                    <>
+                                        <ApproveButton disabled={request?.status === 'approved' || request?.status === 'rejected' || request?.isChecked ? true : false} onClick={() => setIsOpenApproveForStaff(true)} >{request?.isChecked ? "Checked" : "Approved"}</ApproveButton>
+                                        <RejectButton disabled={request?.status === 'rejected' || request?.status === 'approved' || request?.isChecked ? true : false} onClick={() => setIsOpenRejectForStaff(true)}>Reject</RejectButton>
+                                    </>}
+                                {role === 'transport-manager' &&
+                                    <>
+                                        <ApproveButton disabled={request?.status === 'approved' || request?.status === 'rejected' ? true : false} onClick={handleApprove} >Approved</ApproveButton>
+                                        <RejectButton disabled={request?.status === 'rejected' || request?.status === 'approved' || request?.isChecked ? true : false} onClick={handleReject}>Reject</RejectButton>
+                                    </>}
+                                {(role !== 'transport-manager' && role !== 'staff-manager') &&
+                                    <>
+                                        <Buttonn type={request?.status}>{request?.status}</Buttonn>
+                                    </>}
 
-                        </ButtonContainer>
-
+                            </ButtonContainer>
                     </Wrapper>
+                            <UserDetailWrapper>
+                                <Avatar  {...stringAvatar(`${title}`, 150, 150)} alt={title} />
+                                <UserContent>
+                                    <P><Badge fontSize='large' className='icons-margin-right' />
+                                        <span>{title}</span></P>
 
-   
-                        {/* //                             <>
-                        //                                 <ApproveButton disabled={request?.status === 'approved' || request?.status === 'rejected' || request?.isChecked ? true : false} onClick={handleApprove} >{request?.isChecked ? "Checked" : "Approved"}</ApproveButton>
-                        //                                 <RejectButton disabled={request?.status === 'rejected' || request?.status === 'approved' || request?.isChecked ? true : false} onClick={handleReject}>Reject</RejectButton>
-                        //                             </>
-                        //                         }
-                        //                         {user?.role === 'transport-manager' &&
-                        //                             <>
-                        //                                 <ApproveButton disabled={request?.status === 'approved' || request?.status === 'rejected' ? true : false} onClick={handleApprove} >Approved</ApproveButton>
-                        //                                 <RejectButton disabled={request?.status === 'rejected' || request?.status === 'approved' ? true : false} onClick={handleReject}>Reject</RejectButton>
-                        //                             </>}
-                        //                         {(user?.role !== 'transport-manager' && user?.role !== 'staff-manager') &&
-                        //                             <>
-                        //                                 <Button type={request?.status}>{request?.status}</Button>
-                        //                             </>}
+                                    <P><Business fontSize='large' className='icons-margin-right' />
+                                        <span>{userCreated?.department}</span></P>
+                                    <P><Mail fontSize='large' className='icons-margin-right' />
+                                        <span> {userCreated?.email}</span></P>
+                                    <P><Person fontSize='large' className='icons-margin-right' />
+                                        <span>{userCreated?.role}</span></P>
+                                    <P><Accessibility fontSize='large' className='icons-margin-right' />
+                                        <span>{userCreated?.position}</span></P>
+                                </UserContent>
 
-                        //                     </ButtonContainer> */}
-                        { role === 'transport-manager' && <TransportManagerResponse open={isOpen} setOpen={setIsOpen} onSubmit={handleForm} requestId={id} />}
+                            </UserDetailWrapper></> :
+                        (<>
+                            <Wrapper>
+                                <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
+                                <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
+                                <Skeleton variant="text" animation="wave" sx={{ fontSize: '2rem' }} />
+                                <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
+                                <Skeleton variant="text" animation="wave" sx={{ fontSize: '2rem' }} />
+                                <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
+                            </Wrapper>  
+                            <UserDetailWrapper>
+                                <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
+                                <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
+                                <Skeleton variant="text" animation="wave" sx={{ fontSize: '2rem' }} />
+                                <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
 
-                    <Dialog
-                        open={isOpenApproveForStaff}
-                        onClose={() => setIsOpenApproveForStaff(false)}
-                        aria-labelledby="dialog-title"
-                        aria-describedby="dialog-description"
-                    >
-                        <DialogTitle id="dialog-title">
-                            Do you want to approve?
-                        </DialogTitle>
-                        <DialogContent id="dialog-description">
-                            {/* <DialogContentText></DialogContentText> */}
-                        </DialogContent>
-                        <DialogActions>
-                            <Button onClick={() => setIsOpenApproveForStaff(false)} style={{ backgroundColor: "Red", color: "white" }}>No</Button>
-                            <Button
-                                style={{ backgroundColor: "Yellow", color: "white" }}
-                                autoFocus
-                                onClick={() => {
-                                    handleApprove()
-                                    setIsOpenApproveForStaff(false);
-                                }}
-                            >
-                                Yes
-                            </Button>
-                        </DialogActions>
-                    </Dialog>
-
-
-
-                    <Dialog
-                        open={isOpenRejectForStaff}
-                        onClose={() => setIsOpenRejectForStaff(false)}
-                        aria-labelledby="dialog-title"
-                        aria-describedby="dialog-description"
-                    >
-                        <DialogTitle id="dialog-title">
-                            Do you want to approve?
-                        </DialogTitle>
-                        <DialogContent id="dialog-description">
-                            {/* <DialogContentText></DialogContentText> */}
-                        </DialogContent>
-                        <DialogActions>
-                            <Button onClick={() => setIsOpenRejectForStaff(false)} style={{ backgroundColor: "Red", color: "white" }}>No</Button>
-                            <Button
-                                style={{ backgroundColor: "Yellow", color: "black" }}
-                                autoFocus
-                                onClick={() => {
-                                    handleReject()
-                                    setIsOpenRejectForStaff(false);
-                                }}
-                            >
-                                Yes
-                            </Button>
-                        </DialogActions>
-                    </Dialog>
-                </Container> :
-                (<Container>
-                    <Wrapper>
-                        <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
-                        <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
-                        <Skeleton variant="text" animation="wave" sx={{ fontSize: '2rem' }} />
-                        <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
-                        <Skeleton variant="text" animation="wave" sx={{ fontSize: '2rem' }} />
-                        <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
-                    </Wrapper>
-                </Container>)
-            }
+                            </UserDetailWrapper>
+                        </>)
+                    }
+                </MainWrapper>
+                {role === 'transport-manager' && <TransportManagerResponse open={isOpen} setOpen={setIsOpen} onSubmit={handleForm} requestId={id} />}
+                <StaffApproveModal isOpenApproveForStaff={isOpenApproveForStaff} setIsOpenApproveForStaff={setIsOpenApproveForStaff} handleApprove={handleApprove} />
+                <StaffRejectModal isOpenRejectForStaff={isOpenRejectForStaff} setIsOpenRejectForStaff={setIsOpenRejectForStaff} handleReject={handleReject} />
+            </Container>
 
         </>
     )

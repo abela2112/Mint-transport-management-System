@@ -212,19 +212,15 @@ onChange={(e) => setDepartment(e.target.value)}
               title="confirm password must be the same as the main password"
             />
           </Contain>
-          
-         
 
-          {error && <p style={{color:"red"}}>{error}</p>}
-          
-         
           <BottomText>
 
             <p>Already have an account? <Link className='link' to={'/login'} style={{ color: '#e6953b' }}>Sign in</Link>  </p>
           </BottomText>
           <SignUpButton disabled={isLoading} onClick={() => (password !== confirmPassword) ? setIsOpen(true) : setIsOpen(false)} >Sign up</SignUpButton>
-        {/*  */}
+       
         </SignUpForm>
+        {error && <p style={{ color: "red" }}>{error}</p>}
 
         <Dialog
           open={isOpen}

@@ -10,33 +10,34 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import SearchBar from './SearchBar';
 import { useDispatch, useSelector } from 'react-redux'
 import { logOutUser } from '../redux/features/user';
+import { Business, Group, LogoutOutlined, Person, PersonAddAlt } from '@mui/icons-material';
+import { useTranslation } from 'react-i18next';
 const Container = styled.div`
    
-    width:315px;
-    padding: 10px;
+    width:15.75rem;
+    padding: 20px 0;
     margin-top: 30px;
-   // background-color: #C9F7FF;
+    //background-color: #fff;
     height:calc( 100vh - 40px);
     position: fixed;
     top: 0;
     bottom: 0;
+    left: 0;
+    background-color: #023047;
+    //border-right:1px solid rgba(255, 165, 0, 0.75) ;
 `
 
 const List = styled.ul`
-color: red;
+
 list-style: none;
+padding:0.5rem;
+margin: 0;
 `
 
 const ListItem = styled.li`
-/* display:flex;
-padding:10px 20px ;
-margin-bottom: 10px;
-/* background-color: #F5F5F7; */
-/* border-radius: 5px;
-font-weight: 400;
-color: red;
-cursor: pointer;
-/* color:#8E92BC; */ 
+
+border-radius: 10px;
+color: #8E92BC;
 
 &:hover::before {
     content: attr(title);
@@ -55,7 +56,7 @@ cursor: pointer;
 `
 
 const ListItemLogOut = styled.li`
- display:flex;
+display:flex;
 padding:10px 20px ;
 margin-bottom: 10px;
 position:absolute;
@@ -66,7 +67,7 @@ border-radius: 5px;
 font-weight: 400;
 /* color: #141522; */
 cursor: pointer;
-color:rgba(255, 165, 0, 0.75); 
+color:#fff; 
 position: absolute;
 bottom: 0;
 
@@ -76,39 +77,25 @@ bottom: 0;
 };
 
 `
-
-const Logo = styled.img`
-height: 40px;
-`
-
-const ImgContainer = styled.div`
-margin-bottom: 1.5rem;
-display: flex;
-align-items: center;
-`
-
 const ListWrapper = styled.div`
 display: flex;
-
 flex-direction: column;
-align-content: space-between;
-box-shadow: 2px 0px 2px 0px rgba(255, 165, 0, 0.75);
-margin-left: -2rem;
-
-//padding: 20px 30px ;
-//height: 100vh;    
-padding: 20px;
-height: 100vh; 
-width:315px;  
+justify-content: space-between;
+align-items: canter;
+padding:10px ;
+height: 100%; 
+width:100%;  
 position: relative;
 
 `
 
 const SideBar = () => {
+
+    const { t } = useTranslation('global')
     const dispatch = useDispatch()
     const user = useSelector((state) => state.user?.user);
     const navigate = useNavigate()
-    console.log('>> user: ', user)
+
     return (
 
         <Container>
@@ -116,9 +103,10 @@ const SideBar = () => {
             <ListWrapper>
                 <List>
 
-                    {user?.role === 'staff' && 
+                    {user?.role === 'staff' &&
                         <>
-                        <ListItem><NavLink className={'nav-link'} to='/booking'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />Booking</NavLink></ListItem>
+                        <ListItem title='Booking'>
+                            <NavLink className={'nav-link'} to='/booking' > <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />Booking</NavLink></ListItem>
                         <ListItem><NavLink className={'nav-link'} to='/history'><RestoreOutlinedIcon style={{ marginRight: '10px' }} />History</NavLink></ListItem>
                         </>
                     }
@@ -134,31 +122,32 @@ const SideBar = () => {
                     }
                     {user?.role === 'transport-manager' &&
                         <>
-                        <ListItem><NavLink className={'nav-link'} to='/requests'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />Requests</NavLink></ListItem>
-                            <ListItem><NavLink className={'nav-link'} to={'/add-new-car'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />Add New Car</NavLink></ListItem>
-                            <ListItem><NavLink className={'nav-link'} to='/add-new-driver'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />Add New Driver</NavLink></ListItem>
-                            <ListItem><NavLink className={'nav-link'} to={'/available-car'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />Available Car</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to='/requests'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.requests')}</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to='/pending-requests'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.pendingRequests')}</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to={'/add-new-car'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.AddnewCar')}</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to='/add-new-driver'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.AddnewDriver')}</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to={'/available-car'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.AvailableCar')}</NavLink></ListItem>
 
                         </>
                     }
                     {user.role === 'admin' &&
                         <>
 
-                        <ListItem><NavLink className={'nav-link'} to='/user-list'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />User</NavLink></ListItem>
+                        <ListItem ><NavLink className={'nav-link'} to='/user-list'> <Group style={{ marginRight: '10px' }} />User</NavLink></ListItem>
                         <ListItem><NavLink className={'nav-link'} to={'/pending-user-register-request'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />Pending Requests</NavLink></ListItem>
-                        <ListItem><NavLink className={'nav-link'} to={'/user-register-request'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />User Register Requests</NavLink></ListItem>
-                        <ListItem><NavLink className={'nav-link'} to={'/department'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />Department</NavLink></ListItem>
-   
+                        <ListItem><NavLink className={'nav-link'} to={'/user-register-request'} ><PersonAddAlt style={{ marginRight: '10px' }} />User Register Requests</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to={'/department'} ><Business style={{ marginRight: '10px' }} />Department</NavLink></ListItem>
+
                         </>
                     }
 
-                
-                <ListItemLogOut title="logout" onClick={() => {
+
+                    <ListItemLogOut title="logout" onClick={() => {
 
                         dispatch(logOutUser())
                         navigate('/home')
 
-                    }}> <SettingsOutlinedIcon style={{ marginRight: '10px' }} />Logout</ListItemLogOut>
+                    }}> <LogoutOutlined style={{ marginRight: '10px' }} />{t('sidebar.logOut')}</ListItemLogOut>
 
                 </List>
             </ListWrapper>
