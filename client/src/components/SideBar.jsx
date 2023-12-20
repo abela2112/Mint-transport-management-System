@@ -109,6 +109,7 @@ const SideBar = () => {
     const user = useSelector((state) => state.user?.user);
     const navigate = useNavigate()
     console.log('>> user: ', user)
+    //staff  --> booking ,  history 
     return (
 
         <Container>
@@ -118,8 +119,8 @@ const SideBar = () => {
 
                     {user?.role === 'staff' && 
                         <>
-                        <ListItem><NavLink className={'nav-link'} to='/booking'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />Booking</NavLink></ListItem>
-                        <ListItem><NavLink className={'nav-link'} to='/history'><RestoreOutlinedIcon style={{ marginRight: '10px' }} />History</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to='/booking'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />ቦታ ማስያዝ</NavLink></ListItem>  
+                        <ListItem><NavLink className={'nav-link'} to='/history'><RestoreOutlinedIcon style={{ marginRight: '10px' }} />ታሪክ</NavLink></ListItem>
                         </>
                     }
 
@@ -138,6 +139,7 @@ const SideBar = () => {
                             <ListItem><NavLink className={'nav-link'} to={'/add-new-car'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />Add New Car</NavLink></ListItem>
                             <ListItem><NavLink className={'nav-link'} to='/add-new-driver'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />Add New Driver</NavLink></ListItem>
                             <ListItem><NavLink className={'nav-link'} to={'/available-car'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />Available Car</NavLink></ListItem>
+                            <ListItem><NavLink className={'nav-link'} to={'/staff-request'} ><ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />Staff manager Petrol request</NavLink></ListItem>
 
                         </>
                     }

@@ -26,9 +26,9 @@ import StaffMangerPendingRequests from "./pages/StaffMangerPendingRequests";
 import StaffPetrolRequest from "./pages/StaffPetrolRequest"
 import History from "./pages/History";
 import ForgotPassword from "./pages/ForgotPassword";
-
+import AllStaffPetrolRequests from "./pages/AllStaffsPetrolRequest"
 import ResetPassword from "./pages/ResetPassword.jsx";
-
+import SinglePetrolRequestDetail from './pages/singlePetrolRequestDetail'
 import AvailableCar from "./pages/AvailableCar.jsx";
 
 import UserDetail from "./pages/userDetails.jsx";
@@ -40,6 +40,7 @@ import { setNotification } from "./redux/features/user.js";
 import Notification from "./pages/Notification.jsx";
 import Alert from "./components/Alert.jsx";
 import AlertDisplay from "./components/Alert.jsx";
+import Profile from "./pages/Profile.jsx";
 
 const Container = styled.div`
   width: 100%;
@@ -141,10 +142,12 @@ function App() {
               <Route path="/" element={<Navigate to={"/requests"} />} />
               <Route path="/add-new-car" element={<AddNewCar />} />
               <Route path="/add-new-driver" element={<AddNewDriver />} />
+              <Route path="/staff-request" element={<AllStaffPetrolRequests />} />
               
               <Route path="/available-car" element={<AvailableCar />} />
               <Route path="/requests" element={<AllRequests />} />
               <Route path="/request/:id" element={<SingleRequestDetails />} />
+              <Route path="/petrol-request/:id" element={<SinglePetrolRequestDetail />} />
               
             </Route>
           )}
@@ -180,7 +183,9 @@ function App() {
           path="/transportManager-response"
           element={<TransManagerResponse />}
         />
+
         <Route path="/notification" element={<Notification />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/home" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />

@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
-import React, { useState } from "react";
-
-
+import React, { useState ,useEffect} from "react";
+import {staffRequest} from '../api/userApi'
+import { useDispatch,useSelector } from 'react-redux';
 import {
   Button,
   Dialog,
@@ -113,6 +113,7 @@ const Submit = styled.button`
   width:200px;
   color:white;
   height:50px;
+  margin:20px 20px;
   font-size:16px;
   cursor:pointer;
   background-color: rgb(255, 165, 0);
@@ -130,15 +131,22 @@ const Submit = styled.button`
 `
 
 const StaffPetrolRequest=()=>{
-
-      
+  const { user } = useSelector((state) => state.user);
+  console.log(user)
+    const [name,setName]=useState('')
+    const [phoneNumber,setPhoneNumber]=useState('')
     const [requestDate,setRequestDate]=useState('')
     const [discription,setDiscription]=useState('')
+    const [isOpen,setIsOpen]=useState(false)
    
-   const handleSubmit=(e)=>{
-     e.preventDefault()
-     
+   const handleSubmit=()=>{
+  
+     staffRequest({requestDate,discription,name,phoneNumber}).then((data)=>console.log(data)).catch((error)=>console.log(error))
    }
+   useEffect(() => {
+        setName(user?.firstName + "  " + user?.lastName)
+        setPhoneNumber(user?.phoneNumber)
+  }, [])
 
     return (
       <Container>
@@ -146,26 +154,74 @@ const StaffPetrolRequest=()=>{
                   <Title>Petrol Request Form</Title>
                  <FormBox>
                        <InputItem>
+                            <Lable>Full Name</Lable>
+                             <Input  
+                            
+                             type="text"
+                             value={name}
+                              
+                             />
+                       </InputItem>
+                       <InputItem>
+                            <Lable>phone number</Lable>
+                             <Input  
+                             
+                             type="text"
+                             value={phoneNumber}
+                              
+                             />
+                       </InputItem>
+                       <InputItem>
                             <Lable>Request date</Lable>
                              <Input  
                              placeholder="request date" 
                              type="date"
-                             value={discription}
-                             onChange={(e)=>setDiscription(e.target.value)}
+                             value={requestDate}
+                              onChange={(e)=>setRequestDate(e.target.value)}
                              />
                        </InputItem>
                        <InputItem>
                             <Lable>Discription</Lable>
                             <TextArea
                               placeholder="Discription"
-                              value={requestDate}
-                              onChange={(e)=>setRequestDate(e.target.value)}
+                             value={discription}
+                             onChange={(e)=>setDiscription(e.target.value)}
                               rows={4}
                               />
                       </InputItem>
-                     <Submit onClick={handleSubmit}>Submit</Submit>
+                     <Submit onClick={(e)=>{
+                        e.preventDefault()
+                      setIsOpen(true)}}>Submit</Submit>
                  </FormBox>
            </Wrapper>
+
+           <Dialog
+            open={isOpen}
+            onClose={() => setIsOpen(false)}
+            aria-labelledby="dialog-title"
+            aria-describedby="dialog-description"
+          >
+            <DialogTitle id="dialog-title">
+              Do you want to confirm?
+            </DialogTitle>
+            <DialogContent id="dialog-description">
+              {/* <DialogContentText></DialogContentText> */}
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={() => setIsOpen(false)} style={{backgroundColor:"Red",color:"white"}}>No</Button>
+              <Button
+                style={{backgroundColor:"Yellow",color:"black"}}
+                autoFocus
+                onClick={() => {
+                  handleSubmit()
+                  setIsOpen(false);
+                }}
+              >
+                Yes
+              </Button>
+            </DialogActions>
+          </Dialog>
+
       </Container>
 
     )

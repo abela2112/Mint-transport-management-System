@@ -104,39 +104,39 @@ const Register = () => {
         </Title>
         <SignUpForm onSubmit={handleSignUp}>
           <Contain>
-            <Label>First Name</Label>
+            <Label>የመጀመሪያ ስም</Label>
             <SignUpInput
               type="text"
-              placeholder="First Name"
+              placeholder="የመጀመሪያ ስም"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
-              title="Enter your First name"
+              title="የመጀመሪያ ስምዎን ያስገቡ"
             />
           </Contain>
           <Contain>
 
-            <Label>Last Name</Label>
+            <Label>የአያት ስም</Label>
             <SignUpInput
               type="text"
-              placeholder="Last Name"
+              placeholder="የአያት ስም"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
-              title="Enter your last name"
+              title="የአያት ስምህን አስገባ"
             />
           </Contain>
           <Contain>
-            <Label>Email</Label>
+            <Label>ኢሜይል</Label>
             <SignUpInput
               type="email"
-              placeholder="Email"
+              placeholder="ኢሜይል"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              title="Enter your organization email like firstName.lastName@mint.gov.et"
+              title="የድርጅትዎን ኢሜይል እንደ firstName.lastName@mint.gov.et ያስገቡ"
             />
           </Contain>
           <Contain>
 
-            <Label>Department</Label>
+            <Label>ክፍል</Label>
             {/* <SelectOption title="select your department" onChange={(e) => setDepartment(e.target.value)}>
               <Option disabled selected>Select Option</Option>
              
@@ -144,8 +144,8 @@ const Register = () => {
               <Option>cccc</Option>
             </SelectOption> */}
             <SelectOption
-title="select your department"
-placeholder="department"
+title="ክፍልዎን ይምረጡ"
+placeholder="ክፍል"
 value={department}
 onChange={(e) => setDepartment(e.target.value)}
 >
@@ -157,9 +157,9 @@ onChange={(e) => setDepartment(e.target.value)}
 
           <Contain>
              
-            <Label>Position</Label>
-            <SelectOption title="select your position" onChange={(e) => setPosition(e.target.value)}>
-              <Option disabled selected>Select Option</Option>
+            <Label>ቦታዎን</Label>
+            <SelectOption title="ቦታዎን ይምረጡ" onChange={(e) => setPosition(e.target.value)}>
+              <Option disabled selected>አማራጭ ይምረጡ</Option>
               <Option>CEO</Option>
               <Option>Desk</Option>
               <Option>Expert</Option>
@@ -168,24 +168,24 @@ onChange={(e) => setDepartment(e.target.value)}
 
           <Contain>
           
-            <Label>Password</Label>
+            <Label>የይለፍ ቃል</Label>
             <SignUpInput
               type="password"
-              placeholder="Password"
+              placeholder="የይለፍ ቃል"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              title="Your password must containe al-least one number one special character and one letter"
+              title="የይለፍ ቃልዎ ቢያንስ አንድ ቁጥራዊ አንድ ልዩ ቁምፊ እና አንድ ፊደል መያዝ አለበት።"
             />
           </Contain>
           <Contain>
           
-            <Label>Phone</Label>
+            <Label>ስልክ</Label>
             <SignUpInput
               type="tel"
-              placeholder="phone"
+              placeholder="ስልክ"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
-              title="Your phone number must be 10 digit number"
+              title="ስልክ ቁጥርህ ባለ 10 አሃዝ መሆን አለበት።"
             />
           </Contain>
           {/* <Contain>
@@ -203,13 +203,13 @@ onChange={(e) => setDepartment(e.target.value)}
 
           <Contain>
 
-            <Label>Confirm Password</Label>
+            <Label>የይለፍ ቃል አረጋግጥ</Label>
             <SignUpInput
               type="password"
-              placeholder="Confirm Password"
+              placeholder="የይለፍ ቃል አረጋግጥ"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              title="confirm password must be the same as the main password"
+              title="አረጋግጥ የይለፍ ቃል ከዋናው የይለፍ ቃል ጋር አንድ አይነት መሆን አለበት"
             />
           </Contain>
           
@@ -220,7 +220,7 @@ onChange={(e) => setDepartment(e.target.value)}
          
           <BottomText>
 
-            <p>Already have an account? <Link className='link' to={'/login'} style={{ color: '#e6953b' }}>Sign in</Link>  </p>
+            <p>መለያ አለህ? <Link className='link' to={'/login'} style={{ color: '#e6953b' }}>Sign in</Link>  </p>
           </BottomText>
           <SignUpButton disabled={isLoading} onClick={() => (password !== confirmPassword) ? setIsOpen(true) : setIsOpen(false)} >Sign up</SignUpButton>
         {/*  */}

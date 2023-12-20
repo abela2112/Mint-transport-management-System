@@ -32,6 +32,7 @@ const TMresponseRoute=require("./routes/TransManagerResponse")
 const requestRouter=require("./routes/request")
 const forgotPassword=require("./routes/sendMail")
 const deptRoute=require("./routes/department")
+const staffRequestRoute=require("./routes/staffManagerPetrolRequest")
 
 io.on('connection',(socket)=>{
     console.log('connection created')
@@ -147,7 +148,7 @@ app.use("/api/driver", driverRoute);
 app.use("/api/department",deptRoute)
 app.use("/api/TMresponse",TMresponseRoute)
 app.use("/api/forgot",forgotPassword)
-
+app.use("/api/staff-request",staffRequestRoute)
 // error handler
 app.use(errorHandleMiddleware);
 app.use(notFoundErrorMiddleware);

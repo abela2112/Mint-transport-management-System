@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getAllRequests } from '../api/userApi'
+import { getAllPetrolRequests } from '../api/userApi'
 import styled from 'styled-components'
 import SingleRequest from './SingleRequest'
 import SearchBar from '../components/SearchBar'
@@ -28,17 +28,15 @@ const Container = styled.div`
     margin-top: 20px;
     padding: 20px;
 `
-const AllRequests = () => {
-    const { requests } = useSelector(state => state.request)
-    console.log(requests)
-    const navigate = useNavigate()
+const AllStaffPetrolRequests = () => {
+     const [request,setRequest]=useState([])
+     
+    const navigate=useNavigate()
    
-
-    const dispatch = useDispatch()
     useEffect(() => {
-        getAllRequests().then(({ data }) => {
-            dispatch(getRequestSuccess(data.data))
-            console.log(data.data)
+        getAllPetrolRequests().then(({ data }) => {
+            setRequest(data)
+            console.log(data)
         }).catch((err) => console.log(err))
     }, [])
 
@@ -46,15 +44,7 @@ const AllRequests = () => {
         { field: '_id', headerName: 'ID', width: 100 },
         { field: 'name', headerName: 'Full name', width: 200 },
         { field: 'phoneNumber', headerName: 'Phone Number', width: 200 },
-        {
-            field: 'pickUpDate',
-            headerName: 'Pick Up Date',
-
-            width: 150,
-            renderCell: (param) => {
-                return format(param.row?.pickUpDate && new Date(param.row?.pickUpDate), 'MMMM do yyyy')
-            }
-        },
+      
         {
             field: 'status',
             headerName: 'Status',
@@ -72,8 +62,8 @@ const AllRequests = () => {
             renderCell: (param) => {
                 return <div style={{ display: 'flex' }}>
                     <>
-                        <Button onClick={() => navigate(`/request/${param.row?._id}`)}>Detail</Button>
-                        <DeleteIcon style={{ color: 'red', cursor: 'pointer' }} />
+                        <Button onClick={() => navigate(`/petrol-request/${param.row?._id}`)}>Detail</Button>
+                        {/* <DeleteIcon style={{ color: 'red', cursor: 'pointer' }} /> */}
 
                     </>
 
@@ -91,7 +81,7 @@ const AllRequests = () => {
             <Title>Requests</Title>
             <div style={{ height: 400, width: '100%', marginTop: '20px' }}>
             <DataGrid
-                rows={requests}
+                rows={request}
                 getRowId={(row) => row?._id}
                 columns={columns}
                 initialState={{
@@ -104,4 +94,4 @@ const AllRequests = () => {
             </div></Container>
     );
 }
-export default AllRequests
+export default AllStaffPetrolRequests
