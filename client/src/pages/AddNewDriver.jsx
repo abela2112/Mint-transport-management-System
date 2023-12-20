@@ -4,14 +4,15 @@ import { Label, SignUpInput, Title } from './Register/RegisterCSS'
 import Navbar from '../components/Navbar'
 import { addDriver } from '../api/userApi'
 import DialogModal from '../components/DialogModal'
+import { useTranslation } from 'react-i18next'
 
-const Container = styled.div `
+const Container = styled.div`
 width: 100%;
 padding: 20px;
 
 `
 
-const Wrapper = styled.div `
+const Wrapper = styled.div`
 display: flex;
 flex-direction: column;
 
@@ -62,35 +63,33 @@ width: 200px;
 `
 const AddNewDriver = () => {
 
-       const [name,setName]=useState("")
-       const [phoneNumber,setPhoneNumber]=useState("")
-       const [registeredDate,setRegisteredDate]=useState("")
-       const [error,setError]=useState('')
+    const [name, setName] = useState("")
+    const [phoneNumber, setPhoneNumber] = useState("")
+    const [registeredDate, setRegisteredDate] = useState("")
+    const [error, setError] = useState('')
+    const { t } = useTranslation('global')
+
+    const handleClick = (e) => {
+
+        e.preventDefault();
+        addDriver({ name, phoneNumber, registeredDate }).then(() => { setPhoneNumber(''); setName(''); setRegisteredDate(''); setError('') }).catch((error) => {
+            if (error.response) {
+                console.log(error)
+                setError(error.response.data.message);
+            } else {
+                // Handle network errors or other exceptions
+                console.log('Error:', error);
+            }
+        })
+    }
 
 
-       const handleClick=(e)=>{
-        
-            console.log("name" ,name);
-            console.log("phone" ,phoneNumber);
-            console.log("regDate",registeredDate);
-            addDriver({name,phoneNumber,registeredDate}).then(()=>{setPhoneNumber(''); setName('');  setRegisteredDate(''); setError('')}).catch((error)=>{
-                if (error.response) {
-                    console.log(error)
-                  setError(error.response.data.message);
-                } else {
-                  // Handle network errors or other exceptions
-                  console.log('Error:', error);
-                }
-            })
-       }
-       
-       
-       const [isModalOpen, setIsModalOpen] = useState(false);
-      
-       const handleButtonClick = () => {
-           
-         setIsModalOpen(true);
-       };
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleButtonClick = () => {
+
+        setIsModalOpen(true);
+    };
 
 
 
@@ -99,43 +98,43 @@ const AddNewDriver = () => {
 
             <Container>
                 <Wrapper>
-                    <Title>Add new Driver</Title>
+                    <Title>{t('AddnewDriver.title')}</Title>
                     <FormBox>
                         <InputItem>
-                            <Label>name</Label>
-                            <SignUpInput 
-                            type='text' 
-                            placeholder='full name'
-                            value={name}
-                            onChange={(e)=>setName(e.target.value)}
+                            <Label>{t('AddnewDriver.name')}</Label>
+                            <SignUpInput
+                                type='text'
+                                placeholder='full name'
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
                             />
                         </InputItem>
                         <InputItem>
-                            <Label>Phone Number</Label>
-                            <SignUpInput 
-                            type='tel' 
-                            placeholder='phone number' 
-                            value={phoneNumber}
-                            onChange={(e)=>setPhoneNumber(e.target.value)}
+                            <Label>{t('AddnewDriver.phoneNumber')}</Label>
+                            <SignUpInput
+                                type='tel'
+                                placeholder='phone number'
+                                value={phoneNumber}
+                                onChange={(e) => setPhoneNumber(e.target.value)}
                             />
                         </InputItem>
 
 
                         <InputItem>
-                            <Label>Registered date</Label>
-                            <SignUpInput 
-                            type='date'
-                            value={registeredDate}
-                            onChange={(e)=>setRegisteredDate(e.target.value)}
+                            <Label>{t('AddnewDriver.registeredDate')}</Label>
+                            <SignUpInput
+                                type='date'
+                                value={registeredDate}
+                                onChange={(e) => setRegisteredDate(e.target.value)}
                             />
                         </InputItem>
 
                     </FormBox>
-                    {error && <p style={{color:"red"}}>{error}</p>}
+                    {error && <p style={{ color: "red" }}>{error}</p>}
                     <ButtonBox>
 
-                       <SubmitButton onClick={handleButtonClick}>submit</SubmitButton>
-                        <DialogModal open={isModalOpen} onClose={() => setIsModalOpen(false)} onSubmit={handleClick}/>
+                        <SubmitButton onClick={handleButtonClick}>{t('AddnewDriver.submit')}</SubmitButton>
+                        <DialogModal open={isModalOpen} onClose={() => setIsModalOpen(false)} onSubmit={handleClick} />
 
                     </ButtonBox>
                 </Wrapper>

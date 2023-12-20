@@ -1,0 +1,32 @@
+{
+    "Service":"Service--eng",
+    "AddnewDriver":{
+        "title":"Add new driver",
+        "name":"name",
+        "phoneNumber":"Phone Number",
+        "registeredDate":"Registered Date",
+         "submit":"Submit"
+    },
+    "sidebar":{
+        "requests":"Requests",
+        "pendingRequests":"Pending Requests",
+        "AddnewCar":"Add new car",
+        "AddnewDriver":"Add new Driver",
+        "AvailableCar":"Available Car",
+        "logOut":"Logout"
+
+    }
+    ,"AddnewCar":{
+        "title":"Add new car",
+        "brandName":"Brand Name",
+        "modelName":"Model Name",
+        "licencePlateNo":"licence Plate No",
+        "RegisteredDate":"Registered Date",
+        "Driver'sName":"Driver's Name",
+        "Driver'sPhoneNumber":"Driver's Phone Number",
+        "Owned":"Owned",
+        "rent":"rent",
+        "own":"own",
+        "submit":"Submit"
+    }
+    }

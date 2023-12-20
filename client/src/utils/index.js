@@ -19,11 +19,13 @@ export function stringToColor(string) {
   return color;
 }
 
-export function stringAvatar(name) {
+export function stringAvatar(name, width, height) {
   if (!name) return;
   return {
     sx: {
       bgcolor: stringToColor(name),
+      width: width,
+      height: height,
     },
     children: `${name?.split(" ")[0][0]}${name?.split(" ")[1][0]}`,
   };

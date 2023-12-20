@@ -14,6 +14,7 @@ import {
   DialogContentText,
   DialogActions,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const Container = styled.div`
   width: 100%;
@@ -25,7 +26,10 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-`;
+  align-items: flex-start;
+  background: #fff;
+  padding: 10px 20px;
+  `;
 
 const FormBox = styled.form`
   display: flex;
@@ -73,7 +77,7 @@ const Option = styled.option`
 `;
 const AddNewCar = () => {
  
-
+  const { t } = useTranslation('global')
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
   const [owned, setOwned] = useState("");
@@ -125,11 +129,11 @@ const AddNewCar = () => {
     <>
       <Container>
         <Wrapper>
-          <Title>Add new Car</Title>
+          <Title>{t('AddnewCar.title')}</Title>
 
           <FormBox>
             <InputItem>
-              <Label>Brand name</Label>
+              <Label>{t('AddnewCar.brandName')}</Label>
               <SignUpInput
                 type="text"
                 placeholder="brand name"
@@ -138,7 +142,7 @@ const AddNewCar = () => {
               />
             </InputItem>
             <InputItem>
-              <Label>Model name</Label>
+              <Label>{t('AddnewCar.modelName')}</Label>
               <SignUpInput
                 type="text"
                 placeholder="model name"
@@ -148,7 +152,7 @@ const AddNewCar = () => {
             </InputItem>
 
             <InputItem>
-              <Label>Licence plate No</Label>
+              <Label>{t('AddnewCar.licencePlateNo')}</Label>
               <SignUpInput
                 type="text"
                 placeholder="licence plate number"
@@ -157,7 +161,7 @@ const AddNewCar = () => {
               />
             </InputItem>
             <InputItem>
-              <Label>Registered date</Label>
+              <Label>{t('AddnewCar.RegisteredDate')}</Label>
               <SignUpInput
                 type="date"
                 value={driverDate}
@@ -165,7 +169,7 @@ const AddNewCar = () => {
               />
             </InputItem>
             <InputItem>
-              <Label>Driver's Name</Label>
+              <Label>{t("AddnewCar.Driver'sName")}</Label>
               <SignUpInput
                 type="text"
                 placeholder="driver name"
@@ -174,7 +178,7 @@ const AddNewCar = () => {
               />
             </InputItem>
             <InputItem>
-              <Label>Driver's Phone Number</Label>
+              <Label>{t("AddnewCar.Driver'sPhoneNumber")}</Label>
               <SignUpInput
                 type="tel"
                 placeholder="phone number"
@@ -183,16 +187,16 @@ const AddNewCar = () => {
               />
             </InputItem>
             <InputItem>
-              <Label>Owned</Label>
+              <Label>{t("AddnewCar.Owned")}</Label>
               <Select onChange={(e) => setOwned(e.target.value)}>
-                <Option value={"rent"}>rent</Option>
-                <Option value={"own"}>own</Option>
+                <Option value={"rent"}>{t("AddnewCar.rent")}</Option>
+                <Option value={"own"}>{t("AddnewCar.own")}</Option>
               </Select>
             </InputItem>
           </FormBox>
           {error && <p style={{color:"red"}}>{error}</p>}
           <ButtonBox>
-            <SubmitButton onClick={() => setIsOpen(true)}>submit</SubmitButton>
+            <SubmitButton onClick={() => setIsOpen(true)}>{t("AddnewCar.submit")}</SubmitButton>
           </ButtonBox>
 
           

@@ -28,19 +28,23 @@ const Container = styled.div`
     margin-top: 20px;
     padding: 20px;
 `
-const AllRequests = () => {
+const AllRequests = ({ type }) => {
     const { requests } = useSelector(state => state.request)
-    console.log(requests)
     const navigate = useNavigate()
-   
-
     const dispatch = useDispatch()
+    const [filteredReq, setFilteredReq] = useState([])
     useEffect(() => {
         getAllRequests().then(({ data }) => {
             dispatch(getRequestSuccess(data.data))
-            console.log(data.data)
         }).catch((err) => console.log(err))
-    }, [])
+        if (type === 'pending') {
+            console.log(filteredReq)
+            setFilteredReq([...requests].filter((request) => request.status === 'pending'))
+        }
+        else {
+            setFilteredReq(requests)
+        }
+    }, [type])
 
     const columns = [
         { field: '_id', headerName: 'ID', width: 100 },
@@ -52,7 +56,7 @@ const AllRequests = () => {
 
             width: 150,
             renderCell: (param) => {
-                return format(new Date(param.row?.pickUpDate), 'MMMM do yyyy')
+                return format(param.row?.pickUpDate && new Date(param.row?.pickUpDate), 'MMMM do yyyy')
             }
         },
         {
@@ -74,9 +78,7 @@ const AllRequests = () => {
                     <>
                         <Button onClick={() => navigate(`/request/${param.row?._id}`)}>Detail</Button>
                         <DeleteIcon style={{ color: 'red', cursor: 'pointer' }} />
-
                     </>
-
                 </div>
             },
             width: 160,
@@ -88,10 +90,10 @@ const AllRequests = () => {
 
     return (
         <Container>
-            <Title>Requests</Title>
+            <Title>{type && type}Requests</Title>
             <div style={{ height: 400, width: '100%', marginTop: '20px' }}>
             <DataGrid
-                rows={requests}
+                    rows={filteredReq}
                 getRowId={(row) => row?._id}
                 columns={columns}
                 initialState={{

@@ -119,54 +119,44 @@ width: 400px;
 const TransportManagerResponse = ({ open, setOpen, onSubmit, requestId }) => {
     const [cars, setCars] = useState('')
     const [filterdCar, setFilterdCar] = useState([])
-    const [isOpen, setIsOpen] = useState(false)
+
     const [PlateNumber, setPlateNumber] = useState('')
     const [DriverName, setDriverName] = useState('')
     const [DriverPhone, setDriverPhone] = useState('')
     const [CarModel, setCarModel] = useState('')
     const [ReturnDate, setReturnDate] = useState('')
-    const {id} =useParams()
+    const { id } = useParams()
     useEffect(() => {
-
-        // axios.get('/api/car').then(({ data }) => {
-        //     setCars(data)
-        // }).catch(err => console.log(err))
-
         getAvailableCar().then(({ data }) => {
             setCars(data)
-      }).catch((error)=>console.log(error))
-
+        }).catch((error) => console.log(error))
     }, [])
 
     useEffect(() => {
         PlateNumber && setFilterdCar(
             ...cars.filter(car => car?.licencePlateNumber === PlateNumber)
         )
-        setDriverName(filterdCar?.DriverName)
-        setDriverPhone(filterdCar?.DriverPhoneNumber)
-        setCarModel(filterdCar?.model)
-    }, [PlateNumber])
+
+        if (filterdCar) {
+            setDriverName(filterdCar?.DriverName)
+            setDriverPhone(filterdCar?.DriverPhoneNumber)
+            setCarModel(filterdCar?.model)
+        }
+    }, [PlateNumber, filterdCar])
     console.log(PlateNumber)
-    
-    const handleOpen = () => {
-        setIsOpen(true)
-    }
+
+
     const handleClose = () => {
         setOpen(false)
     }
-
     const handleSubmit = () => {
-        updateCarStatus(filterdCar?._id,{status:"taken"}).then(()=>console.log("status updated")).catch((err)=>console.log(err))
+        updateCarStatus(filterdCar?._id, { status: "taken" }).then(() => console.log("status updated")).catch((err) => console.log(err))
         updateRequestById(requestId, { status: 'approved' }).then(() => console.log('approved successfully')).catch((err) => console.log(err));
-        
-        
-       // console.log("id",id)
-       // updateCarStatus(id,{status:"taken"}).then(()=>console.log("status updated")).catch((err)=>console.log(err))
         onSubmit({ requestId, PlateNumber, DriverName, DriverPhone, CarModel, ReturnDate })
         handleClose()
     }
-    
-    
+
+
 
     console.log('driver-name', DriverName)
     return (
@@ -206,7 +196,7 @@ const TransportManagerResponse = ({ open, setOpen, onSubmit, requestId }) => {
                                 <InputForm
                                     type="text"
                                     placeholder="Driver name"
-                                    value={filterdCar?.DriverName || ''}
+                                    value={DriverName}
                                     onChange={(e) => setDriverName(e.target.value)}
                                 />
                             </LabledInput>
@@ -215,7 +205,7 @@ const TransportManagerResponse = ({ open, setOpen, onSubmit, requestId }) => {
                                 <InputForm
                                     type="tel"
                                     placeholder="Driver phone"
-                                    value={filterdCar?.DriverPhoneNumber || ''}
+                                    value={DriverPhone}
                                     onChange={(e) => setDriverPhone(e.target.value)}
 
                                 />
@@ -225,7 +215,7 @@ const TransportManagerResponse = ({ open, setOpen, onSubmit, requestId }) => {
                                 <InputForm
                                     type="text"
                                     placeholder="Car Model"
-                                    value={filterdCar?.model || ''}
+                                    value={CarModel}
                                     onChange={(e) => setCarModel(e.target.value)}
                                 />
                             </LabledInput>

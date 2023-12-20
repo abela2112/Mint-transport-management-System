@@ -49,10 +49,12 @@ const getALLRequests = async (req, res) => {
 const getRequest = async (req, res) => {
   const { id } = req.params;
   try {
-    const request = await Request.findById(id);
-    console.log("request", request);
+    const request = await Request.findOne({ _id: id }).populate("userCreated","firstName lastName email position department role");
+    console.log("request populated", request);
+    console.log("request populated id", request?.userCreated);
     res.status(StatusCodes.OK).json(request);
   } catch (error) {
+    console.log("error", error);
     res.status(StatusCodes.BAD_REQUEST).json(error);
   }
 };

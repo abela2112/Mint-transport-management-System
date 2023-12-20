@@ -35,32 +35,7 @@ const Img1 = styled.img`
 `;
 
 
-const TextmintContainer = styled.div`
-  position: absolute;
-  display: flex;
-  top: 0;
-  left: 100px;
-  width: 150px;
-  height: 80px;
-  background-color: blue;
-`;
 
-const Img2 = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-`;
-
-const ImgContainer = styled.div`
-  flex: 1;
-  
-`;
-
-const Img3 = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-`;
 
 const LoginForm = styled.form`
   display: flex;
@@ -108,13 +83,6 @@ const SubmitButton = styled.button`
   align-items: center;
   justify-content: center;
   width: 100%;
-`;
-
-const SignUpLink = styled.a`
-  color: #007bff;
-  text-decoration: none;
-  margin-top: 10px;
-  cursor: pointer;
 `;
 
 const ForgotPasswordLink = styled.a`
@@ -189,9 +157,9 @@ const Login = () => {
   };
 
 
-  // useEffect(() => {
-  //   setTimeout(() => { dispatch(setError('')) }, 5000)
-  // }, [dispatch])
+  useEffect(() => {
+    setTimeout(() => { dispatch(setError('')) }, 5000)
+  }, [dispatch])
   return (
     <Container>
       <LoginContainer>
@@ -228,7 +196,7 @@ const Login = () => {
             </div>
 
             <Link to="/forgot-password" style={{ color: '#e6953b', marginTop: '10px', textAlign: 'right', textDecoration: 'none' }}>Forgot Password?</Link>
-            {/* {error && <Error>Something went wrong please try again</Error>} */}
+            {error && <Error>Something went wrong please try again</Error>}
             <SubmitButton type="submit" disabled={isLoading}> {isLoading ? <Loader /> : 'Login'}</SubmitButton>
            
           </LoginForm>
