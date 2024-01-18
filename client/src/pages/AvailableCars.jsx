@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useTranslation } from "react-i18next"
 //import { Mint,  MinT } from './images';
 //import { useNavigate } from 'react-router-dom';
 // First Container (Background)
@@ -51,6 +52,7 @@ const LabelContainer = styled.div`
 
 
 const AvailableCars= () => {
+  const {t}=useTranslation('global')
   return (
     <FirstContainer>
         
@@ -58,11 +60,11 @@ const AvailableCars= () => {
     
           <div>
           <LabelContainer>
-            <Commonlabel> Brand</Commonlabel>
+            <Commonlabel>{t("AvailableCars.brand")}</Commonlabel>
             
-           <Commonlabel>Model </Commonlabel>
+           <Commonlabel>{t("AvailableCars.model")} </Commonlabel>
            
-           <Commonlabel>Licence Plate Number</Commonlabel>
+           <Commonlabel>{t("AvailableCars.licensePlate")}</Commonlabel>
             
             </LabelContainer>
             </div>

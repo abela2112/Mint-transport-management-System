@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { Background, Mint } from '../asset';
 import {useState} from 'react'
+import { useTranslation } from "react-i18next"
 
 const Container=styled.div`
     display:flex;
@@ -101,6 +102,7 @@ const TransManagerResponseComponent=()=>{
        const [driverPhone,setDriverPhone]=useState('')
        const [carModel,setCarModel]=useState('')
        const [returnDate,setReturnDate]=useState('')
+       const {t}=useTranslation('global')
 
       
 
@@ -113,43 +115,43 @@ const TransManagerResponseComponent=()=>{
                </ImgmintContainer>
                    <Form> 
                        <LabledInput>
-                           <Lable>Plate Number</Lable>
+                           <Lable>{t("TransManagerResponse.plateNumber")}</Lable>
                            <InputForm 
                            type="text"
-                            placeholder="Plate Number"
+                            placeholder={t("TransManagerResponse.plateNumber")}
                             value={plateNumber}
                             onChange={(e)=>setPlateNumber(e.target.value)}
                             />
                        </LabledInput>
                        <LabledInput>
-                           <Lable>Driver name</Lable>
+                           <Lable>{t("TransManagerResponse.driverName")}</Lable>
                            <InputForm 
                            type="text"
-                           placeholder="Driver name"
+                           placeholder={t("TransManagerResponse.driverName")}
                            value={driverName}
                            onChange={(e)=>setDriverName(e.target.value)}
                            />
                        </LabledInput>
                        <LabledInput>
-                           <Lable>Driver phone</Lable>
+                           <Lable>{t("TransManagerResponse.driverPhone")}</Lable>
                            <InputForm 
                            type="text"
-                           placeholder="Driver phone"
+                           placeholder={t("TransManagerResponse.driverPhone")}
                            value={driverPhone}
                            onChange={(e)=>setDriverPhone(e.target.value)}
                            />
                        </LabledInput>
                        <LabledInput>
-                           <Lable>Car model</Lable>
+                           <Lable>{t("TransManagerResponse.carModel")}</Lable>
                            <InputForm 
                            type="text"
-                           placeholder="Car Model"
+                           placeholder={t("TransManagerResponse.carModel")}
                            value={carModel}
                            onChange={(e)=>setCarModel(e.target.value)}
                            />
                        </LabledInput>
                        <LabledInput>
-                           <Lable>Return Date</Lable>
+                           <Lable>{t("TransManagerResponse.returnDate")}</Lable>
                            <InputForm
                             type="text"
                             placeholder="MM/dd/yy"

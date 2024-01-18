@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 import { getResetPassword, postBack } from "../api/userApi";
+import { useTranslation } from "react-i18next"
 
 import {
   Button,
@@ -118,6 +119,7 @@ const ResetPassword = () => {
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
   const { id, token } = useParams();
+  const {t}=useTranslation('global')
   console.log(newpassword);
   console.log(confirmpassword);
   //console.log(id)
@@ -149,23 +151,23 @@ const ResetPassword = () => {
   return (
     <Container>
       <Wrapper>
-        <Lable>Resetting your password?</Lable>
+        <Lable>{t("ResetPassword.reset")}</Lable>
         <ImgmintContainer>
           <Img1 src={Mint} />
         </ImgmintContainer>
         <Form>
           <Contain>
-            <Lable1>Enter New password</Lable1>
+            <Lable1>{t("ResetPassword.enterPassword")}</Lable1>
             <InputForm
               type="password"
-              placeholder="new password"
+              placeholder={t("ResetPassword.newPassword")}
               value={newpassword}
               onChange={(e) => setNewPassword(e.target.value)}
             />
           </Contain>
 
           <Contain>
-            <Lable1>confirm password</Lable1>
+            <Lable1>{t("ResetPassword.confirmPassword")}</Lable1>
             <InputForm
               type="password"
               placeholder="confirm password"
@@ -174,7 +176,7 @@ const ResetPassword = () => {
             />
           </Contain>
 
-          <ResetButton onClick={handleClick}>Reset Password</ResetButton>
+          <ResetButton onClick={handleClick}>{t("ResetPassword.resetPassword")}</ResetButton>
         </Form>
       </Wrapper>
 
@@ -184,16 +186,16 @@ const ResetPassword = () => {
         aria-labelledby="dialog-title"
         aria-describedby="dialog-description"
       >
-        <DialogTitle id="dialog-title">"Password reset sucess"</DialogTitle>
+        <DialogTitle id="dialog-title">{t("ResetPassword.success")}</DialogTitle>
         <DialogContent id="dialog-description">
           <DialogContentText>
-            Congratulations! You have successfully Reset your password.
+            {t("ResetPassword.congrats")}
           </DialogContentText>
         </DialogContent>
 
         <DialogActions>
           <Button onClick={() => setSuccess(false)} color="primary">
-            Close
+            {t("ResetPassword.close")}
           </Button>
         </DialogActions>
       </Dialog>
@@ -204,15 +206,15 @@ const ResetPassword = () => {
         aria-labelledby="dialog-title"
         aria-describedby="dialog-description"
       >
-        <DialogTitle id="dialog-title">"Password confirm"</DialogTitle>
+        <DialogTitle id="dialog-title">{t("ResetPassword.passwordConfirm")}</DialogTitle>
         <DialogContent id="dialog-description">
-          <DialogContentText>password doesnt match</DialogContentText>
+          <DialogContentText>{t("ResetPassword.noMatch")}</DialogContentText>
 
           <Contain>
-            <Lable1>confirm password</Lable1>
+            <Lable1>{t("ResetPassword.passwordConfirm")}</Lable1>
             <InputForm
               type="password"
-              placeholder="confirm password"
+              placeholder={t("ResetPassword.passwordConfirm")}
               value={confirmpassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
@@ -221,10 +223,10 @@ const ResetPassword = () => {
 
         <DialogActions>
           <Button onClick={() => setError(false)} color="primary">
-            Close
+            {t("ResetPassword.close")}
           </Button>
           <Button onClick={handleClick} color="primary">
-            submit
+            {t("ResetPassword.submit")}
           </Button>
         </DialogActions>
       </Dialog>

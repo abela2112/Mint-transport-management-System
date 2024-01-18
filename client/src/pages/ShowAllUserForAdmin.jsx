@@ -10,6 +10,7 @@ import { io } from 'socket.io-client';
 import styled, { keyframes } from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteuser } from '../redux/features/userlist';
+import {useTranslation} from 'react-i18next';
 
 import { Title } from './StaffMangerPendingRequests';
 export const EditButton = styled.button`
@@ -59,6 +60,7 @@ const socket = io('http://localhost:5000')
 export default function ShowAllUserForAdmin() {
 
   const { allUsers } = useSelector(state => state.users)
+  const {t}=useTranslation('global')
   const navigate = useNavigate()
   const dispatch = useDispatch()
   console.log(allUsers)
@@ -82,26 +84,26 @@ export default function ShowAllUserForAdmin() {
     }).catch((err) => console.log(err))
   }
   const columns = [
-    { field: 'firstName', headerName: 'First Name', width: 170, cellClassName: 'table-cell' },
-    { field: 'lastName', headerName: 'Last name', width: 200, cellClassName: 'table-cell' },
-    { field: 'email', headerName: 'email', width: 200, cellClassName: 'table-cell' },
-    { field: 'role', headerName: 'role', width: 200, cellClassName: 'table-cell' },
+    { field: 'firstName', headerName: t("ShowAllUserForAdmin.firstName"), width: 170, cellClassName: 'table-cell' },
+    { field: 'lastName', headerName: t("ShowAllUserForAdmin.lastName"), width: 200, cellClassName: 'table-cell' },
+    { field: 'email', headerName: t("ShowAllUserForAdmin.email"), width: 200, cellClassName: 'table-cell' },
+    { field: 'role', headerName: t("ShowAllUserForAdmin.role"), width: 200, cellClassName: 'table-cell' },
 
     {
       field: 'phoneNumber',
-      headerName: 'Phone Number',
+      headerName: t("ShowAllUserForAdmin.phoneNumber"),
       width: 170,
       cellClassName: 'table-cell',
     },
 
     {
       field: 'action',
-      headerName: 'Action',
+      headerName: t("ShowAllUserForAdmin.action"),
       sortable: false,
       width: 200,
       renderCell: (param) => {
         return <div style={{ display: 'flex', width: '100%', alignItems: 'center', justifyContent: 'space-around' }}>
-          <EditButton onClick={() => navigate(`/user-detail/${param.row._id}`)}>Edit</EditButton>
+          <EditButton onClick={() => navigate(`/user-detail/${param.row._id}`)}>{t("ShowAllUserForAdmin.edit")}</EditButton>
           <DeleteIcon style={{ color: '#ff4e45', cursor: 'pointer' }} onClick={() => handleDelete(param.row._id)} />
         </div>
       }
@@ -110,7 +112,7 @@ export default function ShowAllUserForAdmin() {
   ];
   return (
     <Container>
-      <Title>All users</Title>
+      <Title>{t("ShowAllUserForAdmin.allUsers")}</Title>
       <TableContainer style={{ height: '60%', width: '100%' }}>
         <DataGrid
 

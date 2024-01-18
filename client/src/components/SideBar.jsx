@@ -108,18 +108,18 @@ const SideBar = () => {
                     {user?.role === 'staff' &&
                         <>
 
-                        <ListItem><NavLink className={'nav-link'} to='/booking'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />ቦታ ማስያዝ</NavLink></ListItem>  
-                        <ListItem><NavLink className={'nav-link'} to='/history'><RestoreOutlinedIcon style={{ marginRight: '10px' }} />ታሪክ</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to='/booking'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.booking')}</NavLink></ListItem>  
+                        <ListItem><NavLink className={'nav-link'} to='/history'><RestoreOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.history')}</NavLink></ListItem>
 
                         </>
                     }
 
                     {user?.role === 'staff-manager' &&
                         <>
-                        <ListItem><NavLink className={'nav-link'} to={'/pending-user-request'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />Pending</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to={'/pending-user-request'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.pending')}</NavLink></ListItem>
 
-                        <ListItem><NavLink className={'nav-link'} to='/requests-history'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />History</NavLink></ListItem>
-                        <ListItem><NavLink className={'nav-link'} to='/petrol-request'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />Petrol Request</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to='/requests-history'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.history')}</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to='/petrol-request'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.petrolRequest')}</NavLink></ListItem>
 
                         </>
                     }
@@ -138,10 +138,10 @@ const SideBar = () => {
                     {user.role === 'admin' &&
                         <>
 
-                        <ListItem ><NavLink className={'nav-link'} to='/user-list'> <Group style={{ marginRight: '10px' }} />User</NavLink></ListItem>
-                        <ListItem><NavLink className={'nav-link'} to={'/pending-user-register-request'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />Pending Requests</NavLink></ListItem>
-                        <ListItem><NavLink className={'nav-link'} to={'/user-register-request'} ><PersonAddAlt style={{ marginRight: '10px' }} />User Register Requests</NavLink></ListItem>
-                        <ListItem><NavLink className={'nav-link'} to={'/department'} ><Business style={{ marginRight: '10px' }} />Department</NavLink></ListItem>
+                        <ListItem ><NavLink className={'nav-link'} to='/user-list'> <Group style={{ marginRight: '10px' }} />{t("sidebar.user")}</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to={'/pending-user-register-request'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />{t("sidebar.pendingRequests")}</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to={'/user-register-request'} ><PersonAddAlt style={{ marginRight: '10px' }} />{t("sidebar.userRegisterRequests")}</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to={'/department'} ><Business style={{ marginRight: '10px' }} />{t("sidebar.department")}</NavLink></ListItem>
 
                         </>
                     }

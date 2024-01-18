@@ -1,7 +1,8 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import React from 'react'
-
+import { useTranslation } from "react-i18next"
 const StaffApproveModal = ({ isOpenApproveForStaff, setIsOpenApproveForStaff, handleApprove }) => {
+    const {t}=useTranslation('global')
     return (
         <Dialog
             open={isOpenApproveForStaff}
@@ -10,13 +11,13 @@ const StaffApproveModal = ({ isOpenApproveForStaff, setIsOpenApproveForStaff, ha
             aria-describedby="dialog-description"
         >
             <DialogTitle id="dialog-title">
-                Do you want to approve?
+                {t("StaffApproveModal.wantToApprove")}
             </DialogTitle>
             <DialogContent id="dialog-description">
                 {/* <DialogContentText></DialogContentText> */}
             </DialogContent>
             <DialogActions>
-                <Button onClick={() => setIsOpenApproveForStaff(false)} style={{ backgroundColor: "Red", color: "white" }}>No</Button>
+                <Button onClick={() => setIsOpenApproveForStaff(false)} style={{ backgroundColor: "Red", color: "white" }}>{t("StaffApproveModal.no")}</Button>
                 <Button
                     style={{ backgroundColor: "Yellow", color: "white" }}
                     autoFocus
@@ -25,7 +26,7 @@ const StaffApproveModal = ({ isOpenApproveForStaff, setIsOpenApproveForStaff, ha
                         setIsOpenApproveForStaff(false);
                     }}
                 >
-                    Yes
+                   {t("StaffApproveModal.yes")}
                 </Button>
             </DialogActions>
         </Dialog>

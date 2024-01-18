@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux'
 import { Container } from '@mui/material'
 import styled from 'styled-components'
 import { format } from 'date-fns'
+import { useTranslation } from "react-i18next"
+
 const Wrapper = styled.div`
 display: flex;
 flex-direction: column;
@@ -40,7 +42,8 @@ const SinglResponsePage = () => {
     const [response, setResponse] = useState(null)
     const { id } = useParams()
     const { user } = useSelector(state => state.user)
-
+    const {t}=useTranslation('global')
+    
     useEffect(() => {
         getRequestResponseapiById(id).then(({ data }) => {
             setResponse(data)
@@ -52,14 +55,14 @@ const SinglResponsePage = () => {
     return (
         <Container>
             
-            <Wrapper>
-            <Title>Response Detail</Title>
+            <Wrapper> 
+            <Title>{t("singleResponsePage.responseDetail")}</Title>
 
               <InfoContainer>
-                <Text><span><b>Driver Name:</b></span>{response?.DriverName}</Text>
-                <Text><span><b>Driver Phone:</b></span>{response?.DriverPhone}</Text>
-                <Text><span><b>Plate Number:</b></span>{response?.PlateNumber}</Text>
-                <Text><span><b>Return date:</b></span>{response?.ReturnDate && format(new Date(response?.ReturnDate)
+                <Text><span><b>{t("singleResponsePage.driverName")}</b></span>{response?.DriverName}</Text>
+                <Text><span><b>{t("singleResponsePage.driverPhone")}</b></span>{response?.DriverPhone}</Text>
+                <Text><span><b>{t("singleResponsePage.plateNumber")}</b></span>{response?.PlateNumber}</Text>
+                <Text><span><b>{t("singleResponsePage.returnDate")}</b></span>{response?.ReturnDate && format(new Date(response?.ReturnDate)
                     , 'MMMM do yyyy')}</Text>
                </InfoContainer>     
             </Wrapper>

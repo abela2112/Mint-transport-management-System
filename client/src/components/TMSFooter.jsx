@@ -4,6 +4,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import EmailIcon from '@mui/icons-material/Email';
 import { Mint2 } from '../asset';
+import { useTranslation } from "react-i18next";
 
 const FooterContainer = styled.footer`
   background-color: #333;
@@ -80,6 +81,7 @@ const IconContainer = styled.span`
 `;
 
 const TMSFooter = () => {
+  const {t}=useTranslation('global')
   return (
     <FooterContainer>
       <LogoContainer>
@@ -87,7 +89,7 @@ const TMSFooter = () => {
       </LogoContainer>
       <ContentWrapper>
         <FooterSection>
-          <h4>Contact Us</h4>
+          <h4>{t("TMSFooter.contactUs")}</h4>
           <ContactLink href="https://twitter.com/MinistryofInno2/status/1470748755221692420" target="_blank" rel="noopener noreferrer">
             <IconContainer>
               <TwitterIcon />

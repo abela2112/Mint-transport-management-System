@@ -245,27 +245,27 @@ const LandingPage = () => {
             
               </StyledText>
               
-             <StyledText2>
-            <h2>Transport Management <br/>System</h2>
+             <StyledText2> 
+            <h2>{t("LandingPage.transportManagement")}<br/>{t("LandingPage.system")}</h2>
           </StyledText2>
           <StyledText4>
-            <h3>Your Gateway to Efficient Operations</h3>
+            <h3>{t("LandingPage.gateway")}</h3>
           </StyledText4>
           
         </ThirdContainer>
         <FourthContainer>
         <div>
-              <StyledText3> {t('Service')}</StyledText3>
+              <StyledText3> {t("LandingPage.service")} </StyledText3>
         <List>
-         <ListItem> ORDER A VEHICLE </ListItem>
-         <ListItem> SCHEDULING </ListItem>
-         <ListItem>REPORTING AND ANALYTICS </ListItem>
+         <ListItem> {t("LandingPage.order")} </ListItem>
+         <ListItem> {t("LandingPage.schedule")} </ListItem>
+         <ListItem> {t("LandingPage.reporting")}</ListItem>
         </List>
         </div>
         
           
-        <Button onClick={() => navigate('/login')}>Login</Button>
-          <SignUpButton onClick={() => navigate('/register')}>Sign Up</SignUpButton>
+        <Button onClick={() => navigate('/login')}>{t("LandingPage.login")}</Button>
+          <SignUpButton onClick={() => navigate('/register')}>{t("LandingPage.signUp")}</SignUpButton>
         </FourthContainer>
       </div>
     

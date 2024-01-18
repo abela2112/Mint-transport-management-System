@@ -7,10 +7,10 @@ import {
     DialogActions,
 } from '@mui/material'
 import {useState}  from 'react'
-
+import { useTranslation } from "react-i18next"
 const DialogModal = ({ open, onClose, onSubmit }) => {
     const [isOpen, setIsOpen] = useState(false)
-
+    const {t}=useTranslation('global')
     const handleOpen = () => {
         setIsOpen(true)
     }
@@ -24,6 +24,7 @@ const DialogModal = ({ open, onClose, onSubmit }) => {
         
         onSubmit()
         handleClose()
+        
     }
 
     return (
@@ -33,17 +34,17 @@ const DialogModal = ({ open, onClose, onSubmit }) => {
                 open={open}
                 onClose={handleClose}
                 aria-labelledby='dialog-title'
-                aria-describedby='dialog-description'
+                aria-describedby='dialog-description' 
             >   
-                <DialogTitle id='dialog-title'>Add the New data to the database?</DialogTitle>
+                <DialogTitle id='dialog-title'>{t("DialogModal.addData")}</DialogTitle>
                 <DialogContent id='dialog-description'>
                    
-                    <DialogContentText>Are you sure?</DialogContentText>
+                    <DialogContentText>{t("DialogModal.areYouSure")}</DialogContentText>
                    
                  </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    <Button autoFocus onClick={handleSubmit}>Submit</Button>
+                    <Button onClick={handleClose}>{t("DialogModal.cancel")}</Button>
+                    <Button autoFocus onClick={handleSubmit}>{t("DialogModal.submit")}</Button>
                 </DialogActions>
             </Dialog>
         </>

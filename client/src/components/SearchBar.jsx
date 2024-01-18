@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import FilterListOutlinedIcon from '@mui/icons-material/FilterListOutlined';
+import { useTranslation } from "react-i18next"
 const Container = styled.div`
     height: 60px;
     width: 100%;
@@ -41,6 +42,7 @@ display: flex;
 align-items: center;
 `
 const SearchBar = ({ sortingTerm, setSortingTerm, filters, setFilters }) => {
+    const {t}=useTranslation('global')
     console.log(filters)
     return (
         <Container>
@@ -50,19 +52,19 @@ const SearchBar = ({ sortingTerm, setSortingTerm, filters, setFilters }) => {
             </SearchBox> */}
             <FilterBox>
                 <FilterListOutlinedIcon style={{ marginRight: '5px' }} />
-                <Title>Status:</Title>
+                <Title>{t("SearchBar.status")}</Title> 
                 <Select value={filters} defaultValue={'pending'} onChange={(e) => setFilters(e.target.value)} >
-                    <Option value={'pending'}>Pending</Option>
-                    <Option value={'approved'}>approved</Option>
-                    <Option value={'rejected'}>rejected</Option>
+                    <Option value={'pending'}>{t("SearchBar.pending")}</Option>
+                    <Option value={'approved'}>{t("SearchBar.approved")}</Option>
+                    <Option value={'rejected'}>{t("SearchBar.rejected")}</Option>
                 </Select>
             </FilterBox>
             <SortingBox>
 
-                <Title>Sort BY:</Title>
+                <Title>{t("SearchBar.sortBy")}</Title>
                 <Select value={sortingTerm} defaultValue={'ASC'} onChange={(e) => setSortingTerm(e.target.value)}>
-                    <Option value={'ASC'}>ASC</Option>
-                    <Option value={'DES'}>DES</Option>
+                    <Option value={'ASC'}>{t("SearchBar.asc")}</Option>
+                    <Option value={'DES'}>{t("SearchBar.des")}</Option>
                 </Select>
             </SortingBox>
         </Container>

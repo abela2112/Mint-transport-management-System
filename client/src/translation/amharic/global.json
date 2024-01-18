@@ -1,15 +1,291 @@
 
-
     {
         "Service":"Service",
-        
+        "AboutUsPage": {
+            "title": "ስለ እኛ",
+            "content": "የኢኖቬሽን እና ቴክኖሎጂ ሚኒስቴር የቴክኖሎጂ እድገትን ወደፊት በመምራት በግንባር ቀደምትነት ተጠቃሽ ነው።  የተሻለ ፈጠራ እና ልህቀትን ለማምጣት ያለን ቁርጠኝነት ጽኑ ነው።",
+            "mission": "ተልዕኳችን",
+            "missionStatement": "የፈጠራ እና የቴክኖሎጂ ሃይልን በመጠቀም ችግሮችን መፍታት፣ ኑሮን ማሻሻል እና ዘላቂነት ያለው እድገት ኢትዮጵያ ውስጥ ማምጣት ነው።",
+            "vision": "ራዕያችን",
+            "visionStatement": "የኢኖቬሽን እና ቴክኖሎጂ ፈጠራዎች ላይ ዋና ተዋናይ በመሆን ኢትዮጵያን ከአለም ግንባር ቀደም የቴክኖሎጂ ፈጠራ አገራት መካከል ማስቀመጥ።",
+            "coreMission": "በተልዕኳችን መሐል ያሉ እሴቶቻችን:",
+            "innovation": "ፈጠራ: መፍትሔዎች ለማግኘት ፈጠራን ማበረታታት",
+            "collaboration": "ትብብር: አብሮ በመስራት የጋራ ዓላማዎቻችንን ማሳካት ",
+            "transparency": "ግልጽነት: በእውነት ላይ የተመሰረቱ ውይይቶች እና ውሳኔዎች",
+            "excellence": "ልህቀት: ከፍተኛ ጥራት እና ክንውን",
+            "leadership": "አመራሮቻችን",
+            "leadershipStatement": "ፕሮፌሽናል የሆኑ፣ ኢኖቬሽን እና ቴክኖሎጂን በኢትዮጵያ አንድ እርምጃ ወደፊት የሚያስኬዱ ናቸው።"
+    },
+    "LandingPage": {
+        "transportManagement": "ትራንስፖርት ማስተዳደርያ",
+        "system": "ሲስተም",
+        "gateway": "የተሟላና ብቁ አገልግሎት",
+        "service": "አገልግሎቶች",
+        "order": "መኪና ማዘዝ",
+        "schedule": "መርሐ-ግብር ማመቻቸት",
+        "reporting": "ሪፖርት እና ትንተና",
+        "login": "ይግቡ",
+        "signUp": "ይመዝገቡ"
+    },
+
+        "Nav": {
+            "home": "ወደ መጀመሪያ ገጽ",
+            "aboutUs": "ስለ እኛ",
+            "services": "አገልግሎቶች"
+    },
+    "Services": {
+        "services": "አገልግሎቶች",
+        "order": "1. መኪና ማዘዝ",
+        "firstOrderText": "ይህ አገልግሎት ተጠቃሚዎች መኪናዎችን ለተለያዩ ፍላጎቶቻቸው እንዲያዙ ያስችላል። ",
+        "secondOrderText": "ተጠቃሚዎች የተለያዩ መስፈርቶቻቸውን ማስታወቅ ይችላሉ ለምሳሌ- የመኪናውን አይነት፣ የተሳፋሪዎች ቁጥር፣ መነሻ እና መዳረሻ ቦታዎች እና የመሳሰሉትን። ሚኒስቴር መስሪያ ቤቱ የመኪናዎቹን ምደባ በመቆጣጠር ተደራሽነትን እና ምቾትን ያረጋግጣል።",
+        "schedule": "2. መርሐ-ግብር ማመቻቸት",
+        "firstScheduleText": "መርሐ-ግብር ማመቻቸት አገልግሎት ተጠቃሚዎች የትራንስፖርት አገልግሎቶቹን በቀላሉ እንዲያቅዱ እና እንዲያስተዳድሩ ያግዛቸዋል።",
+        "secondScheduleText": "ተጠቃሚዎች መነሻ እና መዳረሻ ሰዓቶችን በማመቻቸት አገልግሎቱ በሚፈለገው ሰዓት እንዲገኝ ማድረግ ይችላሉ።",
+        "report": "3. ሪፖርት እና ትንተና",
+        "firstReportText": "ሪፖርት እና ትንተና አገልግሎቶች በመረጃ የተደገፈ ትራንስፖርት እና መኪና አጠቃቀም ያበረክታሉ።",
+        "secondReportText": "ተጠቃሚዎች የመኪና አጠቃቀም እና የተሳፋሪ ቁጥርን መረጃ ማግኘት ይችላሉ። ሚኒስቴር መስሪያ ቤቱም ይህንን መረጃ በመጠቀም ውሳኔዎች ማሳለፍ፣ አገልግሎቱን ማሻሻል እና የሚያጋጥሙ ተግዳሮቶችን መፍታት ይችላል።"
+    },
+        "StaffApproveModal": {
+            "wantToApprove": "ማጽደቅ ይፈልጋሉ?",
+            "yes": "አዎ",
+            "no" : "አልፈልግም"
+    },
+        "StaffRejectModal": {
+            "wantToApprove": "ማጽደቅ ይፈልጋሉ?",
+            "yes": "አዎ",
+            "no" : "አልፈልግም"
+    },
+        "CarCard": {
+            "brand": "የምርት ስም :",
+            "model": "የመኪናው ሞዴል :",
+            "plateNumber": "ታርጋ ቁጥር :"
+    },
+        "DialogModal": {
+            "addData": "ይህንን መረጃ መመዝገብ ይፈልጋሉ?",
+            "areYouSure": "እርግጠኛ ኖት?",
+            "cancel": "ሰርዝ",
+            "submit": "መዝግብ"
+    },
+        "Header": {
+            "header": "የራስጌ መረጃ"
+    },
+        "SearchBar": {
+            "status": "ሁኔታ: ",
+            "pending": "ጥበቃ ላይ ያሉ ትእዛዞች",
+            "approved": "የጸደቁ",
+            "rejected": "ውድቅ የተደረጉ",
+            "sortBy": "ለማስተካከል",
+            "asc": "የሚጨምር",
+            "des": "የሚቀንስ"
+    }, 
+        "TMSFooter": {
+        "contactUs": "ያግኙን"
+    },
+        "AllRequests": {
+            "ID": "አይ.ዲ",
+            "fullName": "ሙሉ ስም",
+            "phoneNumber": "ስልክ ቁጥር",
+            "pickUpDate": "አገልግሎት የሚጀምርበት ቀን",
+            "status": "ሁኔታ",
+            "action": "ድርጊት",
+            "detail": "ዝርዝር መረጃ",
+            "requests": "ጥያቄዎች",
+            "pending": "ጥበቃ ላይ ያሉ"
+    },
         "login": {
-            "heading":"እንክን ደህና መጡ",
-            "title":"ወደ አካዉኒቶ ይግቡ",
-            "email":"ኢሜል አድራሻ",
-            "password":"የይለፍ ቃል",
-            "login":"ግባ"
+            "welcome": "እንኳን ደህና መጡ",
+            "accountLogin": "ወደ አካውንቶት ይግቡ",
+            "email": "ኢሜይል አድራሻ ",
+            "password": "የይለፍ ቃል",
+            "forgotPassword": "የይለፍ ቃሎን እረስተዋል?",
+            "login": "ይግቡ",
+            "noAccount": "አካውንት የሎትም?",
+            "signUp": "ይመዝገቡ",
+            "wrongInput": "የተሳሳተ መረጃ አስገብተዋል በድጋሚ ይሞክሩ"
         },
+        "Register": {
+            "getStarted": "ይጀምሩ",
+            "firstName": "የመጀመሪያ ስም",
+            "lastName": "የመጨረሻ ስም",
+            "department": "ዲፓርትመንት",
+            "position": "የስልጣን እርከን",
+            "email": "ኢሜይል አድራሻ",
+            "phoneNumber": "ስልክ ቁጥር",
+            "password": "የይለፍ ቃል",
+            "confirmPassword": "የይለፍ ቃሉን ያረጋግጡ",
+            "CEO": "ሲ.ኢ.ኦ",
+            "Desk": "ዴስክ",
+            "Expert": "ባለሙያ",
+            "account": "አካውንት አሎት?",
+            "signIn": "ይግቡ",
+            "signUp": "ይመዝገቡ",
+            "choose": "አማራጭ ይምረጡ",
+            "noMatch": "የይለፍ ቃላቱ አይመሳሰሉም! በድጋሚ ያረጋግጡ",
+            "congrats": "እንኳን ደስ አሎት! በተሳካ መልኩ ተመዝግበዋል። መጽደቁን ከአይ.ሲ.ቲ ክፍል ያረጋግጡ።",
+            "submit": "መዝግብ",
+            "cancel": "ሰርዝ",
+            "close": "ይዝጉ"
+    },
+        "ForgotPassword": {
+            "forgotPassword": "የይለፍ ቃሎን እረስተዋል?",
+            "enterEmail": "ኢሜይሎን ያስገቡ",
+            "resetPassword": "የይለፍ ቃል ቀይር",
+            "noAccount": "አካውንት የሎትም?",
+            "signUp": "ይመዝገቡ",
+            "verification": "ኢሜይል ማረጋገጫ",
+            "passwordLink": "የይለፍ ቃል በድጋሚ ማግኛ በኢሜይሎት ተልኳል",
+            "close": "ይዝጉ"  
+    },
+    "Modal": {
+        "successMessage": "የስኬት መልዕክት",
+        "requestSuccess": "ጥያቄዎት በተሳካ መልኩ ተልኳል"
+    },
+    "TransportManagerResponse": {
+        "approve": "የተሞላውን ቅጽ አረጋግጥ",
+        "plateNumber": "ታርጋ ቁጥር",
+        "driverName": "የሹፌር ስም",
+        "driverPhone": "የሹፌር ስልክ ቁጥር",
+        "carModel": "የመኪና ሞዴል",
+        "returnDate": "የመመለሻ ቀን",
+        "submit": "መዝግብ",
+        "cancel": "ሰርዝ"
+
+    },
+
+    "AllStaffsPetrolRequest": {
+        "detail": "ዝርዝር መረጃ",
+        "requests": "ጥያቄዎች"
+    },
+    "AvailableCar": {
+        "availableCar": "ዝግጁ የሆነ መኪና"
+    },
+    "AvailableCars": {
+        "brand": "የምርት ስም",
+        "model": "ሞዴል",
+        "licensePlate": "ታርጋ ቁጥር"
+    },
+    "History": {
+        "detail": "ዝርዝር መረጃ",
+        "history": "የአገልግሎት ታሪክ",
+        "Id": "አይ.ዲ",
+        "fullName": "ሙሉ ስም",
+        "phoneNumber": "ስልክ ቁጥር",
+        "pickUpDate": "አገልግሎት የሚጀምርበት ቀን",
+        "status": "ሁኔታ",
+        "action": "ድርጊት"
+    },
+    "MakeRequest": {
+        "requestForm": "የጥያቄ ቅጽ",
+        "fullName": "ሙሉ ስም",
+        "phoneNumber": "ስልክ ቁጥር",
+        "pickUpDate": "አገልግሎት የሚጀምርበት ቀን",
+        "returnDate": "የመመለሻ ቀን",
+        "destination": "መዳረሻ",
+        "description": "ገለጻ",
+        "passengers": "ተሳፋሪዎች",
+        "addPassenger": "ተሳፋሪ ጨምር"
+    },
+    "Notification": {
+        "notifications": "ማስታወቂያ",
+        "noNotification": "ማስታወቂያ የለም"
+    },
+    "Profile": {
+        "profile": "የማንነት መግለጫ"
+    },
+    "Request": {
+        "requestForm": "የጥያቄ ቅጽ",
+        "fullName": "ሙሉ ስም",
+        "phoneNumber": "ስልክ ቁጥር",
+        "pickUpDate": "አገልግሎት የሚጀምርበት ቀን",
+        "returnDate": "የመመለሻ ቀን",
+        "destination": "መዳረሻ",
+        "passengerNumber": "የተሳፋሪዎች ቁጥር",
+        "description": "ገለጻ",
+        "submit": "መዝግብ",
+        "cancel": "ሰርዝ"
+
+    },
+    "ResetPassword": {
+        "reset": "የይለፍ ቃሎን መቀየር ይፈልጋሉ?",
+        "enterPassword": "አዲስ የይለፍ ቃል ያስገቡ",
+        "newPassword": "አዲስ የይለፍ ቃል",
+        "confirmPassword": "የይለፍ ቃሉን ያረጋግጡ",
+        "resetPassword": "የይለፍ ቃሉን ይቀይሩ",
+        "success": "የይለፍ ቃሉ በተሳካ መልኩ ተቀይሯል",
+        "congrats": "እንኳን ደስ አሎት፤ የይለፍ ቃሉ በተሳካ መልኩ ተቀይሯል",
+        "close": "ይዝጉ",
+        "passwordConfirm": "የይለፍ ቃል ያረጋግጡ",
+        "noMatch": "ያስገቧቸው የይለፍ ቃላት አይመሳሰሉም",
+        "submit": "መዝግብ"
+    },
+    "SearchPage": {
+        "searchPage": "ፈልግ"
+    },
+    "singlePetrolRequestDetail": {
+        "requestDetail": "የጥያቄው ዝርዝር መረጃ ",
+        "fullName": "ሙሉ ስም :",
+        "phoneNumber": "ስልክ ቁጥር :",
+        "description": "ገለጻ :",
+        "requestdate": "የተጠየቀበት ቀን :",
+        "approved": "ጸድቋል",
+        "reject": "ውድቅ ይሁን",
+        "wantToApprove": "ማጽደቅ ይፈልጋሉ?",
+        "yes": "አዎ",
+        "no" : "አልፈልግም",
+        "confirmation": "ማረጋገጫ",
+        "wantToReject": "ውድቅ ማድረግ ይፈልጋሉ?"
+    },
+    "singleRequest": {
+        "fullName": "ሙሉ ስም:",
+        "phoneNumber": "ስልክ ቁጥር:",
+        "pickUpDate": "አገልግሎት የሚጀምርበት ቀን:"
+    },
+    "SingleRequestDetail": {
+        "requestDetail": "የምላሽ ዝርዝር መረጃ",
+        "fullName": "ሙሉ ስም :",
+        "destination": "መዳረሻ :",
+        "phoneNumber": "ስልክ ቁጥር :",
+        "description": "ገለጻ :",
+        "pickUpDate": "አገልግሎት የሚጀምርበት ቀን :",
+        "returnDate": "የመመለሻ ቀን:",
+        "reject": "ውድቅ ይሁን",
+        "approved": "ጸድቋል"
+    },
+    "singleResponsePage": {
+        "responseDetail": "የምላሽ ዝርዝር መረጃ",
+        "driverName": "የሹፌር ስም:",
+        "driverPhone": "የሹፌር ስልክ ቁጥር:",
+        "plateNumber": "ታርጋ ቁጥር:",
+        "returnDate": "የመመለሻ ቀን:"
+    },
+    "StaffMangerPendingRequests": {
+        "id": "አይ.ዲ",
+        "fullName": "ሙሉ ስም",
+        "phoneNumber": "ስልክ ቁጥር",
+        "pickUpDate": "አገልግሎት የሚጀምርበት ቀን",
+        "status": "ሁኔታ",
+        "action": "ድርጊት",
+        "detail": "ዝርዝር መረጃ",
+        "pendingRequests": "ጥበቃ ላይ ያሉ ትእዛዞች"
+    },
+    "TransManagerResponse": {
+        "plateNumber": "ታርጋ ቁጥር",
+        "driverName": "የሹፌር ስም",
+        "driverPhone": "የሹፌር ስልክ ቁጥር",
+        "carModel": "የመኪና ሞዴል",
+        "returnDate": "የመመለሻ ቀን"
+    },
+    "userDetails": {
+        "fullName": "ሙሉ ስም :",
+        "email": "ኢሜል አድራሻ :",
+        "phoneNumber": "ስልክ ቁጥር :",
+        "position": "የስልጣን እርከን :",
+        "department": "ዲፓርትመንት :",
+        "role": "ተግባር:",
+        "registeredDate": "የተመዘገበት ቀን"
+    },
+
+
         "AddnewDriver":{
             "title":"አዲስ ሹፌር መዝግብ",
             "name":"ስም",
@@ -18,13 +294,19 @@
             "submit":"መዝግብ"
         },
         "sidebar":{
+            "booking": "ቦታ ማስያዣ",
             "requests":"ትእዛዞች",
-            "pendingRequests":"ጥብቃ ላይ ያሉ ትእዛዞች",
+            "pendingRequests":"ጥበቃ ላይ ያሉ ትእዛዞች",
             "AddnewCar":"አዲስ መኪና መዝግብ",
             "AddnewDriver":"አዲስ ሹፌር መዝግብ",
             "AvailableCar":"ስራ ያልያዙ መኪና",
-            "logOut":"ዉጣ"
-    
+            "logOut":"ዉጣ",
+            "user": "የተጠቃሚዎች ዝርዝር",
+            "userRegisterRequests": "የተጠቃሚ ምዝገባ ጥያቄ",
+            "department": "ዲፓርትመንት",
+            "pending": "ጥበቃ ላይ ያሉ ትእዛዞች",
+            "history": "የአገልግሎት ታሪክ",
+            "petrolRequest": "የነዳጅ ጥያቄ"
         }
         ,"AddnewCar":{
             "title":"አዲስ መኪና መዝግብ",
@@ -38,5 +320,70 @@
             "rent":"ኪራይ",
             "own":"የራስ",
             "submit":"መዝግብ"
-        }
+        },
+        "AddDepartment": {
+            "departmentInformation": "የዲፓርትመንት መረጃ",
+            "departmentName": "የዲፓርትመንት ስም",
+            "staffManager": "የሠራተኞች ኃላፊ",
+            "newDepartmentToDatabase": "ይህንን ዲፓርትመንት መጨመር ይፈልጋሉ?",
+            "AreYouSure": "ያረጋገጡ",
+            "submit": "መዝግብ",
+            "cancel": "ሰርዝ"
+    },
+    "StaffPetrolRequest": {
+        "petrolForm": "ነዳጅ መሙያ ቅጽ",
+        "fullName": "ሙሉ ስም",
+        "phoneNumber":"ስልክ ቁጥር",
+        "requestDate": "የተጠየቀበት ቀን",
+        "description": "ገለጻ",
+        "submit": "መዝግብ",
+        "confirm": "ማረጋገጥ ይፈልጋሉ?",
+        "yes": "አዎ",
+        "no" : "አልፈልግም"  
+    },
+    "UserRequestDetail":{
+        "email": "ኢሜል አድራሻ",
+        "phoneNumber": "ስልክ ቁጥር",
+        "position": "የስልጣን እርከን",
+        "CEO": "ሲ.ኢ.ኦ",
+        "Desk": "ዴስክ",
+        "Expert": "ባለሙያ",
+        "department": "ዲፓርትመንት",
+        "role": "ተግባር",
+        "staff": "ሠራተኛ",
+        "staffManager": "የሠራተኞች ኃላፊ",
+        "transportManager": "የትራንስፖርት ኃላፊ",
+        "registeredDate": "የተመዘገበት ቀን",
+        "editUser": "ተጠቃሚ ይቀይሩ",
+        "editInfo":"የተጠቃሚ መረጃ ይቀይሩ",
+        "password": "የይለፍ ቃል",
+        "submit": "መዝግብ",
+        "cancel": "ሰርዝ",
+        "approve": "ማረጋገጥ ይፈልጋሉ?",
+        "reject": "አለመቀበል ይፈልጋሉ?",
+        "yes": "አዎ",
+        "no" : "አልፈልግም"
+    },
+    "UserRegisterRequest": {
+        "firstName": "የመጀመሪያ ስም",
+        "lastName": "የመጨረሻ ስም",
+        "email": "ኢሜይል",
+        "role": "ተግባር",
+        "phoneNumber": "ስልክ ቁጥር",
+        "action": "ድርጊት",
+        "edit": "አስተካክል",
+        "userRegisterRequest": "የተጠቃሚ ምዝገባ ጥያቄ",
+        "pending": "የሚጠብቁ"
+    }, 
+    
+        "ShowAllUserForAdmin": {
+        "firstName": "የመጀመሪያ ስም",
+        "lastName": "የመጨረሻ ስም",
+        "email": "ኢሜይል",
+        "role": "ተግባር",
+        "phoneNumber": "ስልክ ቁጥር",
+        "action": "ድርጊት",
+        "edit": "አስተካክል",
+        "allUsers": "ሁሉም ተጠቃሚዎች"
     }
+     }

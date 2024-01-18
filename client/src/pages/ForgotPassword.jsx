@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Background, Mint } from '../asset';
 import { Link } from 'react-router-dom';
 import {forgot} from '../api/userApi'
+import { useTranslation } from "react-i18next"
 
 //import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -117,7 +118,7 @@ const Img1 = styled.img`
 const ForgotPassword=()=>{
     const [isOpen, setIsOpen] = useState(false);
      const [email,setEmail]=useState('')
-     
+     const {t}=useTranslation('global')
     const handleClick = () => {
       
        
@@ -139,9 +140,9 @@ const ForgotPassword=()=>{
                 <ImgmintContainer>
                   <Img1 src={Mint} />
                </ImgmintContainer>
-                <Lable>Forgot Your password?</Lable>
+                <Lable>{t("ForgotPassword.forgotPassword")}</Lable>
                 <Form>
-                      <Lable1>Enter your Email</Lable1>
+                      <Lable1>{t("ForgotPassword.enterEmail")}</Lable1>
                       <InputForm 
                       type="email" 
                       placeholder="xxx@mint.gov.et"
@@ -149,11 +150,11 @@ const ForgotPassword=()=>{
                       onChange={(e)=>setEmail(e.target.value)}
                       />
 
-                     <ResetButton onClick={handleSubmit }>Reset Password</ResetButton>
+                     <ResetButton onClick={handleSubmit }>{t("ForgotPassword.resetPassword")}</ResetButton>
                       
                     
                 </Form>
-                <Desc>Don't have an account <Link to='/register' style={{ color: '#e6953b', marginTop: '10px' }}>Sign Up</Link></Desc>
+                <Desc>{t("ForgotPassword.noAccount")} <Link to='/register' style={{ color: '#e6953b', marginTop: '10px' }}>{t("ForgotPassword.signUp")}</Link></Desc>
                 
 
                 <Dialog
@@ -164,14 +165,14 @@ const ForgotPassword=()=>{
            
           >
             <DialogTitle id="dialog-title">
-             Email verification
+             {t("ForgotPassword.verification")}
             </DialogTitle>
             <DialogContent id="dialog-description">
               {/* <DialogContentText>Are you sure?</DialogContentText> */}
-              Password Reset Link is sent to your email 
+             {t("ForgotPassword.passwordLink")}
             </DialogContent>
             <DialogActions>
-              <Button onClick={() => setIsOpen(false)} style={{backgroundColor:"green",color:"white"}}>Close</Button>
+              <Button onClick={() => setIsOpen(false)} style={{backgroundColor:"green",color:"white"}}>{t("ForgotPassword.close")}</Button>
               {/* <Button
                 style={{backgroundColor:"Yellow",color:"black"}}
                 autoFocus

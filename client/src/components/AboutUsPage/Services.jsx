@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import { useTranslation } from "react-i18next"
 
 const FirstContainer = styled.section`
   background: white;
@@ -48,42 +48,40 @@ const DecorativeLine = styled.hr`
 `;
 
 const Services = () => {
+  const {t}=useTranslation('global')
   return (
     <div>
     <FirstContainer id='services'>
       <ServiceSection>
-        <Title>Services</Title>
+        <Title>{t("Services.services")}</Title>
       </ServiceSection>
       <ServiceSection>
-        <Title>1. Order a Vehicle</Title>
+        <Title>{t("Services.order")}</Title>
         <Text>
-          This service allows users to request and order vehicles for various purposes. It could be for official use, transportation, or any other specific need.
+          {t("Services.firstOrderText")}
         </Text>
         <Text2>
-          Users can specify their requirements, such as the type of vehicle, number of passengers, and the desired pickup and drop-off locations. The ministry ensures the efficient allocation and dispatch of vehicles to fulfill the orders, enhancing accessibility and convenience.
+         {t("Services.secondOrderText")} 
         </Text2>
       </ServiceSection>
       <DecorativeLine />
       <ServiceSection>
-        <Title>2. Scheduling</Title>
+        <Title>{t("Services.schedule")}</Title>
         <Text>
-          The scheduling service helps individuals and organizations plan and manage their transportation needs effectively.
+          {t("Services.firstScheduleText")}
         </Text>
         <Text2>
-          Users can schedule vehicle pickups and drop-offs at specific times and dates, ensuring that transportation is available when needed. This service optimizes the utilization of vehicles and resources, reducing waiting times and enhancing overall transportation efficiency.
+          {t("Services.secondScheduleText")}
         </Text2>
       </ServiceSection>
       <DecorativeLine />
       <ServiceSection>
-        <Title>3. Reporting and Analytics</Title>
+        <Title>{t("Services.report")}</Title>
         <Text>
-          Reporting and analytics services provide valuable insights and data-driven information related to transportation and vehicle usage.
+          {t("Services.firstReportText")}
         </Text>
         <Text2>
-          Users can access reports and analytics on various aspects, including vehicle utilization, route efficiency, passenger trends, and more. The ministry uses data to make informed decisions, improve services, and address any potential issues or challenges in the transportation system.
-        </Text2>
-        <Text2>
-          These services offered by the Ministry of Innovation and Technology aim to enhance transportation accessibility, efficiency, and overall user experience, ultimately contributing to a more effective and streamlined transportation system.
+          {t("Services.secondReportText")}
         </Text2>
       </ServiceSection>
     </FirstContainer>

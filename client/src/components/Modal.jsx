@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-
+import { useTranslation } from "react-i18next"
 
 const style = {
     position: 'absolute',
@@ -18,7 +18,7 @@ const style = {
 };
 
 export default function CustomModal({ handleOpen, handleClose, open, setOpen }) {
-
+    const {t}=useTranslation('global')
     return (
         <div>
 
@@ -30,10 +30,10 @@ export default function CustomModal({ handleOpen, handleClose, open, setOpen }) 
             >
                 <Box sx={style}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Success Message
+                        {t("Modal.successMessage")}
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Your Request was Successfully sent!!!
+                        {t("Modal.requestSuccess")}
                     </Typography>
                 </Box>
             </Modal>

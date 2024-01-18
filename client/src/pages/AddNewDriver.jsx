@@ -104,7 +104,7 @@ const AddNewDriver = () => {
                             <Label>{t('AddnewDriver.name')}</Label>
                             <SignUpInput
                                 type='text'
-                                placeholder='full name'
+                                placeholder={t('AddnewDriver.name')}
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                             />
@@ -113,7 +113,7 @@ const AddNewDriver = () => {
                             <Label>{t('AddnewDriver.phoneNumber')}</Label>
                             <SignUpInput
                                 type='tel'
-                                placeholder='phone number'
+                                placeholder={t('AddnewDriver.phoneNumber')}
                                 value={phoneNumber}
                                 onChange={(e) => setPhoneNumber(e.target.value)}
                             />
