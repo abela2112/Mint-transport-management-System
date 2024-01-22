@@ -6,6 +6,8 @@ import { useDispatch,useSelector } from 'react-redux';
 import { login } from '../../api/userApi';
 import Loader from '../../components/Loader'
 import { setError } from '../../redux/features/user';
+import { useTranslation } from "react-i18next";
+
 const LoginContainer = styled.div `
   flex: 1;
   display: flex;
@@ -140,6 +142,7 @@ const Error = styled.p`
 
 const Login = () => {
   const { isLoading, error } = useSelector((state) => state.user);
+  const {t}=useTranslation('global')
   console.log(isLoading)
 
   const [email, setEmail] = useState('');
@@ -167,40 +170,40 @@ const Login = () => {
               <ImgmintContainer>
                   <Img1 src={Mint} />
                </ImgmintContainer>
-          <TitleBox>
-            <WelcomeTxt>Welcome back</WelcomeTxt>
-            <LoginTxt>Login into your account</LoginTxt>
+          <TitleBox> 
+            <WelcomeTxt>{t("login.welcome")}</WelcomeTxt>
+            <LoginTxt>{t("login.accountLogin")}</LoginTxt>
           </TitleBox>
               
           <LoginForm onSubmit={handleSubmit}>
               
             <div style={{ width: '100%' }}>
-              <label>Email</label>
+              <label>{t("login.email")}</label>
               <Input
                 type="email"
-                placeholder="Email"
+                placeholder={t("login.email")}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div style={{ width: '100%' }}>
               <label>
-                password
+                {t("login.password")}
               </label>
               <Input
                 type="password"
-                placeholder="Password"
+                placeholder={t("login.password")}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
 
-            <Link to="/forgot-password" style={{ color: '#e6953b', marginTop: '10px', textAlign: 'right', textDecoration: 'none' }}>Forgot Password?</Link>
-            {error && <Error>Something went wrong please try again</Error>}
-            <SubmitButton type="submit" disabled={isLoading}> {isLoading ? <Loader /> : 'Login'}</SubmitButton>
+            <Link to="/forgot-password" style={{ color: '#e6953b', marginTop: '10px', textAlign: 'right', textDecoration: 'none' }}>{t("login.forgotPassword")}</Link>
+            {error && <Error>{t("login.wrongInput")}</Error>}
+            <SubmitButton type="submit" disabled={isLoading}> {isLoading ? <Loader /> : t("login.login")}</SubmitButton>
            
           </LoginForm>
-          <Desc>Don't have an account? <Link to='/register' style={{ color: '#e6953b', marginTop: '10px' }}>  Sign Up</Link></Desc>
+          <Desc>{t("login.noAccount")} <Link to='/register' style={{ color: '#e6953b', marginTop: '10px' }}> {t("login.signUp")}</Link></Desc>
 
         </FormContainer>
         <CopyRight>

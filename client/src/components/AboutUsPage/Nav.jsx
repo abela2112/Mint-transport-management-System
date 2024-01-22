@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Mint2} from '../../asset';
+import { useTranslation } from "react-i18next"
 //MinT
 const Container = styled.div`
   width: 100%;
@@ -40,6 +41,7 @@ const NavItem = styled.a`
 `;
 
 const Navbar = () => {
+  const {t}=useTranslation('global')
     const scrollToAboutUs = () => {
         const aboutUsSection = document.getElementById('about');
         aboutUsSection.scrollIntoView({ behavior: 'smooth' });
@@ -56,10 +58,10 @@ const Navbar = () => {
       <Logo src={Mint2} />
         
       </LogoContainer>
-      <NavLinks>
-        <NavItem href="/">Home</NavItem>
-        <NavItem href="#about" onClick={scrollToAboutUs}>About Us</NavItem>
-        <NavItem href="#services"onClick={scrollToServices}>Services</NavItem>
+      <NavLinks> 
+        <NavItem href="/">{t("Nav.home")}</NavItem>
+        <NavItem href="#about" onClick={scrollToAboutUs}>{t("Nav.aboutUs")}</NavItem>
+        <NavItem href="#services"onClick={scrollToServices}>{t("Nav.services")}</NavItem>
       </NavLinks>
     </Container>
   );

@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-
 import React, { useState ,useEffect} from "react";
 import {staffRequest} from '../api/userApi'
 import { useDispatch,useSelector } from 'react-redux';
@@ -11,7 +10,7 @@ import {
   DialogContentText,
   DialogActions,
 } from "@mui/material";
-
+import { useTranslation } from "react-i18next";
 const Container = styled.div`
   width: 100%;
   padding: 20px 10px;
@@ -138,7 +137,7 @@ const StaffPetrolRequest=()=>{
     const [requestDate,setRequestDate]=useState('')
     const [discription,setDiscription]=useState('')
     const [isOpen,setIsOpen]=useState(false)
-   
+    const {t}=useTranslation('global')
    const handleSubmit=()=>{
   
      staffRequest({requestDate,discription,name,phoneNumber}).then((data)=>console.log(data)).catch((error)=>console.log(error))
@@ -150,20 +149,21 @@ const StaffPetrolRequest=()=>{
 
     return (
       <Container>
-           <Wrapper>
-                  <Title>Petrol Request Form</Title>
+           <Wrapper> 
+                  <Title>{t("StaffPetrolRequest.petrolForm")}</Title>
                  <FormBox>
                        <InputItem>
-                            <Lable>Full Name</Lable>
+                            <Lable>{t("StaffPetrolRequest.fullName")}</Lable>
                              <Input  
                             
                              type="text"
+
                              value={name}
                               
                              />
                        </InputItem>
                        <InputItem>
-                            <Lable>phone number</Lable>
+                            <Lable>{t("StaffPetrolRequest.phoneNumber")}</Lable>
                              <Input  
                              
                              type="text"
@@ -172,18 +172,18 @@ const StaffPetrolRequest=()=>{
                              />
                        </InputItem>
                        <InputItem>
-                            <Lable>Request date</Lable>
+                            <Lable>{t("StaffPetrolRequest.requestDate")}</Lable>
                              <Input  
-                             placeholder="request date" 
+                             placeholder={t("StaffPetrolRequest.requestDate")} 
                              type="date"
                              value={requestDate}
                               onChange={(e)=>setRequestDate(e.target.value)}
                              />
                        </InputItem>
                        <InputItem>
-                            <Lable>Discription</Lable>
+                            <Lable>{t("StaffPetrolRequest.description")}</Lable>
                             <TextArea
-                              placeholder="Discription"
+                              placeholder={t("StaffPetrolRequest.description")}
                              value={discription}
                              onChange={(e)=>setDiscription(e.target.value)}
                               rows={4}
@@ -191,7 +191,7 @@ const StaffPetrolRequest=()=>{
                       </InputItem>
                      <Submit onClick={(e)=>{
                         e.preventDefault()
-                      setIsOpen(true)}}>Submit</Submit>
+                      setIsOpen(true)}}>{t("StaffPetrolRequest.submit")}</Submit>
                  </FormBox>
            </Wrapper>
 
@@ -202,13 +202,13 @@ const StaffPetrolRequest=()=>{
             aria-describedby="dialog-description"
           >
             <DialogTitle id="dialog-title">
-              Do you want to confirm?
+              {t("StaffPetrolRequest.confirm")}
             </DialogTitle>
             <DialogContent id="dialog-description">
               {/* <DialogContentText></DialogContentText> */}
             </DialogContent>
             <DialogActions>
-              <Button onClick={() => setIsOpen(false)} style={{backgroundColor:"Red",color:"white"}}>No</Button>
+              <Button onClick={() => setIsOpen(false)} style={{backgroundColor:"Red",color:"white"}}>{t("StaffPetrolRequest.no")}</Button>
               <Button
                 style={{backgroundColor:"Yellow",color:"black"}}
                 autoFocus
@@ -217,7 +217,7 @@ const StaffPetrolRequest=()=>{
                   setIsOpen(false);
                 }}
               >
-                Yes
+               {t("StaffPetrolRequest.yes")}
               </Button>
             </DialogActions>
           </Dialog>

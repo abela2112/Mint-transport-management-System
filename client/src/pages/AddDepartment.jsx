@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {useState} from 'react'
 import {addDept} from '../api/userApi'
+import { useTranslation } from "react-i18next";
 
 
 import {
@@ -81,6 +82,7 @@ const AddDepartment = () => {
     const [staffManager,setStaffManager]=useState('')
     const [error, setError] = useState('');
     const [isOpen,setIsOpen]=useState('');
+    const {t}=useTranslation('global')
     const handleClick=()=>{
          
          
@@ -105,21 +107,21 @@ const AddDepartment = () => {
   return (
     <MainContainer>
       <ThirdContainer>
-        <h2>Department Information</h2>
+        <h2>{t("AddDepartment.departmentInformation")}</h2>
         <InputContainer>
           <div>
-            <label>Department Name</label>
+            <label>{t("AddDepartment.departmentName")}</label>
             <InputField
              type="text" 
-             placeholder="Enter department name" 
+             placeholder={t("AddDepartment.departmentName")}
              value={deptName}
              onChange={(e)=>setDeptName(e.target.value)}
              />
 
-            <label>Staff Manager</label>
+            <label>{t("AddDepartment.staffManager")}</label>
             <InputField 
             type="text" 
-            placeholder="Enter staff manager" 
+            placeholder={t("AddDepartment.staffManager")} 
             value={staffManager}
             onChange={(e)=>setStaffManager(e.target.value)}
             />
@@ -127,7 +129,7 @@ const AddDepartment = () => {
         </InputContainer>
         {error && <p style={{color:"red"}}>{error}</p>}
         <div>
-          <Buttonn onClick={() => setIsOpen(true)}>Submit</Buttonn>
+          <Buttonn onClick={() => setIsOpen(true)}>{t("AddDepartment.submit")}</Buttonn>
        
         </div>
       </ThirdContainer>
@@ -139,13 +141,13 @@ const AddDepartment = () => {
             aria-describedby="dialog-description"
           >
             <DialogTitle id="dialog-title">
-              Add the New department to the database?
+              {t("AddDepartment.newDepartmentToDatabase")}
             </DialogTitle>
             <DialogContent id="dialog-description">
-              <DialogContentText>Are you sure?</DialogContentText>
+              <DialogContentText>{t("AddDepartment.AreYouSure")}</DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button onClick={() => setIsOpen(false)} style={{backgroundColor:"Red",color:"white"}}>Cancel</Button>
+              <Button onClick={() => setIsOpen(false)} style={{backgroundColor:"Red",color:"white"}}>{t("AddDepartment.cancel")}</Button>
               <Button
                 style={{backgroundColor:"Yellow",color:"white"}}
                 autoFocus
@@ -154,7 +156,7 @@ const AddDepartment = () => {
                   setIsOpen(false);
                 }}
               >
-                Submit
+                {t("AddDepartment.submit")}
               </Button>
             </DialogActions>
           </Dialog>

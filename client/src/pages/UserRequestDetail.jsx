@@ -8,6 +8,8 @@ import { useSelector } from 'react-redux'
 import { editUser } from '../api/userApi'
 import { getSingleUser } from '../api/userApi'
 import { getAllDepartment } from '../api/userApi'
+import { useTranslation } from "react-i18next"
+
 
 import {
   Button,
@@ -182,7 +184,7 @@ const UserRequestDetail = () => {
   const [department, setDepartment] = useState('')
   const [role, setRole] = useState('')
   const [deptArray, setDeptArray] = useState([])
-
+  const {t}=useTranslation('global')
   const handleApprove = () => {
 
     updateUserRegisterRequestById(id, { status: 'approved' }).then(({ data }) => {
@@ -289,31 +291,31 @@ const UserRequestDetail = () => {
         aria-describedby="dialog-description"
       >
         <DialogTitle id="dialog-title" style={{ backgroundColor: "lightGreen" }}>
-          Edit the user information
+          {t("UserRequestDetail.editInfo")}
         </DialogTitle>
         <DialogContent id="dialog-description">
 
           <Form>
             <InputContainer>
-              <Text>Position</Text>
+              <Text>{t("UserRequestDetail.position")}</Text>
               <Select onChange={(e) => setPosition(e.target.value)}>
-                <Option disabled selected>{position}</Option>
-                <Option>CEO</Option>
-                <Option>Desk</Option>
-                <Option>Expert</Option>
+                <Option disabled selected>{t("UserRequestDetail.position")}</Option>
+                <Option>{t("UserRequestDetail.CEO")}</Option>
+                <Option>{t("UserRequestDetail.Desk")}</Option>
+                <Option>{t("UserRequestDetail.Expert")}</Option>
               </Select>
             </InputContainer>
             <InputContainer>
-              <Text>Role</Text>
+              <Text>{t("UserRequestDetail.role")}</Text>
               <Select onChange={(e) => setRole(e.target.value)}>
-                <Option disabled selected>{role}</Option>
-                <Option>staff</Option>
-                <Option>staff-manager</Option>
-                <Option>transport-manager</Option>
+                <Option disabled selected>{t("UserRequestDetail.role")}</Option>
+                <Option>{t("UserRequestDetail.staff")}</Option>
+                <Option>{t("UserRequestDetail.staffManager")}</Option>
+                <Option>{t("UserRequestDetail.transportManager")}</Option>
               </Select>
             </InputContainer>
             <InputContainer>
-              <Text>Department</Text>
+              <Text>{t("UserRequestDetail.department")}</Text>
               <Select
 
                 onChange={(e) => setDepartment(e.target.value)}
@@ -326,10 +328,10 @@ const UserRequestDetail = () => {
 
             </InputContainer>
             <InputContainer>
-              <Text>password</Text>
+              <Text>{t("UserRequestDetail.password")}</Text>
               <Input
                 type="password"
-                placeholder="password"
+                placeholder={t("UserRequestDetail.password")}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -339,7 +341,7 @@ const UserRequestDetail = () => {
           </Form>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setIsOpen(false)} style={{ backgroundColor: "Red", color: "white" }}>Cancel</Button>
+          <Button onClick={() => setIsOpen(false)} style={{ backgroundColor: "Red", color: "white" }}>{t("UserRequestDetail.cancel")}</Button>
           <Button
             style={{ backgroundColor: "Yellow", color: "black" }}
             autoFocus
@@ -348,7 +350,7 @@ const UserRequestDetail = () => {
               setIsOpen(false);
             }}
           >
-            Submit
+            {t("UserRequestDetail.submit")}
           </Button>
         </DialogActions>
       </Dialog>
@@ -361,13 +363,13 @@ const UserRequestDetail = () => {
         aria-describedby="dialog-description"
       >
         <DialogTitle id="dialog-title">
-          Do you want to approve?
+          {t("UserRequestDetail.approve")}
         </DialogTitle>
         <DialogContent id="dialog-description">
           {/* <DialogContentText></DialogContentText> */}
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setIsOpenApproved(false)} style={{ backgroundColor: "Red", color: "white" }}>No</Button>
+          <Button onClick={() => setIsOpenApproved(false)} style={{ backgroundColor: "Red", color: "white" }}>{t("UserRequestDetail.no")}</Button>
           <Button
             style={{ backgroundColor: "Yellow", color: "black" }}
             autoFocus
@@ -376,7 +378,7 @@ const UserRequestDetail = () => {
               setIsOpenApproved(false);
             }}
           >
-            Yes
+            {t("UserRequestDetail.yes")}
           </Button>
         </DialogActions>
       </Dialog>
@@ -389,13 +391,13 @@ const UserRequestDetail = () => {
         aria-describedby="dialog-description"
       >
         <DialogTitle id="dialog-title">
-          Do you want to reject?
+          {t("UserRequestDetail.reject")}
         </DialogTitle>
         <DialogContent id="dialog-description">
           {/* <DialogContentText></DialogContentText> */}
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setIsOpenReject(false)} style={{ backgroundColor: "Red", color: "white" }}>No</Button>
+          <Button onClick={() => setIsOpenReject(false)} style={{ backgroundColor: "Red", color: "white" }}>{t("UserRequestDetail.no")}</Button>
           <Button
             style={{ backgroundColor: "Yellow", color: "black" }}
             autoFocus
@@ -404,7 +406,7 @@ const UserRequestDetail = () => {
               setIsOpenReject(false);
             }}
           >
-            Yes
+           {t("UserRequestDetail.yes")}
           </Button>
         </DialogActions>
       </Dialog>

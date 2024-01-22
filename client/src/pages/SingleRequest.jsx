@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
+import { useTranslation } from "react-i18next"
 const Container = styled.div`
 display: flex;
 align-items: center;
@@ -33,15 +34,16 @@ border-radius: 10px;
 
 const Text = styled.span``
 const SingleRequest = ({ request }) => {
+    const {t}=useTranslation('global')
 
     return (
         <Link to={`/request/${request._id}`}>
             <Container>
-                <Left>
-                    <Text>Full Name:{request?.name}</Text>
+                <Left> 
+                    <Text>{t("singleRequest.fullName")}{request?.name}</Text>
                 </Left>
-                <Center><Text>Phone Number :{request?.phoneNumber}</Text></Center>
-                <Center><Text>Pick Up date:{format(new Date(request?.pickUpDate)
+                <Center><Text>{t("singleRequest.phoneNumber")}{request?.phoneNumber}</Text></Center>
+                <Center><Text>{t("singleRequest.pickUpDate")}{format(new Date(request?.pickUpDate)
                     , 'MMMM do yyyy')}</Text></Center>
 
                 <Right><Button type={request?.status}>{request?.status}</Button></Right>

@@ -1,22 +1,319 @@
 {
     "Service":"Service",
+
+    "AboutUsPage": {
+        "title": "About Us",
+        "content": "The Ministry of Innovation and Technology is at the forefront of driving technological advancements and innovations to transform our society. Our commitment to progress and excellence is unwavering, and we aim to lead the way in shaping a brighter future.",
+        "mission": "Our Mission",
+        "missionStatement": "To harness the power of innovation and technology to address challenges, improve lives, and drive sustainable development in Ethiopia.",
+        "vision": "Our Vision",
+        "visionStatement": "To be a catalyst for innovation and technological advancements, enabling Ethiopia to become a global leader in technology-driven solutions.",
+        "coreMission": "At the core of our mission are our values:",
+        "innovation": "Innovation: Embracing creativity and change to find solutions.",
+        "collaboration": "Collaboration: Working together to achieve common goals.",
+        "transparency": "Transparency: Open and honest communication and decision-making.",
+        "excellence": "Excellence: Striving for the highest standards of quality and performance.",
+        "leadership": "Our Leadership",
+        "leadershipStatement": "Meet our dedicated team of professionals who are committed to driving innovation and technology forward in Ethiopia."
+    },
+    
+    "Nav": {
+        "home": "Home",
+        "aboutUs": "About Us",
+        "services": "Services"
+    },
+
+    "Services": {
+        "services": "Services",
+        "order": "1. Order a Vehicle",
+        "firstOrderText": "This service allows users to request and order vehicles for various purposes. It could be for official use, transportation, or any other specific need.",
+        "secondOrderText": "Users can specify their requirements, such as the type of vehicle, number of passengers, and the desired pickup and drop-off locations. The ministry ensures the efficient allocation and dispatch of vehicles to fulfill the orders, enhancing accessibility and convenience.",
+        "schedule": "2. Scheduling",
+        "firstScheduleText": "The scheduling service helps individuals and organizations plan and manage their transportation needs effectively.",
+        "secondScheduleText": "Users can schedule vehicle pickups and drop-offs at specific times and dates, ensuring that transportation is available when needed. This service optimizes the utilization of vehicles and resources, reducing waiting times and enhancing overall transportation efficiency.",
+        "report": "3. Reporting and Analytics",
+        "firstReportText": "Reporting and analytics services provide valuable insights and data-driven information related to transportation and vehicle usage.",
+        "secondReportText": "Users can access reports and analytics on various aspects, including vehicle utilization, route efficiency, passenger trends, and more. The ministry uses data to make informed decisions, improve services, and address any potential issues or challenges in the transportation system."
+    },
+
+    "StaffApproveModal": {
+        "wantToApprove": "Do you want to approve?",
+        "yes": "Yes",
+        "no": "No"
+    },
+
+    "StaffRejectModal": {
+        "wantToApprove": "Do you want to approve?",
+        "yes": "Yes",
+        "no": "No"
+    },
+
+    "CarCard": {
+        "brand": "brand :",
+        "model": "model :",
+        "plateNumber": "plate number :"
+    },
+
+    "DialogModal": {
+        "addData": "Do you want to add this new Data?",
+        "areYouSure": "Are you sure?",
+        "cancel": "Cancel",
+        "submit": "Submit"
+    },
+    
+    "Header": {
+        "header": "Header"
+    },
+    "SearchBar": {
+        "status": "Status: ",
+        "pending": "Pending",
+        "approved": "Approved",
+        "rejected": "Rejected",
+        "sortBy": "Sort By:",
+        "asc": "ASC",
+        "des": "DES"
+    },
+    "TMSFooter": {
+        "contactUs": "Contact Us"
+    },
+    "AllRequests": {
+        "ID": "ID",
+        "fullName": "Full Name",
+        "phoneNumber": "Phone Number",
+        "pickUpDate": "Pick Up Date",
+        "status": "Status",
+        "action": "Action",
+        "detail": "Detail",
+        "requests": "Requests",
+        "pending": "Pending"
+    },
+    "login": {
+        "welcome": "Welcome back",
+        "accountLogin": "Login into your account",
+        "email": "Email",
+        "password": "password",
+        "forgotPassword": "Forgot Password?",
+        "login": "Login",
+        "noAccount": "Don't have an account?",
+        "signUp": "Sign Up",
+        "wrongInput": "Something went wrong please try again"
+    },
+    "Register": {
+        "getStarted": "Get Started Now",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "department": "Department",
+        "position": "Position",
+        "email": "Email",
+        "phoneNumber": "Phone Number",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "account": "Do you have an Account?",
+        "signIn": "Sign in",
+        "signUp": "Sign up",
+        "choose": "Choose an option",
+        "CEO": "CEO",
+        "Desk": "Desk",
+        "Expert": "Expert",
+        "noMatch": "Password doesn't match! Please confirm again",
+        "congrats": "Congratulations! You have successfully registered check your admin for approval",
+        "submit": "Submit",
+        "cancel": "Cancel",
+        "close": "Close"
+    },
+    "ForgotPassword": {
+        "forgotPassword": "Forgot your Password?",
+        "enterEmail": "Enter your Email",
+        "resetPassword": "Reset Password",
+        "noAccount": "Don't have an account?",
+        "signUp": "Sign Up",
+        "verification": "Email verification",
+        "passwordLink": "Password Reset Link is sent to your email",
+        "close": "Close"  
+    },
+    
+    "Modal": {
+        "successMessage": "Success Message",
+        "requestSuccess": "Your Request was Successfully sent!!!"
+    },
+    "TransportManagerResponse": {
+        "approve": "Approve form",
+        "plateNumber": "Plate Number",
+        "driverName": "Driver Name",
+        "driverPhone": "Driver Phone",
+        "carModel": "Car Model",
+        "returnDate": "Return Date",
+        "submit": "Submit",
+        "cancel": "Cancel"
+
+    },
+    "AllStaffsPetrolRequest": {
+        "detail": "Detail",
+        "requests": "Requests"
+    },
+    "AvailableCar": {
+        "availableCar": "Available Car"
+    },
+    "AvailableCars": {
+        "brand": "Brand",
+        "model": "Model",
+        "licensePlate": "License Plate Number"
+    },
+    "History": {
+        "detail": "Detail",
+        "history": "History",
+        "Id": "ID",
+        "fullName": "Full Name",
+        "phoneNumber": "Phone Number",
+        "pickUpDate": "Pick Up Date",
+        "status": "Status",
+        "action": "Action"
+    },
+    "LandingPage": {
+        "transportManagement": "Transport Management",
+        "system": "System",
+        "gateway": "Your Gateway to Efficient Operations",
+        "service": "Services",
+        "order": "ORDER A VEHICLE",
+        "schedule": "SCHEDULING",
+        "reporting": "REPORTING AND ANALYTICS",
+        "login": "Login",
+        "signUp": "Sign Up"
+    },
+    "MakeRequest": {
+        "requestForm": "REQUEST FORM",
+        "fullName": "Full Name",
+        "phoneNumber": "Phone No.",
+        "pickUpDate": "PickUp date",
+        "returnDate": "Return date",
+        "destination": "Destination",
+        "description": "Description",
+        "passengers": "Passengers",
+        "addPassenger": "Add Passenger"
+    },
+    "Notification": {
+        "notifications": "Notifications",
+        "noNotification": "No Notification"
+    },
+    "Profile": {
+        "profile": "Profile"
+    },
+    "Request": {
+        "requestForm": "REQUEST FORM",
+        "fullName": "Full Name",
+        "phoneNumber": "Phone No.",
+        "pickUpDate": "PickUp date",
+        "returnDate": "Return date",
+        "destination": "Destination",
+        "passengerNumber": "Number of Passengers",
+        "description": "Description",
+        "submit": "Submit",
+        "cancel": "Cancel"
+
+    },
+    "ResetPassword": {
+        "reset": "Resetting your password?",
+        "enterPassword": "Enter New Password",
+        "newPassword": "new password",
+        "confirmPassword": "Confirm Password",
+        "resetPassword": "Reset Password",
+        "success": "Password reset success",
+        "congrats": "Congratulations! You have successfully Reset your password.",
+        "close": "Close",
+        "passwordConfirm": "Password confirm",
+        "noMatch": "password does not match",
+        "submit": "Submit"
+    },
+    "SearchPage": {
+        "searchPage": "Search Page"
+    },
+    "singlePetrolRequestDetail": {
+        "requestDetail": "Request Detail",
+        "fullName": "Full Name :",
+        "phoneNumber": "Phone Number :",
+        "description": "Description :",
+        "requestdate": "Request Date :",
+        "approved": "Approved",
+        "reject": "Reject",
+        "wantToApprove": "Do you want to approve?",
+        "no": "No",
+        "yes": "Yes",
+        "confirmation": "Confirmation",
+        "wantToReject": "Do you want to reject?"
+    },
+    "singleRequest": {
+        "fullName": "Full Name:",
+        "phoneNumber": "Phone Number:",
+        "pickUpDate": "Pick Up date:"
+    },
+    "SingleRequestDetail": {
+        "requestDetail": "Request Detail",
+        "fullName": "Full Name :",
+        "destination": "Destination :",
+        "phoneNumber": "Phone Number :",
+        "description": "Description :",
+        "pickUpDate": "Pick Up date :",
+        "returnDate": "return date:",
+        "reject": "Reject",
+        "approved": "Approved"
+    },
+    "singleResponsePage": {
+        "responseDetail": "Response Detail",
+        "driverName": "Driver Name:",
+        "driverPhone": "Driver Phone:",
+        "plateNumber": "Plate Number:",
+        "returnDate": "Return Date:"
+    },
+    "StaffMangerPendingRequests": {
+        "id": "ID",
+        "fullName": "Full Name",
+        "phoneNumber": "Phone Number",
+        "pickUpDate": "Pick Up Date",
+        "status": "Status",
+        "action": "Action",
+        "detail": "Detail",
+        "pendingRequests": "Pending Requests"
+    },
+    "TransManagerResponse": {
+        "plateNumber": "Plate Number",
+        "driverName": "Driver name",
+        "driverPhone": "Driver phone",
+        "carModel": "Car model",
+        "returnDate": "Return Date"
+    },
+    "userDetails": {
+        "fullName": "Full Name:",
+        "email": "Email:",
+        "phoneNumber": "Phone Number:",
+        "position": "position:",
+        "department": "department:",
+        "role": "role:",
+        "registeredDate": "Registered Date"
+    },
     "AddnewDriver":{
         "title":"Add new driver",
         "name":"name",
         "phoneNumber":"Phone Number",
         "registeredDate":"Registered Date",
         "submit":"Submit"
+        
     },
     "sidebar":{
+        "booking": "Booking",
         "requests":"Requests",
         "pendingRequests":"Pending Requests",
         "AddnewCar":"Add new car",
         "AddnewDriver":"Add new Driver",
         "AvailableCar":"Available Car",
-        "logOut":"Logout"
-
-    }
-    ,"AddnewCar":{
+        "logOut":"Logout",
+        "user": "User",
+        "userRegisterRequests": "User Register Requests",
+        "department": "Department",
+        "pending": "Pending",
+        "history": "History",
+        "petrolRequest": "Petrol Request"
+    }, 
+    "AddnewCar":{
         "title":"Add new car",
         "brandName":"Brand Name",
         "modelName":"Model Name",
@@ -28,5 +325,69 @@
         "rent":"rent",
         "own":"own",
         "submit":"Submit"
+    },
+    "AddDepartment": {
+            "departmentInformation": "Department Information",
+            "departmentName": "Department Name",
+            "staffManager": "Staff Manager",
+            "newDepartmentToDatabase": "Add the New department to the database?",
+            "AreYouSure": "Are you sure?",
+            "submit": "Submit",
+            "cancel": "Cancel"
+    },
+    "StaffPetrolRequest": {
+        "petrolForm": "Petrol Request Form",
+        "fullName": "Full Name",
+        "phoneNumber":"Phone Number",
+        "requestDate": "Request Date",
+        "description": "Description",
+        "submit": "Submit",
+        "confirm": "Do you want to confirm?",
+        "yes": "Yes",
+        "no": "No"   
+    },
+    "UserRequestDetail":{
+        "email": "email",
+        "phoneNumber": "Phone Number",
+        "position": "position",
+        "CEO": "CEO",
+        "Desk": "Desk",
+        "Expert": "Expert",
+        "department": "department",
+        "role": "role",
+        "staff": "staff",
+        "staffManager": "staff-manager",
+        "transportManager": "transport-manager",
+        "registeredDate": "Registered Date",
+        "editUser": "Edit User",
+        "editInfo":"Edit the user information",
+        "password": "password",
+        "submit": "Submit",
+        "cancel": "Cancel",
+        "approve": "Do you want to approve?",
+        "reject": "Do you want to reject?",
+        "yes": "Yes",
+        "no": "No"
+    },
+    "UserRegisterRequest": {
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "role": "Role",
+        "phoneNumber": "Phone Number",
+        "action": "Action",
+        "edit": "Edit",
+        "userRegisterRequest": "User Register Request",
+        "pending": "Pending"
+    }, 
+    "ShowAllUserForAdmin": {
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "role": "Role",
+        "phoneNumber": "Phone Number",
+        "action": "Action",
+        "edit": "Edit",
+        "allUsers": "User Register Request"
     }
-    }
+}

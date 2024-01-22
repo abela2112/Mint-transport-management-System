@@ -9,7 +9,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import { Button, Title } from './StaffMangerPendingRequests'
 import { format } from 'date-fns'
 import { useNavigate } from 'react-router-dom'
-
+import { useTranslation } from "react-i18next"
 export const StatusButton = styled.button`
 border:none;
 padding: 5px 7px;
@@ -27,6 +27,7 @@ const Container = styled.div`
     padding: 20px;
 `
 const AllRequests = ({ type }) => {
+    const {t}=useTranslation('global')
     const { requests } = useSelector(state => state.request)
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -45,12 +46,12 @@ const AllRequests = ({ type }) => {
     }, [type])
 
     const columns = [
-        { field: '_id', headerName: 'ID', width: 100 },
-        { field: 'name', headerName: 'Full name', width: 200 },
-        { field: 'phoneNumber', headerName: 'Phone Number', width: 250 },
+        { field: '_id', headerName: t("AllRequests.ID"), width: 100 }, 
+        { field: 'name', headerName: t("AllRequests.fullName"), width: 200 },
+        { field: 'phoneNumber', headerName: t("AllRequests.phoneNumber"), width: 250 },
         {
             field: 'pickUpDate',
-            headerName: 'Pick Up Date',
+            headerName: t("AllRequests.pickUpDate"),
 
             width: 150,
             renderCell: (param) => {
@@ -59,22 +60,22 @@ const AllRequests = ({ type }) => {
         },
         {
             field: 'status',
-            headerName: 'Status',
+            headerName: t("AllRequests.status"),
             sortable: false,
             width: 160,
             renderCell: (param) => {
-                return <StatusButton type={param.row.status} >{param.row.status}</StatusButton>
+                return <StatusButton type={param.row.status} >{t(param.row.status)}</StatusButton>
             }
         },
         
         {
             field: 'action',
-            headerName: 'Action',
+            headerName: t("AllRequests.action"),
             sortable: false,
             renderCell: (param) => {
                 return <div style={{ display: 'flex' }}>
                     <>
-                        <Button onClick={() => navigate(`/request/${param.row?._id}`)}>Detail</Button>
+                        <Button onClick={() => navigate(`/request/${param.row?._id}`)}>{t("AllRequests.detail")}</Button>
                         <DeleteIcon style={{ color: 'red', cursor: 'pointer' }} />
                     </>
                 </div>
@@ -88,7 +89,7 @@ const AllRequests = ({ type }) => {
 
     return (
         <Container>
-            <Title>{type && type}Requests</Title>
+            <Title>{type && type}{t("AllRequests.requests")}</Title>
             <div style={{ height: 400, width: '100%', marginTop: '20px' }}>
             <DataGrid
                     rows={filteredReq}

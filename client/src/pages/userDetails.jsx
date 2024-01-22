@@ -7,6 +7,7 @@ import Loader from '../components/Loader'
 import axios from 'axios'
 import { Avatar, Skeleton } from '@mui/material'
 import { stringAvatar } from '../utils'
+import { useTranslation } from "react-i18next"
 const Container = styled.div `
     padding: 20px;
 `
@@ -81,7 +82,8 @@ const UserDetail = () => {
     const [user, setUser] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
     const {id}=useParams()
-    
+    const {t}=useTranslation('global')
+
     useEffect(() => {
         setIsLoading(true)
         axios.get(`/api/user/${id}`).then(({ data }) => {
@@ -98,21 +100,21 @@ const UserDetail = () => {
     return (
         <Container>
 
-            <Wrapper>
+            <Wrapper> 
                 {
                     user ? (<> <ImageContainer>
                         {/* <Image src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZSUyMHBpY3R1cmV8ZW58MHx8MHx8fDA%3D"/>*/}
                         <Avatar {...stringAvatar(`${user?.firstName} ${user?.lastName}`)} alt={''} sx={{ width: 100, height: 100 }} />
-                        <Text><b>Full Name:</b>{user?.firstName} {user?.lastName}</Text> 
+                        <Text><b>{t("userDetails.fullName")}</b>{user?.firstName} {user?.lastName}</Text> 
                 </ImageContainer>
                 <InfoContainer>
-                <Text><b>email:</b>{user?.email}</Text>
-                <Text><b>Phone Number:</b>{user?.phoneNumber}</Text>
-                <Text><b>position:</b> {user?.position}</Text>
-                <Text><b>department:</b> {user?.department}</Text>
-                <Text> <b>role:</b>{user?.role}</Text>
+                <Text><b>{t("userDetails.email")}</b>{user?.email}</Text>
+                <Text><b>{t("userDetails.phoneNumber")}</b>{user?.phoneNumber}</Text>
+                <Text><b>{t("userDetails.position")}</b> {user?.position}</Text>
+                <Text><b>{t("userDetails.department")}</b> {user?.department}</Text>
+                <Text> <b>{t("userDetails.role")}</b>{user?.role}</Text>
                 
-                 <Text><b>Redistered Date:</b>{user?.createdAt && format(new Date(user?.createdAt)
+                 <Text><b>{t("userDetails.registeredDate")}</b>{user?.createdAt && format(new Date(user?.createdAt)
                     , 'MMMM do yyyy')}</Text> 
                         </InfoContainer></>) : (
                         <>

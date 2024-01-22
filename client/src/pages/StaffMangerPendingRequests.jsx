@@ -9,6 +9,7 @@ import { format } from 'date-fns'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom'
 import { StatusButton } from './AllRequests'
+import { useTranslation } from "react-i18next"
 export const Title = styled.span`
 font-size:24px;
 font-weight: 500;
@@ -38,30 +39,38 @@ const StaffMangerPendingRequests = () => {
     const { requests } = useSelector(state => state.request)
     const dispatch = useDispatch()
     const { user } = useSelector((state) => state.user);
-    
+    const {t}=useTranslation('global')
     
     useEffect(() => {
         axios.get(`/api/request?department=${user?.department}`).then(({ data }) => {
             dispatch(getRequestSuccess(data.data))
         }).catch((err) => console.log(err))
     }, [])
-    console.log(requests)
+    console.log(requests) 
     const columns = [
-        { field: '_id', headerName: 'ID', width: 100 },
-        { field: 'name', headerName: 'Full name', width: 200 },
-        { field: 'phoneNumber', headerName: 'Phone Number', width: 200 },
+        { field: '_id', headerName: t("StaffMangerPendingRequests.id"), width: 100 },
+        { field: 'name', headerName: t("StaffMangerPendingRequests.fullName"), width: 200 },
+        { field: 'phoneNumber', headerName: t("StaffMangerPendingRequests.phoneNumber"), width: 200 },
         {
             field: 'pickUpDate',
-            headerName: 'Pick Up Date',
+            headerName: t("StaffMangerPendingRequests.pickUpDate"),
 
             width: 150,
-            renderCell: (param) => {
-                return format(param.row?.pickUpDate && new Date(param.row?.pickUpDate), 'MMMM do yyyy')
-            }
-        },
+        //     renderCell: (param) => {
+        //         return format(param.row?.pickUpDate && new Date(param.row?.pickUpDate), 'MMMM do yyyy')
+        //     }
+        // },
+        renderCell: (param) => {
+  const pickUpDate = param.row?.pickUpDate;
+  if (pickUpDate) {
+    const formattedDate = format(new Date(pickUpDate), 'MMMM do yyyy');
+    return formattedDate;
+  }
+  return '';
+}},
         {
             field: 'status',
-            headerName: 'Status',
+            headerName: t("StaffMangerPendingRequests.status"),
             sortable: false,
             width: 160,
             renderCell: (param) => {
@@ -70,12 +79,12 @@ const StaffMangerPendingRequests = () => {
         },
         {
             field: 'action',
-            headerName: 'Action',
+            headerName: t("StaffMangerPendingRequests.action"),
             sortable: false,
             renderCell: (param) => {
                 return <div style={{ display: 'flex' }}>
                     <>
-                        <Button onClick={() => navigate(`/request/${param.row?._id}`)}>Detail</Button>
+                        <Button onClick={() => navigate(`/request/${param.row?._id}`)}>{t("StaffMangerPendingRequests.detail")}</Button>
                         <DeleteIcon style={{ color: 'red', cursor: 'pointer' }} />
                     </>
 
@@ -88,7 +97,7 @@ const StaffMangerPendingRequests = () => {
 
     return (
         <Container>
-            <Title>Pending Requests</Title>
+            <Title>{t("StaffMangerPendingRequests.pendingRequests")}</Title>
             <div style={{ width: '100%', marginTop: '20px' }}>
                 <DataGrid
                     rows={requests && requests}

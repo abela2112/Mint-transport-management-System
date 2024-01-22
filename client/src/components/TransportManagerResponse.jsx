@@ -13,7 +13,7 @@ import styled from 'styled-components'
 import { Background, Mint } from '../asset';
 import { getAvailableCar, updateCarStatus, updateRequestById } from '../api/userApi';
 import { useParams } from 'react-router-dom';
-
+import { useTranslation } from "react-i18next"
 
 const Container = styled.div`
     display:flex;
@@ -126,6 +126,7 @@ const TransportManagerResponse = ({ open, setOpen, onSubmit, requestId }) => {
     const [CarModel, setCarModel] = useState('')
     const [ReturnDate, setReturnDate] = useState('')
     const { id } = useParams()
+    const {t}=useTranslation('global')
     useEffect(() => {
         getAvailableCar().then(({ data }) => {
             setCars(data)
@@ -170,8 +171,8 @@ const TransportManagerResponse = ({ open, setOpen, onSubmit, requestId }) => {
                 maxWidth='md'
                 fullWidth={true}
                 overflow='hidden'
-            >
-                <DialogTitle id='dialog-title'>Approve Form</DialogTitle>
+            >   
+                <DialogTitle id='dialog-title'>{t("TransportManagerResponse.approve")}</DialogTitle>
                 <DialogContent id='dialog-description'>
                     <Wrapper>
                         <ImgmintContainer>
@@ -179,10 +180,10 @@ const TransportManagerResponse = ({ open, setOpen, onSubmit, requestId }) => {
                         </ImgmintContainer>
                         <Form>
                             <LabledInput>
-                                <Lable>Plate Number</Lable>
+                                <Lable>{t("TransportManagerResponse.plateNumber")}</Lable>
                                 <Select
 
-                                    placeholder="Plate Number"
+                                    placeholder={t("TransportManagerResponse.plateNumber")}
                                     value={PlateNumber}
                                     onChange={(e) => setPlateNumber(e.target.value)}
                                 >
@@ -192,35 +193,35 @@ const TransportManagerResponse = ({ open, setOpen, onSubmit, requestId }) => {
                                 </Select>
                             </LabledInput>
                             <LabledInput>
-                                <Lable>Driver name</Lable>
+                                <Lable>{t("TransportManagerResponse.driverName")}</Lable>
                                 <InputForm
                                     type="text"
-                                    placeholder="Driver name"
+                                    placeholder={t("TransportManagerResponse.driverName")}
                                     value={DriverName}
                                     onChange={(e) => setDriverName(e.target.value)}
                                 />
                             </LabledInput>
                             <LabledInput>
-                                <Lable>Driver phone</Lable>
+                                <Lable>{t("TransportManagerResponse.driverPhone")}</Lable>
                                 <InputForm
                                     type="tel"
-                                    placeholder="Driver phone"
+                                    placeholder={t("TransportManagerResponse.driverPhone")}
                                     value={DriverPhone}
                                     onChange={(e) => setDriverPhone(e.target.value)}
 
                                 />
                             </LabledInput>
                             <LabledInput>
-                                <Lable>Car model</Lable>
+                                <Lable>{t("TransportManagerResponse.carModel")}</Lable>
                                 <InputForm
                                     type="text"
-                                    placeholder="Car Model"
+                                    placeholder={t("TransportManagerResponse.carModel")}
                                     value={CarModel}
                                     onChange={(e) => setCarModel(e.target.value)}
                                 />
                             </LabledInput>
                             <LabledInput>
-                                <Lable>Return Date</Lable>
+                                <Lable>{t("TransportManagerResponse.returnDate")}</Lable>
                                 <InputForm
                                     type="date"
                                     placeholder="MM/dd/yy"
@@ -237,8 +238,8 @@ const TransportManagerResponse = ({ open, setOpen, onSubmit, requestId }) => {
 
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    <Button autoFocus onClick={handleSubmit}>Submit</Button>
+                    <Button onClick={handleClose}>{t("TransportManagerResponse.cancel")}Cancel</Button>
+                    <Button autoFocus onClick={handleSubmit}>{t("TransportManagerResponse.submit")}Submit</Button>
                 </DialogActions>
             </Dialog>
         </>

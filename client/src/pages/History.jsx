@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Title } from './StaffMangerPendingRequests'
 import { StatusButton } from './AllRequests'
+import { useTranslation } from "react-i18next"
 
 const Button = styled.button`
     padding: 5px 10px;
@@ -25,6 +26,7 @@ const Container = styled.div`
   flex-direction:column;
    `
 const History = () => {
+    const {t}=useTranslation('global')
     const [requests, setRequests] = useState([])
     const navigate = useNavigate()
     useEffect(() => {
@@ -32,14 +34,14 @@ const History = () => {
             setRequests(data.data)
         }).catch((err) => console.log(err))
     }, [])
-    console.log(requests)
+    console.log(requests) 
     const columns = [
-        { field: '_id', headerName: 'ID', width: 100 },
-        { field: 'name', headerName: 'Full name', width: 200 },
-        { field: 'phoneNumber', headerName: 'Phone Number', width: 200 },
+        { field: '_id', headerName:t("History.Id"), width: 100 },
+        { field: 'name', headerName: t("History.fullName"), width: 200 },
+        { field: 'phoneNumber', headerName: t("History.phoneNumber"), width: 200 },
         {
             field: 'pickUpDate',
-            headerName: 'Pick Up Date',
+            headerName: t("History.pickUpDate"),
 
             width: 150,
             renderCell: (param) => {
@@ -48,7 +50,7 @@ const History = () => {
         },
         {
             field: 'status',
-            headerName: 'Status',
+            headerName: t("History.status"),
             sortable: false,
             width: 160,
             renderCell: (param) => {
@@ -58,12 +60,12 @@ const History = () => {
         },
         {
             field: 'action',
-            headerName: 'Action',
+            headerName: t("History.action"),
             sortable: false,
             renderCell: (param) => {
                 return <div style={{ display: 'flex' }}>
                     <>
-                        <Button onClick={() => navigate(`/request/${param.row?._id}`)}>Detail</Button>
+                        <Button onClick={() => navigate(`/request/${param.row?._id}`)}>{t("History.detail")}</Button>
                         <DeleteIcon style={{ color: 'red', cursor: 'pointer' }} />
 
                     </>
@@ -76,7 +78,7 @@ const History = () => {
     ];
 
     return (<Container>
-        <Title>History</Title>
+        <Title>{t("History.history")}</Title>
         <div style={{ width: '100%', marginTop: '20px' }}>
             <DataGrid
                 rows={requests}

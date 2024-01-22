@@ -9,6 +9,7 @@ import CustomModal from '../components/Modal'
 import DialogModal from '../components/DialogModal'
 import { useSelector } from 'react-redux'
 import { io } from 'socket.io-client'
+import { useTranslation } from "react-i18next"
 
 const Container = styled.div`
   display: flex;
@@ -171,6 +172,7 @@ background-color: white;
 
 const MakeRequest = () => {
   const { user } = useSelector(state => state.user)
+  const {t}=useTranslation('global')
   const inputArray = [{
     value: ''
   }]
@@ -247,32 +249,32 @@ const MakeRequest = () => {
       <Container>
       
         <Wrraper>
-          <Title><b>REQUEST FORM</b></Title>
+          <Title><b>{t("MakeRequest.requestForm")}</b></Title>
           <Form >
             <Div>
-              <Label>Full Name</Label>
-              <Input placeholder="Full Name" disabled value={name} onChange={(e) => setName(e.target.value)} />
+              <Label>{t("MakeRequest.fullName")}</Label>
+              <Input placeholder={t("MakeRequest.fullName")} disabled value={name} onChange={(e) => setName(e.target.value)} />
             </Div>
             <Div>
-              <Label>Phone No.</Label>
-              <Input placeholder="Phone" type='tel' value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+              <Label>{t("MakeRequest.phoneNumber")}</Label>
+              <Input placeholder={t("MakeRequest.phoneNumber")} type='tel' value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
             </Div>
             <Div>
-              <Label>PickUp date</Label>
-              <Input placeholder="Pickup date" type='date' value={pickUpDate} onChange={(e) => setPickUpDate(e.target.value)} />
+              <Label>{t("MakeRequest.pickUpDate")}</Label>
+              <Input placeholder={t("MakeRequest.pickUpDate")} type='date' value={pickUpDate} onChange={(e) => setPickUpDate(e.target.value)} />
             </Div>
             <Div>
-              <Label>Return date</Label>
-              <Input placeholder="Return date" type='date' value={returnDate} onChange={(e) => setReturnDate(e.target.value)} />
+              <Label>{t("MakeRequest.returnDate")}</Label>
+              <Input placeholder={t("MakeRequest.returnDate")} type='date' value={returnDate} onChange={(e) => setReturnDate(e.target.value)} />
             </Div>
             <Div>
-              <Label>Destination</Label>
-              <Input placeholder="Destination" value={destination} onChange={(e) => setDestination(e.target.value)} />
+              <Label>{t("MakeRequest.destination")}</Label>
+              <Input placeholder={t("MakeRequest.destination")} value={destination} onChange={(e) => setDestination(e.target.value)} />
             </Div>
             <Div>
-              <Label>Discription</Label>
+              <Label>{t("MakeRequest.description")}</Label>
                <TextArea
-                placeholder="Discription"
+                placeholder={t("MakeRequest.description")}
                 value={description} 
                 onChange={(e) => setDescription(e.target.value)} 
                 rows={4}
@@ -280,7 +282,7 @@ const MakeRequest = () => {
             </Div>
             <Div>
             <div>
-              <Label> Passangers</Label>
+              <Label>{t("MakeRequest.passengers")}</Label>
               {Passangers?.map((item, i) => {
                 return (
                   <PassangerDiv key={i} >
@@ -296,7 +298,7 @@ const MakeRequest = () => {
                   </PassangerDiv>
                 );
               })}
-              <Addbutton onClick={addInput}>Add Passenger</Addbutton>
+              <Addbutton onClick={addInput}>{t("MakeRequest.addPassenger")}</Addbutton>
             </div>
             </Div>
           </Form>

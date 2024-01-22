@@ -11,6 +11,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import { Button, Title } from './StaffMangerPendingRequests'
 import { format } from 'date-fns'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from "react-i18next"
 
 export const StatusButton = styled.button`
 border:none;
@@ -30,7 +31,7 @@ const Container = styled.div`
 `
 const AllStaffPetrolRequests = () => {
      const [request,setRequest]=useState([])
-     
+     const {t}=useTranslation('global')
     const navigate=useNavigate()
    
     useEffect(() => {
@@ -62,7 +63,7 @@ const AllStaffPetrolRequests = () => {
             renderCell: (param) => {
                 return <div style={{ display: 'flex' }}>
                     <>
-                        <Button onClick={() => navigate(`/petrol-request/${param.row?._id}`)}>Detail</Button>
+                        <Button onClick={() => navigate(`/petrol-request/${param.row?._id}`)}>{t("AllStaffsPetrolRequest.detail")}</Button>
                         {/* <DeleteIcon style={{ color: 'red', cursor: 'pointer' }} /> */}
 
                     </>
@@ -78,7 +79,7 @@ const AllStaffPetrolRequests = () => {
 
     return (
         <Container>
-            <Title>Requests</Title>
+            <Title>{t("AllStaffsPetrolRequest.requests")}</Title>
             <div style={{ height: 400, width: '100%', marginTop: '20px' }}>
             <DataGrid
                 rows={request}

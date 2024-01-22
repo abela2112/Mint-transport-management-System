@@ -136,7 +136,7 @@ const AddNewCar = () => {
               <Label>{t('AddnewCar.brandName')}</Label>
               <SignUpInput
                 type="text"
-                placeholder="brand name"
+                placeholder={t('AddnewCar.brandName')}
                 value={brand}
                 onChange={(e) => setBrand(e.target.value)}
               />
@@ -145,7 +145,7 @@ const AddNewCar = () => {
               <Label>{t('AddnewCar.modelName')}</Label>
               <SignUpInput
                 type="text"
-                placeholder="model name"
+                placeholder={t('AddnewCar.modelName')}
                 value={model}
                 onChange={(e) => setModel(e.target.value)}
               />
@@ -155,7 +155,7 @@ const AddNewCar = () => {
               <Label>{t('AddnewCar.licencePlateNo')}</Label>
               <SignUpInput
                 type="text"
-                placeholder="licence plate number"
+                placeholder={t('AddnewCar.licencePlateNo')}
                 value={licencePlateNumber}
                 onChange={(e) => setLicencePlateNumber(e.target.value)}
               />
@@ -172,7 +172,7 @@ const AddNewCar = () => {
               <Label>{t("AddnewCar.Driver'sName")}</Label>
               <SignUpInput
                 type="text"
-                placeholder="driver name"
+                placeholder={t("AddnewCar.Driver'sName")}
                 value={DriverName}
                 onChange={(e) => setDriverName(e.target.value)}
               />
@@ -181,7 +181,7 @@ const AddNewCar = () => {
               <Label>{t("AddnewCar.Driver'sPhoneNumber")}</Label>
               <SignUpInput
                 type="tel"
-                placeholder="phone number"
+                placeholder={t("AddnewCar.Driver'sPhoneNumber")}
                 value={DriverPhoneNumber}
                 onChange={(e) => setDriverPhoneNumber(e.target.value)}
               />

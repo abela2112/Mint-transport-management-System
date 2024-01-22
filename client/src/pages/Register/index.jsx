@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Background, Mint } from '../../asset';
 import { signUp } from '../../api/userApi';
 import {getAllDepartment} from  '../../api/userApi'
-
+import { useTranslation } from "react-i18next"
 import {
   Button,
   Dialog,
@@ -28,7 +28,7 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword]=useState('')
   const [error, setError] = useState('');
   const [deptArray,setDeptArray]=useState([])
-  
+  const {t}=useTranslation('global')
   const [isLoading, setIsLoading] = useState(false)
   const socket = io("http://localhost:5000");
 
@@ -100,14 +100,14 @@ const Register = () => {
         </ImgmintContainer>
 
         <Title>
-         Get Start Now 
+         {t("Register.getStarted")} 
         </Title>
         <SignUpForm onSubmit={handleSignUp}>
           <Contain>
-            <Label>የመጀመሪያ ስም</Label>
+            <Label>{t("Register.firstName")}</Label>
             <SignUpInput
               type="text"
-              placeholder="የመጀመሪያ ስም"
+              placeholder={t("Register.firstName")}
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               title="የመጀመሪያ ስምዎን ያስገቡ"
@@ -115,20 +115,20 @@ const Register = () => {
           </Contain>
           <Contain>
 
-            <Label>የአያት ስም</Label>
+            <Label>{t("Register.lastName")}</Label>
             <SignUpInput
               type="text"
-              placeholder="የአያት ስም"
+              placeholder={t("Register.lastName")}
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               title="የአያት ስምህን አስገባ"
             />
           </Contain>
           <Contain>
-            <Label>ኢሜይል</Label>
+            <Label>{t("Register.email")}</Label>
             <SignUpInput
               type="email"
-              placeholder="ኢሜይል"
+              placeholder={t("Register.email")}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               title="የድርጅትዎን ኢሜይል እንደ firstName.lastName@mint.gov.et ያስገቡ"
@@ -136,7 +136,7 @@ const Register = () => {
           </Contain>
           <Contain>
 
-            <Label>ክፍል</Label>
+            <Label>{t("Register.department")}</Label>
             {/* <SelectOption title="select your department" onChange={(e) => setDepartment(e.target.value)}>
               <Option disabled selected>Select Option</Option>
              
@@ -145,7 +145,7 @@ const Register = () => {
             </SelectOption> */}
             <SelectOption
 title="ክፍልዎን ይምረጡ"
-placeholder="ክፍል"
+placeholder={t("Register.department")}
 value={department}
 onChange={(e) => setDepartment(e.target.value)}
 >
@@ -157,21 +157,21 @@ onChange={(e) => setDepartment(e.target.value)}
 
           <Contain>
              
-            <Label>ቦታዎን</Label>
+            <Label>{t("Register.position")}</Label>
             <SelectOption title="ቦታዎን ይምረጡ" onChange={(e) => setPosition(e.target.value)}>
-              <Option disabled selected>አማራጭ ይምረጡ</Option>
-              <Option>CEO</Option>
-              <Option>Desk</Option>
-              <Option>Expert</Option>
+              <Option disabled selected>{t("Register.choose")}</Option>
+              <Option>{t("Register.CEO")}</Option>
+              <Option>{t("Register.Desk")}</Option>
+              <Option>{t("Register.Expert")}</Option>
             </SelectOption>
           </Contain>
 
           <Contain>
           
-            <Label>የይለፍ ቃል</Label>
+            <Label>{t("Register.password")}</Label>
             <SignUpInput
               type="password"
-              placeholder="የይለፍ ቃል"
+              placeholder={t("Register.password")}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               title="የይለፍ ቃልዎ ቢያንስ አንድ ቁጥራዊ አንድ ልዩ ቁምፊ እና አንድ ፊደል መያዝ አለበት።"
@@ -179,10 +179,10 @@ onChange={(e) => setDepartment(e.target.value)}
           </Contain>
           <Contain>
           
-            <Label>ስልክ</Label>
+            <Label>{t("Register.phoneNumber")}</Label>
             <SignUpInput
               type="tel"
-              placeholder="ስልክ"
+              placeholder={t("Register.phoneNumber")}
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
               title="ስልክ ቁጥርህ ባለ 10 አሃዝ መሆን አለበት።"
@@ -203,10 +203,10 @@ onChange={(e) => setDepartment(e.target.value)}
 
           <Contain>
 
-            <Label>የይለፍ ቃል አረጋግጥ</Label>
+            <Label>{t("Register.confirmPassword")}</Label>
             <SignUpInput
               type="password"
-              placeholder="የይለፍ ቃል አረጋግጥ"
+              placeholder={t("Register.confirmPassword")}
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               title="አረጋግጥ የይለፍ ቃል ከዋናው የይለፍ ቃል ጋር አንድ አይነት መሆን አለበት"
@@ -215,9 +215,9 @@ onChange={(e) => setDepartment(e.target.value)}
 
           <BottomText>
 
-            <p>መለያ አለህ? <Link className='link' to={'/login'} style={{ color: '#e6953b' }}>Sign in</Link>  </p>
+            <p>{t("Register.account")}<Link className='link' to={'/login'} style={{ color: '#e6953b' }}>{t("Register.signIn")}</Link>  </p>
           </BottomText>
-          <SignUpButton disabled={isLoading} onClick={() => (password !== confirmPassword) ? setIsOpen(true) : setIsOpen(false)} >Sign up</SignUpButton>
+          <SignUpButton disabled={isLoading} onClick={() => (password !== confirmPassword) ? setIsOpen(true) : setIsOpen(false)} >{t("Register.signUp")}</SignUpButton>
        
         </SignUpForm>
         {error && <p style={{ color: "red" }}>{error}</p>}
@@ -229,20 +229,20 @@ onChange={(e) => setDepartment(e.target.value)}
           aria-describedby="dialog-description"
         >
           <DialogTitle id="dialog-title">
-            {password !== confirmPassword ? "Confirm Password" : "Registration Successful"}
+            {password !== confirmPassword ? t("Register.confirmPassword") : "Registration Successful"}
           </DialogTitle>
           <DialogContent id="dialog-description">
             {password !== confirmPassword ? (
-              <DialogContentText>Password doesn't match! Please confirm again</DialogContentText>
+              <DialogContentText>{t("Register.noMatch")}</DialogContentText>
             ) : (
-                <DialogContentText>Congratulations! You have successfully registered check your admin for approval</DialogContentText>
+                <DialogContentText>{t("Register.congrats")}</DialogContentText>
             )}
             {password !== confirmPassword && (
               <Contain>
-                <Label>Confirm Password</Label>
+                <Label>{t("Register.confirmPassword")}</Label>
                 <SignUpInput
                   type="password"
-                  placeholder="Confirm Password"
+                  placeholder={t("Register.confirmPassword")}
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
@@ -253,7 +253,7 @@ onChange={(e) => setDepartment(e.target.value)}
             {password !== confirmPassword ? (
               <>
                 <Button onClick={() => setIsOpen(false)} style={{ backgroundColor: "Red", color: "white" }}>
-                  Cancel
+                  {t("Register.cancel")}
                 </Button>
                 <Button
                   style={{ backgroundColor: "Yellow", color: "white" }}
@@ -262,12 +262,12 @@ onChange={(e) => setDepartment(e.target.value)}
                     setIsOpen(false);
                   }}
                 >
-                  Submit
+                  {t("Register.submit")}
                 </Button>
               </>
             ) : (
               <Button onClick={() => setIsOpen(false)} color="primary">
-                Close
+                {t("Register.close")}
               </Button>
             )}
           </DialogActions>

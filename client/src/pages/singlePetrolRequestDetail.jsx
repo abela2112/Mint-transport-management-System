@@ -9,6 +9,7 @@ import { Buttonn } from './UserRegisterRequest'
 import TransportManagerResponse from '../components/TransportManagerResponse'
 import  {getAPetrolRequest} from '../api/userApi'
 import { io } from 'socket.io-client'
+import { useTranslation } from "react-i18next"
 import { Skeleton } from '@mui/material'
 import {
     Button,
@@ -93,6 +94,7 @@ const SinglePetrolRequestDetail = () => {
     const [isLoading, setIsLoading] = useState(false)
     const { id } = useParams()
     const socket = io("http://localhost:5000");
+    const {t}=useTranslation('global')
     useEffect(() => {
         setIsLoading(true)
         getAPetrolRequest(id).then(({ data }) => {
@@ -149,22 +151,22 @@ const SinglePetrolRequestDetail = () => {
             {request ?
                 <Container>
                     <Wrapper>
-                        <Title>Request Detail</Title>
+                        <Title>{t("singlePetrolRequestDetail.requestDetail")}</Title>
                         <InfoContainer>
 
-                            <Text><span><b>Full Name :</b></span>{request?.name}</Text>
+                            <Text><span><b>{t("singlePetrolRequestDetail.fullName")}</b></span>{request?.name}</Text>
                    
-                            <Text><span><b>Phone Number :</b></span>{request?.phoneNumber}</Text>
-                            <Text><span><b>description :</b> </span>{request?.discription}</Text>
-                            <Text><span><b>request date :</b></span>{request?.requestDate && format(new Date(request?.requestDate)
+                            <Text><span><b>{t("singlePetrolRequestDetail.phoneNumber")}</b></span>{request?.phoneNumber}</Text>
+                            <Text><span><b>{t("singlePetrolRequestDetail.description")}</b> </span>{request?.discription}</Text>
+                            <Text><span><b>{t("singlePetrolRequestDetail.requestdate")}</b></span>{request?.requestDate && format(new Date(request?.requestDate)
                                 , 'MMMM do yyyy')}</Text>
                          
                         </InfoContainer>
                         <ButtonContainer>
                             {role === 'transport-manager' &&
                                 <>
-                                    <ApproveButton disabled={request?.status === 'approved' || request?.status === 'reject' ? true : false} onClick={()=>setIsOpenApproveForStaff(true)} >Approved</ApproveButton>
-                                    <RejectButton disabled={request?.status === 'reject' || request?.status === 'approved' || request?.isChecked ? true : false} onClick={()=>setIsOpenRejectForStaff(true)}>Reject</RejectButton>
+                                    <ApproveButton disabled={request?.status === 'approved' || request?.status === 'reject' ? true : false} onClick={()=>setIsOpenApproveForStaff(true)} >{t("singlePetrolRequestDetail.approved")}</ApproveButton>
+                                    <RejectButton disabled={request?.status === 'reject' || request?.status === 'approved' || request?.isChecked ? true : false} onClick={()=>setIsOpenRejectForStaff(true)}>{t("singlePetrolRequestDetail.reject")}</RejectButton>
                                 </>
                                 
                             }
@@ -201,13 +203,13 @@ const SinglePetrolRequestDetail = () => {
                         maxWidth='lg'
                     >
                         <DialogTitle id="dialog-title">
-                            Do you want to approve?
+                            {t("singlePetrolRequestDetail.wantToApprove")}
                         </DialogTitle>
                         <DialogContent id="dialog-description">
                             {/* <DialogContentText></DialogContentText> */}
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={() => setIsOpenApproveForStaff(false)} style={{ backgroundColor: "Red", color: "white" }}>No</Button>
+                            <Button onClick={() => setIsOpenApproveForStaff(false)} style={{ backgroundColor: "Red", color: "white" }}>{t("singlePetrolRequestDetail.no")}</Button>
                             <Button
                                 style={{ backgroundColor: "Yellow", color: "white" }}
                                 autoFocus
@@ -216,7 +218,7 @@ const SinglePetrolRequestDetail = () => {
                                     setIsOpenApproveForStaff(false);
                                 }}
                             >
-                                Yes
+                                {t("singlePetrolRequestDetail.yes")}
                             </Button>
                         </DialogActions>
                     </Dialog>
@@ -232,13 +234,13 @@ const SinglePetrolRequestDetail = () => {
                         maxWidth='lg'
                     >
                         <DialogTitle id="dialog-title">
-                           Confirmation
+                           {t("singlePetrolRequestDetail.confirmation")}
                         </DialogTitle>
                         <DialogContent id="dialog-description">
-                            <DialogContentText> Do you want to reject?</DialogContentText>
+                            <DialogContentText> {t("singlePetrolRequestDetail.wantToReject")}</DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={() => setIsOpenRejectForStaff(false)} style={{ backgroundColor: "Red", color: "white" }}>No</Button>
+                            <Button onClick={() => setIsOpenRejectForStaff(false)} style={{ backgroundColor: "Red", color: "white" }}>{t("singlePetrolRequestDetail.no")}</Button>
                             <Button
                                 style={{ backgroundColor: "Yellow", color: "black" }}
                                 autoFocus
@@ -247,7 +249,7 @@ const SinglePetrolRequestDetail = () => {
                                     setIsOpenRejectForStaff(false);
                                 }}
                             >
-                                Yes
+                               {t("singlePetrolRequestDetail.yes")}
                             </Button>
                         </DialogActions>
                     </Dialog>

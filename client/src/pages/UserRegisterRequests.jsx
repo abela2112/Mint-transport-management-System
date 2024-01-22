@@ -8,6 +8,7 @@ import { DataGrid } from '@mui/x-data-grid'
 import { useNavigate } from 'react-router-dom'
 import { Title } from './StaffMangerPendingRequests'
 import { EditButton, swipeUp } from './ShowAllUserForAdmin'
+import {useTranslation} from 'react-i18next';
 const Container = styled.div`
     padding: 20px;
     display: flex;
@@ -32,6 +33,7 @@ const UserRegisterRequests = ({ type }) => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const {t}=useTranslation('global')
     const [filteredReq, setFilteredReq] = useState([])
     useEffect(() => {
         getAllUserRegisterRequests().then(({ data }) => {
@@ -43,26 +45,26 @@ const UserRegisterRequests = ({ type }) => {
         }
     }, [type])
     const columns = [
-        { field: 'firstName', headerName: 'First Name', cellClassName: 'table-cell', width: 170 },
-        { field: 'lastName', headerName: 'Last name', cellClassName: 'table-cell', width: 200 },
-        { field: 'email', headerName: 'email', cellClassName: 'table-cell', width: 200 },
-        { field: 'role', headerName: 'role', cellClassName: 'table-cell', width: 200 },
+        { field: 'firstName', headerName: t("UserRegisterRequest.firstName"), cellClassName: 'table-cell', width: 170 },
+        { field: 'lastName', headerName: t("UserRegisterRequest.lastName"), cellClassName: 'table-cell', width: 200 },
+        { field: 'email', headerName: t("UserRegisterRequest.email"), cellClassName: 'table-cell', width: 200 },
+        { field: 'role', headerName: t("UserRegisterRequest.role"), cellClassName: 'table-cell', width: 200 },
 
         {
             field: 'phoneNumber',
-            headerName: 'Phone Number',
+            headerName: t("UserRegisterRequest.phoneNumber"),
             width: 170,
             cellClassName: 'table-cell'
         },
 
         {
             field: 'action',
-            headerName: 'Action',
+            headerName: t("UserRegisterRequest.action"),
             sortable: false,
             width: 100,
             renderCell: (param) => {
                 return <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <EditButton onClick={() => navigate(`/user-register-request/${param.row._id}`)}>Edit</EditButton>
+                    <EditButton onClick={() => navigate(`/user-register-request/${param.row._id}`)}>{t("UserRegisterRequest.edit")}</EditButton>
                     {/* <DeleteIcon onClick={() => handleDelete(param.row._id)} /> */}
                 </div>
             }
@@ -73,7 +75,7 @@ const UserRegisterRequests = ({ type }) => {
     return (
         <Container>
 
-            <Title>{type && type} user register request</Title>
+            <Title>{type && type} {t("UserRegisterRequest.userRegisterRequest")}</Title>
             <TableContainer style={{ height: '60%', width: '100%' }}>
                 <DataGrid
                     rows={filteredReq?.length > 0 && type === 'pending' ? filteredReq : requests}

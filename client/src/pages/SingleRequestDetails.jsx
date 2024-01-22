@@ -22,7 +22,7 @@ import StaffApproveModal from '../components/Modals/StaffApproveModal'
 import StaffRejectModal from '../components/Modals/StaffRejectModal'
 import { stringAvatar } from '../utils'
 import { Accessibility, Badge, Business, Mail, Person } from '@mui/icons-material'
-
+import { useTranslation } from "react-i18next"
 
 const Container = styled.div`
     padding: 20px;
@@ -136,6 +136,7 @@ const SingleRequestDetails = () => {
     const title = `${request?.userCreated?.firstName} ${request?.userCreated?.lastName}`
     const userCreated = request?.userCreated
     const socket = io("http://localhost:5000");
+    const {t}=useTranslation('global')
     useEffect(() => {
         setIsLoading(true)
         getRequestById(id).then(({ data }) => {
@@ -197,17 +198,18 @@ const SingleRequestDetails = () => {
             <Container>
                 <MainWrapper>
                     {request ?
-                        <>  <Wrapper>
-                        <Title>Request Detail</Title>
+                        <>  <Wrapper> 
+                        <Title>{t("SingleRequestDetail.requestDetail")}
+                        </Title>
 
                             <InfoContainer>
-                            <Text><span><b>Full Name :</b></span>{request?.name}</Text>
-                            <Text><span><b>destination :</b></span>{request?.destination}</Text>
-                            <Text><span><b>Phone Number :</b></span>{request?.phoneNumber}</Text>
-                            <Text><span><b>description :</b> </span>{request?.description}</Text>
-                            <Text><span><b>Pick Up date :</b></span>{request?.pickUpDate && format(new Date(request?.pickUpDate)
+                            <Text><span><b>{t("SingleRequestDetail.fullName")}</b></span>{request?.name}</Text>
+                            <Text><span><b>{t("SingleRequestDetail.destination")}</b></span>{request?.destination}</Text>
+                            <Text><span><b>{t("SingleRequestDetail.phoneNumber")}</b></span>{request?.phoneNumber}</Text>
+                            <Text><span><b>{t("SingleRequestDetail.description")}</b> </span>{request?.description}</Text>
+                            <Text><span><b>{t("SingleRequestDetail.pickUpDate")}</b></span>{request?.pickUpDate && format(new Date(request?.pickUpDate)
                                 , 'MMMM do yyyy')}</Text>
-                            <Text><span><b>return date:</b></span>{request?.pickUpDate && format(new Date(request?.pickUpDate)
+                            <Text><span><b>{t("SingleRequestDetail.returnDate")}</b></span>{request?.pickUpDate && format(new Date(request?.pickUpDate)
                                 , 'MMMM do yyyy')}</Text>
                         </InfoContainer>
 
@@ -215,12 +217,12 @@ const SingleRequestDetails = () => {
                                 {role === 'staff-manager' &&
                                     <>
                                         <ApproveButton disabled={request?.status === 'approved' || request?.status === 'rejected' || request?.isChecked ? true : false} onClick={() => setIsOpenApproveForStaff(true)} >{request?.isChecked ? "Checked" : "Approved"}</ApproveButton>
-                                        <RejectButton disabled={request?.status === 'rejected' || request?.status === 'approved' || request?.isChecked ? true : false} onClick={() => setIsOpenRejectForStaff(true)}>Reject</RejectButton>
+                                        <RejectButton disabled={request?.status === 'rejected' || request?.status === 'approved' || request?.isChecked ? true : false} onClick={() => setIsOpenRejectForStaff(true)}>{t("SingleRequestDetail.reject")}</RejectButton>
                                     </>}
                                 {role === 'transport-manager' &&
                                     <>
-                                        <ApproveButton disabled={request?.status === 'approved' || request?.status === 'rejected' ? true : false} onClick={handleApprove} >Approved</ApproveButton>
-                                        <RejectButton disabled={request?.status === 'rejected' || request?.status === 'approved' || request?.isChecked ? true : false} onClick={handleReject}>Reject</RejectButton>
+                                        <ApproveButton disabled={request?.status === 'approved' || request?.status === 'rejected' ? true : false} onClick={handleApprove} >{t("SingleRequestDetail.approved")}</ApproveButton>
+                                        <RejectButton disabled={request?.status === 'rejected' || request?.status === 'approved' || request?.isChecked ? true : false} onClick={handleReject}>{t("SingleRequestDetail.reject")}</RejectButton>
                                     </>}
                                 {(role !== 'transport-manager' && role !== 'staff-manager') &&
                                     <>
