@@ -10,15 +10,16 @@ const StaffRejectModal = ({ isOpenRejectForStaff, setIsOpenRejectForStaff, handl
             aria-describedby="dialog-description"
         >
             <DialogTitle id="dialog-title">
-                Do you want to approve?
+                Are you sure you want to reject this request?
+                changes can not be undone
             </DialogTitle>
             <DialogContent id="dialog-description">
                 {/* <DialogContentText></DialogContentText> */}
             </DialogContent>
             <DialogActions>
-                <Button onClick={() => setIsOpenRejectForStaff(false)} style={{ backgroundColor: "Red", color: "white" }}>No</Button>
+                <Button onClick={() => setIsOpenRejectForStaff(false)} style={{ backgroundColor: "#f5f5f5", color: "gray" }}>No</Button>
                 <Button
-                    style={{ backgroundColor: "Yellow", color: "black" }}
+                    style={{ backgroundColor: "rgb(255, 165, 0)", color: "white" }}
                     autoFocus
                     onClick={() => {
                         handleReject()

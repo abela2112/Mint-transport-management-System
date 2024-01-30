@@ -10,15 +10,15 @@ const StaffApproveModal = ({ isOpenApproveForStaff, setIsOpenApproveForStaff, ha
             aria-describedby="dialog-description"
         >
             <DialogTitle id="dialog-title">
-                Do you want to approve?
+                Are you sure do you want to  approve this request?
             </DialogTitle>
             <DialogContent id="dialog-description">
                 {/* <DialogContentText></DialogContentText> */}
             </DialogContent>
             <DialogActions>
-                <Button onClick={() => setIsOpenApproveForStaff(false)} style={{ backgroundColor: "Red", color: "white" }}>No</Button>
+                <Button onClick={() => setIsOpenApproveForStaff(false)} style={{ backgroundColor: "#f5f5f5", color: "gray" }}>No</Button>
                 <Button
-                    style={{ backgroundColor: "Yellow", color: "white" }}
+                    style={{ backgroundColor: "rgb(255, 165, 0)", color: "white" }}
                     autoFocus
                     onClick={() => {
                         handleApprove()

@@ -7,19 +7,14 @@ import {
     DialogActions,
 } from '@mui/material'
 import {useState}  from 'react'
+import { CancelButton, SubmitButton } from './Buttons'
 
-const DialogModal = ({ open, onClose, onSubmit }) => {
+const DialogModal = ({ open, onClose, onSubmit, message }) => {
     const [isOpen, setIsOpen] = useState(false)
-
-    const handleOpen = () => {
-        setIsOpen(true)
-    }
-
     const handleClose = () => {
         setIsOpen(false)
         onClose()
     }
-
     const handleSubmit = (e) => {
         
         onSubmit()
@@ -35,15 +30,24 @@ const DialogModal = ({ open, onClose, onSubmit }) => {
                 aria-labelledby='dialog-title'
                 aria-describedby='dialog-description'
             >   
-                <DialogTitle id='dialog-title'>Add the New data to the database?</DialogTitle>
+                <DialogTitle id='dialog-title'>Confirmation Message</DialogTitle>
                 <DialogContent id='dialog-description'>
                    
-                    <DialogContentText>Are you sure?</DialogContentText>
-                   
+                    <DialogContentText>{message}</DialogContentText>
+                    {/* Are you sure do you want to send this request? */}
                  </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    <Button autoFocus onClick={handleSubmit}>Submit</Button>
+                    <Button onClick={handleClose} style={{ backgroundColor: "#f5f5f5", color: "gray" }}>Cancel</Button>
+                    <Button
+                        style={{ backgroundColor: "#ee8624", color: "white" }}
+                        autoFocus
+                        onClick={() => {
+                            handleSubmit()
+                        }}
+                    >
+                        Yes
+                    </Button>
+
                 </DialogActions>
             </Dialog>
         </>

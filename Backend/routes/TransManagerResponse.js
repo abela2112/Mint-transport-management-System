@@ -8,7 +8,7 @@ const {
   getAllResponses,
   getResponseById,
   getUserRequestResponse,
- 
+  getResponseForSingleRequest,
 } = require("../controller/TransManagerResponse");
 
 const {
@@ -18,14 +18,12 @@ const {
   verifyTokenAndAccessToRequest,
   verifyTokenAndAuth,
 
-
   verifyTokenAndAccessToTransportManager,
 } = require("../middleware/auth");
 
-
-
 router.get("/", verifyTokenAndAccessToTransportManager, getAllResponses);
 router.get("/:id", auth, getResponseById);
+router.get("/request/:id", auth, getResponseForSingleRequest);
 router.get("/user/:userId", auth, getUserRequestResponse);
 router.post("/add-new-response", verifyTokenAndAccessToRequest, addNewResponse);
 router.patch("/:id", auth, updateResponse);

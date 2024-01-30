@@ -70,14 +70,7 @@ const InfoContainer=styled.div`
   flex:2;
 `
 const UserDetail = () => {
-    // const handleApprove = (e) => {
-    //     e.preventDefault()
-    //     updateUserRegisterRequestById(id, { status: 'approved' }).then(() => console.log('approved successfully')).catch((err) => console.log(err));
-    // }
-    // const handleReject = (e) => {
-    //     e.preventDefault()
-    //     updateUserRegisterRequestById(id, { status: 'rejected' }).then(() => console.log('rejected successfully')).catch((err) => console.log(err));
-    // }
+
     const [user, setUser] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
     const {id}=useParams()

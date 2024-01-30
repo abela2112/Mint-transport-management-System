@@ -48,7 +48,13 @@ const getResponseById = async (req, res) => {
   const response = await TResponse.findById(id);
   res.status(200).json(response);
 };
-
+const getResponseForSingleRequest = async (req, res) => {
+  const { id } = req.params;
+  const response = await TResponse.findOne({ requestId: id });
+  if (!response)
+    return new BadRequestError("Could not find response for request");
+  res.status(StatusCodes.OK).json(response);
+};
 module.exports = {
   addNewResponse,
   updateResponse,
@@ -56,5 +62,5 @@ module.exports = {
   getAllResponses,
   getResponseById,
   getUserRequestResponse,
-  
+  getResponseForSingleRequest,
 };

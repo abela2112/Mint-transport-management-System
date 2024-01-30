@@ -13,6 +13,7 @@ import styled from 'styled-components'
 import { Background, Mint } from '../asset';
 import { getAvailableCar, updateCarStatus, updateRequestById } from '../api/userApi';
 import { useParams } from 'react-router-dom';
+import { Contain, Input, Label, SelectOption } from '../pages/Register/RegisterCSS';
 
 
 const Container = styled.div`
@@ -119,7 +120,6 @@ width: 400px;
 const TransportManagerResponse = ({ open, setOpen, onSubmit, requestId }) => {
     const [cars, setCars] = useState('')
     const [filterdCar, setFilterdCar] = useState([])
-
     const [PlateNumber, setPlateNumber] = useState('')
     const [DriverName, setDriverName] = useState('')
     const [DriverPhone, setDriverPhone] = useState('')
@@ -178,10 +178,9 @@ const TransportManagerResponse = ({ open, setOpen, onSubmit, requestId }) => {
                             <Img1 src={Mint} />
                         </ImgmintContainer>
                         <Form>
-                            <LabledInput>
-                                <Lable>Plate Number</Lable>
-                                <Select
-
+                            <Contain>
+                                <Label>Plate Number</Label>
+                                <SelectOption
                                     placeholder="Plate Number"
                                     value={PlateNumber}
                                     onChange={(e) => setPlateNumber(e.target.value)}
@@ -189,45 +188,45 @@ const TransportManagerResponse = ({ open, setOpen, onSubmit, requestId }) => {
                                     {cars.length > 0 && cars.map((car, i) => (
                                         <Option key={i} value={car?.licencePlateNumber} >{car?.licencePlateNumber} </Option>
                                     ))}
-                                </Select>
-                            </LabledInput>
-                            <LabledInput>
-                                <Lable>Driver name</Lable>
-                                <InputForm
+                                </SelectOption>
+                            </Contain>
+                            <Contain>
+                                <Label>Driver Name</Label>
+                                <Input
                                     type="text"
                                     placeholder="Driver name"
                                     value={DriverName}
                                     onChange={(e) => setDriverName(e.target.value)}
                                 />
-                            </LabledInput>
-                            <LabledInput>
-                                <Lable>Driver phone</Lable>
-                                <InputForm
+                            </Contain>
+                            <Contain>
+                                <Label>Driver phone</Label>
+                                <Input
                                     type="tel"
                                     placeholder="Driver phone"
                                     value={DriverPhone}
                                     onChange={(e) => setDriverPhone(e.target.value)}
 
                                 />
-                            </LabledInput>
-                            <LabledInput>
-                                <Lable>Car model</Lable>
-                                <InputForm
+                            </Contain>
+                            <Contain>
+                                <Label>Car model</Label>
+                                <Input
                                     type="text"
                                     placeholder="Car Model"
                                     value={CarModel}
                                     onChange={(e) => setCarModel(e.target.value)}
                                 />
-                            </LabledInput>
-                            <LabledInput>
-                                <Lable>Return Date</Lable>
-                                <InputForm
+                            </Contain>
+                            <Contain>
+                                <Label>Return Date</Label>
+                                <Input
                                     type="date"
                                     placeholder="MM/dd/yy"
                                     value={ReturnDate}
                                     onChange={(e) => setReturnDate(e.target.value)}
                                 />
-                            </LabledInput>
+                            </Contain>
 
                         </Form>
 
@@ -237,8 +236,8 @@ const TransportManagerResponse = ({ open, setOpen, onSubmit, requestId }) => {
 
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    <Button autoFocus onClick={handleSubmit}>Submit</Button>
+                    <Button onClick={handleClose} style={{ backgroundColor: "#f5f5f5", color: "gray" }}>Cancel</Button>
+                    <Button autoFocus onClick={handleSubmit} style={{ backgroundColor: "#ee8624", color: "white" }}>Submit</Button>
                 </DialogActions>
             </Dialog>
         </>

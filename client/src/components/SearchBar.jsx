@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import FilterListOutlinedIcon from '@mui/icons-material/FilterListOutlined';
@@ -10,6 +9,10 @@ const Container = styled.div`
     justify-content: space-between;
     padding: 10px 20px;
     margin-top: 10px;
+
+    @media screen and (max-width: 768px) {
+       flex-direction :column ;
+    }
 `
 const Title = styled.span``
 const Select = styled.select``
@@ -20,14 +23,6 @@ color:#54577A;
 padding: 10px;
 border: none;
 `
-// const SearchBox = styled.div` 
-// border: 1px solid #F5F5F7;
-// display: flex;
-// align-items: center;
-// justify-content: space-between;
-// border-radius: 5px;
-// width: 400px;
-// `
 const SortingBox = styled.div`
 border: 1px solid #F5F5F7;
 display:flex;

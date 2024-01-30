@@ -1,50 +1,41 @@
-import { Routes, Route, Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 
-import Register from "./pages/Register/index";
-import Login from "./pages/Login/index";
-import io from "socket.io-client";
 import axios from "axios";
-import SideBar from "./components/SideBar";
-import styled from "styled-components";
-import Layout from "./layout";
-import AddNewCar from "./pages/addNewCar";
-import AddNewDriver from "./pages/AddNewDriver";
 import { useDispatch, useSelector } from "react-redux";
-import Requests from "./pages/UserRequests";
-import MakeRequest from "./pages/MakeRequest";
-import UserRequests from "./pages/UserRequests";
-import AllRequests from "./pages/AllRequests";
-import ShowAllUserForAdmin from "./pages/ShowAllUserForAdmin";
-import SingleRequestDetails from "./pages/SingleRequestDetails";
-import LandingPage from "./pages/LandingPage";
-import AddDepartment from "./pages/AddDepartment";
-import UserRegisterRequests from "./pages/UserRegisterRequests";
-import UserRequestDetail from "./pages/UserRequestDetail";
-import TransManagerResponse from "./pages/TransManagerResponse";
-import SearchPage from "./pages/SearchPage.jsx";
-import StaffMangerPendingRequests from "./pages/StaffMangerPendingRequests";
-import StaffPetrolRequest from "./pages/StaffPetrolRequest";
-import History from "./pages/History";
+import io from "socket.io-client";
+import styled from "styled-components";
+import SingleRequestDetails from "./components/SingleRequestDetails.jsx";
+import Layout from "./layout";
+import AddDepartment from "./pages/AdminPages/AddDepartment.jsx";
+import ShowAllUserForAdmin from "./pages/AdminPages/ShowAllUserForAdmin.jsx";
+// import UserRegisterRequests from "./pages/AdminPages/UserRegisterRequests.jsx";
+import UserRequestDetail from "./pages/AdminPages/UserRequestDetail.jsx";
 import ForgotPassword from "./pages/ForgotPassword";
-
+import LandingPage from "./pages/LandingPage/LandingPage.jsx";
+import Login from "./pages/Login/index";
+import Register from "./pages/Register/index";
+import SearchPage from "./pages/SearchPage.jsx";
+import History from "./pages/StaffManagerPages/History.jsx";
+import StaffMangerPendingRequests from "./pages/StaffManagerPages/StaffMangerPendingRequests.jsx";
+import StaffPetrolRequest from "./pages/StaffManagerPages/StaffPetrolRequest.jsx";
+import MakeRequest from "./pages/StaffPages/MakeRequest.jsx";
+import UserRequests from "./pages/StaffPages/UserRequests.jsx";
+import TransManagerResponse from "./pages/TransManagerResponse";
+import AddNewDriver from "./pages/TransportManagerPages/AddNewDriver.jsx";
+import AllRequests from "./pages/TransportManagerPages/AllRequests.jsx";
+import AddNewCar from "./pages/TransportManagerPages/addNewCar.jsx";
+import ReponseForSingleRequest from "./pages/StaffPages/ReponseForSingleRequest.jsx";
 import ResetPassword from "./pages/ResetPassword.jsx";
+import AvailableCar from "./pages/TransportManagerPages/AvailableCar.jsx";
 
-import AvailableCar from "./pages/AvailableCar.jsx";
-
-import UserDetail from "./pages/userDetails.jsx";
-
-import Response from "./pages/Response.jsx";
-import SinglResponsePage from "./pages/SinglResponsePage.jsx";
-import { useEffect, useState } from "react";
-import { setNotification } from "./redux/features/user.js";
+import { useEffect } from "react";
 import Notification from "./pages/Notification.jsx";
-import Alert from "./components/Alert.jsx";
-import AlertDisplay from "./components/Alert.jsx";
-
-const Container = styled.div`
-  width: 100%;
-  height: 100%;
-`;
+import Response from "./pages/StaffPages/Response.jsx";
+import SinglResponsePage from "./pages/StaffPages/SinglResponsePage.jsx";
+import { setNotification } from "./redux/features/user.js";
+import ProfilePage from "./pages/ProfilePage.jsx";
+import PendingUserRegisterRequests from "./pages/AdminPages/PendingUserRegisterRequests.jsx";
+import PendingRequests from "./pages/TransportManagerPages/PendingRequests.jsx";
 
 const StaffLayout = () => (
   <>
@@ -77,7 +68,6 @@ function App() {
   const user = useSelector((state) => state.user?.user);
   const token = useSelector((state) => state.user?.token);
   const dispatch = useDispatch();
-  const [alert, setAlert] = useState(false);
   axios.defaults.baseURL = "http://localhost:5000";
   axios.defaults.headers = {
     Authorization: "Bearer " + token,
@@ -95,7 +85,6 @@ function App() {
     let socket = io("http://localhost:5000");
     socket.emit("setup", user);
     socket.on("messagerecieved", (message) => {
-      console.log("user notif", message);
       dispatch(setNotification(message));
     });
     socket.on("notification", (message) =>
@@ -108,6 +97,7 @@ function App() {
       {/* <AlertDisplay open={open} setOpen={setOpen} message={message} /> */}
       <Routes>
         <Route path="/" element={user ? <Layout /> : <Navigate to={"/home"} />}>
+          <Route path="/profile" element={<ProfilePage />} />
           {user?.role === "staff" && (
             <Route path="/" element={<StaffLayout />}>
               <Route path="/" element={<Navigate to={"/booking"} />} />
@@ -117,6 +107,10 @@ function App() {
               <Route path="/booking" element={<MakeRequest />} />
               <Route path="/response" element={<Response />} />
               <Route path="/response/:id" element={<SinglResponsePage />} />
+              <Route
+                path="/response/request/:id"
+                element={<ReponseForSingleRequest />}
+              />
             </Route>
           )}
           {user?.role === "staff-manager" && (
@@ -132,6 +126,10 @@ function App() {
               <Route path="/requests-history" element={<History />} />
               <Route path="/petrol-request" element={<StaffPetrolRequest />} />
               <Route path="/request/:id" element={<SingleRequestDetails />} />
+              <Route
+                path="/response/request/:id"
+                element={<ReponseForSingleRequest />}
+              />
             </Route>
           )}
 
@@ -139,27 +137,25 @@ function App() {
             <Route path="/" element={<TransportManagerLayout />}>
               <Route path="/" element={<Navigate to={"/requests"} />} />
               <Route path="/add-new-car" element={<AddNewCar />} />
-              <Route
-                path="/pending-requests"
-                element={<AllRequests type={"pending"} />}
-              />
+              <Route path="/pending-requests" element={<PendingRequests />} />
               <Route path="/add-new-driver" element={<AddNewDriver />} />
               <Route path="/available-car" element={<AvailableCar />} />
               <Route path="/requests" element={<AllRequests />} />
               <Route path="/request/:id" element={<SingleRequestDetails />} />
+              <Route
+                path="/response/request/:id"
+                element={<ReponseForSingleRequest />}
+              />
             </Route>
           )}
 
           {user?.role === "admin" && (
             <Route path="/" element={<AdminLayout />}>
               <Route path="/" element={<Navigate to={"/user-list"} />} />
-              <Route
-                path="/user-register-request"
-                element={<UserRegisterRequests />}
-              />
+
               <Route
                 path="/pending-user-register-request"
-                element={<UserRegisterRequests type={"pending"} />}
+                element={<PendingUserRegisterRequests />}
               />
               <Route
                 path="/user-register-request/:id"
