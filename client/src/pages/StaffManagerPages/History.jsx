@@ -14,7 +14,7 @@ const History = () => {
     useEffect(() => {
         setIsLoading(true);
         axios.get(`/api/request?department=${user?.department}`).then(({ data }) => {
-            setRequests(data.data)
+            setRequests(data?.data)
             setNotPendingRequests(data?.data.filter(request => request.status !== 'pending' && request))
             setIsLoading(false)
         }).catch((err) => {

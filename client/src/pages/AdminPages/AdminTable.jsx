@@ -1,57 +1,51 @@
 import { DataGrid } from '@mui/x-data-grid';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-export const columns = [
-  {
-    field: "firstName",
-    headerName: "First Name",
-    cellClassName: "table-cell",
-    width: 170,
-  },
-  {
-    field: "lastName",
-    headerName: "Last name",
-    cellClassName: "table-cell",
-    width: 200,
-  },
-  {
-    field: "email",
-    headerName: "Email",
-    cellClassName: "table-cell",
-    width: 200,
-  },
-  {
-    field: "role",
-    headerName: "Role",
-    cellClassName: "table-cell",
-    width: 200,
-  },
 
-  {
-    field: "phoneNumber",
-    headerName: "Phone Number",
-    width: 170,
-    cellClassName: "table-cell",
-  },
-];
-const Container = styled.div`
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: flex-start;
-    align-items: flex-start;
-    transition: all 0.3s ease-in-out;
-`
 const TableContainer = styled.div`
   .table-cell {
     font-size: 18px;
     cursor: pointer;
   }
-`;
+  `;
 const AdminTable = ({ rows, isLoading }) => {
+  const { t } = useTranslation('global')
   const navigate = useNavigate()
+  const columns = [
+    {
+      field: "firstName",
+      headerName: t("ShowAllUserForAdmin.firstName"),
+      cellClassName: "table-cell",
+      width: 170,
+    },
+    {
+      field: "lastName",
+      headerName: t("ShowAllUserForAdmin.lastName"),
+      cellClassName: "table-cell",
+      width: 200,
+    },
+    {
+      field: "email",
+      headerName: t("ShowAllUserForAdmin.email"),
+      cellClassName: "table-cell",
+      width: 200,
+    },
+    {
+      field: "role",
+      headerName: t("ShowAllUserForAdmin.role"),
+      cellClassName: "table-cell",
+      width: 200,
+    },
+
+    {
+      field: "phoneNumber",
+      headerName: t("ShowAllUserForAdmin.phoneNumber"),
+      width: 170,
+      cellClassName: "table-cell",
+    },
+  ];
   if (isLoading) return <p>Loading.....</p>
   return (
 

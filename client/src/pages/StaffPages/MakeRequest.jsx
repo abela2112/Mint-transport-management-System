@@ -9,15 +9,16 @@ import { createRequest } from '../../api/userApi';
 import { CancelButton, SubmitButton } from '../../components/Buttons';
 import DialogModal from '../../components/DialogModal';
 import ErrorMessage from '../../components/ErrorMessage';
+import { useTranslation } from 'react-i18next';
 
-const Container = styled.div`
+export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction:column;
    `
 
-const Wrraper = styled.div`
+export const Wrraper = styled.div`
  width:80%;
  background: #fff;
  padding: 20px;
@@ -75,7 +76,7 @@ const PassangerDiv = styled.div`
   margin-top: 10px;
   width: 100%;
 `
-const TextArea = styled.textarea`
+export const TextArea = styled.textarea`
 flex:1;
 padding :10px;
 border-radius:5px;
@@ -118,7 +119,7 @@ background-color: white;
 
 const MakeRequest = () => {
   const { user } = useSelector(state => state.user)
-
+  const { t } = useTranslation('global')
   const [isLoading, setIsLoading] = useState(false)
   const {
     register,
@@ -134,43 +135,47 @@ const MakeRequest = () => {
       required: "please enter a name"
     }
   });
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      setIsLoading(true)
+      await createRequest(data)
+      socket.emit('sendNotificationToStaffmanager', { notificationType: "request", messageId: data?._id, message: 'new request', from: user?._id });
+      toast.success("Successfully created request")
+      setIsLoading(false);
+      reset()
+
+    } catch (error) {
+      toast.error("Failed to create request!")
+      setIsLoading(false);
+      reset()
+    }
+  })
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const socket = io("http://localhost:5000");
 
   return (
     <Container>
       <Wrraper>
-        <Title>Request Form</Title>
-        <Form onSubmit={handleSubmit(async (data) => {
-          try {
-            setIsLoading(true)
-            await createRequest(data)
-            socket.emit('sendNotificationToStaffmanager', { notificationType: "request", messageId: data?._id, message: 'new request', from: user?._id });
-            toast.success("Successfully created request")
-            setIsLoading(false);
-            reset()
-            console.log("Successfully created", data);
-          } catch (error) {
-            toast.error("Failed to create request!")
-            setIsLoading(false);
-          }
-        })}>
+        <Title>{t("MakeRequest.requestForm")}</Title>
+        <Form onSubmit={(e) => {
+          e.preventDefault();
+          setIsModalOpen(true)
+        }}>
           <Div>
-            <Label>Full Name</Label>
-            <Input placeholder="Full Name" defaultValue={`${user?.firstName} ${user?.lastName}`}  {...register('name', { disabled: true })} />
+            <Label>{t("MakeRequest.fullName")}</Label>
+            <Input placeholder={t("MakeRequest.fullName")} defaultValue={`${user?.firstName} ${user?.lastName}`}  {...register('name')} />
             <ErrorMessage>{errors.name?.message}</ErrorMessage>
           </Div>
 
           <Div>
-            <Label>Phone No.</Label>
-            <Input placeholder="Phone" type='tel'  {...register('phoneNumber', { required: "phone number is required" },)} />
+            <Label>{t("MakeRequest.phoneNumber")}</Label>
+            <Input placeholder={t("MakeRequest.phoneNumber")} type='tel'  {...register('phoneNumber', { required: "phone number is required" },)} />
             <ErrorMessage>{errors.phoneNumber && errors.phoneNumber.message}</ErrorMessage>
           </Div>
           <Div>
-            <Label>PickUp date</Label>
-            <Input placeholder="Pickup date" type='date' {...register('pickUpDate', {
+            <Label>{t("MakeRequest.pickUpDate")}</Label>
+            <Input placeholder={t("MakeRequest.pickUpDate")} type='date' {...register('pickUpDate', {
               required: "Pick Up date is required",
               validate: (fieldvalue) => {
                 const currentDate = new Date().getTime()
@@ -185,8 +190,8 @@ const MakeRequest = () => {
             <ErrorMessage>{errors.pickUpDate?.message}</ErrorMessage>
           </Div>
           <Div>
-            <Label>Return date</Label>
-            <Input placeholder="Return date" type='date'  {...register('returnDate', {
+            <Label>{t("MakeRequest.returnDate")}</Label>
+            <Input placeholder={t("MakeRequest.returnDate")} type='date'  {...register('returnDate', {
               required: "Return date is required.",
               validate: (fieldvalue) => {
                 const currentDate = new Date().getTime()
@@ -200,14 +205,14 @@ const MakeRequest = () => {
             <ErrorMessage>{errors.returnDate?.message}</ErrorMessage>
           </Div>
           <Div>
-            <Label>Destination</Label>
-            <Input placeholder="Destination"  {...register('destination', { required: "Destination is Required." })} />
+            <Label>{t("MakeRequest.destination")}</Label>
+            <Input placeholder={t("MakeRequest.destination")}  {...register('destination', { required: "Destination is Required." })} />
             <ErrorMessage>{errors.destination?.message}</ErrorMessage>
           </Div>
           <Div>
-            <Label>Discription</Label>
+            <Label>{t("MakeRequest.description")}</Label>
             <TextArea
-              placeholder="Discription"
+              placeholder={t("MakeRequest.description")}
               {...register('description', { required: "Description is Required." })}
               rows={4}
             />
@@ -215,7 +220,7 @@ const MakeRequest = () => {
           </Div>
           <Div>
 
-            <Label> Passangers</Label>
+            <Label> {t("MakeRequest.passengers")}</Label>
             {
               fields.map((field, index) => {
                 return (
@@ -232,7 +237,7 @@ const MakeRequest = () => {
                 );
               })
             }
-            <Addbutton type='button' onClick={() => append({ value: '' })}> <AddSharp style={{ color: '#fff' }} /> Add Passenger </Addbutton>
+            <Addbutton type='button' onClick={() => append({ value: '' })}> <AddSharp style={{ color: '#fff' }} /> {t("MakeRequest.addPassenger")} </Addbutton>
           </Div>
           {/* <ErrorMessage>{errors.passenger && "Passenger is Required."}</ErrorMessage> */}
           <ButtonContainer>
@@ -245,7 +250,7 @@ const MakeRequest = () => {
 
       </Wrraper>
       <Toaster />
-      <DialogModal open={isModalOpen} onClose={() => setIsModalOpen(false)} onSubmit={handleSubmit} />
+      <DialogModal open={isModalOpen} onClose={() => setIsModalOpen(false)} onSubmit={onSubmit} />
     </Container>
   )
 

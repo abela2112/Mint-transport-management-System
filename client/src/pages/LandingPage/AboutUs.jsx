@@ -1,6 +1,6 @@
 
 import styled from 'styled-components';
-
+import { useTranslation } from "react-i18next"
 const AboutUsContainer = styled.section`
 width: 100%;
   background-color: #f0f0f0;
@@ -50,34 +50,35 @@ const ValueListItem = styled.li`
 `;
 
 const AboutUsPage = () => {
+  const {t}=useTranslation('global')
   return (
     <AboutUsContainer id='about'>
-      <Title>About Us</Title>
+      <Title>{t("AboutUsPage.title")}</Title> 
       <Content>
-        The Ministry of Innovation and Technology is at the forefront of driving technological advancements and innovations to transform our society. Our commitment to progress and excellence is unwavering, and we aim to lead the way in shaping a brighter future.
+        {t("AboutUsPage.content")}
       </Content>
       <MissionVision>
-        <SectionTitle>Our Mission</SectionTitle>
+        <SectionTitle>{t("AboutUsPage.mission")}</SectionTitle>
         <Mission>
-          To harness the power of innovation and technology to address challenges, improve lives, and drive sustainable development in Ethiopia.
+          {t("AboutUsPage.missionStatement")}
         </Mission>
-        <SectionTitle>Our Vision</SectionTitle>
+        <SectionTitle>{t("AboutUsPage.vision")}</SectionTitle>
         <Content>
-          To be a catalyst for innovation and technological advancements, enabling Ethiopia to become a global leader in technology-driven solutions.
+          {t("AboutUsPage.visionStatement")}
         </Content>
       </MissionVision>
       <Content>
-        At the core of our mission are our values:
+        {t("AboutUsPage.coreMission")}
         <ValueList>
-          <ValueListItem>Innovation: Embracing creativity and change to find solutions.</ValueListItem>
-          <ValueListItem>Collaboration: Working together to achieve common goals.</ValueListItem>
-          <ValueListItem>Transparency: Open and honest communication and decision-making.</ValueListItem>
-          <ValueListItem>Excellence: Striving for the highest standards of quality and performance.</ValueListItem>
+          <ValueListItem>{t("AboutUsPage.innovation")}</ValueListItem>
+          <ValueListItem>{t("AboutUsPage.collaboration")}</ValueListItem>
+          <ValueListItem>{t("AboutUsPage.transparency")}</ValueListItem>
+          <ValueListItem>{t("AboutUsPage.excellence")}</ValueListItem>
         </ValueList>
       </Content>
-      <SectionTitle>Our Leadership</SectionTitle>
+      <SectionTitle>{t("AboutUsPage.leadership")}</SectionTitle>
       <Content>
-        Meet our dedicated team of professionals who are committed to driving innovation and technology forward in Ethiopia.
+        {t("AboutUsPage.leadershipStatement")}
       </Content>
       {/* You can list the leadership team here. */}
     </AboutUsContainer>

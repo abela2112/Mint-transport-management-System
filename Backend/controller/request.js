@@ -67,13 +67,14 @@ const getUserRequests = async (req, res) => {
 };
 const postRequest = async (req, res) => {
   try {
-   
+   console.log("request", req.body);
     const request = await Request.create({
       ...req.body,
       userCreated: req?.user?.userID,
     });
     res.status(StatusCodes.CREATED).json(request);
   } catch (error) {
+    console.error('error creating',error)
     res.status(StatusCodes.BAD_REQUEST).json(error);
   }
 };

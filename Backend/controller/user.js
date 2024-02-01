@@ -18,9 +18,10 @@ const login = async (req, res) => {
       throw new BadRequestError("Incorrect  password");
     }
     const token = user.createJWT();
-    res.status(StatusCodes.OK).json({ data: user, token });
+    const { password, ...newUser } = user;
+    res.status(StatusCodes.OK).json({ data: newUser, token });
   } else {
-    throw new BadRequestError("user not  approved please check your admin");
+    throw new BadRequestError("User not  approved please check your admin");
   }
 };
 

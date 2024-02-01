@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import Navbar from '../components/Navbar'
 
 import { useState } from 'react'
+import { useTranslation } from "react-i18next"
 
 const Container = styled.div `
    width:100%;
@@ -122,6 +123,7 @@ const Submit=styled.button`
 
 
 const Request = () => {
+  const {t}=useTranslation('global')
   const inputArray = [{
     type: 'text',
     id: 1,
@@ -156,44 +158,44 @@ const Request = () => {
         <Container>
             <Navbar/>
             <Wrraper>
-                <Title><b>REQUEST FORM</b></Title>
+                <Title><b>{t("Request.requestForm")}</b></Title>
                 <Form>
                      <Div>
-                     <Label>full name</Label>
-                     <Input placeholder="Full Name"/>
+                     <Label>{t("Request.fullName")}</Label>
+                     <Input placeholder={t("Request.fullName")}/>
                      </Div>
                      <Div>
-                     <Label>phone</Label>
-                     <Input placeholder="Phone"/>
+                     <Label>{t("Request.phoneNumber")}</Label>
+                     <Input placeholder={t("Request.phoneNumber")}/>
                      </Div>
                      <Div>
-                     <Label>PickUp date</Label>
-                     <Input placeholder="Pickup date"/>
+                     <Label>{t("Request.pickUpDate")}</Label>
+                     <Input placeholder={t("Request.pickUpDate")}/>
                      </Div>
                      <Div>
-                    <Label>Return date</Label>
-                     <Input placeholder="Return date"/>
+                    <Label>{t("Request.returnDate")}</Label>
+                     <Input placeholder={t("Request.returnDate")}/>
                      </Div>
                      <Div>
-                     <Label>destination</Label>
-                     <Input placeholder="Destination"/>
+                     <Label>{t("Request.destination")}</Label>
+                     <Input placeholder={t("Request.destination")}/>
                      </Div>
                      <Div>
-                     <Label>Number ofpassanger</Label>
-                     <Input placeholder="Number of passanger"/>
+                     <Label>{t("Request.passengerNumber")}</Label>
+                     <Input placeholder={t("Request.passengerNumber")}/>
                      </Div>
                      <Div> 
-                     <Label>discription</Label>
-                    <TextArea placeholder="discription"/>
+                     <Label>{t("Request.description")}</Label>
+                    <TextArea placeholder={t("Request.description")}/>
                     </Div>
 
                 </Form>
                 <ButtonContainer>
                     <Cancel>
-                       <b>Cancel</b> 
+                       <b>{t("Request.cancel")}</b> 
                     </Cancel>
                     <Submit>
-                       <b>Submit</b> 
+                       <b>{t("Request.submit")}</b> 
                     </Submit>
                 </ButtonContainer>
                 

@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 // import {StatusButton} from 
 import DeleteIcon from '@mui/icons-material/Delete';
 import { StatusButton } from '../../components/Buttons';
+import { useTranslation } from 'react-i18next';
 const Container = styled.div`
     padding: 20px;
     margin-top: 10px;
@@ -14,13 +15,14 @@ const Container = styled.div`
 `
 const RequestsTable = ({ title, rows }) => {
     const navigate = useNavigate()
+    const { t } = useTranslation('global')
     const columns = [
-        { field: '_id', headerName: 'ID', width: 100 },
-        { field: 'name', headerName: 'Full name', width: 200 },
-        { field: 'phoneNumber', headerName: 'Phone Number', width: 200 },
+        { field: '_id', headerName: t("AllRequests.ID"), width: 100 },
+        { field: 'name', headerName: t("AllRequests.fullName"), width: 200 },
+        { field: 'phoneNumber', headerName: t("AllRequests.phoneNumber"), width: 200 },
         {
             field: 'pickUpDate',
-            headerName: 'Pick Up Date',
+            headerName: t("AllRequests.pickUpDate"),
             width: 150,
             renderCell: (param) => {
                 return format(param.row?.pickUpDate && new Date(param.row?.pickUpDate), 'MMMM do yyyy')
@@ -28,7 +30,7 @@ const RequestsTable = ({ title, rows }) => {
         },
         {
             field: 'status',
-            headerName: 'Status',
+            headerName: t("AllRequests.status"),
             sortable: false,
             width: 160,
             renderCell: (param) => {

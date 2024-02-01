@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  font-family: "Poppins", sans-serif;
   width: 100vw;
   min-height: 100vh !important;
   align-items: center;
@@ -21,7 +20,7 @@ export const Container = styled.div`
 export const Title = styled.span`
  font-weight: 500;
  font-size: 34px;
- text-align: center;
+ text-align: left;
  margin-bottom: 2rem;
 /* padding:10px 20px; */
 
@@ -48,13 +47,14 @@ export const FormContainer = styled.form`
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   width: 100%;
   height: 80%;
 
   @media screen and (max-width:768px) {
     
-    padding: 5px;
+    padding: 10px 20px;
+    justify-content: center;
+  
   }
 `;
 export const Contain = styled.div`
@@ -165,7 +165,7 @@ export const TextContainer = styled.div`
   border-radius: 2rem;
   margin: 5rem 0 3rem 0;
 
-  @media screen and (max-width:425px) {
+  @media screen and (max-width:768px) {
     width: 92%;
   }
 `;

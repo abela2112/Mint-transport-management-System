@@ -1,3 +1,11 @@
+
+import React, { useState } from 'react'
+import { Background, Mint } from '../asset';
+import { Link } from 'react-router-dom';
+import {forgot} from '../api/userApi'
+import { useTranslation } from "react-i18next"
+
+//import { makeStyles } from '@material-ui/core/styles';
 import {
   Button,
   Dialog,
@@ -5,16 +13,15 @@ import {
   DialogContent,
   DialogTitle
 } from "@mui/material";
-import { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+
 import styled from 'styled-components';
 import { forgotPasswordApi } from '../api/userApi';
-import { Mint } from '../asset';
 import { SubmitButton } from '../components/Buttons';
 import Center from '../components/Center';
 import CustomToastBar from "../components/ToastErrorMessage";
-import { Contain, Container, CopyRight, FormContainer, Img1, ImgmintContainer, Input, Label } from './Register/RegisterCSS';
+import { Contain, Container, CopyRight, FormContainer, Img1, ImgmintContainer, Input, Label, } from './Register/RegisterCSS';
+import { Wrapper } from './Login';
 
 export const WelcomeTxt = styled.span`
  font-weight: 500;
@@ -37,47 +44,78 @@ const Desc = styled.p`
   text-align: center;
 `;
 
+const InputForm=styled.input`
 
-const TitleBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 2rem;
+margin: 5px 0;
+padding: 10px;
+width: 100%;
+border: 1px solid #ccc;
+border-radius: 10px;
+&:focus {
+  // border-color: #4285f4;
+  outline:none;
+}
+margin-bottom: 10px;
+`
+const Lable=styled.h3`
+  margin-top:5px;
+  color: #777;
+`
+const Lable1=styled.p`
+color: #777;
 `
 
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 500px;
-  background-color: #fff;
-  box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
- -webkit-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
- -moz-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
-  justify-content: center;
-  align-items: center;
-  border-radius: 2rem;
-  margin: 5rem 0 3rem 0;
-
-  @media screen and (max-width:768px) {
-    width: 92%;
-  }
-
+const ResetButton=styled.button`
+background-color: #164E62;
+color: white;
+border: none;
+border-radius: 5px;
+padding: 10px 20px;
+font-size: 16px;
+cursor: pointer;
+margin-top: 20px;
+display:flex;
+align-items: center;
+justify-content: center;
+width: 100%;
 `
 
-const ForgotPassword = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [email, setEmail] = useState('')
-  const [error, setError] = useState('')
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    email ? setIsOpen(true) : setIsOpen(false);
-    forgotPasswordApi({ email }).then((data) => console.log(data)).catch((err) => {
-      toast.error((err?.response?.data?.message))
-      setError(err?.response?.data?.message);
-    })
+// const ImgmintContainer = styled.div`
+//    display:flex;
+//    justify-content:center;
+//    align-items:center;
 
-  }
-  return (
+//   width: 100px;
+//   height: 100px;
+//   margin-left: 5px;
+//   margin-top: -250px;
+// `;
+
+// const Img1 = styled.img`
+//   width: 100px;
+//   height:100px;
+//   object-fit: cover;
+// `;
+
+
+
+const ForgotPassword=()=>{
+    const [isOpen, setIsOpen] = useState(false);
+     const [email,setEmail]=useState('')
+     const [error, setError] = useState('')
+     const {t}=useTranslation('global')
+    
+    const handleSubmit=(e)=>{
+      e.preventDefault();
+     email ?  setIsOpen(true) : setIsOpen(false);
+      console.log(email)
+      
+      forgotPasswordApi({ email }).then((data) => console.log(data)).catch((err) => {
+        toast.error((err?.response?.data?.message))
+        setError(err?.response?.data?.message);
+      }) 
+    }
+      return (
 
     <Container>
       <Wrapper>
@@ -85,10 +123,10 @@ const ForgotPassword = () => {
           <Img1 src={Mint} />
         </ImgmintContainer>
 
-        <TitleBox>
+
           <WelcomeTxt>Forgot Password</WelcomeTxt>
           {/* <LoginTxt>Login into your account</LoginTxt> */}
-        </TitleBox>
+
         <FormContainer onSubmit={handleSubmit}>
           <Contain>
             <Label>Email</Label>
@@ -114,7 +152,7 @@ const ForgotPassword = () => {
           open={isOpen}
           onClose={() => setIsOpen(false)} aria-labelledby="dialog-title"
           aria-describedby="dialog-description">
-          <DialogTitle id="dialog-title"> Email verification </DialogTitle>             <DialogContent id="dialog-description">               {/* <DialogContentText>Are you sure?</DialogContentText> */}               Password Reset Link is sent to your email              </DialogContent>
+          <DialogTitle id="dialog-title"> {t("ForgotPassword.verification")}</DialogTitle>             <DialogContent id="dialog-description">               {/* <DialogContentText>Are you sure?</DialogContentText> */}               Password Reset Link is sent to your email              </DialogContent>
           <DialogActions>
             <Button onClick={() => setIsOpen(false)} style={{ backgroundColor: "green", color: "white" }}>Close</Button>
           </DialogActions>

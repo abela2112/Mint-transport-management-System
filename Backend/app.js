@@ -32,6 +32,9 @@ const TMresponseRoute=require("./routes/TransManagerResponse")
 const requestRouter=require("./routes/request")
 const forgotPassword=require("./routes/sendMail")
 const deptRoute=require("./routes/department")
+
+const staffRequestRoute=require("./routes/staffManagerPetrolRequest")
+
 app.use(cors());
 app.use(express.json());
 app.use("/api/user", userRoute);
@@ -41,6 +44,7 @@ app.use("/api/driver", driverRoute);
 app.use("/api/department", deptRoute);
 app.use("/api/TMresponse", TMresponseRoute);
 app.use("/api/forgot", forgotPassword);
+app.use("/api/petrol-request", staffRequestRoute);
 
 // error handler
 app.use(errorHandleMiddleware);
@@ -146,6 +150,7 @@ io.on("connection", (socket) => {
   socket.on("sendNotificationToAdmin", async (data) => {
     console.log("message received", { data });
 
+
     // Find admin users in the database
     const adminUsers = await User.find({ role: "admin" });
     //check for admin users
@@ -200,6 +205,7 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", () => console.log("disconnected"));
 });
+
 
 // socket.on("sendNotificationToStaffmanager", async (data) => {
 //   console.log("notification received to staff manager", data);

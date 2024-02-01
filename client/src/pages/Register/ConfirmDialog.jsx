@@ -1,4 +1,4 @@
-import React from 'react'
+import { useTranslation } from "react-i18next";
 import {
   Button,
   Dialog,
@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { Contain, Input, Label } from './RegisterCSS';
 const ConfirmDialog = ({ isOpen, setIsOpen, password, confirmPassword, setConfirmPassword }) => {
+  const { t } = useTranslation('global')
   return (
     <Dialog
       open={isOpen}
@@ -17,20 +18,20 @@ const ConfirmDialog = ({ isOpen, setIsOpen, password, confirmPassword, setConfir
       aria-describedby="dialog-description"
     >
       <DialogTitle id="dialog-title">
-        {password !== confirmPassword ? "Confirm Password" : "Registration Successful"}
+        {password !== confirmPassword ? t("Register.confirmPassword") : "Registration Successful"}
       </DialogTitle>
       <DialogContent id="dialog-description">
         {password !== confirmPassword ? (
-          <DialogContentText>Password doesn't match! Please confirm again</DialogContentText>
+          <DialogContentText>{t("Register.noMatch")}</DialogContentText>
         ) : (
-          <DialogContentText>Congratulations! You have successfully registered check your admin for approval</DialogContentText>
+            <DialogContentText>{t("Register.congrats")}</DialogContentText>
         )}
         {password !== confirmPassword && (
           <Contain>
-            <Label>Confirm Password</Label>
+            <Label>{t("Register.confirmPassword")}</Label>
             <Input
               type="password"
-              placeholder="Confirm Password"
+              placeholder={t("Register.confirmPassword")}
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
@@ -41,7 +42,7 @@ const ConfirmDialog = ({ isOpen, setIsOpen, password, confirmPassword, setConfir
         {password !== confirmPassword ? (
           <>
             <Button onClick={() => setIsOpen(false)} style={{ backgroundColor: "Red", color: "white" }}>
-              Cancel
+              {t("Register.cancel")}
             </Button>
             <Button
               style={{ backgroundColor: "Yellow", color: "white" }}
@@ -50,12 +51,12 @@ const ConfirmDialog = ({ isOpen, setIsOpen, password, confirmPassword, setConfir
                 setIsOpen(false);
               }}
             >
-              Submit
+              {t("Register.submit")}
             </Button>
           </>
         ) : (
           <Button onClick={() => setIsOpen(false)} color="primary">
-            Close
+              {t("Register.close")}
           </Button>
         )}
       </DialogActions>

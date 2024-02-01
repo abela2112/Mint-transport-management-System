@@ -180,7 +180,7 @@ const Navbar = () => {
                 </Center>
                 <Right>
                     <Badge badgeContent={i18n.language} color="primary" >
-                        <Language onClick={() => handleLanguage()} />
+                        <Language style={{ cursor: 'pointer' }} onClick={() => handleLanguage()} />
                     </Badge>
                     <Badge badgeContent={noOfNotifications} color="primary">
                         <Link to={'/notification'}> <NotificationsActiveOutlinedIcon /></Link>

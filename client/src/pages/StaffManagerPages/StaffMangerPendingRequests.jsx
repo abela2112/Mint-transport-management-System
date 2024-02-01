@@ -2,9 +2,10 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { getRequestSuccess } from '../../redux/features/request'
+
 import RequestsTable from './RequestsTable'
 import Loader from '../../components/Loader'
+import { useTranslation } from 'react-i18next'
 export const Title = styled.span`
 font-size:24px;
 font-weight: 500;
@@ -47,10 +48,10 @@ const StaffMangerPendingRequests = () => {
         })
     }, [])
     console.log(requests)
-
+    const { t } = useTranslation('global')  
     if (isLoading) return <Loader />
     return (
-        <RequestsTable title={"Pending Requests"} rows={requests && requests} />
+        <RequestsTable title={t("StaffMangerPendingRequests.pendingRequests")} rows={requests && requests} />
     );
 }
 

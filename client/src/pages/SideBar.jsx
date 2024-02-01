@@ -6,10 +6,9 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import useMediaQuery from '../hooks/useMediaQuery';
 import { logOutUser } from '../redux/features/user';
 const MobileContainer = styled.div`
-transform: translateX();
+
     width:15.75rem;
     padding: 20px 0;
     margin-top: 60px;
@@ -19,7 +18,7 @@ transform: translateX();
     bottom: 0;
     left: 0;
     background-color: #023047; 
-    transition: all 0.3s ease-in-out;
+    transition: all 0.4s ease;
 `
 const Container = styled.div`
     width:15.75rem;
@@ -105,44 +104,47 @@ export const SideBar = () => {
     const dispatch = useDispatch()
     const user = useSelector((state) => state.user?.user);
     const navigate = useNavigate()
-    const isAboveMediaScreen = useMediaQuery('(min-width:1060px)')
     return (
         <Container>
             <ListWrapper>
                 <List>
                     {user?.role === 'staff' &&
                         <>
-                            <ListItem title='Booking'>
-                                <NavLink className={'nav-link'} to='/booking' > <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />Booking</NavLink></ListItem>
-                            <ListItem><NavLink className={'nav-link'} to='/history'><RestoreOutlinedIcon style={{ marginRight: '10px' }} />History</NavLink></ListItem>
+
+                        <ListItem><NavLink className={'nav-link'} to='/booking'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.booking')}</NavLink></ListItem>  
+                        <ListItem><NavLink className={'nav-link'} to='/history'><RestoreOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.history')}</NavLink></ListItem>
+
                         </>
                     }
 
                     {user?.role === 'staff-manager' &&
                         <>
-                            <ListItem><NavLink className={'nav-link'} to={'/pending-user-request'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />Pending</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to={'/pending-user-request'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.pending')}</NavLink></ListItem>
 
-                            <ListItem><NavLink className={'nav-link'} to='/requests-history'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />History</NavLink></ListItem>
-                            <ListItem><NavLink className={'nav-link'} to='/petrol-request'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />Petrol Request</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to='/requests-history'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.history')}</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to='/petrol-request'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.petrolRequest')}</NavLink></ListItem>
 
                         </>
                     }
                     {user?.role === 'transport-manager' &&
                         <>
-                            <ListItem><NavLink className={'nav-link'} to='/requests'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.requests')}</NavLink></ListItem>
-                            <ListItem><NavLink className={'nav-link'} to='/pending-requests'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.pendingRequests')}</NavLink></ListItem>
-                            <ListItem><NavLink className={'nav-link'} to={'/add-new-car'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.AddnewCar')}</NavLink></ListItem>
-                            <ListItem><NavLink className={'nav-link'} to='/add-new-driver'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.AddnewDriver')}</NavLink></ListItem>
-                            <ListItem><NavLink className={'nav-link'} to={'/available-car'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.AvailableCar')}</NavLink></ListItem>
+
+                        <ListItem><NavLink className={'nav-link'} to='/requests'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.requests')}</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to='/pending-requests'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.pendingRequests')}</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to={'/add-new-car'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.AddnewCar')}</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to='/add-new-driver'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.AddnewDriver')}</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to={'/available-car'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.AvailableCar')}</NavLink></ListItem>
+
 
                         </>
                     }
                     {user.role === 'admin' &&
                         <>
-                            <ListItem><NavLink className={'nav-link'} to='/user-list'> <Group style={{ marginRight: '10px' }} />User</NavLink></ListItem>
-                            <ListItem><NavLink className={'nav-link'} to={'/pending-user-register-request'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />Pending Requests</NavLink></ListItem>
-                            {/* <ListItem><NavLink className={'nav-link'} to={'/user-register-request'} ><PersonAddAlt style={{ marginRight: '10px' }} />User Register Requests</NavLink></ListItem> */}
-                            <ListItem><NavLink className={'nav-link'} to={'/department'} ><Business style={{ marginRight: '10px' }} />Department</NavLink></ListItem>
+
+                        <ListItem ><NavLink className={'nav-link'} to='/user-list'> <Group style={{ marginRight: '10px' }} />{t("sidebar.user")}</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to={'/pending-user-register-request'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />{t("sidebar.pendingRequests")}</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to={'/user-register-request'} ><PersonAddAlt style={{ marginRight: '10px' }} />{t("sidebar.userRegisterRequests")}</NavLink></ListItem>
+                        <ListItem><NavLink className={'nav-link'} to={'/department'} ><Business style={{ marginRight: '10px' }} />{t("sidebar.department")}</NavLink></ListItem>
 
                         </>
                     }
@@ -171,44 +173,48 @@ export const MobileScreenSideBar = ({ isMenuOpen }) => {
             <List>
                 {user?.role === 'staff' &&
                     <>
-                        <ListItem title='Booking'>
-                        <NavLink className={'nav-link'} to='/booking' > <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />Booking</NavLink></ListItem>
-                        <ListItem><NavLink className={'nav-link'} to='/history'><RestoreOutlinedIcon style={{ marginRight: '10px' }} />History</NavLink></ListItem>
+
+                    <ListItem><NavLink className={'nav-link'} to='/booking'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.booking')}</NavLink></ListItem>
+                    <ListItem><NavLink className={'nav-link'} to='/history'><RestoreOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.history')}</NavLink></ListItem>
+
                     </>
                 }
 
                 {user?.role === 'staff-manager' &&
                     <>
-                        <ListItem><NavLink className={'nav-link'} to={'/pending-user-request'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />Pending</NavLink></ListItem>
+                    <ListItem><NavLink className={'nav-link'} to={'/pending-user-request'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.pending')}</NavLink></ListItem>
 
-                        <ListItem><NavLink className={'nav-link'} to='/requests-history'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />History</NavLink></ListItem>
-                        <ListItem><NavLink className={'nav-link'} to='/petrol-request'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />Petrol Request</NavLink></ListItem>
+                    <ListItem><NavLink className={'nav-link'} to='/requests-history'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.history')}</NavLink></ListItem>
+                    <ListItem><NavLink className={'nav-link'} to='/petrol-request'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.petrolRequest')}</NavLink></ListItem>
 
                     </>
                 }
                 {user?.role === 'transport-manager' &&
                     <>
+
                         <ListItem><NavLink className={'nav-link'} to='/requests'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.requests')}</NavLink></ListItem>
                         <ListItem><NavLink className={'nav-link'} to='/pending-requests'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.pendingRequests')}</NavLink></ListItem>
                         <ListItem><NavLink className={'nav-link'} to={'/add-new-car'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.AddnewCar')}</NavLink></ListItem>
                         <ListItem><NavLink className={'nav-link'} to='/add-new-driver'> <ImportContactsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.AddnewDriver')}</NavLink></ListItem>
                         <ListItem><NavLink className={'nav-link'} to={'/available-car'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />{t('sidebar.AvailableCar')}</NavLink></ListItem>
 
+
                     </>
                 }
                 {user.role === 'admin' &&
                     <>
-                        <ListItem ><NavLink className={'nav-link'} to='/user-list'> <Group style={{ marginRight: '10px' }} />User</NavLink></ListItem>
-                        <ListItem><NavLink className={'nav-link'} to={'/pending-user-register-request'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />Pending Requests</NavLink></ListItem>
-                        <ListItem><NavLink className={'nav-link'} to={'/user-register-request'} ><PersonAddAlt style={{ marginRight: '10px' }} />User Register Requests</NavLink></ListItem>
-                        <ListItem><NavLink className={'nav-link'} to={'/department'} ><Business style={{ marginRight: '10px' }} />Department</NavLink></ListItem>
+
+                    <ListItem ><NavLink className={'nav-link'} to='/user-list'> <Group style={{ marginRight: '10px' }} />{t("sidebar.user")}</NavLink></ListItem>
+                    <ListItem><NavLink className={'nav-link'} to={'/pending-user-register-request'} ><PendingActionsOutlinedIcon style={{ marginRight: '10px' }} />{t("sidebar.pendingRequests")}</NavLink></ListItem>
+                    <ListItem><NavLink className={'nav-link'} to={'/user-register-request'} ><PersonAddAlt style={{ marginRight: '10px' }} />{t("sidebar.userRegisterRequests")}</NavLink></ListItem>
+                    <ListItem><NavLink className={'nav-link'} to={'/department'} ><Business style={{ marginRight: '10px' }} />{t("sidebar.department")}</NavLink></ListItem>
 
                     </>
                 }
                 <ListItemLogOut title="logout" onClick={() => {
 
                     dispatch(logOutUser())
-                    navigate('/home')
+                    navigate('/login')
 
                 }}> <LogoutOutlined style={{ marginRight: '10px' }} />{t('sidebar.logOut')}</ListItemLogOut>
 

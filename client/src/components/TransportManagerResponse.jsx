@@ -1,20 +1,18 @@
 import {
     Button,
     Dialog,
-    DialogTitle,
-    DialogContent,
-    DialogContentText,
     DialogActions,
-} from '@mui/material'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
+    DialogContent,
+    DialogTitle,
+} from '@mui/material';
+import { useEffect, useState } from 'react';
 
-import styled from 'styled-components'
-import { Background, Mint } from '../asset';
-import { getAvailableCar, updateCarStatus, updateRequestById } from '../api/userApi';
+import { useTranslation } from "react-i18next";
 import { useParams } from 'react-router-dom';
-import { Contain, Input, Label, SelectOption } from '../pages/Register/RegisterCSS';
-
+import styled from 'styled-components';
+import { getAvailableCar, updateCarStatus, updateRequestById } from '../api/userApi';
+import { Mint } from '../asset';
+import { Contain, Input, SelectOption } from '../pages/Register/RegisterCSS';
 
 const Container = styled.div`
     display:flex;
@@ -126,6 +124,7 @@ const TransportManagerResponse = ({ open, setOpen, onSubmit, requestId }) => {
     const [CarModel, setCarModel] = useState('')
     const [ReturnDate, setReturnDate] = useState('')
     const { id } = useParams()
+    const { t } = useTranslation('global')
     useEffect(() => {
         getAvailableCar().then(({ data }) => {
             setCars(data)
@@ -171,7 +170,7 @@ const TransportManagerResponse = ({ open, setOpen, onSubmit, requestId }) => {
                 fullWidth={true}
                 overflow='hidden'
             >
-                <DialogTitle id='dialog-title'>Approve Form</DialogTitle>
+                <DialogTitle id='dialog-title'>{t("TransportManagerResponse.approve")}</DialogTitle>
                 <DialogContent id='dialog-description'>
                     <Wrapper>
                         <ImgmintContainer>
@@ -179,9 +178,12 @@ const TransportManagerResponse = ({ open, setOpen, onSubmit, requestId }) => {
                         </ImgmintContainer>
                         <Form>
                             <Contain>
-                                <Label>Plate Number</Label>
+                                <Lable>{t("TransportManagerResponse.plateNumber")}</Lable>
                                 <SelectOption
-                                    placeholder="Plate Number"
+
+
+                                    placeholder={t("TransportManagerResponse.plateNumber")}
+
                                     value={PlateNumber}
                                     onChange={(e) => setPlateNumber(e.target.value)}
                                 >
@@ -191,55 +193,59 @@ const TransportManagerResponse = ({ open, setOpen, onSubmit, requestId }) => {
                                 </SelectOption>
                             </Contain>
                             <Contain>
-                                <Label>Driver Name</Label>
+                                <Lable>{t("TransportManagerResponse.driverName")}</Lable>
+
                                 <Input
                                     type="text"
-                                    placeholder="Driver name"
+                                    placeholder={t("TransportManagerResponse.driverName")}
                                     value={DriverName}
-                                    onChange={(e) => setDriverName(e.target.value)}
-                                />
+                                    onChange={(e) => setDriverName(e.target.value)} />
                             </Contain>
                             <Contain>
-                                <Label>Driver phone</Label>
+                                <Lable>{t("TransportManagerResponse.driverPhone")}</Lable>
+
                                 <Input
                                     type="tel"
-                                    placeholder="Driver phone"
+                                    placeholder={t("TransportManagerResponse.driverPhone")}
                                     value={DriverPhone}
-                                    onChange={(e) => setDriverPhone(e.target.value)}
-
-                                />
+                                    onChange={(e) => setDriverPhone(e.target.value)} />
                             </Contain>
                             <Contain>
-                                <Label>Car model</Label>
+                                <Lable>{t("TransportManagerResponse.carModel")}</Lable>
+
                                 <Input
                                     type="text"
-                                    placeholder="Car Model"
+                                    placeholder={t("TransportManagerResponse.carModel")}
                                     value={CarModel}
                                     onChange={(e) => setCarModel(e.target.value)}
                                 />
-                            </Contain>
+
+                            </Contain >
                             <Contain>
-                                <Label>Return Date</Label>
+                                <Lable>{t("TransportManagerResponse.returnDate")}</Lable>
+
                                 <Input
                                     type="date"
                                     placeholder="MM/dd/yy"
                                     value={ReturnDate}
                                     onChange={(e) => setReturnDate(e.target.value)}
                                 />
+
                             </Contain>
 
-                        </Form>
+                        </Form >
 
 
 
-                    </Wrapper>
+                    </Wrapper >
 
-                </DialogContent>
+                </DialogContent >
                 <DialogActions>
-                    <Button onClick={handleClose} style={{ backgroundColor: "#f5f5f5", color: "gray" }}>Cancel</Button>
-                    <Button autoFocus onClick={handleSubmit} style={{ backgroundColor: "#ee8624", color: "white" }}>Submit</Button>
-                </DialogActions>
-            </Dialog>
+                    <Button onClick={handleClose} style={{ backgroundColor: "#f5f5f5", color: "gray" }}>{t("TransportManagerResponse.cancel")}</Button>
+                    <Button autoFocus onClick={handleSubmit} style={{ backgroundColor: "#ee8624", color: "white" }}>{t("TransportManagerResponse.submit")}</Button>
+
+                </DialogActions >
+            </Dialog >
         </>
 
     )

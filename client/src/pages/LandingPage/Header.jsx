@@ -1,14 +1,7 @@
-
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import Services from './Services'
-import Nav from './Nav'
-import AboutUs from './AboutUs'
 import styled from 'styled-components';
 import { Mint2, MinT } from '../../asset';
-import Footer from './Footer';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
 const FirstContainer = styled.section`
   background: #164E62;
   min-height: 100vh;
@@ -87,7 +80,7 @@ const StyledText = styled.span`
 
 
 
-const StyledText2 = styled.span`
+const StyledText2 = styled.div`
   color: #E6953C;
   position: absolute;
   top: 330px;
@@ -122,7 +115,7 @@ const StyledText2 = styled.span`
 
 
 
-const StyledText4 = styled.h3`
+const StyledText4 = styled.div`
   color: #1c314c;
   position: absolute;
   top: 440px;
@@ -256,70 +249,54 @@ width:100%;
   flex-direction: column;
 }
 `
-const LandingPage = () => {
+const Header = () => {
   const { t, i18n } = useTranslation('global')
   const navigate = useNavigate();
-  //const [isOpen, setIsOpen] = useState(false);
   return (
-
-    <>
-      <FirstContainer>
-        <Nav />
-
-        <Wrapper>
-          <ThirdContainer>
-            <ImgmintContainer1>
-              <Img1 src={Mint2} />
-            </ImgmintContainer1>
-            <ImgmintContainer2>
-              <Img2 src={MinT} />
-            </ImgmintContainer2>
-            <StyledText>
-              <h1
-              >የኢኖቬሸንና ቴክኖሎጂ ሚንስቴር</h1>
-
-            </StyledText>
-
-            <StyledText2>
-              <h2>Transport Management <br />System</h2>
-            </StyledText2>
-            <StyledText4>
-              <h3>Your Gateway to Efficient Operations</h3>
-            </StyledText4>
-
-          </ThirdContainer>
-          <FourthContainer>
-            <Box>
-              <StyledText3> {t('Service')}</StyledText3>
-              <List>
-                <ListItem> ORDER A VEHICLE </ListItem>
-                <ListItem> SCHEDULING </ListItem>
-                <ListItem>REPORTING AND ANALYTICS </ListItem>
-              </List>
-            </Box>
-
-            <Box>
-
-              <Button onClick={() => navigate('/login')}>Login</Button>
-              <SignUpButton onClick={() => navigate('/register')}>Sign Up</SignUpButton>
-            </Box>
-          </FourthContainer>
-        </Wrapper>
-      </FirstContainer>
-      <AboutUs />
-      <Services />
-      <Footer />
-    </>
-
-  );
-};
-
-export default LandingPage;
+    <FirstContainer>
 
 
+      <Wrapper>
+        <ThirdContainer>
+          <ImgmintContainer1>
+            <Img1 src={Mint2} />
+          </ImgmintContainer1>
+          <ImgmintContainer2>
+            <Img2 src={MinT} />
+          </ImgmintContainer2>
+          <StyledText>
+            <h1
+            >የኢኖቬሸንና ቴክኖሎጂ ሚንስቴር</h1>
 
+          </StyledText>
 
+          <StyledText2>
+            <h2>Transport Management <br />System</h2>
+          </StyledText2>
+          <StyledText4>
+            <h3>Your Gateway to Efficient Operations</h3>
+          </StyledText4>
 
+        </ThirdContainer>
+        <FourthContainer>
+          <Box>
+            <StyledText3> {t('Service')}</StyledText3>
+            <List>
+              <ListItem> ORDER A VEHICLE </ListItem>
+              <ListItem> SCHEDULING </ListItem>
+              <ListItem>REPORTING AND ANALYTICS </ListItem>
+            </List>
+          </Box>
 
+          <Box>
 
+            <Button onClick={() => navigate('/login')}>Login</Button>
+            <SignUpButton onClick={() => navigate('/register')}>Sign Up</SignUpButton>
+          </Box>
+        </FourthContainer>
+      </Wrapper>
+    </FirstContainer>
+  )
+}
 
+export default Header

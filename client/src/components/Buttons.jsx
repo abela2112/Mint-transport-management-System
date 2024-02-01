@@ -36,16 +36,16 @@ const Submit = styled.button`
   height:40px;
   font-size:18px;
   cursor:pointer;
-  background-color: rgb(255, 165, 0);
+  background-color: #164E62;
   display: flex;
   align-items: center;
   justify-content: center;
   
   &:hover{
     font-size:18px;
-    box-shadow: 0px 0px 18px 0px rgba(255, 165, 0, 0.75);
+    /* box-shadow: 0px 0px 18px 0px rgba(255, 165, 0, 0.75);
     -webkit-box-shadow: 0px 0px 18px 0px rgba(255, 165, 0, 0.75);
-    -moz-box-shadow: 0px 0px 18px 0px rgba(255, 165, 0, 0.75);
+    -moz-box-shadow: 0px 0px 18px 0px rgba(255, 165, 0, 0.75); */
 
   }
 

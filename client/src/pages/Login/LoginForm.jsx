@@ -10,6 +10,7 @@ import ErrorMessage from '../../components/ErrorMessage';
 import { LoaderForButton } from '../../components/Loader';
 import { loginUserSuccess } from '../../redux/features/user';
 import { Contain, Input, Label } from '../Register/RegisterCSS';
+import { useTranslation } from "react-i18next";
 
 const Form = styled.form`
    display:flex;
@@ -52,7 +53,7 @@ const LoginForm = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm()
-
+    const { t } = useTranslation('global')
     return (
         <Form onSubmit={handleSubmit(async (formdata) => {
             try {
@@ -71,29 +72,29 @@ const LoginForm = () => {
             }
         })}>
             <Contain>
-                <Label>Email</Label>
+                <Label>{t("login.email")}</Label>
                 <Input
                     type="email"
-                    placeholder="Email"
+                    placeholder={t("login.email")}
                     {...register('email', { required: "Email is required." })}
                 />
                 <ErrorMessage>{errors.email?.message}</ErrorMessage>
             </Contain>
             <Contain>
                 <Label>
-                    password
+                    {t("login.password")}
                 </Label>
                 <Input
                     type="password"
-                    placeholder="Password"
+                    placeholder={t("login.password")}
                     // value={password}
                     // onChange={(e) => setPassword(e.target.value)}
                     {...register('password', { required: "Password is required." })}
                 />
                 <ErrorMessage>{errors.password?.message}</ErrorMessage>
             </Contain>
-            <Link to="/forgot-password" style={{ color: '#e6953b', marginTop: '10px', textAlign: 'right', textDecoration: 'none' }}>Forgot Password?</Link>
-            <SubmitButton disabled={isLoading}><LoginOutlined style={{ marginRight: "1rem" }} /> {isLoading ? <LoaderForButton /> : "Login"}</SubmitButton>
+            <Link to="/forgot-password" style={{ color: '#e6953b', marginTop: '10px', textAlign: 'right', textDecoration: 'none' }}>{t('login.forgotPassword')}?</Link>
+            <SubmitButton disabled={isLoading}><LoginOutlined style={{ marginRight: "1rem" }} /> {isLoading ? <LoaderForButton /> : t('login.login')}</SubmitButton>
             {/* {error && <ErrorMessage>{error}</ErrorMessage>} */}
 
             <Toaster>

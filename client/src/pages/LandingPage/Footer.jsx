@@ -79,7 +79,7 @@ const IconContainer = styled.span`
   margin-right: 5px;
 `;
 
-const Footer = () => {
+const TMSFooter = () => {
   return (
     <FooterContainer>
       <LogoContainer>
@@ -109,4 +109,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default TMSFooter;

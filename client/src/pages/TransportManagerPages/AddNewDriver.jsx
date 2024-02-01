@@ -30,6 +30,7 @@ padding: 20px;
 @media screen and (max-width: 768px) {
    width:100%; 
    padding: 10px;
+   align-items: center;
 }
 `
 
@@ -46,30 +47,6 @@ const ButtonBox = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-start;
-`
-// const SubmitButton = styled.button`
-//   width: 200px;
-//   padding:10px 20px;
-//   font-size: 16px;
-//   margin: 20px;
-//   background-color: #155c68;
-//   color: #fff;
-//   border: none;
-//   border-radius: 5px;
-//   cursor: pointer;
-
-// `
-const CancelButton = styled.button`
-  width: 200px;
-  padding:10px 20px;
-  font-size: 16px;
-  margin: 20px;
-  background-color: #828788;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  
 `
 const AddNewDriver = () => {
 
@@ -111,7 +88,7 @@ const AddNewDriver = () => {
                             <Label>{t('AddnewDriver.name')}</Label>
                             <Input
                                 type='text'
-                                placeholder='full name'
+                                placeholder={t('AddnewDriver.name')}
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                             />
@@ -120,7 +97,7 @@ const AddNewDriver = () => {
                             <Label>{t('AddnewDriver.phoneNumber')}</Label>
                             <Input
                                 type='tel'
-                                placeholder='phone number'
+                                placeholder={t('AddnewDriver.phoneNumber')}
                                 value={phoneNumber}
                                 onChange={(e) => setPhoneNumber(e.target.value)}
                             />

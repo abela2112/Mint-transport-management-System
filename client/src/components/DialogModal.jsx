@@ -7,10 +7,14 @@ import {
     DialogActions,
 } from '@mui/material'
 import {useState}  from 'react'
-import { CancelButton, SubmitButton } from './Buttons'
-
-const DialogModal = ({ open, onClose, onSubmit, message }) => {
+import { useTranslation } from "react-i18next"
+const DialogModal = ({ open, onClose, onSubmit }) => {
     const [isOpen, setIsOpen] = useState(false)
+    const {t}=useTranslation('global')
+    const handleOpen = () => {
+        setIsOpen(true)
+    }
+
     const handleClose = () => {
         setIsOpen(false)
         onClose()
@@ -19,6 +23,7 @@ const DialogModal = ({ open, onClose, onSubmit, message }) => {
         
         onSubmit()
         handleClose()
+        
     }
 
     return (
@@ -28,16 +33,17 @@ const DialogModal = ({ open, onClose, onSubmit, message }) => {
                 open={open}
                 onClose={handleClose}
                 aria-labelledby='dialog-title'
-                aria-describedby='dialog-description'
+                aria-describedby='dialog-description' 
             >   
-                <DialogTitle id='dialog-title'>Confirmation Message</DialogTitle>
+                <DialogTitle id='dialog-title'>{t("UserRequestDetail.reject")}</DialogTitle>
                 <DialogContent id='dialog-description'>
                    
-                    <DialogContentText>{message}</DialogContentText>
+                    <DialogContentText></DialogContentText>
                     {/* Are you sure do you want to send this request? */}
                  </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose} style={{ backgroundColor: "#f5f5f5", color: "gray" }}>Cancel</Button>
+                   
+                    <Button onClick={handleClose} style={{ backgroundColor: "#f5f5f5", color: "gray" }}>{t("DialogModal.cancel")}</Button>
                     <Button
                         style={{ backgroundColor: "#ee8624", color: "white" }}
                         autoFocus
@@ -45,7 +51,7 @@ const DialogModal = ({ open, onClose, onSubmit, message }) => {
                             handleSubmit()
                         }}
                     >
-                        Yes
+                      {t("DialogModal.submit")}
                     </Button>
 
                 </DialogActions>

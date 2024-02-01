@@ -9,9 +9,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Mint } from '../asset';
+import { useTranslation } from "react-i18next";
 
-
-import { Container, CopyRight, Img1, ImgmintContainer, Title } from './Register/RegisterCSS';
 
 
 
@@ -23,7 +22,7 @@ import {
   DialogContentText,
   DialogActions,
 } from "@mui/material";
-import { Input, Label, Contain } from "./Register/RegisterCSS";
+import { Input, Label, Contain, Container, ImgmintContainer, Title, Img1 } from "./Register/RegisterCSS";
 import { useNavigate } from 'react-router-dom'
 const ResetButton = styled.button`
   background-color: #164e62;
@@ -88,6 +87,11 @@ const ResetPassword = () => {
   const [success, setSuccess] = useState(false);
   const { id, token } = useParams();
   const navigate = useNavigate()
+  const {t}=useTranslation('global')
+  console.log(newpassword);
+  console.log(confirmpassword);
+  //console.log(id)
+
   useEffect(() => {
     getResetPassword(id, token)
       .then((data) => console.log(data))
@@ -117,26 +121,27 @@ const ResetPassword = () => {
 
     <Container>
       <Wrapper>
+
         <ImgmintContainer>
           <Img1 src={Mint} />
         </ImgmintContainer>
 
         <Title>
-          Reset password
+        {t("ResetPassword.reset")}
         </Title>
         <Form onSubmit={handleClick}>
           <Contain>
-            <Label>Enter New password</Label>
+            <Label>{t("ResetPassword.enterPassword")}</Label>
             <Input
               type="password"
-              placeholder="new password"
+              placeholder={t("ResetPassword.newPassword")}
               value={newpassword}
               onChange={(e) => setNewPassword(e.target.value)}
             />
           </Contain>
 
           <Contain>
-            <Label>confirm password</Label>
+            <Label>{t("ResetPassword.confirmPassword")}</Label>
             <Input
               type="password"
               placeholder="confirm password"
@@ -144,31 +149,28 @@ const ResetPassword = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </Contain>
-
-          <ResetButton>Reset Password</ResetButton>
-
+          <ResetButton type="submit">{t("ResetPassword.resetPassword")}</ResetButton>
         </Form>
 
-        <CopyRight>
-          <small>mint&copy;2023 All right reserved</small>
-        </CopyRight>
-      </Wrapper>
+</Wrapper>
+       
+     
       <Dialog
         open={success}
         onClose={() => setSuccess(false)}
         aria-labelledby="dialog-title"
         aria-describedby="dialog-description"
       >
-        <DialogTitle id="dialog-title">Password reset sucess</DialogTitle>
+        <DialogTitle id="dialog-title">{t("ResetPassword.success")}</DialogTitle>
         <DialogContent id="dialog-description">
           <DialogContentText>
-            Congratulations! You have successfully Reset your password.
+            {t("ResetPassword.congrats")}
           </DialogContentText>
         </DialogContent>
 
         <DialogActions>
           <Button onClick={() => setSuccess(false)} color="primary">
-            Close
+            {t("ResetPassword.close")}
           </Button>
         </DialogActions>
       </Dialog>
@@ -179,15 +181,15 @@ const ResetPassword = () => {
         aria-labelledby="dialog-title"
         aria-describedby="dialog-description"
       >
-        <DialogTitle id="dialog-title">Password confirm</DialogTitle>
+        <DialogTitle id="dialog-title">{t("ResetPassword.passwordConfirm")}</DialogTitle>
         <DialogContent id="dialog-description">
-          <DialogContentText>password doesnt match</DialogContentText>
+          <DialogContentText>{t("ResetPassword.noMatch")}</DialogContentText>
 
           <Contain>
-            <Label>confirm password</Label>
+            <Label>{t("ResetPassword.passwordConfirm")}</Label>
             <Input
               type="password"
-              placeholder="confirm password"
+              placeholder={t("ResetPassword.passwordConfirm")}
               value={confirmpassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
@@ -196,10 +198,10 @@ const ResetPassword = () => {
 
         <DialogActions>
           <Button onClick={() => setError(false)} color="primary">
-            Close
+            {t("ResetPassword.close")}
           </Button>
           <Button onClick={handleClick} color="primary">
-            submit
+            {t("ResetPassword.submit")}
           </Button>
         </DialogActions>
       </Dialog>

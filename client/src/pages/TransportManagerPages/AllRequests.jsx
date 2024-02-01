@@ -11,14 +11,10 @@ import { getRequestSuccess } from '../../redux/features/request';
 import { Title } from '../StaffManagerPages/StaffMangerPendingRequests';
 import Loader from '../../components/Loader';
 import RequestsTable from '../StaffManagerPages/RequestsTable';
+import { useTranslation } from 'react-i18next';
 
-
-const Container = styled.div`
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #fff;
-`
 const AllRequests = () => {
+    const { t } = useTranslation('global')
     const { data, error, isPending } = useQuery({
         queryKey: ['carrequest'],
         queryFn: getAllRequests,
@@ -27,7 +23,7 @@ const AllRequests = () => {
     
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    console.log('data', data?.data)
+
     const [filteredReq, setFilteredReq] = useState([])
     // useEffect(() => {
     //     getAllRequests().then(({ data }) => {
@@ -47,7 +43,7 @@ const AllRequests = () => {
     if (isPending) return <Loader />
     return (
 
-        <RequestsTable title={"All Requests"} rows={data.data} />
+        <RequestsTable title={t("AllRequests.title")} rows={data?.data} />
     );
 }
 export default AllRequests

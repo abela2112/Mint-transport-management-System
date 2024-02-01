@@ -7,6 +7,8 @@ import ConfirmDialog from './ConfirmDialog';
 import Center from '../../components/Center';
 import { PersonAdd } from '@mui/icons-material';
 import { LoaderForButton } from '../../components/Loader';
+import { useTranslation } from "react-i18next"
+
 const RegisterForm = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -21,6 +23,7 @@ const RegisterForm = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [isOpen, setIsOpen] = useState(false);
     const socket = io("http://localhost:5000");
+    const { t } = useTranslation('global')
     const handleSignUp = (e) => {
         e.preventDefault()
         setError('');
@@ -55,30 +58,30 @@ const RegisterForm = () => {
     return (<>
         <FormContainer onSubmit={handleSignUp}>
             <Contain>
-                <Label>First Name</Label>
+                <Label>{t("Register.firstName")}</Label>
                 <Input
                     type="text"
-                    placeholder="First Name"
+                    placeholder={t("Register.firstName")}
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
-                    title="Enter your First name"
+                    // title="Enter your First name"
                 />
             </Contain>
             <Contain>
-                <Label>Last Name</Label>
+                <Label>{t("Register.lastName")}</Label>
                 <Input
                     type="text"
-                    placeholder="Last Name"
+                    placeholder={t("Register.lastName")}
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
                     title="Enter your last name"
                 />
             </Contain>
             <Contain>
-                <Label>Email</Label>
+                <Label>{t("Register.email")}</Label>
                 <Input
                     type="email"
-                    placeholder="Email"
+                    placeholder={t("Register.email")}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     title="Enter your organization email like firstName.lastName@mint.gov.et"
@@ -86,10 +89,10 @@ const RegisterForm = () => {
             </Contain>
             <Contain>
 
-                <Label>Department</Label>
+                <Label>{t("Register.department")}</Label>
                 <SelectOption
                     title="select your department"
-                    placeholder="department"
+                    placeholder={t("Register.department")}
                     value={department}
                     onChange={(e) => setDepartment(e.target.value)}
                 >
@@ -101,21 +104,21 @@ const RegisterForm = () => {
 
             <Contain>
 
-                <Label>Position</Label>
+                <Label>{t("Register.position")}</Label>
                 <SelectOption title="select your position" onChange={(e) => setPosition(e.target.value)}>
-                    <Option disabled selected>Select Option</Option>
-                    <Option>CEO</Option>
-                    <Option>Desk</Option>
-                    <Option>Expert</Option>
+                    <Option disabled selected>{t("Register.choose")}</Option>
+                    <Option>{t("Register.CEO")}</Option>
+                    <Option>{t("Register.Desk")}</Option>
+                    <Option>{t("Register.Expert")}</Option>
                 </SelectOption>
             </Contain>
 
             <Contain>
 
-                <Label>Password</Label>
+                <Label>{t("Register.password")}</Label>
                 <Input
                     type="password"
-                    placeholder="Password"
+                    placeholder={t("Register.password")}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     title="Your password must containe al-least one number one special character and one letter"
@@ -123,20 +126,20 @@ const RegisterForm = () => {
             </Contain>
             <Contain>
 
-                <Label>Phone</Label>
+                <Label>{t("Register.phoneNumber")}</Label>
                 <Input
                     type="tel"
-                    placeholder="phone"
+                    placeholder={t("Register.phoneNumber")}
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
                     title="Your phone number must be 10 digit number"
                 />
             </Contain>
             <Contain>
-                <Label>Confirm Password</Label>
+                <Label>{t("Register.confirmPassword")}</Label>
                 <Input
                     type="password"
-                    placeholder="Confirm Password"
+                    placeholder={t("Register.confirmPassword")}
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     title="confirm password must be the same as the main password"
@@ -144,12 +147,14 @@ const RegisterForm = () => {
             </Contain>
 
             <BottomText>
-                <p>Already have an account? <Link className='link' to={'/login'} style={{ color: '#e6953b' }}>Sign in</Link>  </p>
+                <p>{t("Register.account")}? <Link className='link' to={'/login'} style={{ color: '#e6953b' }}>{t("Register.signIn")}</Link>  </p>
             </BottomText>
+
             <Center>
-                <SignUpButton disabled={isLoading} onClick={() => (password !== confirmPassword) ? setIsOpen(true) : setIsOpen(false)} >
+                <SignUpButton disabled={isLoading} onClick={() => password !== confirmPassword ? setIsOpen(true) : setIsOpen(false)}>
                     <PersonAdd style={{ marginRight: "1rem" }} />
-                    {isLoading ? <LoaderForButton /> : "Register"}</SignUpButton>
+                    {isLoading ? <LoaderForButton /> : t('Register.signUp')}
+                </SignUpButton>
             </Center>
         </FormContainer>
         {error && <p style={{ color: "red" }}>{error}</p>}

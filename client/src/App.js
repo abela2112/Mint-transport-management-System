@@ -3,7 +3,6 @@ import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import io from "socket.io-client";
-import styled from "styled-components";
 import SingleRequestDetails from "./components/SingleRequestDetails.jsx";
 import Layout from "./layout";
 import AddDepartment from "./pages/AdminPages/AddDepartment.jsx";
@@ -11,7 +10,7 @@ import ShowAllUserForAdmin from "./pages/AdminPages/ShowAllUserForAdmin.jsx";
 // import UserRegisterRequests from "./pages/AdminPages/UserRegisterRequests.jsx";
 import UserRequestDetail from "./pages/AdminPages/UserRequestDetail.jsx";
 import ForgotPassword from "./pages/ForgotPassword";
-import LandingPage from "./pages/LandingPage/LandingPage.jsx";
+import LandingPage from "./pages/LandingPage";
 import Login from "./pages/Login/index";
 import Register from "./pages/Register/index";
 import SearchPage from "./pages/SearchPage.jsx";
@@ -19,23 +18,30 @@ import History from "./pages/StaffManagerPages/History.jsx";
 import StaffMangerPendingRequests from "./pages/StaffManagerPages/StaffMangerPendingRequests.jsx";
 import StaffPetrolRequest from "./pages/StaffManagerPages/StaffPetrolRequest.jsx";
 import MakeRequest from "./pages/StaffPages/MakeRequest.jsx";
+import ReponseForSingleRequest from "./pages/StaffPages/ReponseForSingleRequest.jsx";
 import UserRequests from "./pages/StaffPages/UserRequests.jsx";
 import TransManagerResponse from "./pages/TransManagerResponse";
 import AddNewDriver from "./pages/TransportManagerPages/AddNewDriver.jsx";
 import AllRequests from "./pages/TransportManagerPages/AllRequests.jsx";
 import AddNewCar from "./pages/TransportManagerPages/addNewCar.jsx";
-import ReponseForSingleRequest from "./pages/StaffPages/ReponseForSingleRequest.jsx";
-import ResetPassword from "./pages/ResetPassword.jsx";
+
 import AvailableCar from "./pages/TransportManagerPages/AvailableCar.jsx";
 
-import { useEffect } from "react";
 import Notification from "./pages/Notification.jsx";
 import Response from "./pages/StaffPages/Response.jsx";
 import SinglResponsePage from "./pages/StaffPages/SinglResponsePage.jsx";
-import { setNotification } from "./redux/features/user.js";
-import ProfilePage from "./pages/ProfilePage.jsx";
+
 import PendingUserRegisterRequests from "./pages/AdminPages/PendingUserRegisterRequests.jsx";
+import AllStaffPetrolRequests from "./pages/AllStaffsPetrolRequest";
+import ProfilePage from "./pages/ProfilePage.jsx";
+import ResetPassword from "./pages/ResetPassword.jsx";
 import PendingRequests from "./pages/TransportManagerPages/PendingRequests.jsx";
+import SinglePetrolRequestDetail from "./pages/singlePetrolRequestDetail";
+
+import { useEffect } from "react";
+import { setNotification } from "./redux/features/user.js";
+
+import Profile from "./pages/ProfilePage.jsx";
 
 const StaffLayout = () => (
   <>
@@ -139,12 +145,22 @@ function App() {
               <Route path="/add-new-car" element={<AddNewCar />} />
               <Route path="/pending-requests" element={<PendingRequests />} />
               <Route path="/add-new-driver" element={<AddNewDriver />} />
+
+              <Route
+                path="/staff-request"
+                element={<AllStaffPetrolRequests />}
+              />
+
               <Route path="/available-car" element={<AvailableCar />} />
               <Route path="/requests" element={<AllRequests />} />
               <Route path="/request/:id" element={<SingleRequestDetails />} />
               <Route
                 path="/response/request/:id"
                 element={<ReponseForSingleRequest />}
+              />
+              <Route
+                path="/petrol-request/:id"
+                element={<SinglePetrolRequestDetail />}
               />
             </Route>
           )}
@@ -174,7 +190,9 @@ function App() {
           path="/transportManager-response"
           element={<TransManagerResponse />}
         />
+
         <Route path="/notification" element={<Notification />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/home" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />

@@ -29,6 +29,9 @@ const Wrapper = styled.div`
   align-items: flex-start;
   background: #fff;
   padding: 10px 20px;
+  @media screen and (max-width: 768px) {
+    align-items: center;
+  }
   `;
 
 const ButtonBox = styled.div`
@@ -116,7 +119,7 @@ const AddNewCar = () => {
               <Label>{t('AddnewCar.brandName')}</Label>
               <Input
                 type="text"
-                placeholder="brand name"
+                placeholder={t('AddnewCar.brandName')}
                 value={brand}
                 onChange={(e) => setBrand(e.target.value)}
               />
@@ -125,7 +128,7 @@ const AddNewCar = () => {
               <Label>{t('AddnewCar.modelName')}</Label>
               <Input
                 type="text"
-                placeholder="model name"
+                placeholder={t('AddnewCar.modelName')}
                 value={model}
                 onChange={(e) => setModel(e.target.value)}
               />
@@ -135,7 +138,7 @@ const AddNewCar = () => {
               <Label>{t('AddnewCar.licencePlateNo')}</Label>
               <Input
                 type="text"
-                placeholder="licence plate number"
+                placeholder={t('AddnewCar.licencePlateNo')}
                 value={licencePlateNumber}
                 onChange={(e) => setLicencePlateNumber(e.target.value)}
               />
@@ -152,7 +155,7 @@ const AddNewCar = () => {
               <Label>{t("AddnewCar.Driver'sName")}</Label>
               <Input
                 type="text"
-                placeholder="driver name"
+                placeholder={t("AddnewCar.Driver'sName")}
                 value={DriverName}
                 onChange={(e) => setDriverName(e.target.value)}
               />
@@ -161,7 +164,7 @@ const AddNewCar = () => {
               <Label>{t("AddnewCar.Driver'sPhoneNumber")}</Label>
               <Input
                 type="tel"
-                placeholder="phone number"
+                placeholder={t("AddnewCar.Driver'sPhoneNumber")}
                 value={DriverPhoneNumber}
                 onChange={(e) => setDriverPhoneNumber(e.target.value)}
               />

@@ -28,7 +28,7 @@ const InnerContainer = styled.div`
 margin-top:60px;
 background-color:#f5f5f5;
 width: 100%;
-padding: 0 20px 20px 20px;
+padding: 0 5px 5px 0px;
 height: 100%;
 overflow-y: auto;
 

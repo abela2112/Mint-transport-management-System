@@ -44,6 +44,8 @@ export const getUserRequests = (userId) =>
   axios.get(`/api/request/user/${userId}`);
 
 export const getAllRequests = () => axios.get(`/api/request?checked=true`);
+export const getAllPetrolRequests = () => axios.get(`/api/petrol-request`);
+export const getAPetrolRequest = (id) => axios.get(`api/petrol-request/${id}`);
 export const getRequestById = (id) => axios.get(`/api/request/${id}`);
 export const updateRequestById = (id, request) =>
   axios.patch(`/api/request/updateRequest/${id}`, request);
@@ -73,3 +75,9 @@ export const addCar = (car) => axios.post("/api/car/add-new-car", car);
 export const getAllDepartment = () => axios.get("/api/department/getAll");
 export const addDept = (dept) =>
   axios.post("/api/department/add-department", dept);
+
+//update petrol request
+export const updateAPetrolRequest = (id, data) =>
+  axios.put("/api/petrol-request/" + id, data);
+export const postPetrolRequest = (data) =>
+  axios.post("/api/petrol-request", data);

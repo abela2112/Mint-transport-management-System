@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getUserRequests } from '../../api/userApi'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import SingleRequest from '../SingleRequest'
+import SingleRequest from './SingleRequest'
 import SearchBar from '../../components/SearchBar'
 
 const Container = styled.div`

@@ -8,6 +8,7 @@ import axios from 'axios';
 import { formatDistance } from 'date-fns';
 import Navbar from './Navbar';
 import { avatar } from '../asset';
+import { useTranslation } from "react-i18next"
 //import { Title } from './StaffMangerPendingRequests';
 const NotificationCard = styled.div`
     width: 100%;
@@ -81,6 +82,7 @@ const NotificationContainer = styled.div`
 const Notification = () => {
     const { user } = useSelector(state => state.user)
     const dispatch = useDispatch()
+    const {t}=useTranslation('global')
     const handleNotification = (id) => {
         axios.patch(`/api/user/notification/${id}`, { seen: true }).then((data) => {
             console.log('updated notification', data.data)
@@ -99,7 +101,7 @@ const Notification = () => {
             <Navbar />
             <Container>
                 <NotificationContainer>
-                    <Title>Notifications</Title>
+                    <Title>{t("Notification.notifications")}</Title>
                     {user?.notifications.length > 0 ? [...user?.notifications].sort((a, b) => new Date(b?.time) - new Date(a?.time)).map((notification, i) => (
                         <>
 
@@ -127,7 +129,7 @@ const Notification = () => {
                             <Hr />
                         </>
 
-                    )) : <p>no notification</p>}
+                    )) : <p>{t("Notification.noNotification")}</p>}
                 </NotificationContainer>
             </Container></>
     )

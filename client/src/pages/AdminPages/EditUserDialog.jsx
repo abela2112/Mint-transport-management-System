@@ -11,12 +11,13 @@ import { useQuery } from '@tanstack/react-query'
 import { Contain, FormContainer, Input, Label, Option, SelectOption } from '../Register/RegisterCSS';
 import { editUser, getAllDepartment } from '../../api/userApi';
 import CustomToastBar from '../../components/ToastErrorMessage';
+import { useTranslation } from 'react-i18next';
 const EditUserDialog = ({ id, isOpen, setIsOpen, user }) => {
     const [position, setPosition] = useState('')
     const [password, setPassword] = useState('')
     const [department, setDepartment] = useState('')
     const [role, setRole] = useState('')
-
+    const { t } = useTranslation('global')
     const { isPending, error, data } = useQuery({
         queryKey: ['department'],
         queryFn: getAllDepartment,
@@ -38,31 +39,31 @@ const EditUserDialog = ({ id, isOpen, setIsOpen, user }) => {
             aria-describedby="dialog-description"
         >
             <DialogTitle id="dialog-title">
-                Edit the user information
+                {t("UserRequestDetail.editInfo")}
             </DialogTitle>
             <DialogContent id="dialog-description">
 
                 <FormContainer>
                     <Contain>
-                        <Label>Position</Label>
-                        <SelectOption onChange={(e) => setPosition(e.target.value)}>
-                            <Option disabled selected>{position}</Option>
-                            <Option>CEO</Option>
-                            <Option>Desk</Option>
-                            <Option>Expert</Option>
+                        <Label>{t("UserRequestDetail.position")}</Label>
+                        <SelectOption defaultValue={position} onChange={(e) => setPosition(e.target.value)}>
+                            <Option disabled>{position}</Option>
+                            <Option>{t("UserRequestDetail.CEO")}</Option>
+                            <Option>{t("UserRequestDetail.Desk")}</Option>
+                            <Option>{t("UserRequestDetail.Expert")}</Option>
                         </SelectOption>
                     </Contain>
                     <Contain>
-                        <Label>Role</Label>
+                        <Label>{t("UserRequestDetail.role")}</Label>
                         <SelectOption defaultValue={user?.role} onChange={(e) => setRole(e.target.value)}>
-                            <Option disabled selected>{role}</Option>
-                            <Option>staff</Option>
-                            <Option>staff-manager</Option>
-                            <Option>transport-manager</Option>
+                            <Option disabled >{role}</Option>
+                            <Option>{t("UserRequestDetail.staff")}</Option>
+                            <Option>{t("UserRequestDetail.staffManager")}</Option>
+                            <Option>{t("UserRequestDetail.transportManager")}</Option>
                         </SelectOption>
                     </Contain>
                     <Contain>
-                        <Label>Department</Label>
+                        <Label>{t("UserRequestDetail.department")}</Label>
                         {isPending ?
                             <p>Loading...</p> :
                             <SelectOption
@@ -77,10 +78,10 @@ const EditUserDialog = ({ id, isOpen, setIsOpen, user }) => {
                         }
                     </Contain>
                     <Contain>
-                        <Label>password</Label>
+                        <Label>{t("UserRequestDetail.password")}</Label>
                         <Input
                             type="password"
-                            placeholder="password"
+                            placeholder={t("UserRequestDetail.password")}
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
@@ -102,7 +103,7 @@ const EditUserDialog = ({ id, isOpen, setIsOpen, user }) => {
                 </FormContainer>
             </DialogContent>
             <DialogActions>
-                <Button onClick={() => setIsOpen(false)} style={{ backgroundColor: "#f5f5f5", color: "gray" }}>Cancel</Button>
+                <Button onClick={() => setIsOpen(false)} style={{ backgroundColor: "#f5f5f5", color: "gray" }}>{t("UserRequestDetail.cancel")}</Button>
                 <Button
                     type='button'
                     style={{ backgroundColor: "#ee8624", color: "white" }}
@@ -111,7 +112,7 @@ const EditUserDialog = ({ id, isOpen, setIsOpen, user }) => {
                         handleSubmit()
                     }}
                 >
-                    Edit
+                    {t("UserRequestDetail.submit")}
                 </Button>
             </DialogActions>
 

@@ -1,8 +1,10 @@
+import { useTranslation } from "react-i18next"
 import { getAllRequests } from "../../api/userApi"
 import Loader from "../../components/Loader"
 import RequestsTable from "../StaffManagerPages/RequestsTable"
 import { useQuery } from '@tanstack/react-query'
 const PendingRequests = () => {
+    const { t } = useTranslation('global')
     const { data, error, isPending } = useQuery({
         queryKey: ['carrequest', 'pending'],
         queryFn: getAllRequests,
@@ -16,7 +18,7 @@ const PendingRequests = () => {
 
     }
     return (
-        <RequestsTable title={"Pending Requests"} rows={filterdRequest} />
+        <RequestsTable title={t("AllRequests.pendingRequests")} rows={filterdRequest} />
     )
 }
 

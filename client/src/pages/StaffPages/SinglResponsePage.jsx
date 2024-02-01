@@ -6,6 +6,7 @@ import { Container } from '@mui/material'
 import styled from 'styled-components'
 import { format } from 'date-fns'
 import { Box, Content } from '../../components/SingleRequestDetails'
+import { useTranslation } from 'react-i18next'
 const Wrapper = styled.div`
 display: flex;
 flex-direction: column;
@@ -48,6 +49,7 @@ const Span = styled.span`
 const SinglResponsePage = () => {
     const [response, setResponse] = useState(null)
     const { id } = useParams()
+    const { t } = useTranslation('global')
     useEffect(() => {
         getRequestResponseapiById(id).then(({ data }) => {
             setResponse(data)
@@ -58,7 +60,7 @@ const SinglResponsePage = () => {
     return (
         <Container>
             <Wrapper>
-                <Title>Response Detail</Title>
+                <Title>{t("singleResponsePage.responseDetail")}</Title>
                 {/* <Span>Dear {user?.firstName} your request has been approved.
                     you can get more detail about the response here below.
                 </Span> */}
@@ -68,13 +70,15 @@ const SinglResponsePage = () => {
     )
 }
 export const Info = ({ response }) => {
+    const { t } = useTranslation('global')
+
     return <InfoContainer>
-        <Box><span>Driver Name</span>
+        <Box><span>{t("singleResponsePage.driverName")}</span>
             <Content>{response?.DriverName}</Content></Box>
-        <Box><span>Driver Phone</span>
+        <Box><span>{t("singleResponsePage.driverPhone")}</span>
             <Content>{response?.DriverPhone}</Content></Box>
-        <Box><span>Plate Number</span><Content>{response?.PlateNumber}</Content></Box>
-        <Box><span>Return date</span><Content>{response?.ReturnDate && format(new Date(response?.ReturnDate)
+        <Box><span>{t("singleResponsePage.plateNumber")}</span><Content>{response?.PlateNumber}</Content></Box>
+        <Box><span>{t("singleResponsePage.returnDate")}</span><Content>{response?.ReturnDate && format(new Date(response?.ReturnDate)
             , 'MMMM do yyyy')}</Content></Box>
     </InfoContainer>
 }

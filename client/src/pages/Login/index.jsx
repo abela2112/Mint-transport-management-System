@@ -1,12 +1,36 @@
+import { Container, CopyRight, Img1, ImgmintContainer } from '../Register/RegisterCSS';
+import LoginForm from './LoginForm';
 import React from 'react';
 // import { SignUpContainer, Contain, Title, SignUpForm, SignUpInput, SignUpButton, Option, SelectOption, ImgmintContainer, Img1, ImageContainer, Image, TextContainer, Label, BottomText, CopyRight } from './RegisterCSS';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
 import { Mint } from '../../asset';
+import { useTranslation } from 'react-i18next';
 
 
-import { Container, CopyRight, Img1, ImgmintContainer } from '../Register/RegisterCSS';
-import LoginForm from './LoginForm';
+const LoginContainer = styled.div `
+  flex: 1;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: #e0e0e0;
+`;
+
+// const ImgmintContainer = styled.div`
+//    display:flex;
+//    justify-content:center;
+//    align-items:center;
+
+//   width: 100px;
+//   height: 100px;
+//   margin-left: 5px;
+//   margin-top: -70px;
+// `;
+
+
 
 
 export const WelcomeTxt = styled.span`
@@ -38,7 +62,7 @@ const TitleBox = styled.div`
 `
 
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
  
   display: flex;
   flex-direction: column;
@@ -59,21 +83,20 @@ const Wrapper = styled.div`
 `
 
 const Login = () => {
+  const { t } = useTranslation('global')
   return (
     <Container>
       <Wrapper>
         <ImgmintContainer>
           <Img1 src={Mint} />
         </ImgmintContainer>
-
         <TitleBox>
-          <WelcomeTxt>Welcome back</WelcomeTxt>
-          <LoginTxt>Login into your account</LoginTxt>
+          <WelcomeTxt>{t("login.welcome")}</WelcomeTxt>
+          <LoginTxt>{t("login.accountLogin")}</LoginTxt>
         </TitleBox>
         <LoginForm />
         {/* {error && <p style={{ color: "red" }}>{error}</p>} */}
-        <Desc>Don't have an account? <Link to='/register' style={{ color: '#e6953b', marginTop: '10px' }}>  Sign Up</Link></Desc>
-
+        <Desc>{t("login.noAccount")}? <Link to='/register' style={{ color: '#e6953b', marginTop: '10px' }}>{t('login.signUp')}</Link></Desc>
 
       </Wrapper>
       <CopyRight>
