@@ -27,7 +27,6 @@ const UserSchema = new mongoose.Schema(
       default: "EXPERT",
     },
 
-
     password: {
       type: String,
       required: [true, "password must be provided"],
@@ -41,7 +40,7 @@ const UserSchema = new mongoose.Schema(
     //       validator: function (password) {
     //         // The regular expression pattern to enforce password requirements
     //         const pattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]+$/;
-    
+
     //         return pattern.test(password);
     //       },
     //       message: "password must contain at least one letter, one number, and one special character",
@@ -98,7 +97,7 @@ const UserSchema = new mongoose.Schema(
     notifications: [
       {
         to: { type: String },
-        from: { type: String },
+        from: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
         notificationType: { type: String },
         messageId: { type: String },
         id: {

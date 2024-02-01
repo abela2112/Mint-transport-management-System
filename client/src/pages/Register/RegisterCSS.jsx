@@ -1,21 +1,26 @@
 import styled from "styled-components";
 
-export const SignUpContainer = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  font-family: "Poppins", sans-serif;
   width: 100vw;
+  min-height: 100vh !important;
   align-items: center;
   justify-content: center;
   background-color: #e0e0e0;
   position :relative;
   margin-top:0px;
   padding-top:0px;
+
+  @media screen and (max-width:1024px) {
+    height: 100% !important;
+  }
 `;
+
 export const Title = styled.span`
  font-weight: 500;
  font-size: 34px;
- text-align: center;
+ text-align: left;
  margin-bottom: 2rem;
 /* padding:10px 20px; */
 
@@ -37,33 +42,49 @@ export const Img1 = styled.img`
     object-fit: cover;
 `;
 
-export const SignUpForm = styled.form`
+export const FormContainer = styled.form`
   //width: 400px;
-  
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  width: 100%;
+  height: 80%;
+
+  @media screen and (max-width:768px) {
+    
+    padding: 10px 20px;
+    justify-content: center;
+  
+  }
 `;
 export const Contain = styled.div`
 display: flex;
-
+width: 400px;
 flex-direction: column;
 margin-bottom: 10px;
 margin-right: 20px;
+
+@media screen and (max-width:768px) {
+    width: 100%;
+    margin-right: 0;
+  }
 `
 export const Label = styled.label`
 padding: 5px 0;
  
 `;
 
-export const SignUpInput = styled.input`
-  width: calc(100%);
+export const Input = styled.input`
+  width: 100%;
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  width: 400px;
+  //width: 400px;
+
+  @media screen and (max-width:768px) {
+    width: 100%;
+  }
 
 
   &:hover::before {
@@ -91,6 +112,9 @@ export const SignUpButton = styled.button`
   color: #fff;
   border: none;
   border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   &:disabled{
     cursor: not-allowed;
@@ -104,7 +128,12 @@ export const SelectOption = styled.select`
   border: 1px solid #ccc;
   border-radius: 4px;
   cursor: pointer;
+
+  @media screen and (max-width:768px) {
+    width: 100%;
+  } 
 `;
+
 export const BottomText = styled.div`
  text-align: center;
  width: 100%;
@@ -120,7 +149,6 @@ export const Image = styled.img`
 `;
 export const ImageContainer = styled.div`
   flex: 1;
-  
   width: 100%;
   height: 100%;
 `;
@@ -136,15 +164,18 @@ export const TextContainer = styled.div`
   align-items: center;
   border-radius: 2rem;
   margin: 5rem 0 3rem 0;
+
+  @media screen and (max-width:768px) {
+    width: 92%;
+  }
 `;
 
 export const CopyRight = styled.small`
-  position: fixed;
-  bottom: 0;
-  right: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
   margin-right: 3rem;
   font-size: 16px;
   font-weight: 300;
 `
-
 export const Option = styled.option``;

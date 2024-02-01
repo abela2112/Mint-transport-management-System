@@ -90,16 +90,18 @@
             "action": "ድርጊት",
             "detail": "ዝርዝር መረጃ",
             "requests": "ጥያቄዎች",
-            "pending": "ጥበቃ ላይ ያሉ"
+            "pending": "ጥበቃ ላይ ያሉ",
+            "title": "አጠቃላይ የጥያቄዎች ዝርዝር መረጃ"
+            ,"pendingRequests": "ጥበቃ ላይ ያሉ ጥያቄዎች "
     },
         "login": {
             "welcome": "እንኳን ደህና መጡ",
             "accountLogin": "ወደ አካውንቶት ይግቡ",
             "email": "ኢሜይል አድራሻ ",
             "password": "የይለፍ ቃል",
-            "forgotPassword": "የይለፍ ቃሎን እረስተዋል?",
+            "forgotPassword": "የይለፍ ቃሎን እረስተዋል",
             "login": "ይግቡ",
-            "noAccount": "አካውንት የሎትም?",
+            "noAccount": "አካውንት የሎትም",
             "signUp": "ይመዝገቡ",
             "wrongInput": "የተሳሳተ መረጃ አስገብተዋል በድጋሚ ይሞክሩ"
         },
@@ -116,7 +118,7 @@
             "CEO": "ሲ.ኢ.ኦ",
             "Desk": "ዴስክ",
             "Expert": "ባለሙያ",
-            "account": "አካውንት አሎት?",
+            "account": "አካውንት አሎት",
             "signIn": "ይግቡ",
             "signUp": "ይመዝገቡ",
             "choose": "አማራጭ ይምረጡ",
@@ -248,8 +250,9 @@
         "description": "ገለጻ :",
         "pickUpDate": "አገልግሎት የሚጀምርበት ቀን :",
         "returnDate": "የመመለሻ ቀን:",
+        "passengers": "ተሳፋሪዎች",
         "reject": "ውድቅ ይሁን",
-        "approved": "ጸድቋል"
+        "approve": "አጽደቅ"
     },
     "singleResponsePage": {
         "responseDetail": "የምላሽ ዝርዝር መረጃ",

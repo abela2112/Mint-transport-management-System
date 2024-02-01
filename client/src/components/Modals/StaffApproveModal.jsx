@@ -19,7 +19,7 @@ const StaffApproveModal = ({ isOpenApproveForStaff, setIsOpenApproveForStaff, ha
             <DialogActions>
                 <Button onClick={() => setIsOpenApproveForStaff(false)} style={{ backgroundColor: "Red", color: "white" }}>{t("StaffApproveModal.no")}</Button>
                 <Button
-                    style={{ backgroundColor: "Yellow", color: "white" }}
+                    style={{ backgroundColor: "rgb(255, 165, 0)", color: "white" }}
                     autoFocus
                     onClick={() => {
                         handleApprove()

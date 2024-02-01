@@ -49,22 +49,47 @@ color: #fff;
 }
 .icons-margin-right{
     margin-right: 5px;
-    color: rgba(255, 165, 0, 0.75);
+    color: #18616C;
     
+
 }
-.custom-loader {
-    width:40px;
-    height:40px;
+
+.custom-loader-btn{
+    width:30px;
+    height:30px;
     --c:radial-gradient(farthest-side,#fff 92%,#0000);
     background: 
       var(--c) 50% 0,
       var(--c) 50% 100%,
       var(--c) 100% 50%,
       var(--c) 0    50%;
-    background-size:12px 12px;
+    background-size:10px 10px;
     background-repeat:no-repeat;
     animation:s7 1s infinite;
+
+}
+.custom-loader {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: 
+      radial-gradient(farthest-side,#071104 94%,#0000) top/8px 8px no-repeat,
+      conic-gradient(#0000 30%,#071104);
+    -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 8px),#000 0);
+    animation:s3 1s infinite linear;
+  }
+  
+  @keyframes s3{ 
+    100%{transform: rotate(1turn)}
   }
   @keyframes s7 {to{transform: rotate(.5turn)}}
 
-  
+  .toast{
+    color: white !important;
+    padding: 1rem !important;
+    border-radius: 10px !important;
+    display: flex !important;
+    align-items: center !important;
+    border:1px solid rgba(241,51,34,.71);
+    background-color: rgba(184, 71, 65, 0.9)!important;
+  }

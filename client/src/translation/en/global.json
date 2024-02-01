@@ -85,7 +85,9 @@
         "action": "Action",
         "detail": "Detail",
         "requests": "Requests",
-        "pending": "Pending"
+        "pending": "Pending",
+        "title":"All Requests",
+        "pendingRequests": "Pending Requests"
     },
     "login": {
         "welcome": "Welcome back",
@@ -254,8 +256,10 @@
         "description": "Description :",
         "pickUpDate": "Pick Up date :",
         "returnDate": "return date:",
+        "passengers": "Passengers",
+        
         "reject": "Reject",
-        "approved": "Approved"
+        "approved": "Approve"
     },
     "singleResponsePage": {
         "responseDetail": "Response Detail",

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { deleteNotification, updateNotification } from '../redux/features/user';
 import axios from 'axios';
 import { formatDistance } from 'date-fns';
-import Navbar from '../components/Navbar';
+import Navbar from './Navbar';
 import { avatar } from '../asset';
 import { useTranslation } from "react-i18next"
 //import { Title } from './StaffMangerPendingRequests';

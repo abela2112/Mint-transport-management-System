@@ -44,15 +44,13 @@ app.use("/api/driver", driverRoute);
 app.use("/api/department", deptRoute);
 app.use("/api/TMresponse", TMresponseRoute);
 app.use("/api/forgot", forgotPassword);
-
+app.use("/api/petrol-request", staffRequestRoute);
 
 // error handler
 app.use(errorHandleMiddleware);
 app.use(notFoundErrorMiddleware);
 
 io.on("connection", (socket) => {
-  console.log("connection created");
-
   socket.on("setup", (userData) => {
     console.log("user", userData?._id);
     socket.join(userData?._id);
@@ -70,8 +68,6 @@ io.on("connection", (socket) => {
       department: user.department,
       role: "staff-manager",
     });
-
-    console.log("staffManagers", staffManagers);
 
     if (!staffManagers || staffManagers.length === 0) return;
 

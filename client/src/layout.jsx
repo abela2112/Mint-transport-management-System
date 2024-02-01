@@ -1,9 +1,10 @@
 import React from 'react'
-import SideBar from './components/SideBar'
+import { SideBar } from './pages/SideBar'
 import { Outlet } from 'react-router-dom'
 import styled from 'styled-components'
-import Navbar from './components/Navbar'
+import Navbar from './pages/Navbar'
 import { useSelector } from 'react-redux'
+import { CopyRight } from './pages/Register/RegisterCSS'
 const Container = styled.div`
 display: flex;
 width: 100%;
@@ -15,15 +16,23 @@ flex: 4;
 margin-left: 16rem;
 height: 100%;
 position: relative;
-overflow:hidden;
+
+@media screen and (max-width:768px){
+    margin-left: 0.5rem;
+    overflow-x:auto !important;
+   }
+
 
 `
 const InnerContainer = styled.div`
 margin-top:60px;
 background-color:#f5f5f5;
 width: 100%;
-padding: 0 20px 20px 20px;
+padding: 0 5px 5px 0px;
 height: 100%;
+overflow-y: auto;
+
+
 `
 
 const Layout = () => {
@@ -36,6 +45,10 @@ const Layout = () => {
                 <Navbar />
                 <InnerContainer>
                     <Outlet />
+
+                    <CopyRight>
+                        <small>mint&copy;2023 All right reserved</small>
+                    </CopyRight>
                 </InnerContainer>
             </Main>
         </Container>

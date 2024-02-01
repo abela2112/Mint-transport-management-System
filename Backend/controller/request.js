@@ -9,17 +9,14 @@ const getALLRequests = async (req, res) => {
   let requests;
   try {
     if (checked) {
-      requests = await Request.find({ isChecked: true }).sort({updatedAt:-1});
+      requests = await Request.find({ isChecked: true }).sort({
+        updatedAt: -1,
+      });
     } else if (all) {
-      requests = await Request.find().sort({updatedAt:-1});
+      requests = await Request.find().sort({ updatedAt: -1 });
     } else if (department) {
       // console.log("department", department);
       requests = await Request.aggregate([
-        {
-          $match: {
-            isChecked: false, // or false, depending on what you are looking for
-          },
-        },
         {
           $lookup: {
             from: "users", // The collection to join with
@@ -38,10 +35,9 @@ const getALLRequests = async (req, res) => {
         },
       ]).sort({ updatedAt: -1 });
     }
-  
-    res.status(StatusCodes.OK).json({ data: requests });
+
+    res.status(StatusCodes.OK).json(requests);
   } catch (error) {
-    
     res.status(StatusCodes.BAD_REQUEST).json(error);
   }
 };
@@ -49,12 +45,13 @@ const getALLRequests = async (req, res) => {
 const getRequest = async (req, res) => {
   const { id } = req.params;
   try {
-    const request = await Request.findOne({ _id: id }).populate("userCreated","firstName lastName email position department role");
-    console.log("request populated", request);
-    console.log("request populated id", request?.userCreated);
+    const request = await Request.findOne({ _id: id }).populate(
+      "userCreated",
+      "firstName lastName email position department role"
+    );
+
     res.status(StatusCodes.OK).json(request);
   } catch (error) {
-    console.log("error", error);
     res.status(StatusCodes.BAD_REQUEST).json(error);
   }
 };
@@ -70,13 +67,14 @@ const getUserRequests = async (req, res) => {
 };
 const postRequest = async (req, res) => {
   try {
-   
+   console.log("request", req.body);
     const request = await Request.create({
       ...req.body,
       userCreated: req?.user?.userID,
     });
     res.status(StatusCodes.CREATED).json(request);
   } catch (error) {
+    console.error('error creating',error)
     res.status(StatusCodes.BAD_REQUEST).json(error);
   }
 };

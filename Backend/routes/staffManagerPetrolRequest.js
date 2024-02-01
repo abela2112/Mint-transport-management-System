@@ -14,8 +14,12 @@ const {
 
 const {postRequest,getrequestOneRequest,getAllRequest,updateAPetrolRequest}=require('../controller/staffManagerPetrolRequest')
 
-router.post('/staff-petrol-request',verifyTokenAndStaffManager,postRequest)
-router.get('/:id/getOne',verifyTokenAndAccessToTransportManager,getrequestOneRequest)
-router.get('/getAll',verifyTokenAndAccessToTransportManager,getAllRequest)
+router.post("/", verifyTokenAndStaffManager, postRequest);
+router.get("/", verifyTokenAndAccessToTransportManager, getAllRequest);
+router.get(
+  "/:id",
+  verifyTokenAndAccessToTransportManager,
+  getrequestOneRequest
+);
 router.put('/:id',verifyTokenAndAccessToTransportManager,updateAPetrolRequest)
 module.exports=router

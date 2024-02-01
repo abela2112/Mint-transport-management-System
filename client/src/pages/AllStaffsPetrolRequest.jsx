@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { getAllPetrolRequests } from '../api/userApi'
 import styled from 'styled-components'
-import SingleRequest from './SingleRequest'
-import SearchBar from '../components/SearchBar'
-import DeleteIcon from '@mui/icons-material/Delete';
+import { getAllPetrolRequests } from '../api/userApi'
 
-import { useDispatch, useSelector } from 'react-redux'
-import { getRequestSuccess } from '../redux/features/request'
-import { DataGrid } from '@mui/x-data-grid';
-import { Button, Title } from './StaffMangerPendingRequests'
-import { format } from 'date-fns'
-import { useNavigate } from 'react-router-dom'
+import { DataGrid } from '@mui/x-data-grid'
 import { useTranslation } from "react-i18next"
+import { useNavigate } from 'react-router-dom'
+import { Button, Title } from './StaffManagerPages/StaffMangerPendingRequests'
 
 export const StatusButton = styled.button`
 border:none;

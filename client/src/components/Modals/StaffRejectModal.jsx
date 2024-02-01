@@ -17,9 +17,9 @@ const StaffRejectModal = ({ isOpenRejectForStaff, setIsOpenRejectForStaff, handl
                 {/* <DialogContentText></DialogContentText> */}
             </DialogContent>
             <DialogActions>
-                <Button onClick={() => setIsOpenRejectForStaff(false)} style={{ backgroundColor: "Red", color: "white" }}>{t("StaffRejectModal.no")}</Button>
+                <Button onClick={() => setIsOpenRejectForStaff(false)}  style={{ backgroundColor: "#f5f5f5", color: "gray" }}>{t("StaffRejectModal.no")}</Button>
                 <Button
-                    style={{ backgroundColor: "Yellow", color: "black" }}
+                    style={{ backgroundColor: "rgb(255, 165, 0)", color: "white" }}
                     autoFocus
                     onClick={() => {
                         handleReject()

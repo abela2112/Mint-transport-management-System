@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+
 import React, { useState } from 'react'
 import { Background, Mint } from '../asset';
 import { Link } from 'react-router-dom';
@@ -7,55 +7,39 @@ import { useTranslation } from "react-i18next"
 
 //import { makeStyles } from '@material-ui/core/styles';
 import {
-    Button,
-    Dialog,
-    DialogTitle,
-    DialogContent,
-    DialogContentText,
-    DialogActions,
-    ClickAwayListener,
-  } from "@mui/material";
-import { useSelector } from 'react-redux';
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle
+} from "@mui/material";
+import toast, { Toaster } from 'react-hot-toast';
 
+import styled from 'styled-components';
+import { forgotPasswordApi } from '../api/userApi';
+import { SubmitButton } from '../components/Buttons';
+import Center from '../components/Center';
+import CustomToastBar from "../components/ToastErrorMessage";
+import { Contain, Container, CopyRight, FormContainer, Img1, ImgmintContainer, Input, Label, } from './Register/RegisterCSS';
+import { Wrapper } from './Login';
 
+export const WelcomeTxt = styled.span`
+ font-weight: 500;
+ font-size: 30px;
+ text-align: left;
+ margin-bottom: 10px;
+/* padding:10px 20px; */
 
-const Container=styled.div`
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:100vw;
-    height:100vh;
-    //background-image:url("https://img.freepik.com/premium-vector/phishing-account-concept_23-2148543436.jpg?size=626&ext=jpg&uid=R123836269&ga=GA1.1.1136001642.1699130489&semt=ais");
-    // background-repeat: no-repeat;
-    // background-size: cover;
-    background-color: #e0e0e0;
-   
+`
+export const LoginTxt = styled.span`
+ font-weight: 300;
+ font-size: 22px;
+ text-align: left;
+ margin-bottom: 20px;
+/* padding:10px 20px; */
+
 `
 
-const Wrapper=styled.div`
-
-padding:20px;
-border-radius:25px;
-display:flex;
-align-items:center;
-justify-content:center;
-width:35%;
-height:80%;
-margin:auto;
-background-color: #fff;
-flex-direction: column;
-  box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
--webkit-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
--moz-box-shadow: 0px 0px 23px 0px rgba(162, 161, 161, 0.75);
-`
-
-const Form =styled.form`
-display: flex;
-flex-direction: column;
-/* align-items: center; */
-width: 100%;
-margin:10px 0;
-`
 const Desc = styled.p`
   text-align: center;
 `;
@@ -96,99 +80,91 @@ justify-content: center;
 width: 100%;
 `
 
-const ImgmintContainer = styled.div`
-   display:flex;
-   justify-content:center;
-   align-items:center;
-  
-  width: 100px;
-  height: 100px;
-  margin-left: 5px;
-  margin-top: -250px;
-`;
+// const ImgmintContainer = styled.div`
+//    display:flex;
+//    justify-content:center;
+//    align-items:center;
 
-const Img1 = styled.img`
-  width: 100px;
-  height:100px;
-  object-fit: cover;
-`;
+//   width: 100px;
+//   height: 100px;
+//   margin-left: 5px;
+//   margin-top: -250px;
+// `;
+
+// const Img1 = styled.img`
+//   width: 100px;
+//   height:100px;
+//   object-fit: cover;
+// `;
 
 
 
 const ForgotPassword=()=>{
     const [isOpen, setIsOpen] = useState(false);
      const [email,setEmail]=useState('')
+     const [error, setError] = useState('')
      const {t}=useTranslation('global')
-    const handleClick = () => {
-      
-       
-        console.log("verification send");
-         
-      };
+    
     const handleSubmit=(e)=>{
       e.preventDefault();
      email ?  setIsOpen(true) : setIsOpen(false);
       console.log(email)
       
-      forgot({email}).then((data)=>console.log(data)).catch((err)=>console.log(err))
-      
+      forgotPasswordApi({ email }).then((data) => console.log(data)).catch((err) => {
+        toast.error((err?.response?.data?.message))
+        setError(err?.response?.data?.message);
+      }) 
     }
       return (
 
-       <Container>
-            <Wrapper>
-                <ImgmintContainer>
-                  <Img1 src={Mint} />
-               </ImgmintContainer>
-                <Lable>{t("ForgotPassword.forgotPassword")}</Lable>
-                <Form>
-                      <Lable1>{t("ForgotPassword.enterEmail")}</Lable1>
-                      <InputForm 
-                      type="email" 
-                      placeholder="xxx@mint.gov.et"
-                      value={email}
-                      onChange={(e)=>setEmail(e.target.value)}
-                      />
+    <Container>
+      <Wrapper>
+        <ImgmintContainer>
+          <Img1 src={Mint} />
+        </ImgmintContainer>
 
-                     <ResetButton onClick={handleSubmit }>{t("ForgotPassword.resetPassword")}</ResetButton>
-                      
-                    
-                </Form>
-                <Desc>{t("ForgotPassword.noAccount")} <Link to='/register' style={{ color: '#e6953b', marginTop: '10px' }}>{t("ForgotPassword.signUp")}</Link></Desc>
-                
 
-                <Dialog
-            open={isOpen}
-            onClose={() => setIsOpen(false)}
-            aria-labelledby="dialog-title"
-            aria-describedby="dialog-description"
-           
-          >
-            <DialogTitle id="dialog-title">
-             {t("ForgotPassword.verification")}
-            </DialogTitle>
-            <DialogContent id="dialog-description">
-              {/* <DialogContentText>Are you sure?</DialogContentText> */}
-             {t("ForgotPassword.passwordLink")}
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={() => setIsOpen(false)} style={{backgroundColor:"green",color:"white"}}>{t("ForgotPassword.close")}</Button>
-              {/* <Button
-                style={{backgroundColor:"Yellow",color:"black"}}
-                autoFocus
-                onClick={() => {
-                   handleClick()
-                  setIsOpen(false);
-                }}
-              >
-               Open Gmail
-              </Button> */}
-            </DialogActions>
-          </Dialog>
-            </Wrapper>
-       </Container>
+          <WelcomeTxt>Forgot Password</WelcomeTxt>
+          {/* <LoginTxt>Login into your account</LoginTxt> */}
 
-      )
-}
+        <FormContainer onSubmit={handleSubmit}>
+          <Contain>
+            <Label>Email</Label>
+            <Input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+
+
+          </Contain>
+          <Center>
+            <SubmitButton title={"Reset Password"} />
+          </Center>
+        </FormContainer>
+        <Toaster>
+          {(t) => <CustomToastBar {...t} />}
+        </Toaster>
+        {/* <ErrorMessage>{error && error}</ErrorMessage> */}
+        <Desc>Don't have an account <Link to='/register' style={{ color: '#e6953b', marginTop: '10px' }}>Sign Up</Link></Desc>
+        <Dialog
+          open={isOpen}
+          onClose={() => setIsOpen(false)} aria-labelledby="dialog-title"
+          aria-describedby="dialog-description">
+          <DialogTitle id="dialog-title"> {t("ForgotPassword.verification")}</DialogTitle>             <DialogContent id="dialog-description">               {/* <DialogContentText>Are you sure?</DialogContentText> */}               Password Reset Link is sent to your email              </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setIsOpen(false)} style={{ backgroundColor: "green", color: "white" }}>Close</Button>
+          </DialogActions>
+        </Dialog>
+
+      </Wrapper>
+      <CopyRight>
+        <small>mint&copy;2023 All right reserved</small>
+      </CopyRight>
+    </Container>
+
+  );
+};
 
 export default ForgotPassword;

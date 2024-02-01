@@ -19,7 +19,6 @@ const DialogModal = ({ open, onClose, onSubmit }) => {
         setIsOpen(false)
         onClose()
     }
-
     const handleSubmit = (e) => {
         
         onSubmit()
@@ -36,15 +35,25 @@ const DialogModal = ({ open, onClose, onSubmit }) => {
                 aria-labelledby='dialog-title'
                 aria-describedby='dialog-description' 
             >   
-                <DialogTitle id='dialog-title'>{t("DialogModal.addData")}</DialogTitle>
+                <DialogTitle id='dialog-title'>{t("UserRequestDetail.reject")}</DialogTitle>
                 <DialogContent id='dialog-description'>
                    
-                    <DialogContentText>{t("DialogModal.areYouSure")}</DialogContentText>
-                   
+                    <DialogContentText></DialogContentText>
+                    {/* Are you sure do you want to send this request? */}
                  </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>{t("DialogModal.cancel")}</Button>
-                    <Button autoFocus onClick={handleSubmit}>{t("DialogModal.submit")}</Button>
+                   
+                    <Button onClick={handleClose} style={{ backgroundColor: "#f5f5f5", color: "gray" }}>{t("DialogModal.cancel")}</Button>
+                    <Button
+                        style={{ backgroundColor: "#ee8624", color: "white" }}
+                        autoFocus
+                        onClick={() => {
+                            handleSubmit()
+                        }}
+                    >
+                      {t("DialogModal.submit")}
+                    </Button>
+
                 </DialogActions>
             </Dialog>
         </>

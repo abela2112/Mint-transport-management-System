@@ -4,7 +4,7 @@ const TResponseSchema = new mongoose.Schema(
   {
     PlateNumber: {
       type: String,
-      required: [true, "you must provide plate number"],
+      //required: [true, "you must provide plate number"],
     },
     DriverName: {
       type: String,
@@ -28,7 +28,6 @@ const TResponseSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    
   },
   { timestamps: true }
 );
