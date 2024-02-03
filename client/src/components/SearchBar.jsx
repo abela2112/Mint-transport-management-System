@@ -1,50 +1,54 @@
-import styled from 'styled-components'
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import FilterListOutlinedIcon from '@mui/icons-material/FilterListOutlined';
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "react-i18next";
+import styled from 'styled-components';
 const Container = styled.div`
-    height: 60px;
+    height: auto;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 20px;
+    padding: 10px;
+
     margin-top: 10px;
+    background-color: #fff;
 
     @media screen and (max-width: 768px) {
        flex-direction :column ;
+       gap: 1rem;
+       align-items: flex-start;
     }
 `
 const Title = styled.span``
-const Select = styled.select``
-const Option = styled.option``
-const Input = styled.input`
-flex: 2;
-color:#54577A;
-padding: 10px;
+const Select = styled.select`
 border: none;
+outline: none;
+&:focus{
+    outline: none;
+}
 `
+const Option = styled.option``
 const SortingBox = styled.div`
-border: 1px solid #F5F5F7;
+
 display:flex;
 align-items: center;
 padding: 5px;
+border: 2px solid #000;
+border-radius:10px;
 
 `
 
 const FilterBox = styled.div`
 display: flex;
 align-items: center;
+border: 2px solid #000;
+padding: 5px;
+border-radius:10px;
 `
 const SearchBar = ({ sortingTerm, setSortingTerm, filters, setFilters }) => {
     const {t}=useTranslation('global')
     console.log(filters)
     return (
         <Container>
-            {/* <SearchBox>
-                <Input type='text' placeholder='search request...' />
-                <SearchOutlinedIcon style={{margin:'0 5px' ,}} />
-            </SearchBox> */}
             <FilterBox>
                 <FilterListOutlinedIcon style={{ marginRight: '5px' }} />
                 <Title>{t("SearchBar.status")}</Title> 

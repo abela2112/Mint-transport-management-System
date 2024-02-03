@@ -368,6 +368,7 @@
         "password": "password",
         "submit": "Submit",
         "cancel": "Cancel",
+        "confirm":"Are you sure you want to send the request?",
         "approve": "Do you want to approve?",
         "reject": "Do you want to reject?",
         "yes": "Yes",

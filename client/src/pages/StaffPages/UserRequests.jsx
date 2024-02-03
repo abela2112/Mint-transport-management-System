@@ -4,27 +4,33 @@ import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import SingleRequest from './SingleRequest'
 import SearchBar from '../../components/SearchBar'
-
 const Container = styled.div`
-    margin-top: 20px;
+    height: 100%;
+
+`
+const Wrraper = styled.div`
+    margin-top: 10px;
     padding: 20px;
-    transition: all 0.3 ease-in-out;
-    
-    background-color: #f4f4f4;
+
 `
 const UserRequests = () => {
     const [requests, setRequests] = useState([])
     const user = useSelector(state => state.user.user)
+    const [isLoading, setIsLoading] = useState(false)
     const [sortingTerm, setSortingTerm] = useState('')
-    const [filters, setFilters] = useState('approved')
+    const [filters, setFilters] = useState('')
     const [filteredRequest, setFilteredRequest] = useState([])
 
 
     useEffect(() => {
+        setIsLoading(true)
         getUserRequests(user?._id).then(({ data }) => {
             setRequests(data)
-            console.log(data)
-        }).catch((err) => console.log(err))
+            setIsLoading(false)
+        }).catch((err) => {
+            console.log(err)
+            setIsLoading(false)
+        })
     }, [user])
     useEffect(() => {
         sortingTerm && sortingTerm === 'ASC' ? setRequests((requests) => requests?.toSorted((a, b) => new Date(a?.pickUpDate) - new Date(b?.pickUpDate))) : setRequests((requests) => requests?.toSorted((a, b) => new Date(b?.pickUpDate) - new Date(a?.pickUpDate)))
@@ -34,20 +40,22 @@ const UserRequests = () => {
     useEffect(() => {
         filters && setFilteredRequest([...requests].filter((request) => request?.status === filters))
     }, [filters, requests])
-    console.log(filters)
-    return (<>
+    if (isLoading) return (<div>loading...</div>)
+    return (<Container>
         <SearchBar sortingTerm={sortingTerm} setSortingTerm={setSortingTerm} filters={filters} setFilters={setFilters} />
-
-        <Container >
+        <Wrraper >
             {
                 filters ? (filteredRequest.length > 0 ? filteredRequest.map((request, i) => (
                     <SingleRequest request={request} key={i} />
-                )) : (<p>no results found</p>)) : requests.length > 0 && requests.map((request, i) => (
+                ))
+                    :
+                    (<p>no results found</p>))
+                    : requests.length > 0 && requests.map((request, i) => (
                     <SingleRequest request={request} key={i} />
                 ))
             }
-        </Container>
-    </>
+        </Wrraper>
+    </Container>
     )
 }
 

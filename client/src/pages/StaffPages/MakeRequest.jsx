@@ -158,10 +158,7 @@ const MakeRequest = () => {
     <Container>
       <Wrraper>
         <Title>{t("MakeRequest.requestForm")}</Title>
-        <Form onSubmit={(e) => {
-          e.preventDefault();
-          setIsModalOpen(true)
-        }}>
+        <Form onSubmit={onSubmit}>
           <Div>
             <Label>{t("MakeRequest.fullName")}</Label>
             <Input placeholder={t("MakeRequest.fullName")} defaultValue={`${user?.firstName} ${user?.lastName}`}  {...register('name')} />
@@ -250,7 +247,7 @@ const MakeRequest = () => {
 
       </Wrraper>
       <Toaster />
-      <DialogModal open={isModalOpen} onClose={() => setIsModalOpen(false)} onSubmit={onSubmit} />
+      {/* <DialogModal open={isModalOpen} onClose={() => setIsModalOpen(false)} onSubmit={onSubmit} /> */}
     </Container>
   )
 

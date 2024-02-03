@@ -5,8 +5,12 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+   
 }
-
+::-webkit-scrollbar {
+  display: none;
+}
 .link{
     color: #e6953b;
 }
