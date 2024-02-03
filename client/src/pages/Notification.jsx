@@ -131,8 +131,7 @@ const Notification = () => {
                                 </LeftBox>
                                 <RightBox>
 
-                                    <ClearIcon onClick={() => handleDelete(notification?._id)} />
-
+                                            <ClearIcon onClick={() => handleDelete(notification?._id)} />
                                 </RightBox>
 
                             </NotificationCard>
