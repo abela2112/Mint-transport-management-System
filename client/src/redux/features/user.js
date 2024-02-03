@@ -16,6 +16,9 @@ const userSlice = createSlice({
         (notif) => !notif?.seen
       ).length;
     },
+    setUser: (state, action) => {
+      state.user = action.payload?.data;
+    },
 
     logOutUser: (state) => {
       state.user = null;
@@ -49,6 +52,7 @@ export const {
   loginUserSuccess,
   logOutUser,
   setError,
+  setUser,
   updateNotification,
   deleteNotification,
   setNotification,

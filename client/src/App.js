@@ -39,7 +39,7 @@ import PendingRequests from "./pages/TransportManagerPages/PendingRequests.jsx";
 import SinglePetrolRequestDetail from "./pages/singlePetrolRequestDetail";
 
 import { useEffect } from "react";
-import { setNotification } from "./redux/features/user.js";
+import { setNotification, setUser } from "./redux/features/user.js";
 
 import Profile from "./pages/ProfilePage.jsx";
 
@@ -84,9 +84,9 @@ function App() {
     token &&
       axios
         .get(`/api/user/${user?._id}`)
-        .then(({ data }) => console.log(data))
+        .then((response) => dispatch(setUser(response)))
         .catch((error) => console.log(error));
-  }, []);
+  }, [token]);
   useEffect(() => {
     let socket = io("http://localhost:5000");
     socket.emit("setup", user);

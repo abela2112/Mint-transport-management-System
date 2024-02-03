@@ -1,17 +1,17 @@
 
-import React, { useState } from 'react'
-import styled from 'styled-components'
+import { Language, Menu } from '@mui/icons-material';
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-import Badge from '@mui/material/Badge';
-import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { Mint, MintText } from '../asset';
 import { Avatar } from '@mui/material';
-import { stringAvatar } from '../utils';
+import Badge from '@mui/material/Badge';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Language, Menu } from '@mui/icons-material';
-import { SideBar, MobileScreenSideBar } from './SideBar'
+import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { Mint, MintText } from '../asset';
+import { stringAvatar } from '../utils';
+import { MobileScreenSideBar } from './SideBar';
 const Container = styled.div`
     width: 100%;
     height: 60px;

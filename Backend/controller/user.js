@@ -18,13 +18,12 @@ const login = async (req, res) => {
       throw new BadRequestError("Incorrect  password");
     }
     const token = user.createJWT();
-    const { password, ...newUser } = user;
-    res.status(StatusCodes.OK).json({ data: newUser, token });
+    user.password = undefined;
+    res.status(StatusCodes.OK).json({ data: user, token });
   } else {
     throw new BadRequestError("User not  approved please check your admin");
   }
 };
-
 
 const register = async (req, res) => {
   const user = await User.create({ ...req.body });
@@ -60,9 +59,16 @@ const getAUser = async (req, res) => {
   if (!id) {
     throw new BadRequestError("please provide valid id");
   }
-  console.log("get user", id);
-  const user = await User.findById(id);
+
+  const user = await User.findById(id).populate({
+    path: "notifications",
+    populate: {
+      path: "from",
+      select: "firstName lastName profilePhoto",
+    },
+  });
   if (!user) return res.status(404).json({ message: "User not found" });
+  user.password = undefined;
   res.status(StatusCodes.OK).json(user);
 };
 const deleteUser = async (req, res) => {

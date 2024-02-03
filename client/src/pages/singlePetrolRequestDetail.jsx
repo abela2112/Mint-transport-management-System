@@ -176,25 +176,6 @@ const SinglePetrolRequestDetail = () => {
 
                     </Wrapper>
 
-   
-                        {/* //                             <>
-                        //                                 <ApproveButton disabled={request?.status === 'approved' || request?.status === 'rejected' || request?.isChecked ? true : false} onClick={handleApprove} >{request?.isChecked ? "Checked" : "Approved"}</ApproveButton>
-                        //                                 <RejectButton disabled={request?.status === 'rejected' || request?.status === 'approved' || request?.isChecked ? true : false} onClick={handleReject}>Reject</RejectButton>
-                        //                             </>
-                        //                         }
-                        //                         {user?.role === 'transport-manager' &&
-                        //                             <>
-                        //                                 <ApproveButton disabled={request?.status === 'approved' || request?.status === 'rejected' ? true : false} onClick={handleApprove} >Approved</ApproveButton>
-                        //                                 <RejectButton disabled={request?.status === 'rejected' || request?.status === 'approved' ? true : false} onClick={handleReject}>Reject</RejectButton>
-                        //                             </>}
-                        //                         {(user?.role !== 'transport-manager' && user?.role !== 'staff-manager') &&
-                        //                             <>
-                        //                                 <Button type={request?.status}>{request?.status}</Button>
-                        //                             </>}
-
-                        //                     </ButtonContainer> */}
-                      {/* { role === 'transport-manager' && <TransportManagerResponse open={isOpen} setOpen={setIsOpen} onSubmit={handleForm} requestId={id} />} */}
-
                     <Dialog
                         open={isOpenApproveForStaff}
                         onClose={() => setIsOpenApproveForStaff(false)}

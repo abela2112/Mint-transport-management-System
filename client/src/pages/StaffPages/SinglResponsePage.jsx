@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { UpdateResponse, getRequestResponseapiById } from '../../api/userApi'
-import { useParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 import { Container } from '@mui/material'
-import styled from 'styled-components'
 import { format } from 'date-fns'
-import { Box, Content } from '../../components/SingleRequestDetails'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useParams } from 'react-router-dom'
+import styled from 'styled-components'
+import { getRequestResponseapiById } from '../../api/userApi'
+import { Box, Content } from '../../components/SingleRequestDetails'
 const Wrapper = styled.div`
 display: flex;
 flex-direction: column;

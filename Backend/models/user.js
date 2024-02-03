@@ -89,6 +89,9 @@ const UserSchema = new mongoose.Schema(
       enum: ["staff", "staff-manager", "transport-manager", "admin"],
       default: "staff",
     },
+    profilePhoto: {
+      type: String,
+    },
     status: {
       type: String,
       enum: ["approved", "rejected", "pending"],
