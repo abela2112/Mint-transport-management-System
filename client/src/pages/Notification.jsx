@@ -8,6 +8,8 @@ import axios from 'axios';
 import { formatDistance } from 'date-fns';
 import Navbar from './Navbar';
 import { avatar } from '../asset';
+import { Avatar } from '@mui/material';
+import { stringAvatar } from '../utils';
 import { useTranslation } from "react-i18next"
 //import { Title } from './StaffMangerPendingRequests';
 const NotificationCard = styled.div`
@@ -95,6 +97,7 @@ const Notification = () => {
             dispatch(deleteNotification(id))
         }).catch((err) => console.log(err))
     }
+
     console.log('notif', user?.notifications)
     return (
         <>
@@ -102,12 +105,19 @@ const Notification = () => {
             <Container>
                 <NotificationContainer>
                     <Title>{t("Notification.notifications")}</Title>
-                    {user?.notifications.length > 0 ? [...user?.notifications].sort((a, b) => new Date(b?.time) - new Date(a?.time)).map((notification, i) => (
+                    {user?.notifications.length > 0 ?
+                        [...user?.notifications]
+                            .sort((a, b) => new Date(b?.time) - new Date(a?.time))
+                            .map((notification, i) => (
                         <>
 
                             <NotificationCard key={i} >
                                 <LeftBox>
-                                    <Img src={avatar} />
+                                            <div style={{ display: "flex", alignItems: 'center' }}>
+
+                                                {notification?.from?.profilePhoto ? <Img /> : <Avatar {...stringAvatar(`${notification?.from?.firstName} ${notification?.from?.lastName}`)} alt={"profile photo"} />}
+
+                                            </div>
                                     <Link to={`/${notification?.notificationType}/${notification?.messageId}`} onClick={() => handleNotification(notification?._id)}>
                                         <MessageBox>
                                             <Message seen={notification?.seen}>{notification?.message}</Message>

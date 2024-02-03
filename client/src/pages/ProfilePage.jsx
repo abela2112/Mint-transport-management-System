@@ -5,49 +5,65 @@ import { Container, Wrraper } from './StaffPages/MakeRequest'
 import styled from 'styled-components'
 import { Box, Content, InfoContainer } from '../components/SingleRequestDetails'
 import { avatar } from '../asset'
+import { useQuery } from '@tanstack/react-query';
+import Loader from '../components/Loader'
+import { useSelector } from 'react-redux'
+import { getSingleUser } from '../api/userApi'
+
 const FlexBetween = styled.div`
 display: flex;
 justify-content: space-between;
 `
-// const Box = styled.div``
 
 const Profile = () => {
     const { t } = useTranslation('global')
+    const { user } = useSelector((state) => state.user);
+    const { data, isPending, error } = useQuery({
+        queryKey: ['profile', user._id],
+        queryFn: () => getSingleUser(user?._id),
+        staleTime: 1000 * 60 * 5, // 5 minutes
+        retry: 3
+    })
+    const response = data?.data
+    if (isPending) return <Loader />
+    if (error) return <p>Something went Wrong</p>
     return (
         <Container>
             <Wrraper>
-
                 <FlexBetween>
-
                     <ImgmintContainer>
-                        <Img1 src={avatar} />
+                        <Img1 src={response.profile ? response?.profile : avatar} />
 
                     </ImgmintContainer>
                     <InfoContainer>
                         <Title>{t("Profile.profile")}</Title>
                         <Box>
                             <span>First Name</span>
-                            <Content>Abel</Content>
+                            <Content>{response.firstName}</Content>
                         </Box>
                         <Box>
                             <span>Last Name</span>
-                            <Content>Ayalew</Content>
+                            <Content>{response?.lastName}</Content>
                         </Box>
                         <Box>
                             <span>Email</span>
-                            <Content>abela9326@Mint.gov.et</Content>
+                            <Content>{response?.email}</Content>
                         </Box>
                         <Box>
                             <span>Phone Number</span>
-                            <Content>+251 933017499</Content>
+                            <Content>{response.phoneNumber}</Content>
                         </Box>
                         <Box>
                             <span>Position</span>
-                            <Content>Abel AYALEW</Content>
+                            <Content>{response.position}</Content>
                         </Box>
                         <Box>
                             <span>Department</span>
-                            <Content>Abel AYALEW</Content>
+                            <Content>{response.department}</Content>
+                        </Box>
+                        <Box>
+                            <span>Role</span>
+                            <Content>{response.role}</Content>
                         </Box>
 
 
