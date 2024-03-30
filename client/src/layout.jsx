@@ -1,9 +1,7 @@
-import React from 'react'
 import { SideBar } from './pages/SideBar'
 import { Outlet } from 'react-router-dom'
 import styled from 'styled-components'
 import Navbar from './pages/Navbar'
-import { useSelector } from 'react-redux'
 import { CopyRight } from './pages/Register/RegisterCSS'
 const Container = styled.div`
 display: flex;
@@ -31,13 +29,12 @@ width: 100%;
 padding: 0 5px 5px 0px;
 height: 100%;
 overflow-y: auto;
-
+ 
 
 `
 
 const Layout = () => {
-    const { user } = useSelector(state => state.user)
-    console.log(user)
+
     return (
         <Container>
             <SideBar />
@@ -45,11 +42,10 @@ const Layout = () => {
                 <Navbar />
                 <InnerContainer>
                     <Outlet />
-
+                </InnerContainer>
                     <CopyRight>
                         <small>mint&copy;2023 All right reserved</small>
-                    </CopyRight>
-                </InnerContainer>
+                </CopyRight>
             </Main>
         </Container>
     )

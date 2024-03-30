@@ -74,7 +74,8 @@ function App() {
   const user = useSelector((state) => state.user?.user);
   const token = useSelector((state) => state.user?.token);
   const dispatch = useDispatch();
-  axios.defaults.baseURL = "http://localhost:5000";
+  axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
+  // "http://localhost:5000";
   axios.defaults.headers = {
     Authorization: "Bearer " + token,
     "Content-type": "application/json",
@@ -88,7 +89,7 @@ function App() {
         .catch((error) => console.log(error));
   }, [token]);
   useEffect(() => {
-    let socket = io("http://localhost:5000");
+    let socket = io(process.env.REACT_APP_BASE_URL);
     socket.emit("setup", user);
     socket.on("messagerecieved", (message) => {
       dispatch(setNotification(message));

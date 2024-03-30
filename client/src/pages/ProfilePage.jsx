@@ -10,9 +10,13 @@ import Loader from '../components/Loader'
 import { useSelector } from 'react-redux'
 import { getSingleUser } from '../api/userApi'
 
-const FlexBetween = styled.div`
+export const FlexBetween = styled.div`
 display: flex;
 justify-content: space-between;
+gap: 1rem;
+@media screen and (max-width: 768px) {
+    flex-direction: column;
+}
 `
 
 const Profile = () => {

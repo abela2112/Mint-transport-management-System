@@ -35,7 +35,7 @@ const DialogModal = ({ open, onClose, onSubmit }) => {
                 aria-labelledby='dialog-title'
                 aria-describedby='dialog-description' 
             >   
-                <DialogTitle id='dialog-title'>{t("UserRequestDetail.reject")}</DialogTitle>
+                <DialogTitle id='dialog-title'>{t("UserRequestDetail.confirm")}</DialogTitle>
                 <DialogContent id='dialog-description'>
                    
                     <DialogContentText></DialogContentText>

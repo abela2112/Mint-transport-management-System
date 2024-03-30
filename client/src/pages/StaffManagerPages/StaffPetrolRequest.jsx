@@ -1,92 +1,17 @@
 import React, { useState } from "react";
 import { useForm } from 'react-hook-form';
-import { Toaster } from 'react-hot-toast';
+import { io } from 'socket.io-client';
 import { useTranslation } from "react-i18next";
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import toast, { Toaster } from 'react-hot-toast'
 import DialogModal from '../../components/DialogModal';
 import { LoaderForButton } from '../../components/Loader';
 import { Contain, FormContainer, Input } from '../Register/RegisterCSS';
 import { TextArea, Wrraper } from '../StaffPages/MakeRequest';
 import ErrorMessage from "../../components/ErrorMessage";
-// const Container = styled.div`
-//   width: 100%;
-//   padding: 20px 10px;
-//   margin-top: 10px;
-// `;
-
-// const Wrapper = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: space-between;
-//   text-align:center;
-// `;
-
-const FormBox = styled.form`
-  display: flex;
-//   flex-wrap: wrap;
-  flex-direction:column;
-`;
-
-const InputItem = styled.div`
-   display:flex;
-  text-align:left;
-  padding:0;
-  flex-direction:column;
-  margin-top: 10px;
-  margin-right: 20px;
-  width: 400px;
-`;
-
-// const Input = styled.input`
-// width: calc(100%);
-// padding: 10px;
-// margin-bottom: 10px;
-// border: 1px solid #ccc;
-// border-radius: 5px;
-// width: 400px;
-
-
-// &:hover::before {
-//   content: attr(title);
-//   position: absolute;
-//   top: 100%;
-//   left: 50%;
-//   transform: translateX(-50%);
-//   padding: 8px;
-//   background-color: #000;
-//   color: #fff;
-//   border-radius: 2px;
-//   font-size: 12px;
-//   white-space: nowrap;
-//   pointer-events: none;
-// }
-// `
-const Text = styled.p`
-
-`
-
-const ButtonBox = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-`;
-
-const SubmitButton = styled.button`
-  width: 200px;
-  padding: 10px 20px;
-  font-size: 16px;
-  margin: 20px;
-  background-color: #155c68;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  &:hover {
-    background-color: #3b808c;
-    color: #ee8624;
-  }
-`;
+import { postPetrolRequest } from "../../api/userApi";
+import { SubmitButton } from "../../components/Buttons";
 
 const Title = styled.h1`
 
@@ -104,7 +29,7 @@ const Submit = styled.button`
   margin:20px 20px;
   font-size:16px;
   cursor:pointer;
-  background-color: rgb(255, 165, 0);
+  /* background-color: rgb(255, 165, 0); */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -119,8 +44,8 @@ const Submit = styled.button`
 `
 
 const StaffPetrolRequest = () => {
+  const socket = io('http://localhost:5000');
   const { user } = useSelector((state) => state.user);
-  console.log(user)
   const [name, setName] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
   const [requestDate, setRequestDate] = useState('')
@@ -133,37 +58,43 @@ const StaffPetrolRequest = () => {
     register,
     handleSubmit,
     reset,
-    control,
     formState: { errors, },
-  } = useForm();
-  // const handleSubmit = () => {
-  //   setIsLoading(true)
-  //   postPetrolRequest({ requestDate, discription, name, phoneNumber }).then((data) => {
-  //     console.log(data)
-  //     setIsLoading(false)
-  //     toast.success('Successfully Submited!!')
-  //   }).catch((error) => {
-  //     console.log(error)
-  //     setIsLoading(false)
-  //     toast.error("something went Wrong!")
-  //   })
-  // }
-  // useEffect(() => {
-  //   setName(user?.firstName + "  " + user?.lastName)
-  //   setPhoneNumber(user?.phoneNumber)
-  // }, [])
+  } = useForm({
+    defaultValues: {
+      name: `${user?.firstName} ${user?.lastName}`,
+      phoneNumber: user?.phoneNumber,
+    }
+  });
+
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      setIsLoading(true)
+      await postPetrolRequest(data)
+      socket.emit('sendNotificationToTransportmanager', { notificationType: "petrol request", messageId: data?._id, message: 'new petrol request', from: user?._id });
+      toast.success("Successfully created request")
+      setIsLoading(false);
+      reset()
+
+    } catch (error) {
+      toast.error("Failed to create request!")
+      setIsLoading(false);
+      reset()
+    }
+  })
+
 
   return (
     <>
       <Wrraper>
         <Title>{t("StaffPetrolRequest.petrolForm")}</Title>
-        <FormContainer>
+        <FormContainer onSubmit={onSubmit}>
           <Contain>
             <Lable>{t("StaffPetrolRequest.fullName")}</Lable>
             <Input
               type="text"
-              defaultValue={`${user?.firstName} ${user?.lastName}`}
-              {...register('name', { disabled: true })}
+              // defaultValue={`${user?.firstName} ${user?.lastName}`}
+              {...register('name', { required: 'name is required' })}
+              disabled
             />
           </Contain>
           <Contain>
@@ -202,19 +133,17 @@ const StaffPetrolRequest = () => {
               {...register('discription',
                 { required: "Description is Required" })}
             />
-            <ErrorMessage>{errors.description?.message}</ErrorMessage>
+            <ErrorMessage>{errors.discription?.message}</ErrorMessage>
 
           </Contain>
-          <Submit onClick={(e) => {
-            e.preventDefault()
-            setIsOpen(true)
-          }}>{isLoading ? <LoaderForButton /> : t("StaffPetrolRequest.submit")}</Submit>
+          {/* <Submit type="submit">{isLoading ? <LoaderForButton /> : t("StaffPetrolRequest.submit")}</Submit> */}
+          <SubmitButton isLoading={isLoading} title={t("StaffPetrolRequest.submit")} />
         </FormContainer>
         <Toaster />
       </Wrraper>
 
 
-      <DialogModal open={isOpen} onClose={() => setIsOpen(false)} onSubmit={handleSubmit} />
+      {/* <DialogModal open={isOpen} onClose={() => setIsOpen(false)} onSubmit={handleSubmit} /> */}
 
 
     </>
