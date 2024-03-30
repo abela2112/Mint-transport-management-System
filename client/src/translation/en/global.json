@@ -259,7 +259,7 @@
         "passengers": "Passengers",
         
         "reject": "Reject",
-        "approved": "Approve"
+        "approve": "Approve"
     },
     "singleResponsePage": {
         "responseDetail": "Response Detail",

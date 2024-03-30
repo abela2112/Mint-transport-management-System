@@ -16,7 +16,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction:column;
-   `
+  `
 
 export const Wrraper = styled.div`
  width:80%;
@@ -127,7 +127,11 @@ const MakeRequest = () => {
     reset,
     control,
     formState: { errors, },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      name: `${user?.firstName} ${user?.lastName}`
+    }
+  });
   const { fields, append, prepend, remove, } = useFieldArray({
     control, // control props comes from useForm (optional: if you are using FormContext)
     name: "passenger", // unique name for your Field Array
@@ -151,7 +155,7 @@ const MakeRequest = () => {
     }
   })
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
   const socket = io("http://localhost:5000");
 
   return (
@@ -161,7 +165,7 @@ const MakeRequest = () => {
         <Form onSubmit={onSubmit}>
           <Div>
             <Label>{t("MakeRequest.fullName")}</Label>
-            <Input placeholder={t("MakeRequest.fullName")} defaultValue={`${user?.firstName} ${user?.lastName}`}  {...register('name')} />
+            <Input placeholder={t("MakeRequest.fullName")}   {...register('name')} disabled />
             <ErrorMessage>{errors.name?.message}</ErrorMessage>
           </Div>
 

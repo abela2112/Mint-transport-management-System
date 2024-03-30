@@ -190,8 +190,6 @@ export default function SingleRequestDetails() {
             .catch((err) => console.log(err))
     }
     const handleApprove = () => {
-
-
         if (role === 'staff-manager') {
             setIsOpenApproveForStaff(true);
         }
@@ -231,7 +229,7 @@ export default function SingleRequestDetails() {
                                     <StatusButton type={request?.status} >{request?.status}</StatusButton>
                                     {request?.status !== "pending" && <Link to={`/response/request/${request?._id}`}>Response</Link>}
                                 </div>
-                                <div>{role === 'staff-manager' && request?.isChecked ? "Checked" : ""}</div>
+                                {role === 'staff-manager' && request?.isChecked && <div style={{ backgroundColor: "yellow", padding: '5px', width: "100px", borderRadius: "10px" }}>Checked</div>}
                                 <InfoContainer>
                                     <Box>
                                         <span>{t('SingleRequestDetail.fullName')}</span>

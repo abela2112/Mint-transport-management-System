@@ -119,10 +119,6 @@ const SinglePetrolRequestDetail = () => {
             .catch((err) => console.log(err))
     }
     const handleApprove = () => {
-      
-
-        
-     
             updateAPetrolRequest(id, {  status: 'approved' }).then(({ data }) => {
                 console.log('approved data', data)
                 // socket.emit('sendNotificationToStaff', { notificationType: "response", messageId: data?._id, message: 'your request has been rejected ', from: user?._id, to: data?.userCreated });
